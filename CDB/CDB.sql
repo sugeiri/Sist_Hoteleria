@@ -18,68 +18,66 @@ CREATE TABLE Tercero(
 	ID_T_Identif_Tercero	char(5) Not null Constraint FK_Tercero_T_Identif FOREIGN KEY REFERENCES Tipo_Identificacion(Id_Tipo_Ident),
 	Cedula_Tercero			varchar(20) NOT NULL,
 	Fecha_Nac_Tercero		date NOT NULL,
-	Estado_Tercero			char(1) NOT NULL,
-	Sexo_Tercero			char(1) NOT NULL
+	Sexo_Tercero			char(1) NOT NULL,
+	Estado_Tercero			char(1) NOT NULL
 )
 CREATE TABLE PAIS(
 	id_pais		char(5) NOT NULL PRIMARY KEY,
 	descr_pais	VARCHAR(50) NOT NULL,
 	estado_pais CHAR(1) NOT NULL
-
 )
 CREATE TABLE PROVINCIA(
 	id_provincia		char(5) NOT NULL PRIMARY KEY,
 	descr_provincia		VARCHAR(50) NOT NULL,
-	estado_provincia	CHAR(1) NOT NULL,
-	id_pais_provincia	char(5) NOT NULL Constraint FK_PROVINCIA_PAIS FOREIGN KEY REFERENCES PAIS(id_pais)
+	id_pais_provincia	char(5) NOT NULL Constraint FK_PROVINCIA_PAIS FOREIGN KEY REFERENCES PAIS(id_pais),
+	estado_provincia	CHAR(1) NOT NULL
 )
 CREATE TABLE MUNICIPIO(
 	id_municipio		char(5) NOT NULL PRIMARY KEY,
 	descr_municipio		VARCHAR(50) NOT NULL,
-	estado_municipio	CHAR(1) NOT NULL,
-	id_prov_municipio	char(5) NOT NULL Constraint FK_MUNICIPIO_PROV FOREIGN KEY REFERENCES PROVINCIA(ID_PROVINCIA)
-
+	id_prov_municipio	char(5) NOT NULL Constraint FK_MUNICIPIO_PROV FOREIGN KEY REFERENCES PROVINCIA(ID_PROVINCIA),
+	estado_municipio	CHAR(1) NOT NULL
 )
 
 CREATE TABLE DIRECCION(
 	id_Tercero_Direccion	char(10) NOT NULL Constraint FK_Tercero_Direccion FOREIGN KEY REFERENCES Tercero(id_Tercero),
 	id_mun_Direccion		char(5) NOT NULL Constraint FK_MUNICIPIO_Direccion FOREIGN KEY REFERENCES MUNICIPIO(id_municipio),
 	Direccion				varchar(MAX) NOT NULL,
-	ESTADO_DIRECCION		CHAR(1) NOT NULL,
 	TIPO_DIRECCION			VARCHAR(2) NOT NULL,
 	N_LINEA_DIRECCION		INT NOT NULL,
+	ESTADO_DIRECCION		CHAR(1) NOT NULL
 	PRIMARY KEY(id_Tercero_Direccion,TIPO_DIRECCION,N_LINEA_DIRECCION)	
 )
 
 CREATE TABLE EMAIL(
 	id_Tercero_Email	char(10) NOT NULL Constraint FK_Tercero_Email FOREIGN KEY REFERENCES Tercero(id_Tercero),
 	Email				varchar(MAX) NOT NULL,
-	ESTADO_Email		CHAR(1) NOT NULL,
 	TIPO_Email			VARCHAR(2) NOT NULL,
 	N_LINEA_Email		INT NOT NULL,
+	ESTADO_Email		CHAR(1) NOT NULL
 	PRIMARY KEY(id_Tercero_Email,N_LINEA_Email)	
 )
 CREATE TABLE TELEFONO(
 	id_Tercero_Tel	char(10) NOT NULL Constraint FK_Tercero_Tel FOREIGN KEY REFERENCES Tercero(id_Tercero),
 	Numero_Tel		varchar(20) NOT NULL,
-	ESTADO_Tel	    CHAR(1) NOT NULL,
 	TIPO_Tel		VARCHAR(2) NOT NULL,
 	N_LINEA_Tel	    INT NOT NULL,
+	ESTADO_Tel	    CHAR(1) NOT NULL
 	PRIMARY KEY(id_Tercero_Tel,Numero_Tel,N_LINEA_Tel)	
 )
 CREATE TABLE Tipo_Usuario(
 	id_T_Usuario			char(5) NOT NULL PRIMARY KEY,
 	Descripcion_T_Usuario	varchar(30)  NOT NULL,
-	Estado_T_Usuario		char(1) NOT NULL,
 	Nivel_Acceso_T_Usuario	varchar(3) NOT NULL,
+	Estado_T_Usuario		char(1) NOT NULL
 )
 
 CREATE TABLE Usuario(
 	id_Usuario			char(10) NOT NULL PRIMARY KEY,
 	id_Tercero_Usuario	char(10) NOT NULL Constraint FK_Usuario_Tercero FOREIGN KEY REFERENCES Tercero(id_Tercero),
-	Estado_Usuario		char(1) NOT NULL,
 	id_Tipo_Usuario		char(5) NOT NULL Constraint FK_Usuario_Tipo_Usuario FOREIGN KEY REFERENCES Tipo_Usuario(id_T_Usuario),
-	password_Usuario	varchar(MAX) NOT NULL
+	password_Usuario	varchar(MAX) NOT NULL,
+	Estado_Usuario		char(1) NOT NULL
 )
 
 CREATE TABLE Permisos_Adi(
@@ -102,9 +100,9 @@ CREATE TABLE CLIENTE(
 	ID_CLIENTE char(5) NOT NULL PRIMARY KEY,
 	ID_TERCERO_CLIENTE char(10) NOT NULL Constraint FK_Tercero_CLIENTE FOREIGN KEY REFERENCES Tercero(id_Tercero),
 	ID_T_CLIENTE       char(5) NOT NULL Constraint FK_T_CLIENTE_TC FOREIGN KEY REFERENCES TIPO_CLIENTE(ID_T_CLIENTE_TC),
-	ESTADO_CLIENTE CHAR(1) NOT NULL,
 	LIM_CRED_CLIENTE DECIMAL(12,2) NOT NULL,
-	SALDO_CLIENTE DECIMAL(12,2) NOT NULL
+	SALDO_CLIENTE DECIMAL(12,2) NOT NULL,
+	ESTADO_CLIENTE CHAR(1) NOT NULL
 )
 CREATE TABLE TIPO_EMPLEADO(
 	ID_T_EMPLEADO_TE char(5) NOT NULL PRIMARY KEY,
@@ -115,8 +113,8 @@ CREATE TABLE EMPLEADO(
 	ID_EMPLEADO char(5) NOT NULL PRIMARY KEY,
 	ID_TERCERO_EMPLEADO char(10) NOT NULL Constraint FK_Tercero_EMPLEADO FOREIGN KEY REFERENCES Tercero(id_Tercero),
 	ID_T_EMPLEADO       char(5) NOT NULL Constraint FK_T_EMPLEADO_TE FOREIGN KEY REFERENCES TIPO_EMPLEADO(ID_T_EMPLEADO_TE),
-	ESTADO_EMPLEADO     CHAR(1) NOT NULL,
 	FECHA_I_EMPLEADO    DATE NOT NULL,
+	ESTADO_EMPLEADO     CHAR(1) NOT NULL
 )
 
 create table servicio( 
@@ -129,8 +127,8 @@ create table tipo_alojamiento
 (
 	id_t_alojamiento char(5) not null primary key,
 	descr_t_alojamiento varchar(100) not null,
-	estado_t_alojamiento char(1) not null,
-	costo_t_alojamiento decimal(12,2) not null	
+	costo_t_alojamiento decimal(12,2) not null,
+	estado_t_alojamiento char(1) not null	
 )
 create table talojamiento_servicio
 (
@@ -141,15 +139,15 @@ create table talojamiento_servicio
 create table cama(
 	id_cama char(5) not null primary key,
 	descr_cama varchar(50) not null,
-	estado_cama char(1) not null,
-	capacidad_cama int not null
+	capacidad_cama int not null,
+	estado_cama char(1) not null
 )
 create table tipo_habitacion(
 	id_t_hab char(5) not null primary key,
 	descr_t_hab varchar(50) not null,
-	estado_t_hab char(1) not null,
 	capacidad_hab int not null,
-	costo_hab	 decimal(12,2) not null
+	costo_hab	 decimal(12,2) not null,
+	estado_t_hab char(1) not null
 )
 
 create table thabitacion_cama(
@@ -173,16 +171,16 @@ create table thab_caracteristica
 create table edificio(
 	id_edificio char(5) not null primary key,
 	descr_edificio varchar(100) not null,
-	estado_edificio char(1) not null,
-	cant_nivel_edificio int not null
+	cant_nivel_edificio int not null,
+	estado_edificio char(1) not null
 )
 create table habitacion(
 	id_habitacion char(5) not null primary key,
 	descr_habitacion varchar(100) not null,
-	estado_habitacion char(1) not null,
 	t_habitacion		  char(5) not null Constraint FK_thabitacion_hab FOREIGN KEY REFERENCES tipo_habitacion(id_t_hab),
 	edificio_habitacion  char(5) not null Constraint FK_edificio_hab FOREIGN KEY REFERENCES edificio(id_edificio),
-	piso_habitacion		int not null
+	piso_habitacion		int not null,
+	estado_habitacion char(1) not null
 )
 
 create table tipo_mantenimiento(
@@ -193,10 +191,9 @@ create table tipo_mantenimiento(
 create table mantenimiento(
 	id_mantenimiento int not null primary key,
 	id_hab_mantenimiento  char(5) not null Constraint FK_habitacion_mant FOREIGN KEY REFERENCES habitacion(id_habitacion),
-	estado_mantenimiento char(1) not null,
 	fecha_cre_mantenimiento datetime not null,
 	fecha_mod_mantenimiento datetime not null,
-	
+	estado_mantenimiento char(1) not null
 )
 create table mantenimiento_det(
 	id_mantenimiento_det int not null Constraint FK_mant_det FOREIGN KEY REFERENCES mantenimiento(id_mantenimiento),
@@ -236,16 +233,14 @@ create table cancelacion(
 	mod_por_cancelacion	char(10) not null,
 	fecha_mod_cancelacion   datetime not null
 )
-
-
 create table alojamiento(
 	id_alojamiento int not null primary key,
 	id_reserv_alojamiento int not null Constraint FK_reserv_aloj FOREIGN KEY REFERENCES reservacion(id_reservacion),
-	estado_alojamiento char(1) not null,
 	ing_por_alojamiento char(10) not null,
 	fecha_i_alojamiento datetime not null,
 	sal_por_alojamiento char(10) not null,
 	fecha_s_alojamiento datetime not null,
+	estado_alojamiento char(1) not null
 )
 
 create table alojamiento_det(
@@ -292,15 +287,15 @@ CREATE TABLE NOTA_CREDITO_ABONO
 CREATE TABLE TEMPORADA(
 	id_temporada char(5) not null primary key,
 	descr_temporada varchar(100) not  null,
-	estado_temporada char(1) not null,
 	fecha_i_temporada date not null,
-	fecha_f_temporada date not null
+	fecha_f_temporada date not null,
+	estado_temporada char(1) not null
 )
 CREATE TABLE Oferta
 (	id_oferta char(5) not null primary key,
 	descr_oferta varchar(200) not null,
-	estado_oferta	char(1) not null,
 	id_temp_oferta char(5) not null,
+	estado_oferta	char(1) not null
 	CONSTRAINT FK_temporada_oferta FOREIGN KEY(id_temp_oferta) REFERENCES TEMPORADA(id_temporada)
 )
 --POR TIPO ALOJAMIENTO
@@ -328,8 +323,24 @@ create table oferta_det_03
 	descuento_det03   decimal(12,2) not null,
 	primary key(id_oferta_det03,c_ini_aloj_det03,c_fin_aloj_det03)
 )
-
-
+create table tipo_archivo
+(
+	id_t_archivo int not null primary key,
+	descr_t_archivo varchar(100) not null,
+	estado_t_archivo char(1) not null
+)
+create table archivo(
+	id_archivo				char(10) not null,
+	id_tarchivo				int not null  CONSTRAINT FK_tipo_archivo FOREIGN KEY REFERENCES tipo_archivo(id_t_archivo),
+	ruta_archivo			varchar(500) not null,
+	comentario_01_archivo	varchar(2000) not null,
+	comentario_02_archivo	varchar(2000) not null,
+	estado_archivo			char(1) not null,
+	CREADO_P_archivo		CHAR(10) NOT NULL,
+	FECHA_C_archivo			DATETIME NOT NULL,
+	MOD_P_archivo			CHAR(10) NOT NULL,
+	FECHA_M_archivo			DATETIME NOT NULL
+)
 
 
 
