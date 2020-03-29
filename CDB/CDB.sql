@@ -71,11 +71,10 @@ CREATE TABLE Tipo_Usuario(
 	Nivel_Acceso_T_Usuario	varchar(3) NOT NULL,
 	Estado_T_Usuario		char(1) NOT NULL
 )
-
 CREATE TABLE Usuario(
 	id_Usuario			char(10) NOT NULL PRIMARY KEY,
 	id_Tercero_Usuario	char(10) NOT NULL Constraint FK_Usuario_Tercero FOREIGN KEY REFERENCES Tercero(id_Tercero),
-	id_Tipo_Usuario		char(5) NOT NULL Constraint FK_Usuario_Tipo_Usuario FOREIGN KEY REFERENCES Tipo_Usuario(id_T_Usuario),
+	Tipo_Usuario		char(5) NOT NULL Constraint FK_Usuario_Tipo_Usuario FOREIGN KEY REFERENCES Tipo_Usuario(id_T_Usuario),
 	password_Usuario	varchar(MAX) NOT NULL,
 	Estado_Usuario		char(1) NOT NULL
 )

@@ -2,13 +2,13 @@
 GO 
 drop TABLE HOTEL
 GO 
-drop TABLE PAIS
-GO 
 drop TABLE PROVINCIA
 GO 
 drop TABLE MUNICIPIO
 GO 
 drop TABLE DIRECCION
+GO 
+drop TABLE PAIS
 GO 
 drop TABLE EMAIL
 GO 
@@ -22,13 +22,13 @@ drop TABLE Permisos_Adi
 GO 
 drop TABLE Usuario_Permisos_Adi
 GO 
-drop TABLE TIPO_CLIENTE
-GO 
 drop TABLE CLIENTE
 GO 
-drop TABLE TIPO_EMPLEADO
+drop TABLE TIPO_CLIENTE
 GO 
 drop TABLE EMPLEADO
+GO 
+drop TABLE TIPO_EMPLEADO
 GO 
 drop table servicio 
 GO 

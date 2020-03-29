@@ -21,12 +21,100 @@ namespace SistHoteleria
         //O=OBSERVADOR
         public static string Usuario = "";
         public static string Nivel_Acceso = "";
+        public static string Nombre_Hotel = "";
         public class ETipo
         {
             public string id = "";
             public string descripcion = "";
             public string estado = "";
             public bool Tipo_PK_int = true;
+        }
+        public class EProvincia
+        {
+            public string id_provincia = "";
+            public string descr_provincia = "";
+            public string estado_provincia = "";
+            public string id_pais_provincia = "";
+
+        }
+        public class EMunicipio
+        {
+            public string id_municipio = "";
+            public string descr_municipio = "";
+            public string estado_municipio = "";
+            public string id_prov_municipio = "";
+
+        }
+        public class ETipo_Usuario
+        {
+            public string id_T_Usuario = "";
+            public string Descripcion_T_Usuario = "";
+            public string Estado_T_Usuario = "";
+            public string Nivel_Acceso_T_Usuario = "";
+
+        }
+        public class ETipo_Identificacion
+        {
+            public string Id_Tipo_Ident = "";
+            public string Descr_Tipo_Ident = "";
+            public string Estado_Tipo_Ident = "";
+
+        }
+
+        public class EUsuario
+        {
+            public string id_Usuario = "";
+            public string id_Tercero_Usuario = "";
+            public string Estado_Usuario = "";
+            public string id_Tipo_Usuario = "";
+            public string Password_Usuario = "";
+            public string nivel = "";
+
+        }
+        public class ETercero
+        {
+            public string id_Tercero = "";
+            public string Nombre_Tercero = "";
+            public string ID_T_Identif_Tercero = "";
+            public string Cedula_Tercero = "";
+            public string Fecha_Nac_Tercero = "";
+            public string Estado_Tercero = "";
+            public string Sexo_Tercero = "";
+
+        }
+        public class ETelefono
+        {
+            public string id_Tercero_Tel = "";
+            public string Numero_Tel = "";
+            public string TIPO_Tel = "";
+            public string descr_tipo = "";
+            public string ESTADO_Tel = "";
+            public int N_LINEA_Tel = 0;
+
+
+        }
+        public class EEmail
+        {
+            public string id_Tercero_Email = "";
+            public string Email = "";
+            public string TIPO_Email = "";
+            public string descr_tipo = "";
+            public string ESTADO_Email = "";
+            public int    N_LINEA_Email = 0;
+
+        }
+        public class EDireccion
+        {
+            public string id_Tercero_Direccion = "";
+            public string id_mun_Direccion = "";
+            public string Direccion = "";
+            public string ESTADO_DIRECCION = "";
+            public string TIPO_DIRECCION = "";
+            public int N_LINEA_DIRECCION = 0;
+            public string id_Pais_Direccion = "";
+            public string id_Provincia_Direccion = "";
+
+
         }
     }
 }
