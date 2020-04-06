@@ -1,6 +1,6 @@
 ﻿namespace SistHoteleria
 {
-    partial class Mant_Cama
+    partial class Mant_Habitacion
     {
         /// <summary>
         /// Required designer variable.
@@ -31,8 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.LTitulo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.TCapacidad = new System.Windows.Forms.TextBox();
+            this.BTHabitacion = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TPiso = new System.Windows.Forms.TextBox();
+            this.TEdificio = new System.Windows.Forms.TextBox();
+            this.TDescr_THabitacion = new System.Windows.Forms.TextBox();
+            this.TTHabitacion = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BLimpiar = new System.Windows.Forms.Button();
             this.BCancelar = new System.Windows.Forms.Button();
@@ -45,6 +49,8 @@
             this.LCodigo = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.TDescr_Edificio = new System.Windows.Forms.TextBox();
+            this.BEdificio = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -60,15 +66,21 @@
             this.LTitulo.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LTitulo.Location = new System.Drawing.Point(161, 9);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(46, 16);
+            this.LTitulo.Size = new System.Drawing.Size(82, 16);
             this.LTitulo.TabIndex = 0;
-            this.LTitulo.Text = "Cama";
+            this.LTitulo.Text = "Habitacion";
             this.LTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.TCapacidad);
+            this.panel1.Controls.Add(this.BEdificio);
+            this.panel1.Controls.Add(this.TDescr_Edificio);
+            this.panel1.Controls.Add(this.BTHabitacion);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.TPiso);
+            this.panel1.Controls.Add(this.TEdificio);
+            this.panel1.Controls.Add(this.TDescr_THabitacion);
+            this.panel1.Controls.Add(this.TTHabitacion);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.CB_ESTADO);
             this.panel1.Controls.Add(this.label2);
@@ -77,28 +89,62 @@
             this.panel1.Controls.Add(this.tid);
             this.panel1.Controls.Add(this.LCodigo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 35);
+            this.panel1.Location = new System.Drawing.Point(0, 40);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(413, 177);
+            this.panel1.Size = new System.Drawing.Size(413, 236);
             this.panel1.TabIndex = 1;
             // 
-            // label3
+            // BTHabitacion
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(24, 71);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 16);
-            this.label3.TabIndex = 44;
-            this.label3.Text = "CAPACIDAD:";
+            this.BTHabitacion.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.BTHabitacion.Location = new System.Drawing.Point(8, 95);
+            this.BTHabitacion.Name = "BTHabitacion";
+            this.BTHabitacion.Size = new System.Drawing.Size(107, 23);
+            this.BTHabitacion.TabIndex = 50;
+            this.BTHabitacion.Text = "T Habitacion";
+            this.BTHabitacion.UseVisualStyleBackColor = true;
+            this.BTHabitacion.Click += new System.EventHandler(this.BTHabitacion_Click);
             // 
-            // TCapacidad
+            // label5
             // 
-            this.TCapacidad.Location = new System.Drawing.Point(120, 70);
-            this.TCapacidad.Name = "TCapacidad";
-            this.TCapacidad.Size = new System.Drawing.Size(58, 20);
-            this.TCapacidad.TabIndex = 43;
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(68, 154);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 16);
+            this.label5.TabIndex = 49;
+            this.label5.Text = "Piso:";
+            // 
+            // TPiso
+            // 
+            this.TPiso.Location = new System.Drawing.Point(121, 147);
+            this.TPiso.Name = "TPiso";
+            this.TPiso.Size = new System.Drawing.Size(58, 20);
+            this.TPiso.TabIndex = 48;
+            // 
+            // TEdificio
+            // 
+            this.TEdificio.Location = new System.Drawing.Point(121, 123);
+            this.TEdificio.Name = "TEdificio";
+            this.TEdificio.Size = new System.Drawing.Size(58, 20);
+            this.TEdificio.TabIndex = 46;
+            // 
+            // TDescr_THabitacion
+            // 
+            this.TDescr_THabitacion.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.TDescr_THabitacion.Location = new System.Drawing.Point(185, 97);
+            this.TDescr_THabitacion.Name = "TDescr_THabitacion";
+            this.TDescr_THabitacion.ReadOnly = true;
+            this.TDescr_THabitacion.Size = new System.Drawing.Size(211, 20);
+            this.TDescr_THabitacion.TabIndex = 45;
+            // 
+            // TTHabitacion
+            // 
+            this.TTHabitacion.Location = new System.Drawing.Point(121, 97);
+            this.TTHabitacion.Name = "TTHabitacion";
+            this.TTHabitacion.Size = new System.Drawing.Size(58, 20);
+            this.TTHabitacion.TabIndex = 43;
             // 
             // panel2
             // 
@@ -106,7 +152,7 @@
             this.panel2.Controls.Add(this.BCancelar);
             this.panel2.Controls.Add(this.BGuardar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 114);
+            this.panel2.Location = new System.Drawing.Point(0, 173);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(413, 63);
             this.panel2.TabIndex = 9;
@@ -160,7 +206,7 @@
             // 
             this.CB_ESTADO.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.CB_ESTADO.FormattingEnabled = true;
-            this.CB_ESTADO.Location = new System.Drawing.Point(310, 7);
+            this.CB_ESTADO.Location = new System.Drawing.Point(310, 37);
             this.CB_ESTADO.Name = "CB_ESTADO";
             this.CB_ESTADO.Size = new System.Drawing.Size(86, 21);
             this.CB_ESTADO.TabIndex = 5;
@@ -170,7 +216,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(246, 9);
+            this.label2.Location = new System.Drawing.Point(246, 39);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 16);
             this.label2.TabIndex = 4;
@@ -179,7 +225,7 @@
             // tDESCR
             // 
             this.tDESCR.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tDESCR.Location = new System.Drawing.Point(121, 41);
+            this.tDESCR.Location = new System.Drawing.Point(121, 71);
             this.tDESCR.Name = "tDESCR";
             this.tDESCR.Size = new System.Drawing.Size(275, 20);
             this.tDESCR.TabIndex = 3;
@@ -189,7 +235,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 41);
+            this.label1.Location = new System.Drawing.Point(7, 71);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(108, 16);
             this.label1.TabIndex = 2;
@@ -198,7 +244,7 @@
             // tid
             // 
             this.tid.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tid.Location = new System.Drawing.Point(121, 7);
+            this.tid.Location = new System.Drawing.Point(121, 37);
             this.tid.Name = "tid";
             this.tid.Size = new System.Drawing.Size(119, 20);
             this.tid.TabIndex = 1;
@@ -210,7 +256,7 @@
             this.LCodigo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.LCodigo.AutoSize = true;
             this.LCodigo.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LCodigo.Location = new System.Drawing.Point(46, 7);
+            this.LCodigo.Location = new System.Drawing.Point(46, 37);
             this.LCodigo.Name = "LCodigo";
             this.LCodigo.Size = new System.Drawing.Size(69, 16);
             this.LCodigo.TabIndex = 0;
@@ -228,17 +274,37 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // Mant_Cama
+            // TDescr_Edificio
+            // 
+            this.TDescr_Edificio.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.TDescr_Edificio.Location = new System.Drawing.Point(185, 126);
+            this.TDescr_Edificio.Name = "TDescr_Edificio";
+            this.TDescr_Edificio.ReadOnly = true;
+            this.TDescr_Edificio.Size = new System.Drawing.Size(211, 20);
+            this.TDescr_Edificio.TabIndex = 51;
+            // 
+            // BEdificio
+            // 
+            this.BEdificio.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.BEdificio.Location = new System.Drawing.Point(8, 123);
+            this.BEdificio.Name = "BEdificio";
+            this.BEdificio.Size = new System.Drawing.Size(107, 23);
+            this.BEdificio.TabIndex = 52;
+            this.BEdificio.Text = "Edificio";
+            this.BEdificio.UseVisualStyleBackColor = true;
+            this.BEdificio.Click += new System.EventHandler(this.BEdificio_Click);
+            // 
+            // Mant_Habitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 212);
+            this.ClientSize = new System.Drawing.Size(413, 276);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.Name = "Mant_Cama";
+            this.Name = "Mant_Habitacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CREAR/MODIFICAR";
-            this.Load += new System.EventHandler(this.Mant_Cama_Load);
+            this.Load += new System.EventHandler(this.Mant_Habitacion_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -265,7 +331,13 @@
         private System.Windows.Forms.Button BCancelar;
         private System.Windows.Forms.Button BGuardar;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.TextBox TCapacidad;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox TTHabitacion;
+        private System.Windows.Forms.TextBox TEdificio;
+        private System.Windows.Forms.TextBox TDescr_THabitacion;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox TPiso;
+        private System.Windows.Forms.Button BTHabitacion;
+        private System.Windows.Forms.Button BEdificio;
+        private System.Windows.Forms.TextBox TDescr_Edificio;
     }
 }

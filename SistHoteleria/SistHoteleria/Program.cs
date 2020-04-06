@@ -21,7 +21,7 @@ namespace SistHoteleria
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new menu());
-            Application.Run(new Login(ref aa_Parametro));
+           Application.Run(new Login(ref aa_Parametro));
             if (aa_Parametro[0].Trim() != "")
             {
                 Clases.Usuario = aa_Parametro[0];

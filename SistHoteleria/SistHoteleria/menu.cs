@@ -225,5 +225,71 @@ namespace SistHoteleria
             this.Dispose();
 
         }
+
+        private void cREARToolStripMenuItem11_Click(object sender, EventArgs e)
+        {
+            Mant_Cama form = new Mant_Cama("a");
+            form.ShowDialog();
+        }
+
+        private void cONSULTARToolStripMenuItem11_Click(object sender, EventArgs e)
+        {
+            Mant_C_Cama form = new Mant_C_Cama("");
+            form.ShowDialog();
+        }
+
+        private void crearToolStripMenuItem12_Click(object sender, EventArgs e)
+        {
+            Mant_Habitacion form = new Mant_Habitacion("a");
+            form.ShowDialog();
+        }
+
+        private void consultasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Mant_C_Habitacion form = new Mant_C_Habitacion();
+            form.ShowDialog();
+
+        }
+
+        private void asignarCamaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void crearToolStripMenuItem13_Click(object sender, EventArgs e)
+        {
+            Mant_TipoHabitacion form = new Mant_TipoHabitacion("a");
+            form.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem12_Click(object sender, EventArgs e)
+        {
+            Mant_C_TipoHabitacion form = new Mant_C_TipoHabitacion();
+            form.ShowDialog();
+        }
+
+        private void crearToolStripMenuItem14_Click(object sender, EventArgs e)
+        {
+            Mant_Edificio form = new Mant_Edificio("a");
+            form.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem13_Click(object sender, EventArgs e)
+        {
+            Mant_C_Edificio form = new Mant_C_Edificio();
+            form.ShowDialog();
+        }
+
+        private void crearToolStripMenuItem15_Click(object sender, EventArgs e)
+        {
+            Mant_Empleado form = new Mant_Empleado("a");
+            form.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem14_Click(object sender, EventArgs e)
+        {
+            Mant_C_Empleado form = new Mant_C_Empleado();
+            form.ShowDialog();
+        }
     }
 }

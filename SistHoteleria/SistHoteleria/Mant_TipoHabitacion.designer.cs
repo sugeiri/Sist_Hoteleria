@@ -1,6 +1,6 @@
 ﻿namespace SistHoteleria
 {
-    partial class Mant_Cama
+    partial class Mant_TipoHabitacion
     {
         /// <summary>
         /// Required designer variable.
@@ -45,6 +45,8 @@
             this.LCodigo = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.TCosto = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -60,13 +62,15 @@
             this.LTitulo.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LTitulo.Location = new System.Drawing.Point(161, 9);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(46, 16);
+            this.LTitulo.Size = new System.Drawing.Size(116, 16);
             this.LTitulo.TabIndex = 0;
-            this.LTitulo.Text = "Cama";
+            this.LTitulo.Text = "Tipo Habitacion";
             this.LTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.TCosto);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.TCapacidad);
             this.panel1.Controls.Add(this.panel2);
@@ -77,9 +81,9 @@
             this.panel1.Controls.Add(this.tid);
             this.panel1.Controls.Add(this.LCodigo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 35);
+            this.panel1.Location = new System.Drawing.Point(0, 53);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(413, 177);
+            this.panel1.Size = new System.Drawing.Size(413, 227);
             this.panel1.TabIndex = 1;
             // 
             // label3
@@ -87,7 +91,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(24, 71);
+            this.label3.Location = new System.Drawing.Point(24, 111);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 16);
             this.label3.TabIndex = 44;
@@ -95,9 +99,9 @@
             // 
             // TCapacidad
             // 
-            this.TCapacidad.Location = new System.Drawing.Point(120, 70);
+            this.TCapacidad.Location = new System.Drawing.Point(121, 107);
             this.TCapacidad.Name = "TCapacidad";
-            this.TCapacidad.Size = new System.Drawing.Size(58, 20);
+            this.TCapacidad.Size = new System.Drawing.Size(66, 20);
             this.TCapacidad.TabIndex = 43;
             // 
             // panel2
@@ -106,7 +110,7 @@
             this.panel2.Controls.Add(this.BCancelar);
             this.panel2.Controls.Add(this.BGuardar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 114);
+            this.panel2.Location = new System.Drawing.Point(0, 164);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(413, 63);
             this.panel2.TabIndex = 9;
@@ -160,7 +164,7 @@
             // 
             this.CB_ESTADO.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.CB_ESTADO.FormattingEnabled = true;
-            this.CB_ESTADO.Location = new System.Drawing.Point(310, 7);
+            this.CB_ESTADO.Location = new System.Drawing.Point(310, 23);
             this.CB_ESTADO.Name = "CB_ESTADO";
             this.CB_ESTADO.Size = new System.Drawing.Size(86, 21);
             this.CB_ESTADO.TabIndex = 5;
@@ -170,7 +174,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(246, 9);
+            this.label2.Location = new System.Drawing.Point(246, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 16);
             this.label2.TabIndex = 4;
@@ -179,7 +183,7 @@
             // tDESCR
             // 
             this.tDESCR.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tDESCR.Location = new System.Drawing.Point(121, 41);
+            this.tDESCR.Location = new System.Drawing.Point(121, 64);
             this.tDESCR.Name = "tDESCR";
             this.tDESCR.Size = new System.Drawing.Size(275, 20);
             this.tDESCR.TabIndex = 3;
@@ -189,7 +193,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 41);
+            this.label1.Location = new System.Drawing.Point(7, 68);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(108, 16);
             this.label1.TabIndex = 2;
@@ -198,7 +202,7 @@
             // tid
             // 
             this.tid.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tid.Location = new System.Drawing.Point(121, 7);
+            this.tid.Location = new System.Drawing.Point(121, 22);
             this.tid.Name = "tid";
             this.tid.Size = new System.Drawing.Size(119, 20);
             this.tid.TabIndex = 1;
@@ -210,7 +214,7 @@
             this.LCodigo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.LCodigo.AutoSize = true;
             this.LCodigo.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LCodigo.Location = new System.Drawing.Point(46, 7);
+            this.LCodigo.Location = new System.Drawing.Point(46, 22);
             this.LCodigo.Name = "LCodigo";
             this.LCodigo.Size = new System.Drawing.Size(69, 16);
             this.LCodigo.TabIndex = 0;
@@ -228,17 +232,35 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // Mant_Cama
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(216, 108);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(61, 16);
+            this.label4.TabIndex = 46;
+            this.label4.Text = "COSTO:";
+            // 
+            // TCosto
+            // 
+            this.TCosto.Location = new System.Drawing.Point(290, 106);
+            this.TCosto.Name = "TCosto";
+            this.TCosto.Size = new System.Drawing.Size(75, 20);
+            this.TCosto.TabIndex = 45;
+            // 
+            // Mant_TipoHabitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 212);
+            this.ClientSize = new System.Drawing.Size(413, 280);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.Name = "Mant_Cama";
+            this.Name = "Mant_TipoHabitacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CREAR/MODIFICAR";
-            this.Load += new System.EventHandler(this.Mant_Cama_Load);
+            this.Load += new System.EventHandler(this.Mant_TipoHabitacion_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -267,5 +289,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.TextBox TCapacidad;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox TCosto;
     }
 }

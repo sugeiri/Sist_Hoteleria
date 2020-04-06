@@ -61,6 +61,54 @@
     <Compile Include="Login.designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mant_C_Edificio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Edificio.designer.cs">
+      <DependentUpon>Mant_C_Edificio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Empleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Empleado.designer.cs">
+      <DependentUpon>Mant_C_Empleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Edificio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Edificio.designer.cs">
+      <DependentUpon>Mant_Edificio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_TipoHabitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_TipoHabitacion.designer.cs">
+      <DependentUpon>Mant_TipoHabitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_TipoHabitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_TipoHabitacion.designer.cs">
+      <DependentUpon>Mant_C_TipoHabitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Habitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Habitacion.designer.cs">
+      <DependentUpon>Mant_C_Habitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Habitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Habitacion.designer.cs">
+      <DependentUpon>Mant_Habitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Cama.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Cama.designer.cs">
+      <DependentUpon>Mant_C_Cama.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mant_C_Municipio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +133,12 @@
     <Compile Include="Mant_C_Usuario.designer.cs">
       <DependentUpon>Mant_C_Usuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mant_Cama.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Cama.designer.cs">
+      <DependentUpon>Mant_Cama.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mant_Municipio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +150,12 @@
     </Compile>
     <Compile Include="Mant_Provincia.designer.cs">
       <DependentUpon>Mant_Provincia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Empleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Empleado.designer.cs">
+      <DependentUpon>Mant_Empleado.cs</DependentUpon>
     </Compile>
     <Compile Include="Mant_Usuario.cs">
       <SubType>Form</SubType>
@@ -129,6 +189,30 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Edificio.resx">
+      <DependentUpon>Mant_C_Edificio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Empleado.resx">
+      <DependentUpon>Mant_C_Empleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Edificio.resx">
+      <DependentUpon>Mant_Edificio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_TipoHabitacion.resx">
+      <DependentUpon>Mant_TipoHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_TipoHabitacion.resx">
+      <DependentUpon>Mant_C_TipoHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Habitacion.resx">
+      <DependentUpon>Mant_C_Habitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Habitacion.resx">
+      <DependentUpon>Mant_Habitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Cama.resx">
+      <DependentUpon>Mant_C_Cama.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mant_C_Municipio.resx">
       <DependentUpon>Mant_C_Municipio.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,11 +225,17 @@
     <EmbeddedResource Include="Mant_C_Usuario.resx">
       <DependentUpon>Mant_C_Usuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Cama.resx">
+      <DependentUpon>Mant_Cama.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mant_Municipio.resx">
       <DependentUpon>Mant_Municipio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Mant_Provincia.resx">
       <DependentUpon>Mant_Provincia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Empleado.resx">
+      <DependentUpon>Mant_Empleado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Mant_Usuario.resx">
       <DependentUpon>Mant_Usuario.cs</DependentUpon>

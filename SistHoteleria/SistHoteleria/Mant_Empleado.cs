@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SistHoteleria
 {
-    public partial class Mant_Usuario : Form
+    public partial class Mant_Empleado : Form
     {
         string sql = "";
         DataSet DS = new DataSet();
@@ -20,8 +20,6 @@ namespace SistHoteleria
         string aa_ID = "";
         string aa_Modo = "A";
 
-        List<Clases.ETipo_Usuario> aa_LETipo_Usuario = new List<Clases.ETipo_Usuario>();
-        Clases.ETipo_Usuario aa_ETipo_Usuario = new Clases.ETipo_Usuario();
 
         List<Clases.ETipo_Identificacion> aa_LETipo_Identificacion = new List<Clases.ETipo_Identificacion>();
         Clases.ETipo_Identificacion aa_EETipo_Identificacion = new Clases.ETipo_Identificacion();
@@ -29,9 +27,9 @@ namespace SistHoteleria
         List<Clases.ETercero> aa_LETercero = new List<Clases.ETercero>();
         Clases.ETercero aa_ETercero = new Clases.ETercero();
 
-        Clases.EUsuario aa_EUsuario = new Clases.EUsuario();
+        Clases.EEmpleado aa_EEmpleado = new Clases.EEmpleado();
 
-        public Mant_Usuario()
+        public Mant_Empleado(string ii_modo)
         {
             InitializeComponent();
             CB_Estado.SelectedIndex = 0;
@@ -39,9 +37,10 @@ namespace SistHoteleria
             CB_Estado.Enabled = false;
             CB_EstadoTercero.Enabled = false;
             CB_Sexo.SelectedIndex = 0;
+            aa_Modo = ii_modo;
         }
 
-        public Mant_Usuario(string ii_ID,string ii_Modo)
+        public Mant_Empleado(string ii_ID,string ii_Modo)
         {
             InitializeComponent();
             aa_ID = ii_ID;
@@ -50,30 +49,30 @@ namespace SistHoteleria
             CB_EstadoTercero.SelectedIndex = 0;
             CB_EstadoTercero.Enabled = false;
             CB_Sexo.SelectedIndex = 0;
-        }
-
-        private void Mant_Usuario_Load(object sender, EventArgs e)
-        {
-            Lee_Tipo_Usuario();
-            Lee_Tipo_Identificacion();
-            if(aa_Modo.Trim().ToUpper()=="B")
+            if (aa_Modo.Trim().ToUpper() != "A")
             {
-                Llena_Datos();
+              //  Llena_Datos();
+                Pasa_Datos();
             }
         }
-        void Llena_Datos()
+
+        private void Mant_Empleado_Load(object sender, EventArgs e)
         {
-            Error = "";
-            string sql = "select * from USUARIO where id_USUARIO='" + aa_ID.ToString().Trim() + "'";
+            Lee_Tipo_Identificacion();
+          
+        }
+        void Pasa_Datos()
+        {
+             Error = "";
+            string sql = "select * from empleado where id_empleado='" + aa_ID.ToString().Trim() + "'";
             DataSet DS = Conexion.EjecutaSQL(sql, ref Error);
             int Count = DS.Tables[0].Rows.Count;
             if (Count > 0)
             {
-                TUsuario.Text = aa_ID.ToString().Trim();
-                TPassw.Text = Conexion.DesEncriptar(DS.Tables[0].Rows[0]["Password_Usuario"].ToString().Trim());
-                TConfirmacion.Text = TPassw.Text;
-                string estado = DS.Tables[0].Rows[0]["Estado_Usuario"].ToString().Trim();
-                string tipo = DS.Tables[0].Rows[0]["Tipo_Usuario"].ToString().Trim();
+                TEmpleado.Text = aa_ID.ToString().Trim();
+                string estado = DS.Tables[0].Rows[0]["Estado_empleado"].ToString().Trim();
+               TTipoEmpleado.Text = DS.Tables[0].Rows[0]["ID_T_EMPLEADO"].ToString().Trim();
+                DT_Fecha_Ini.Value = DateTime.Parse(DS.Tables[0].Rows[0]["FECHA_I_EMPLEADO"].ToString().Trim());
                 if (estado.ToString().Trim().ToUpper() == "A")
                 {
                     CB_Estado.SelectedIndex = 0;
@@ -82,23 +81,39 @@ namespace SistHoteleria
                 {
                     CB_Estado.SelectedIndex = 1;
                 }
-                foreach (var Tipo in aa_LETipo_Usuario)
-                {
-                    if (Tipo.id_T_Usuario.Trim().ToUpper() ==tipo.ToUpper())
-                    {
-                        for (int ii = 0; ii < CB_TipoUsuario.Items.Count; ii++)
-                        {
-                            if ((Tipo.Descripcion_T_Usuario.ToString().Trim() == CB_TipoUsuario.Items[ii].ToString().Trim()))
-                            {
-                                CB_TipoUsuario.SelectedIndex = ii;
-                                break;
-                            }
-                        }
-                    }
+                aa_ETercero = new Clases.ETercero();
+                aa_ETercero = funciones.Consulta_Tercero(DS.Tables[0].Rows[0]["ID_TERCERO_EMPLEADO"].ToString().Trim());
+                Llena_Datos_Tercero(aa_ETercero);
 
+
+            }
+
+
+
+        }
+
+        void Llena_Datos()
+        {
+            Error = "";
+            string sql = "select * from empleado where id_empleado='" + aa_ID.ToString().Trim() + "'";
+            DataSet DS = Conexion.EjecutaSQL(sql, ref Error);
+            int Count = DS.Tables[0].Rows.Count;
+            if (Count > 0)
+            {
+                TEmpleado.Text = aa_ID.ToString().Trim();
+                string estado = DS.Tables[0].Rows[0]["Estado_empleado"].ToString().Trim();
+                string tipo = DS.Tables[0].Rows[0]["ID_T_EMPLEADO"].ToString().Trim();
+                string Fecha_ini = DS.Tables[0].Rows[0]["FECHA_I_EMPLEADO"].ToString().Trim();
+                if (estado.ToString().Trim().ToUpper() == "A")
+                {
+                    CB_Estado.SelectedIndex = 0;
+                }
+                else
+                {
+                    CB_Estado.SelectedIndex = 1;
                 }
                 aa_ETercero = new Clases.ETercero();
-                aa_ETercero = funciones.Consulta_Tercero(DS.Tables[0].Rows[0]["id_Tercero_Usuario"].ToString().Trim());
+                aa_ETercero = funciones.Consulta_Tercero(DS.Tables[0].Rows[0]["ID_TERCERO_EMPLEADO"].ToString().Trim());
                 Limpia_Datos_Tercero();
                 Llena_Datos_Tercero(aa_ETercero);
                  
@@ -119,43 +134,7 @@ namespace SistHoteleria
          
 
         }
-        public void Lee_Tipo_Usuario()
-        {
-            CB_TipoUsuario.Items.Add("");
-            aa_LETipo_Usuario = new List<Clases.ETipo_Usuario>();
-            aa_ETipo_Usuario = new Clases.ETipo_Usuario();
-            sql = "SELECT * FROM Tipo_Usuario where Estado_T_Usuario='A'";
-
-            try
-            {
-                DS = Conexion.EjecutaSQL(sql, ref Error);
-                int Count = DS.Tables.Count;
-                if (Count > 0)
-                {
-                    Count = DS.Tables[0].Rows.Count;
-                    for (int i = 0; i < Count; i++)
-                    {
-                        aa_ETipo_Usuario = new Clases.ETipo_Usuario();
-                        aa_ETipo_Usuario.id_T_Usuario = DS.Tables[0].Rows[i]["id_T_Usuario"].ToString();
-                        aa_ETipo_Usuario.Descripcion_T_Usuario = DS.Tables[0].Rows[i]["Descripcion_T_Usuario"].ToString();
-                        aa_ETipo_Usuario.Estado_T_Usuario = DS.Tables[0].Rows[i]["Estado_T_Usuario"].ToString();
-                        aa_ETipo_Usuario.Nivel_Acceso_T_Usuario = DS.Tables[0].Rows[i]["Nivel_Acceso_T_Usuario"].ToString();
-                        aa_LETipo_Usuario.Add(aa_ETipo_Usuario);
-                        CB_TipoUsuario.Items.Add(aa_ETipo_Usuario.Descripcion_T_Usuario);
-                    }
-                    CB_TipoUsuario.SelectedIndex = 0;
-                }
-                else
-                {
-                    MessageBox.Show("NO ENCONTRO DATO DE LA CLINICA");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        public void Lee_Tipo_Identificacion()
+       public void Lee_Tipo_Identificacion()
         {
             CB_TipoIdentificacion.Items.Add("");
             aa_LETipo_Identificacion = new List<Clases.ETipo_Identificacion>();
@@ -190,20 +169,7 @@ namespace SistHoteleria
             }
         }
 
-        private void TConfirmacion_Leave(object sender, EventArgs e)
-        {
-            BCheck_M.Visible = false;
-            Bcheck_B.Visible = false;
-            if (TPassw.Text.Trim() != TConfirmacion.Text.Trim())
-            {
-                BCheck_M.Visible = true;
-            }
-            else
-            {
-                Bcheck_B.Visible = true;
-            }
-        }
-
+      
         private void DT_Fecha_NAc_ValueChanged(object sender, EventArgs e)
         {
 
@@ -223,7 +189,7 @@ namespace SistHoteleria
                 
                    if (Inserta_Tercero())
                     {
-                        if (Inserta_Usuario())
+                        if (Inserta_Empleado())
                         {
                             Limpia_Datos();
                             if(aa_Modo.ToUpper()!="A")
@@ -266,11 +232,12 @@ namespace SistHoteleria
                 catch { }
             }
             DT_Fecha_NAc.Value = DateTime.Today;
+            DT_Fecha_Ini.Value = DateTime.Today;
             CB_Estado.SelectedIndex = 0;
             CB_EstadoTercero.SelectedIndex = 0;
             CB_Sexo.SelectedIndex = 0;
             CB_TipoIdentificacion.SelectedIndex = 0;
-            CB_TipoUsuario.SelectedIndex = 0;
+            
 
 
         }
@@ -285,23 +252,12 @@ namespace SistHoteleria
             }
             return "";
         }
-        string Busca_Tipo_Usuario()
-        {
-            foreach (var Tipo in aa_LETipo_Usuario)
-            {
-                if (Tipo.Descripcion_T_Usuario.ToString().Trim() == CB_TipoUsuario.SelectedItem.ToString().Trim())
-                {
-                    return Tipo.id_T_Usuario;
-                }
-            }
-            return "";
-        }
         bool Inserta_Tercero()
         {
             Error = "";
             aa_ETercero = new Clases.ETercero();
-            if (aa_EUsuario.id_Tercero_Usuario.ToString().Trim() != "")
-                aa_ETercero.id_Tercero = aa_EUsuario.id_Tercero_Usuario;
+            if (aa_EEmpleado.id_tercero_empleado.ToString().Trim() != "")
+                aa_ETercero.id_Tercero = aa_EEmpleado.id_tercero_empleado;
             aa_ETercero.Nombre_Tercero = TNombreTercero.Text.ToString().Trim();
             aa_ETercero.ID_T_Identif_Tercero = Busca_Tipo_Identificacion().Trim();
 
@@ -327,18 +283,18 @@ namespace SistHoteleria
             }
             return false;
         }
-        bool Inserta_Usuario()
+        bool Inserta_Empleado()
         {
             Error = "";
-            aa_EUsuario = new Clases.EUsuario();
+            aa_EEmpleado = new Clases.EEmpleado();
 
-            aa_EUsuario.id_Usuario = TUsuario.Text.ToString().Trim();
-            aa_EUsuario.id_Tercero_Usuario = aa_ETercero.id_Tercero;
-            aa_EUsuario.id_Tipo_Usuario = Busca_Tipo_Usuario().ToString().Trim();
-            aa_EUsuario.Password_Usuario = Conexion.Encriptar(TPassw.Text.ToString().Trim());
-            aa_EUsuario.Estado_Usuario = CB_Estado.SelectedItem.ToString().Trim().ToUpper().Substring(0,1);
+            aa_EEmpleado.id_empleado = TEmpleado.Text.ToString().Trim();
+            aa_EEmpleado.id_tercero_empleado = aa_ETercero.id_Tercero;
+            aa_EEmpleado.id_t_empleado = TTipoEmpleado.Text.ToString().Trim();
+            aa_EEmpleado.fecha_i_empleado = DT_Fecha_Ini.Value.ToString("yyyy-MM-dd").Trim();
+            aa_EEmpleado.estado_empleado = CB_Estado.SelectedItem.ToString().Trim().ToUpper().Substring(0,1);
 
-            if (funciones.Inserta_Usuario(aa_EUsuario, ref Error,aa_Modo))
+            if (funciones.Inserta_Empleado(aa_EEmpleado, ref Error,aa_Modo))
             {
                 return true;
             }
@@ -356,35 +312,21 @@ namespace SistHoteleria
         {
             errorProvider1.Clear();
             string Msj = "Este Campo No Puede Estar en Blanco";
-            if (string.IsNullOrWhiteSpace(TUsuario.Text.Trim()))
+            if (string.IsNullOrWhiteSpace(TEmpleado.Text.Trim()))
             {
-                Lanza_Error(TUsuario, Msj);
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(TPassw.Text.Trim()))
-            {
-                Lanza_Error(TPassw, Msj);
-                return false;
-            }
-            if (TPassw.Text.Trim() != TConfirmacion.Text.Trim())
-            {
-                Lanza_Error(TConfirmacion, "Las Contraseñas no Coinciden");
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(CB_TipoUsuario.SelectedItem.ToString().Trim()))
-            {
-                MessageBox.Show("Debe Especificar Tipo de Usuario");
+                Lanza_Error(TEmpleado, Msj);
                 return false;
             }
             
+            
             if (CB_Estado.SelectedItem.ToString().Substring(0, 1).Trim().ToUpper() != "A" && aa_Modo.ToUpper()=="A")
             {
-                MessageBox.Show("No puede crear Usuario Inactivo");
+                MessageBox.Show("No puede crear empleado Inactivo");
                 return false;
             }
             if (CB_EstadoTercero.SelectedItem.ToString().Substring(0, 1).Trim().ToUpper() != "A")
             {
-                MessageBox.Show("No puede crear Usuario Con Datos Inactivos");
+                MessageBox.Show("No puede crear empleado Con Datos Inactivos");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(TNombreTercero.Text.Trim()))
@@ -432,7 +374,7 @@ namespace SistHoteleria
             aa_ETercero = new Clases.ETercero();
             aa_ETercero = funciones.Consulta_Tercero(id_T);
             Llena_Datos_Tercero(aa_ETercero);
-            aa_EUsuario.id_Tercero_Usuario = aa_ETercero.id_Tercero;
+            aa_EEmpleado.id_tercero_empleado = aa_ETercero.id_Tercero;
         }
         void Llena_Datos_Tercero(Clases.ETercero ii_ETercero)
         {
@@ -471,6 +413,22 @@ namespace SistHoteleria
             {
                 CB_EstadoTercero.SelectedIndex = 1;
             }
+
+        }
+
+        private void BTEmpleado_Click(object sender, EventArgs e)
+        {
+            tipob form = new tipob("e", "TIPO_EMPLEADO", "Tipo Empleado");
+            form.ShowDialog();
+            if (form.Id.ToString().Trim() != "")
+            {
+                TTipoEmpleado.Text = form.Id.ToString().Trim();
+                TDescr_TipoEmpleado.Text = funciones.Lee_Tipo(form.Id.ToString().Trim(), "TIPO_EMPLEADO").descripcion;
+            }
+        }
+
+        private void TEdad_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

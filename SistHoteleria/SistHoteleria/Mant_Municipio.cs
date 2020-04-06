@@ -14,7 +14,6 @@ namespace SistHoteleria
     public partial class Mant_Municipio : Form
     {
         string aa_modo = "";
-        string aa_id = "";
         Clases.EMunicipio aa_EMunicipio = new Clases.EMunicipio();
         public Mant_Municipio(string ii_modo)
         {

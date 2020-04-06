@@ -10,19 +10,19 @@ using System.Windows.Forms;
 
 namespace SistHoteleria
 {
-    public partial class Mant_C_Usuario : Form
+    public partial class Mant_C_Empleado : Form
     {
 
         public string Id = "";
         string modo = "c";
         string sql = "";
        
-        public Mant_C_Usuario()
+        public Mant_C_Empleado()
         {
             InitializeComponent();
 
         }
-        public Mant_C_Usuario(string ii_sql,string ii_modo)
+        public Mant_C_Empleado(string ii_sql,string ii_modo)
         {
             InitializeComponent();
             modo = ii_modo;
@@ -87,24 +87,16 @@ namespace SistHoteleria
         }
         void Modificar()
         {
-            if (Clases.Nivel_Acceso.ToUpper() == "A")
-            {
-                int i = Fila_Actual();
-                Id = DG_Datos.Rows[i].Cells[0].Value.ToString().Trim();
-                Mant_Usuario cs = new Mant_Usuario(Id, "b");
-                cs.ShowDialog();
-                if (cs.DialogResult == DialogResult.OK)
-                    Lee_Datos();
-            }
-            else
-            {
-                MessageBox.Show("No Tiene Acceso");
-            }
-            
-            
+            int i = Fila_Actual();
+            Id = DG_Datos.Rows[i].Cells[0].Value.ToString().Trim();
+            Mant_Empleado form = new Mant_Empleado(Id,"m");
+            if (form.ShowDialog() == DialogResult.OK)
+                Lee_Datos();
+
+
         }
 
-        private void Mant_C_Usuario_Load(object sender, EventArgs e)
+        private void Mant_C_Empleado_Load(object sender, EventArgs e)
         {
 
             Lee_Datos();
@@ -115,7 +107,8 @@ namespace SistHoteleria
             string Error = "";
              if (modo.ToString().Trim().ToLower() != "e" || sql.ToString().Trim()=="")
             {
-                sql = "SELECT * FROM Usuario,Tercero where id_Tercero=id_Tercero_Usuario";
+                sql = "SELECT * FROM empleado,Tercero,TIPO_EMPLEADO where id_Tercero=ID_TERCERO_EMPLEADO " +
+                       "and ID_T_EMPLEADO_TE=ID_T_EMPLEADO";
            
             }
             DataSet DS = Conexion.EjecutaSQL(sql, ref Error);
@@ -128,10 +121,10 @@ namespace SistHoteleria
                 {
                     DataGridViewRow ii_row = new DataGridViewRow();
                     ii_row.CreateCells(DG_Datos);
-                    ii_row.Cells[0].Value = DS.Tables[0].Rows[i]["id_Usuario"].ToString().Trim();
+                    ii_row.Cells[0].Value = DS.Tables[0].Rows[i]["id_empleado"].ToString().Trim();
                     ii_row.Cells[1].Value = DS.Tables[0].Rows[i]["Nombre_Tercero"].ToString().Trim();
-                    ii_row.Cells[2].Value = DS.Tables[0].Rows[i]["Estado_Usuario"].ToString().Trim();
-                    ii_row.Cells[3].Value = DS.Tables[0].Rows[i]["Tipo_Usuario"].ToString().Trim();
+                    ii_row.Cells[2].Value = DS.Tables[0].Rows[i]["Estado_empleado"].ToString().Trim();
+                    ii_row.Cells[3].Value = DS.Tables[0].Rows[i]["DESCR_TE"].ToString().Trim();
                     DG_Datos.Rows.Add(ii_row);
                 }
             }
@@ -152,7 +145,7 @@ namespace SistHoteleria
             
             EventArgs e = new EventArgs();
             Object ob = new Object();
-            if(!string.IsNullOrWhiteSpace(TUsuario.Text.ToString().Trim()))
+            if(!string.IsNullOrWhiteSpace(TEmpleado.Text.ToString().Trim()))
                 TCodigo_TextChanged(ob, e);
             if (CB_Estado.SelectedIndex>0)
                 CB_Estado_Servicio_SelectedIndexChanged(ob, e);
@@ -202,7 +195,7 @@ namespace SistHoteleria
         private void TCodigo_TextChanged(object sender, EventArgs e)
         {
 
-            string id = TUsuario.Text.ToString().Trim();
+            string id = TEmpleado.Text.ToString().Trim();
             if (!string.IsNullOrWhiteSpace(id))
             {
                 Filtra(0, id,false);
@@ -230,7 +223,7 @@ namespace SistHoteleria
 
         private void BLimpiar_Click(object sender, EventArgs e)
         {
-            TUsuario.Text = "";
+            TEmpleado.Text = "";
             TNombre.Text = "";
             CB_Estado.SelectedIndex = 0;
             foreach (DataGridViewRow dr in DG_Datos.Rows)

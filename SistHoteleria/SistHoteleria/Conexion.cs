@@ -16,7 +16,8 @@ namespace SistHoteleria
         static string Database = "db_hotel";
         static string Usuario = "SistHot";
         static string Pass = "971223";
-        static string Server = "QJM_SUGEIRI";
+       // static string Server = "QJM_SUGEIRI";
+        static string Server = "QJM-PC";
         public static SqlConnection OpenC(ref string Error)
         {
             ConnectionString = @"Persist Security Info=False;User ID = " + Usuario + "; Password=" + Pass + ";Initial Catalog = " + Database + "; Server=" + Server + ";database=" + Database + "";

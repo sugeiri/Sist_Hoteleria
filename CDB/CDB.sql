@@ -152,6 +152,7 @@ create table tipo_habitacion(
 create table thabitacion_cama(
 	id_t_hab_thc char(5) not null Constraint FK_thabitacion_thc FOREIGN KEY REFERENCES tipo_habitacion(id_t_hab),
 	id_cama_thc char(5) not null Constraint FK_cama_thc FOREIGN KEY REFERENCES cama(id_cama),
+	Cantidad_camas int not null,--DA
 	primary key(id_t_hab_thc,id_cama_thc)
 )
 create table caracteristica(

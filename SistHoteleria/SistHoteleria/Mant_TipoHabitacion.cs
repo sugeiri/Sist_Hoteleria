@@ -11,24 +11,25 @@ using System.Windows.Forms;
 
 namespace SistHoteleria
 {
-    public partial class Mant_Cama : Form
+    public partial class Mant_TipoHabitacion : Form
     {
         string aa_modo = "";
-        Clases.ECama aa_ECama = new Clases.ECama();
-        public Mant_Cama(string ii_modo)
+        string aa_id = "";
+        Clases.ETHabitacion aa_ETHabitacion = new Clases.ETHabitacion();
+        public Mant_TipoHabitacion(string ii_modo)
         {
             InitializeComponent();
             aa_modo = ii_modo;
 
         }
-        public Mant_Cama(string ii_modo, Clases.ECama ii_ECama)
+        public Mant_TipoHabitacion(string ii_modo, Clases.ETHabitacion ii_ETHabitacion)
         {
             InitializeComponent();
             aa_modo = ii_modo;
-            aa_ECama = ii_ECama;
+            aa_ETHabitacion = ii_ETHabitacion;
         }
 
-        private void Mant_Cama_Load(object sender, EventArgs e)
+        private void Mant_TipoHabitacion_Load(object sender, EventArgs e)
         {
             CB_ESTADO.Items.Add("A");
             CB_ESTADO.Items.Add("I");
@@ -42,10 +43,11 @@ namespace SistHoteleria
         }
         void Pasa_Datos()
         {
-            tid.Text = aa_ECama.id_cama;
-            tDESCR.Text = aa_ECama.descr_cama.ToString().Trim().ToUpper();
-            TCapacidad.Text = aa_ECama.capacidad_cama.ToString().Trim().ToUpper();
-            if (aa_ECama.estado_cama.ToUpper() != "A")
+            tid.Text = aa_ETHabitacion.id_t_hab;
+            tDESCR.Text = aa_ETHabitacion.descr_t_hab.ToString().Trim().ToUpper();
+            TCapacidad.Text = aa_ETHabitacion.capacidad_hab.ToString().Trim().ToUpper();
+            TCosto.Text = aa_ETHabitacion.costo_hab.ToString().Trim().ToUpper();
+            if (aa_ETHabitacion.estado_t_hab.ToUpper() != "A")
             {
                 CB_ESTADO.SelectedIndex = 1;
             }
@@ -59,6 +61,7 @@ namespace SistHoteleria
             tDESCR.Text = "";
             CB_ESTADO.SelectedIndex = 0;
             TCapacidad.Text = "";
+            TCosto.Text = "";
         }
 
         private void tid_Leave(object sender, EventArgs e)
@@ -68,16 +71,17 @@ namespace SistHoteleria
                 if (tid.Text.ToString().Trim() == "*")
                 {
 
-                    tid.Text = funciones.Prox_Codigo("Cama").ToString("######");
+                    tid.Text = funciones.Prox_Codigo("tipo_habitacion").ToString("######");
                 }
                 else {
-                    aa_ECama = funciones.Lee_Cama(tid.Text.ToString().Trim());
-                    if (aa_ECama != null)
+                    aa_ETHabitacion = funciones.Lee_TipoHabitacion(tid.Text.ToString().Trim());
+                    if (aa_ETHabitacion != null)
                     {
                         aa_modo = "m";
-                        tDESCR.Text = aa_ECama.descr_cama;
-                        TCapacidad.Text = aa_ECama.capacidad_cama.ToString();
-                        if (aa_ECama.estado_cama.ToUpper() == "A")
+                        tDESCR.Text = aa_ETHabitacion.descr_t_hab;
+                        TCapacidad.Text = aa_ETHabitacion.capacidad_hab.ToString();
+                        TCosto.Text = aa_ETHabitacion.costo_hab.ToString();
+                        if (aa_ETHabitacion.estado_t_hab.ToUpper() == "A")
                             CB_ESTADO.SelectedIndex = 0;
                         else
                             CB_ESTADO.SelectedIndex = 1;
@@ -136,21 +140,27 @@ namespace SistHoteleria
                     return;
 
                 }
-                sql = "INSERT INTO CAMA VALUES('" + tid.Text.ToString() + "','" + tDESCR.Text.ToString().Trim() + "','" + TCapacidad.Text.ToString().Trim() + "','"+CB_ESTADO.SelectedItem.ToString().Trim() + "')";
+                sql = "INSERT INTO tipo_habitacion VALUES('" + tid.Text.ToString() + "','" 
+                                                             + tDESCR.Text.ToString().Trim() + "','" 
+                                                             + TCapacidad.Text.ToString().Trim() + "','"
+                                                             + TCosto.Text.ToString().Trim() + "','"
+                                                             + CB_ESTADO.SelectedItem.ToString().Trim() + "')";
 
             }
             else
             {
 
-                sql = "UPDATE Cama SET " +
-                        "descr_cama='" + tDESCR.Text.ToUpper() + "'," +
-                        "capacidad_cama=" + TCapacidad.Text.ToString().ToUpper() + "'," +
-                        "estado_cama='" + CB_ESTADO.SelectedItem.ToString().ToUpper() + "'" +
-                        " WHERE id_cama=" + tid.Text.ToString().Trim() + "";
+                sql = "UPDATE tipo_habitacion SET " +
+                        "descr_t_hab='" + tDESCR.Text.ToUpper() + "'," +
+                        "capacidad_hab=" + TCapacidad.Text.ToString().ToUpper() + "'," +
+                        "costo_hab=" + TCosto.Text.ToString().ToUpper() + "'," +
+                        "estado_t_hab='" + CB_ESTADO.SelectedItem.ToString().ToUpper() + "'" +
+                        " WHERE id_t_hab=" + tid.Text.ToString().Trim() + "";
 
                  
             }
-            if (!Conexion.Inserta_Datos(sql, ref Error))
+            
+           if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 MessageBox.Show(Error);
                 return;

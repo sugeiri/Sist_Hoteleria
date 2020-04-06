@@ -205,7 +205,7 @@ namespace SistHoteleria
             DataSet ds = new DataSet();
             try
             {
-                string consulta = "select * from Tercero where id_Tercero=" + id_tercero.Trim();
+                string consulta = "select * from Tercero where id_Tercero='" + id_tercero.Trim() +"'";
                 ds =Conexion.EjecutaSQL(consulta, ref Error);
                 if (ds.Tables.Count > 0)
                 {
@@ -293,8 +293,8 @@ namespace SistHoteleria
                 ID = funciones.Genera_Codigo_Numerico("Tercero", "id_Tercero");
 
                 sql = "INSERT INTO  Tercero VALUES(" + ID + ",'" +
-                                        ii_ETercero.Nombre_Tercero + "'," +
-                                        ii_ETercero.ID_T_Identif_Tercero + ",'" +
+                                        ii_ETercero.Nombre_Tercero + "','" +
+                                        ii_ETercero.ID_T_Identif_Tercero + "','" +
                                         ii_ETercero.Cedula_Tercero + "','" +
                                         ii_ETercero.Fecha_Nac_Tercero + "','" +
                                         ii_ETercero.Sexo_Tercero + "'," +
@@ -445,23 +445,124 @@ namespace SistHoteleria
             return null;
 
         }
-        public static string Lee_Descr_Cama(string id)
+      
+        public static Clases.EHabitacion Lee_Habitacion (string id)
         {
             string sql = "";
+            Clases.EHabitacion ii_habitacion = new Clases.EHabitacion();
             DataSet DS = new DataSet();
             string Error = "";
 
-            sql = "  SELECT * from  Cama  WHERE id_Cama = '" + id +"'";
+            sql = "  SELECT * from  habitacion  WHERE id_habitacion = '" + id + "'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
             {
-                return DS.Tables[0].Rows[0]["descr_Cama"].ToString();
+                ii_habitacion.id_habitacion = id;
+                ii_habitacion.descr_habitacion = DS.Tables[0].Rows[0]["descr_habitacion"].ToString();
+                ii_habitacion.t_habitacion = DS.Tables[0].Rows[0]["t_habitacion"].ToString();
+                ii_habitacion.edificio_habitacion = DS.Tables[0].Rows[0]["edificio_habitacion"].ToString();
+                ii_habitacion.piso_habitacion = int.Parse(DS.Tables[0].Rows[0]["piso_habitacion"].ToString());
+                ii_habitacion.estado_habitacion = DS.Tables[0].Rows[0]["estado_habitacion"].ToString();
 
-
+                return ii_habitacion;
             }
-            return "";
+            return null;
 
         }
+        
+        public static Clases.ETHabitacion Lee_TipoHabitacion(string id)
+        {
+            string sql = "";
+            Clases.ETHabitacion ii_THabitacion = new Clases.ETHabitacion();
+            DataSet DS = new DataSet();
+            string Error = "";
 
+            sql = "  SELECT * from  tipo_habitacion  WHERE id_t_hab = '" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                ii_THabitacion.id_t_hab = id;
+                ii_THabitacion.descr_t_hab = DS.Tables[0].Rows[0]["descr_t_hab"].ToString();
+                ii_THabitacion.capacidad_hab = DS.Tables[0].Rows[0]["capacidad_hab"].ToString();
+                ii_THabitacion.costo_hab = DS.Tables[0].Rows[0]["costo_hab"].ToString();
+                ii_THabitacion.estado_t_hab = DS.Tables[0].Rows[0]["estado_t_hab"].ToString();
+
+                return ii_THabitacion;
+            }
+            return null;
+
+        }
+      
+        public static Clases.EEdificio Lee_Edificio(string id)
+        {
+            string sql = "";
+            Clases.EEdificio ii_Edificio = new Clases.EEdificio();
+            DataSet DS = new DataSet();
+            string Error = "";
+
+            sql = "  SELECT * from  edificio  WHERE id_edificio = '" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                ii_Edificio.id_edificio = id;
+                ii_Edificio.descr_edificio = DS.Tables[0].Rows[0]["descr_edificio"].ToString();
+                ii_Edificio.cant_nivel_edificio = int.Parse(DS.Tables[0].Rows[0]["cant_nivel_edificio"].ToString());
+                ii_Edificio.estado_edificio = DS.Tables[0].Rows[0]["estado_edificio"].ToString();
+
+                return ii_Edificio;
+            }
+            return null;
+
+        }
+        public static Clases.EEmpleado Lee_Empleado(string id)
+        {
+            string sql = "";
+            Clases.EEmpleado ii_Empleado = new Clases.EEmpleado();
+            DataSet DS = new DataSet();
+            string Error = "";
+
+            sql = "  SELECT * from  empleado  WHERE id_empleado = '" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                ii_Empleado.id_empleado = id;
+                ii_Empleado.id_tercero_empleado = DS.Tables[0].Rows[0]["id_tercero_empleado"].ToString();
+                ii_Empleado.id_t_empleado = DS.Tables[0].Rows[0]["id_t_empleado"].ToString();
+                ii_Empleado.fecha_i_empleado = DS.Tables[0].Rows[0]["fecha_i_empleado"].ToString();
+                ii_Empleado.estado_empleado = DS.Tables[0].Rows[0]["estado_empleado"].ToString();
+
+                return ii_Empleado;
+            }
+            return null;
+
+        }
+        public static bool Inserta_Empleado(Clases.EEmpleado ii_EEmpleado, ref string Error, string modo)
+        {
+            string sql = "";
+            if (modo.Trim().ToUpper() == "A")
+            {
+                sql = "INSERT INTO empleado VALUES('" +
+                                    ii_EEmpleado.id_empleado + "','" +
+                                    ii_EEmpleado.id_tercero_empleado + "','" +
+                                    ii_EEmpleado.id_t_empleado + "','" +
+                                    ii_EEmpleado.fecha_i_empleado + "','" +
+                                    ii_EEmpleado.estado_empleado + "')";
+            }
+            else
+            {
+                sql = " UPDATE empleado SET id_tercero_empleado='" + ii_EEmpleado.id_tercero_empleado + "'," +
+                                        "id_t_empleado='" + ii_EEmpleado.id_t_empleado + "'," +
+                                        "fecha_i_empleado='" + ii_EEmpleado.fecha_i_empleado + "'," +
+                                        "estado_empleado='" + ii_EEmpleado.estado_empleado + "'" +
+                    " WHERE id_empleado='" + ii_EEmpleado.id_empleado + "'";
+            }
+
+            if (Conexion.Inserta_Datos(sql, ref Error))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

@@ -125,6 +125,46 @@ namespace SistHoteleria
            
 
         }
+        public class EHabitacion
+        {
+            public string id_habitacion = "";
+            public string descr_habitacion = "";
+            public string t_habitacion = "";
+            public string edificio_habitacion = "";
+            public int piso_habitacion = 0;
+            public string estado_habitacion = "";
+
+
+        }
+        public class ETHabitacion
+        {
+            public string id_t_hab = "";
+            public string descr_t_hab = "";
+            public string capacidad_hab = "";
+            public string costo_hab = "";
+            public string estado_t_hab = "";
+
+      
+        }
+        public class EEdificio
+        {
+            public string id_edificio = "";
+            public string descr_edificio = "";
+            public int cant_nivel_edificio = 0;
+            public string estado_edificio = "";
+
+
+        }
+        public class EEmpleado
+        {
+            public string id_empleado = "";
+            public string id_tercero_empleado= "";
+            public string id_t_empleado = "";
+            public string fecha_i_empleado = "";
+            public string estado_empleado = "";
+	
+
+        }
 
     }
 }
