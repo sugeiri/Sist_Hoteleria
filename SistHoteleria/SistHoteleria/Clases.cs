@@ -116,5 +116,15 @@ namespace SistHoteleria
 
 
         }
+        public class ECama
+        {
+            public string id_cama = "";
+            public string descr_cama = "";
+            public int capacidad_cama = 0;
+            public string estado_cama = "";
+           
+
+        }
+
     }
 }
