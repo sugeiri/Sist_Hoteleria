@@ -1,0 +1,2401 @@
+
+--------------ACTCAMA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTCAMA' AND type = 'P')
+DROP PROCEDURE ACTCAMA
+GO
+CREATE PROCEDURE ACTCAMA
+       @II_ID_CAMA  CHAR(5),
+       @II_DESCR_CAMA  VARCHAR(50),
+       @II_CAPACIDAD_CAMA  INT,
+       @II_ESTADO_CAMA  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into cama values(	     @II_ID_CAMA,
+	     @II_DESCR_CAMA,
+	     @II_CAPACIDAD_CAMA,
+	     @II_ESTADO_CAMA);
+else
+	update cama set 	     DESCR_CAMA=@II_DESCR_CAMA,
+	     CAPACIDAD_CAMA=@II_CAPACIDAD_CAMA,
+	     ESTADO_CAMA=@II_ESTADO_CAMA
+  where ID_CAMA=@II_ID_CAMA;
+GO
+grant all on ACTCAMA to public
+
+--------------ACTTIPO_HABITACION-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_HABITACION' AND type = 'P')
+DROP PROCEDURE ACTTIPO_HABITACION
+GO
+CREATE PROCEDURE ACTTIPO_HABITACION
+       @II_ID_T_HAB  CHAR(5),
+       @II_DESCR_T_HAB  VARCHAR(50),
+       @II_CAPACIDAD_HAB  INT,
+       @II_COSTO_HAB  DECIMAL,
+       @II_ESTADO_T_HAB  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into tipo_habitacion values(	     @II_ID_T_HAB,
+	     @II_DESCR_T_HAB,
+	     @II_CAPACIDAD_HAB,
+	     @II_COSTO_HAB,
+	     @II_ESTADO_T_HAB);
+else
+	update tipo_habitacion set 	     DESCR_T_HAB=@II_DESCR_T_HAB,
+	     CAPACIDAD_HAB=@II_CAPACIDAD_HAB,
+	     COSTO_HAB=@II_COSTO_HAB,
+	     ESTADO_T_HAB=@II_ESTADO_T_HAB
+  where ID_T_HAB=@II_ID_T_HAB;
+GO
+grant all on ACTTIPO_HABITACION to public
+
+--------------ACTCARACTERISTICA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTCARACTERISTICA' AND type = 'P')
+DROP PROCEDURE ACTCARACTERISTICA
+GO
+CREATE PROCEDURE ACTCARACTERISTICA
+       @II_ID_CARACTERISTICA  CHAR(5),
+       @II_DESCR_CARACTERISTICA  VARCHAR(100),
+       @II_ESTADO_CARACTERISTICA  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into caracteristica values(	     @II_ID_CARACTERISTICA,
+	     @II_DESCR_CARACTERISTICA,
+	     @II_ESTADO_CARACTERISTICA);
+else
+	update caracteristica set 	     DESCR_CARACTERISTICA=@II_DESCR_CARACTERISTICA,
+	     ESTADO_CARACTERISTICA=@II_ESTADO_CARACTERISTICA
+  where ID_CARACTERISTICA=@II_ID_CARACTERISTICA;
+GO
+grant all on ACTCARACTERISTICA to public
+
+--------------ACTTHAB_CARACTERISTICA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTHAB_CARACTERISTICA' AND type = 'P')
+DROP PROCEDURE ACTTHAB_CARACTERISTICA
+GO
+CREATE PROCEDURE ACTTHAB_CARACTERISTICA
+       @II_ID_T_HAB_THCAR  CHAR(5),
+       @II_ID_CARACTERISTICA_THCAR  CHAR(5),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into thab_caracteristica values(	     @II_ID_T_HAB_THCAR,
+	     @II_ID_CARACTERISTICA_THCAR);
+else
+	update thab_caracteristica set 	     ID_CARACTERISTICA_THCAR=@II_ID_CARACTERISTICA_THCAR
+  where ID_T_HAB_THCAR=@II_ID_T_HAB_THCAR;
+GO
+grant all on ACTTHAB_CARACTERISTICA to public
+
+--------------ACTEDIFICIO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTEDIFICIO' AND type = 'P')
+DROP PROCEDURE ACTEDIFICIO
+GO
+CREATE PROCEDURE ACTEDIFICIO
+       @II_ID_EDIFICIO  CHAR(5),
+       @II_DESCR_EDIFICIO  VARCHAR(100),
+       @II_CANT_NIVEL_EDIFICIO  INT,
+       @II_ESTADO_EDIFICIO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into edificio values(	     @II_ID_EDIFICIO,
+	     @II_DESCR_EDIFICIO,
+	     @II_CANT_NIVEL_EDIFICIO,
+	     @II_ESTADO_EDIFICIO);
+else
+	update edificio set 	     DESCR_EDIFICIO=@II_DESCR_EDIFICIO,
+	     CANT_NIVEL_EDIFICIO=@II_CANT_NIVEL_EDIFICIO,
+	     ESTADO_EDIFICIO=@II_ESTADO_EDIFICIO
+  where ID_EDIFICIO=@II_ID_EDIFICIO;
+GO
+grant all on ACTEDIFICIO to public
+
+--------------ACTHABITACION-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTHABITACION' AND type = 'P')
+DROP PROCEDURE ACTHABITACION
+GO
+CREATE PROCEDURE ACTHABITACION
+       @II_ID_HABITACION  CHAR(5),
+       @II_DESCR_HABITACION  VARCHAR(100),
+       @II_T_HABITACION  CHAR(5),
+       @II_EDIFICIO_HABITACION  CHAR(5),
+       @II_PISO_HABITACION  INT,
+       @II_ESTADO_HABITACION  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into habitacion values(	     @II_ID_HABITACION,
+	     @II_DESCR_HABITACION,
+	     @II_T_HABITACION,
+	     @II_EDIFICIO_HABITACION,
+	     @II_PISO_HABITACION,
+	     @II_ESTADO_HABITACION);
+else
+	update habitacion set 	     DESCR_HABITACION=@II_DESCR_HABITACION,
+	     T_HABITACION=@II_T_HABITACION,
+	     EDIFICIO_HABITACION=@II_EDIFICIO_HABITACION,
+	     PISO_HABITACION=@II_PISO_HABITACION,
+	     ESTADO_HABITACION=@II_ESTADO_HABITACION
+  where ID_HABITACION=@II_ID_HABITACION;
+GO
+grant all on ACTHABITACION to public
+
+--------------ACTTIPO_MANTENIMIENTO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_MANTENIMIENTO' AND type = 'P')
+DROP PROCEDURE ACTTIPO_MANTENIMIENTO
+GO
+CREATE PROCEDURE ACTTIPO_MANTENIMIENTO
+       @II_ID_T_MANTENIMIENTO  CHAR(5),
+       @II_DESCR_T_MANTENIMIENTO  VARCHAR(100),
+       @II_ESTADO_T_MANTENIMIENTO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into tipo_mantenimiento values(	     @II_ID_T_MANTENIMIENTO,
+	     @II_DESCR_T_MANTENIMIENTO,
+	     @II_ESTADO_T_MANTENIMIENTO);
+else
+	update tipo_mantenimiento set 	     DESCR_T_MANTENIMIENTO=@II_DESCR_T_MANTENIMIENTO,
+	     ESTADO_T_MANTENIMIENTO=@II_ESTADO_T_MANTENIMIENTO
+  where ID_T_MANTENIMIENTO=@II_ID_T_MANTENIMIENTO;
+GO
+grant all on ACTTIPO_MANTENIMIENTO to public
+
+--------------ACTMANTENIMIENTO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTMANTENIMIENTO' AND type = 'P')
+DROP PROCEDURE ACTMANTENIMIENTO
+GO
+CREATE PROCEDURE ACTMANTENIMIENTO
+       @II_ID_MANTENIMIENTO  INT,
+       @II_ID_HAB_MANTENIMIENTO  CHAR(5),
+       @II_FECHA_CRE_MANTENIMIENTO  DATETIME,
+       @II_FECHA_MOD_MANTENIMIENTO  DATETIME,
+       @II_ESTADO_MANTENIMIENTO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into mantenimiento values(	     @II_ID_MANTENIMIENTO,
+	     @II_ID_HAB_MANTENIMIENTO,
+	     GETDATE(),
+	     GETDATE(),
+	     @II_ESTADO_MANTENIMIENTO);
+else
+	update mantenimiento set 	     ID_HAB_MANTENIMIENTO=@II_ID_HAB_MANTENIMIENTO,
+	     FECHA_CRE_MANTENIMIENTO=GETDATE(),
+	     FECHA_MOD_MANTENIMIENTO=GETDATE(),
+	     ESTADO_MANTENIMIENTO=@II_ESTADO_MANTENIMIENTO
+  where ID_MANTENIMIENTO=@II_ID_MANTENIMIENTO;
+GO
+grant all on ACTMANTENIMIENTO to public
+
+--------------ACTMANTENIMIENTO_DET-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTMANTENIMIENTO_DET' AND type = 'P')
+DROP PROCEDURE ACTMANTENIMIENTO_DET
+GO
+CREATE PROCEDURE ACTMANTENIMIENTO_DET
+       @II_ID_MANTENIMIENTO_DET  INT,
+       @II_ID_T_MANT_DET  CHAR(5),
+       @II_ID_EMPLEADO_DET  CHAR(5),
+       @II_ESTADO_MANTENIMIENTO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into mantenimiento_det values(	     @II_ID_MANTENIMIENTO_DET,
+	     @II_ID_T_MANT_DET,
+	     @II_ID_EMPLEADO_DET,
+	     @II_ESTADO_MANTENIMIENTO);
+else
+	update mantenimiento_det set 	     ID_T_MANT_DET=@II_ID_T_MANT_DET,
+	     ID_EMPLEADO_DET=@II_ID_EMPLEADO_DET,
+	     ESTADO_MANTENIMIENTO=@II_ESTADO_MANTENIMIENTO
+  where ID_MANTENIMIENTO_DET=@II_ID_MANTENIMIENTO_DET;
+GO
+grant all on ACTMANTENIMIENTO_DET to public
+
+--------------ACTRESERVACION-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTRESERVACION' AND type = 'P')
+DROP PROCEDURE ACTRESERVACION
+GO
+CREATE PROCEDURE ACTRESERVACION
+       @II_ID_RESERVACION  INT,
+       @II_ID_CLIENTE  CHAR(5),
+       @II_ID_T_ALOJ_RESERVACION  CHAR(5),
+       @II_FECHA_LLEG_RESERVACION  DATETIME,
+       @II_FECHA_SAL_RESERVACION  DATETIME,
+       @II_MONTO_APAGAR  DECIMAL,
+       @II_ESTADO_RESERVACION  CHAR(1),
+       @II_CREADO_POR_RESERVACION  CHAR(10),
+       @II_FECHA_CRE_RESERVACION  DATETIME,
+       @II_MOD_POR_RESERVACION  CHAR(10),
+       @II_FECHA_MOD_RESERVACION  DATETIME,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into reservacion values(	     @II_ID_RESERVACION,
+	     @II_ID_CLIENTE,
+	     @II_ID_T_ALOJ_RESERVACION,
+	     GETDATE(),
+	     GETDATE(),
+	     @II_MONTO_APAGAR,
+	     @II_ESTADO_RESERVACION,
+	     @II_CREADO_POR_RESERVACION,
+	     GETDATE(),
+	     @II_MOD_POR_RESERVACION,
+	     GETDATE());
+else
+	update reservacion set 	     ID_CLIENTE=@II_ID_CLIENTE,
+	     ID_T_ALOJ_RESERVACION=@II_ID_T_ALOJ_RESERVACION,
+	     FECHA_LLEG_RESERVACION=GETDATE(),
+	     FECHA_SAL_RESERVACION=GETDATE(),
+	     MONTO_APAGAR=@II_MONTO_APAGAR,
+	     ESTADO_RESERVACION=@II_ESTADO_RESERVACION,
+	     CREADO_POR_RESERVACION=@II_CREADO_POR_RESERVACION,
+	     FECHA_CRE_RESERVACION=GETDATE(),
+	     MOD_POR_RESERVACION=@II_MOD_POR_RESERVACION,
+	     FECHA_MOD_RESERVACION=GETDATE()
+  where ID_RESERVACION=@II_ID_RESERVACION;
+GO
+grant all on ACTRESERVACION to public
+
+--------------ACTRESERVACION_DET-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTRESERVACION_DET' AND type = 'P')
+DROP PROCEDURE ACTRESERVACION_DET
+GO
+CREATE PROCEDURE ACTRESERVACION_DET
+       @II_ID_RESERVACION_DET  INT,
+       @II_ID_THAB_RESERV_DET  CHAR(5),
+       @II_CANT_RESERV_DET  INT,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into reservacion_det values(	     @II_ID_RESERVACION_DET,
+	     @II_ID_THAB_RESERV_DET,
+	     @II_CANT_RESERV_DET);
+else
+	update reservacion_det set 	     ID_THAB_RESERV_DET=@II_ID_THAB_RESERV_DET,
+	     CANT_RESERV_DET=@II_CANT_RESERV_DET
+  where ID_RESERVACION_DET=@II_ID_RESERVACION_DET;
+GO
+grant all on ACTRESERVACION_DET to public
+
+--------------ACTCANCELACION-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTCANCELACION' AND type = 'P')
+DROP PROCEDURE ACTCANCELACION
+GO
+CREATE PROCEDURE ACTCANCELACION
+       @II_ID_CANCELACION  INT,
+       @II_ID_RESERV_CANCELACION  INT,
+       @II_FECHA_CANCELACION  DATETIME,
+       @II_MOTIVO_CANCELACION  VARCHAR(MAX),
+       @II_CREADO_POR_CANCELACION  CHAR(10),
+       @II_ESTADO_CANCELACION  CHAR(1),
+       @II_MOD_POR_CANCELACION  CHAR(10),
+       @II_FECHA_MOD_CANCELACION  DATETIME,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into cancelacion values(	     @II_ID_CANCELACION,
+	     @II_ID_RESERV_CANCELACION,
+	     GETDATE(),
+	     @II_MOTIVO_CANCELACION,
+	     @II_CREADO_POR_CANCELACION,
+	     @II_ESTADO_CANCELACION,
+	     @II_MOD_POR_CANCELACION,
+	     GETDATE());
+else
+	update cancelacion set 	     ID_RESERV_CANCELACION=@II_ID_RESERV_CANCELACION,
+	     FECHA_CANCELACION=GETDATE(),
+	     MOTIVO_CANCELACION=@II_MOTIVO_CANCELACION,
+	     CREADO_POR_CANCELACION=@II_CREADO_POR_CANCELACION,
+	     ESTADO_CANCELACION=@II_ESTADO_CANCELACION,
+	     MOD_POR_CANCELACION=@II_MOD_POR_CANCELACION,
+	     FECHA_MOD_CANCELACION=GETDATE()
+  where ID_CANCELACION=@II_ID_CANCELACION;
+GO
+grant all on ACTCANCELACION to public
+
+--------------ACTALOJAMIENTO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTALOJAMIENTO' AND type = 'P')
+DROP PROCEDURE ACTALOJAMIENTO
+GO
+CREATE PROCEDURE ACTALOJAMIENTO
+       @II_ID_ALOJAMIENTO  INT,
+       @II_ID_RESERV_ALOJAMIENTO  INT,
+       @II_ING_POR_ALOJAMIENTO  CHAR(10),
+       @II_FECHA_I_ALOJAMIENTO  DATETIME,
+       @II_SAL_POR_ALOJAMIENTO  CHAR(10),
+       @II_FECHA_S_ALOJAMIENTO  DATETIME,
+       @II_ESTADO_ALOJAMIENTO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into alojamiento values(	     @II_ID_ALOJAMIENTO,
+	     @II_ID_RESERV_ALOJAMIENTO,
+	     @II_ING_POR_ALOJAMIENTO,
+	     GETDATE(),
+	     @II_SAL_POR_ALOJAMIENTO,
+	     GETDATE(),
+	     @II_ESTADO_ALOJAMIENTO);
+else
+	update alojamiento set 	     ID_RESERV_ALOJAMIENTO=@II_ID_RESERV_ALOJAMIENTO,
+	     ING_POR_ALOJAMIENTO=@II_ING_POR_ALOJAMIENTO,
+	     FECHA_I_ALOJAMIENTO=GETDATE(),
+	     SAL_POR_ALOJAMIENTO=@II_SAL_POR_ALOJAMIENTO,
+	     FECHA_S_ALOJAMIENTO=GETDATE(),
+	     ESTADO_ALOJAMIENTO=@II_ESTADO_ALOJAMIENTO
+  where ID_ALOJAMIENTO=@II_ID_ALOJAMIENTO;
+GO
+grant all on ACTALOJAMIENTO to public
+
+--------------ACTALOJAMIENTO_DET-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTALOJAMIENTO_DET' AND type = 'P')
+DROP PROCEDURE ACTALOJAMIENTO_DET
+GO
+CREATE PROCEDURE ACTALOJAMIENTO_DET
+       @II_ID_ALOJAMIENTO_DET  INT,
+       @II_ID_HAB_DET  CHAR(5),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into alojamiento_det values(	     @II_ID_ALOJAMIENTO_DET,
+	     @II_ID_HAB_DET);
+else
+	update alojamiento_det set 	     ID_HAB_DET=@II_ID_HAB_DET
+  where ID_ALOJAMIENTO_DET=@II_ID_ALOJAMIENTO_DET;
+GO
+grant all on ACTALOJAMIENTO_DET to public
+
+--------------ACTNOTA_CREDITO_CLIENTE-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTNOTA_CREDITO_CLIENTE' AND type = 'P')
+DROP PROCEDURE ACTNOTA_CREDITO_CLIENTE
+GO
+CREATE PROCEDURE ACTNOTA_CREDITO_CLIENTE
+       @II_ID_NCC  INT,
+       @II_ID_CLIENTE_NCC  CHAR(5),
+       @II_MONTO_NCC  DECIMAL,
+       @II_FECHA_NCC  DATE,
+       @II_ESTADO_NCC  CHAR(1),
+       @II_CREADO_P_NCC  CHAR(10),
+       @II_FECHA_C_NCC  DATETIME,
+       @II_MOD_P_NCC  CHAR(10),
+       @II_FECHA_M_NCC  DATETIME,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into NOTA_CREDITO_CLIENTE values(	     @II_ID_NCC,
+	     @II_ID_CLIENTE_NCC,
+	     @II_MONTO_NCC,
+	     @II_FECHA_NCC,
+	     @II_ESTADO_NCC,
+	     @II_CREADO_P_NCC,
+	     GETDATE(),
+	     @II_MOD_P_NCC,
+	     GETDATE());
+else
+	update NOTA_CREDITO_CLIENTE set 	     ID_CLIENTE_NCC=@II_ID_CLIENTE_NCC,
+	     MONTO_NCC=@II_MONTO_NCC,
+	     FECHA_NCC=@II_FECHA_NCC,
+	     ESTADO_NCC=@II_ESTADO_NCC,
+	     CREADO_P_NCC=@II_CREADO_P_NCC,
+	     FECHA_C_NCC=GETDATE(),
+	     MOD_P_NCC=@II_MOD_P_NCC,
+	     FECHA_M_NCC=GETDATE()
+  where ID_NCC=@II_ID_NCC;
+GO
+grant all on ACTNOTA_CREDITO_CLIENTE to public
+
+--------------ACTNOTA_CREDITO_DETALLE-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTNOTA_CREDITO_DETALLE' AND type = 'P')
+DROP PROCEDURE ACTNOTA_CREDITO_DETALLE
+GO
+CREATE PROCEDURE ACTNOTA_CREDITO_DETALLE
+       @II_ID_NCC_DET  INT,
+       @II_ID_RESERV_NCC_DET  INT,
+       @II_VALOR_NCC_DET  DECIMAL,
+       @II_BALANCE_NCC_DET  DECIMAL,
+       @II_FECHA_NCC_DET  DATETIME,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into NOTA_CREDITO_DETALLE values(	     @II_ID_NCC_DET,
+	     @II_ID_RESERV_NCC_DET,
+	     @II_VALOR_NCC_DET,
+	     @II_BALANCE_NCC_DET,
+	     GETDATE());
+else
+	update NOTA_CREDITO_DETALLE set 	     ID_RESERV_NCC_DET=@II_ID_RESERV_NCC_DET,
+	     VALOR_NCC_DET=@II_VALOR_NCC_DET,
+	     BALANCE_NCC_DET=@II_BALANCE_NCC_DET,
+	     FECHA_NCC_DET=GETDATE()
+  where ID_NCC_DET=@II_ID_NCC_DET;
+GO
+grant all on ACTNOTA_CREDITO_DETALLE to public
+
+--------------ACTNOTA_CREDITO_ABONO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTNOTA_CREDITO_ABONO' AND type = 'P')
+DROP PROCEDURE ACTNOTA_CREDITO_ABONO
+GO
+CREATE PROCEDURE ACTNOTA_CREDITO_ABONO
+       @II_ID_NCC_AB  INT,
+       @II_ID_RESERV_NCC_AB  INT,
+       @II_N_ABONO_NCC_AB  INT,
+       @II_FECHA_ABONO_NCC_AB  DATETIME,
+       @II_BALANCE_ANT_NCC_AB  DECIMAL,
+       @II_ABONO_NCC_AB  DECIMAL,
+       @II_BALANCE_ACT_NCC_AB  DECIMAL,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into NOTA_CREDITO_ABONO values(	     @II_ID_NCC_AB,
+	     @II_ID_RESERV_NCC_AB,
+	     @II_N_ABONO_NCC_AB,
+	     GETDATE(),
+	     @II_BALANCE_ANT_NCC_AB,
+	     @II_ABONO_NCC_AB,
+	     @II_BALANCE_ACT_NCC_AB);
+else
+	update NOTA_CREDITO_ABONO set 	     ID_RESERV_NCC_AB=@II_ID_RESERV_NCC_AB,
+	     N_ABONO_NCC_AB=@II_N_ABONO_NCC_AB,
+	     FECHA_ABONO_NCC_AB=GETDATE(),
+	     BALANCE_ANT_NCC_AB=@II_BALANCE_ANT_NCC_AB,
+	     ABONO_NCC_AB=@II_ABONO_NCC_AB,
+	     BALANCE_ACT_NCC_AB=@II_BALANCE_ACT_NCC_AB
+  where ID_NCC_AB=@II_ID_NCC_AB;
+GO
+grant all on ACTNOTA_CREDITO_ABONO to public
+
+--------------ACTTEMPORADA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTEMPORADA' AND type = 'P')
+DROP PROCEDURE ACTTEMPORADA
+GO
+CREATE PROCEDURE ACTTEMPORADA
+       @II_ID_TEMPORADA  CHAR(5),
+       @II_DESCR_TEMPORADA  VARCHAR(100),
+       @II_FECHA_I_TEMPORADA  DATE,
+       @II_FECHA_F_TEMPORADA  DATE,
+       @II_ESTADO_TEMPORADA  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into TEMPORADA values(	     @II_ID_TEMPORADA,
+	     @II_DESCR_TEMPORADA,
+	     @II_FECHA_I_TEMPORADA,
+	     @II_FECHA_F_TEMPORADA,
+	     @II_ESTADO_TEMPORADA);
+else
+	update TEMPORADA set 	     DESCR_TEMPORADA=@II_DESCR_TEMPORADA,
+	     FECHA_I_TEMPORADA=@II_FECHA_I_TEMPORADA,
+	     FECHA_F_TEMPORADA=@II_FECHA_F_TEMPORADA,
+	     ESTADO_TEMPORADA=@II_ESTADO_TEMPORADA
+  where ID_TEMPORADA=@II_ID_TEMPORADA;
+GO
+grant all on ACTTEMPORADA to public
+
+--------------ACTOFERTA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTOFERTA' AND type = 'P')
+DROP PROCEDURE ACTOFERTA
+GO
+CREATE PROCEDURE ACTOFERTA
+       @II_ID_OFERTA  CHAR(5),
+       @II_DESCR_OFERTA  VARCHAR(200),
+       @II_ID_TEMP_OFERTA  CHAR(5),
+       @II_ESTADO_OFERTA  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Oferta values(	     @II_ID_OFERTA,
+	     @II_DESCR_OFERTA,
+	     @II_ID_TEMP_OFERTA,
+	     @II_ESTADO_OFERTA);
+else
+	update Oferta set 	     DESCR_OFERTA=@II_DESCR_OFERTA,
+	     ID_TEMP_OFERTA=@II_ID_TEMP_OFERTA,
+	     ESTADO_OFERTA=@II_ESTADO_OFERTA
+  where ID_OFERTA=@II_ID_OFERTA;
+GO
+grant all on ACTOFERTA to public
+
+--------------ACTOFERTA_DET_01-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTOFERTA_DET_01' AND type = 'P')
+DROP PROCEDURE ACTOFERTA_DET_01
+GO
+CREATE PROCEDURE ACTOFERTA_DET_01
+       @II_ID_OFERTA_DET01  CHAR(5),
+       @II_ID_T_ALOJ_DET01  CHAR(5),
+       @II_DESCUENTO_DET01  DECIMAL,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into oferta_det_01 values(	     @II_ID_OFERTA_DET01,
+	     @II_ID_T_ALOJ_DET01,
+	     @II_DESCUENTO_DET01);
+else
+	update oferta_det_01 set 	     ID_T_ALOJ_DET01=@II_ID_T_ALOJ_DET01,
+	     DESCUENTO_DET01=@II_DESCUENTO_DET01
+  where ID_OFERTA_DET01=@II_ID_OFERTA_DET01;
+GO
+grant all on ACTOFERTA_DET_01 to public
+
+--------------ACTOFERTA_DET_02-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTOFERTA_DET_02' AND type = 'P')
+DROP PROCEDURE ACTOFERTA_DET_02
+GO
+CREATE PROCEDURE ACTOFERTA_DET_02
+       @II_ID_OFERTA_DET02  CHAR(5),
+       @II_ID_T_CLIENTE_DET02  CHAR(5),
+       @II_DESCUENTO_DET02  DECIMAL,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into oferta_det_02 values(	     @II_ID_OFERTA_DET02,
+	     @II_ID_T_CLIENTE_DET02,
+	     @II_DESCUENTO_DET02);
+else
+	update oferta_det_02 set 	     ID_T_CLIENTE_DET02=@II_ID_T_CLIENTE_DET02,
+	     DESCUENTO_DET02=@II_DESCUENTO_DET02
+  where ID_OFERTA_DET02=@II_ID_OFERTA_DET02;
+GO
+grant all on ACTOFERTA_DET_02 to public
+
+--------------ACTOFERTA_DET_03-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTOFERTA_DET_03' AND type = 'P')
+DROP PROCEDURE ACTOFERTA_DET_03
+GO
+CREATE PROCEDURE ACTOFERTA_DET_03
+       @II_ID_OFERTA_DET03  CHAR(5),
+       @II_C_INI_ALOJ_DET03  INT,
+       @II_C_FIN_ALOJ_DET03  INT,
+       @II_DESCUENTO_DET03  DECIMAL,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into oferta_det_03 values(	     @II_ID_OFERTA_DET03,
+	     @II_C_INI_ALOJ_DET03,
+	     @II_C_FIN_ALOJ_DET03,
+	     @II_DESCUENTO_DET03);
+else
+	update oferta_det_03 set 	     C_INI_ALOJ_DET03=@II_C_INI_ALOJ_DET03,
+	     C_FIN_ALOJ_DET03=@II_C_FIN_ALOJ_DET03,
+	     DESCUENTO_DET03=@II_DESCUENTO_DET03
+  where ID_OFERTA_DET03=@II_ID_OFERTA_DET03;
+GO
+grant all on ACTOFERTA_DET_03 to public
+
+--------------ACTTIPO_ARCHIVO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_ARCHIVO' AND type = 'P')
+DROP PROCEDURE ACTTIPO_ARCHIVO
+GO
+CREATE PROCEDURE ACTTIPO_ARCHIVO
+       @II_ID_T_ARCHIVO  INT,
+       @II_DESCR_T_ARCHIVO  VARCHAR(100),
+       @II_ESTADO_T_ARCHIVO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into tipo_archivo values(	     @II_ID_T_ARCHIVO,
+	     @II_DESCR_T_ARCHIVO,
+	     @II_ESTADO_T_ARCHIVO);
+else
+	update tipo_archivo set 	     DESCR_T_ARCHIVO=@II_DESCR_T_ARCHIVO,
+	     ESTADO_T_ARCHIVO=@II_ESTADO_T_ARCHIVO
+  where ID_T_ARCHIVO=@II_ID_T_ARCHIVO;
+GO
+grant all on ACTTIPO_ARCHIVO to public
+
+--------------ACTARCHIVO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTARCHIVO' AND type = 'P')
+DROP PROCEDURE ACTARCHIVO
+GO
+CREATE PROCEDURE ACTARCHIVO
+       @II_ID_ARCHIVO  CHAR(10),
+       @II_ID_TARCHIVO  INT,
+       @II_RUTA_ARCHIVO  VARCHAR(500),
+       @II_COMENTARIO_01_ARCHIVO  VARCHAR(2000),
+       @II_COMENTARIO_02_ARCHIVO  VARCHAR(2000),
+       @II_ESTADO_ARCHIVO  CHAR(1),
+       @II_CREADO_P_ARCHIVO  CHAR(10),
+       @II_FECHA_C_ARCHIVO  DATETIME,
+       @II_MOD_P_ARCHIVO  CHAR(10),
+       @II_FECHA_M_ARCHIVO  DATETIME,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into archivo values(	     @II_ID_ARCHIVO,
+	     @II_ID_TARCHIVO,
+	     @II_RUTA_ARCHIVO,
+	     @II_COMENTARIO_01_ARCHIVO,
+	     @II_COMENTARIO_02_ARCHIVO,
+	     @II_ESTADO_ARCHIVO,
+	     @II_CREADO_P_ARCHIVO,
+	     GETDATE(),
+	     @II_MOD_P_ARCHIVO,
+	     GETDATE());
+else
+	update archivo set 	     ID_TARCHIVO=@II_ID_TARCHIVO,
+	     RUTA_ARCHIVO=@II_RUTA_ARCHIVO,
+	     COMENTARIO_01_ARCHIVO=@II_COMENTARIO_01_ARCHIVO,
+	     COMENTARIO_02_ARCHIVO=@II_COMENTARIO_02_ARCHIVO,
+	     ESTADO_ARCHIVO=@II_ESTADO_ARCHIVO,
+	     CREADO_P_ARCHIVO=@II_CREADO_P_ARCHIVO,
+	     FECHA_C_ARCHIVO=GETDATE(),
+	     MOD_P_ARCHIVO=@II_MOD_P_ARCHIVO,
+	     FECHA_M_ARCHIVO=GETDATE()
+  where ID_ARCHIVO=@II_ID_ARCHIVO;
+GO
+grant all on ACTARCHIVO to public
+
+--------------ACTHOTEL-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTHOTEL' AND type = 'P')
+DROP PROCEDURE ACTHOTEL
+GO
+CREATE PROCEDURE ACTHOTEL
+       @II_ID_HOTEL  CHAR(5),
+       @II_DESCR_HOTEL  VARCHAR(300),
+       @II_DIRECCION_HOTEL  VARCHAR(max),
+       @II_TEL_HOTEL  VARCHAR(12),
+       @II_A_CANCELACION_HOTEL  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into HOTEL values(	     @II_ID_HOTEL,
+	     @II_DESCR_HOTEL,
+	     @II_DIRECCION_HOTEL,
+	     @II_TEL_HOTEL,
+	     @II_A_CANCELACION_HOTEL);
+else
+	update HOTEL set 	     DESCR_HOTEL=@II_DESCR_HOTEL,
+	     DIRECCION_HOTEL=@II_DIRECCION_HOTEL,
+	     TEL_HOTEL=@II_TEL_HOTEL,
+	     A_CANCELACION_HOTEL=@II_A_CANCELACION_HOTEL
+  where ID_HOTEL=@II_ID_HOTEL;
+GO
+grant all on ACTHOTEL to public
+
+--------------ACTTIPO_IDENTIFICACION-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_IDENTIFICACION' AND type = 'P')
+DROP PROCEDURE ACTTIPO_IDENTIFICACION
+GO
+CREATE PROCEDURE ACTTIPO_IDENTIFICACION
+       @II_ID_TIPO_IDENT  CHAR(5),
+       @II_DESCR_TIPO_IDENT  VARCHAR(30),
+       @II_ESTADO_TIPO_IDENT  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Tipo_Identificacion values(	     @II_ID_TIPO_IDENT,
+	     @II_DESCR_TIPO_IDENT,
+	     @II_ESTADO_TIPO_IDENT);
+else
+	update Tipo_Identificacion set 	     DESCR_TIPO_IDENT=@II_DESCR_TIPO_IDENT,
+	     ESTADO_TIPO_IDENT=@II_ESTADO_TIPO_IDENT
+  where ID_TIPO_IDENT=@II_ID_TIPO_IDENT;
+GO
+grant all on ACTTIPO_IDENTIFICACION to public
+
+--------------ACTTERCERO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTERCERO' AND type = 'P')
+DROP PROCEDURE ACTTERCERO
+GO
+CREATE PROCEDURE ACTTERCERO
+       @II_ID_TERCERO  CHAR(10),
+       @II_NOMBRE_TERCERO  VARCHAR(100),
+       @II_ID_T_IDENTIF_TERCERO  CHAR(5),
+       @II_CEDULA_TERCERO  VARCHAR(20),
+       @II_FECHA_NAC_TERCERO  DATE,
+       @II_SEXO_TERCERO  CHAR(1),
+       @II_ESTADO_TERCERO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Tercero values(	     @II_ID_TERCERO,
+	     @II_NOMBRE_TERCERO,
+	     @II_ID_T_IDENTIF_TERCERO,
+	     @II_CEDULA_TERCERO,
+	     @II_FECHA_NAC_TERCERO,
+	     @II_SEXO_TERCERO,
+	     @II_ESTADO_TERCERO);
+else
+	update Tercero set 	     NOMBRE_TERCERO=@II_NOMBRE_TERCERO,
+	     ID_T_IDENTIF_TERCERO=@II_ID_T_IDENTIF_TERCERO,
+	     CEDULA_TERCERO=@II_CEDULA_TERCERO,
+	     FECHA_NAC_TERCERO=@II_FECHA_NAC_TERCERO,
+	     SEXO_TERCERO=@II_SEXO_TERCERO,
+	     ESTADO_TERCERO=@II_ESTADO_TERCERO
+  where ID_TERCERO=@II_ID_TERCERO;
+GO
+grant all on ACTTERCERO to public
+
+--------------ACTPAIS-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTPAIS' AND type = 'P')
+DROP PROCEDURE ACTPAIS
+GO
+CREATE PROCEDURE ACTPAIS
+       @II_ID_PAIS  CHAR(5),
+       @II_DESCR_PAIS  VARCHAR(50),
+       @II_ESTADO_PAIS  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into PAIS values(	     @II_ID_PAIS,
+	     @II_DESCR_PAIS,
+	     @II_ESTADO_PAIS);
+else
+	update PAIS set 	     DESCR_PAIS=@II_DESCR_PAIS,
+	     ESTADO_PAIS=@II_ESTADO_PAIS
+  where ID_PAIS=@II_ID_PAIS;
+GO
+grant all on ACTPAIS to public
+
+--------------ACTPROVINCIA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTPROVINCIA' AND type = 'P')
+DROP PROCEDURE ACTPROVINCIA
+GO
+CREATE PROCEDURE ACTPROVINCIA
+       @II_ID_PROVINCIA  CHAR(5),
+       @II_DESCR_PROVINCIA  VARCHAR(50),
+       @II_ID_PAIS_PROVINCIA  CHAR(5),
+       @II_ESTADO_PROVINCIA  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into PROVINCIA values(	     @II_ID_PROVINCIA,
+	     @II_DESCR_PROVINCIA,
+	     @II_ID_PAIS_PROVINCIA,
+	     @II_ESTADO_PROVINCIA);
+else
+	update PROVINCIA set 	     DESCR_PROVINCIA=@II_DESCR_PROVINCIA,
+	     ID_PAIS_PROVINCIA=@II_ID_PAIS_PROVINCIA,
+	     ESTADO_PROVINCIA=@II_ESTADO_PROVINCIA
+  where ID_PROVINCIA=@II_ID_PROVINCIA;
+GO
+grant all on ACTPROVINCIA to public
+
+--------------ACTMUNICIPIO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTMUNICIPIO' AND type = 'P')
+DROP PROCEDURE ACTMUNICIPIO
+GO
+CREATE PROCEDURE ACTMUNICIPIO
+       @II_ID_MUNICIPIO  CHAR(5),
+       @II_DESCR_MUNICIPIO  VARCHAR(50),
+       @II_ID_PROV_MUNICIPIO  CHAR(5),
+       @II_ESTADO_MUNICIPIO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into MUNICIPIO values(	     @II_ID_MUNICIPIO,
+	     @II_DESCR_MUNICIPIO,
+	     @II_ID_PROV_MUNICIPIO,
+	     @II_ESTADO_MUNICIPIO);
+else
+	update MUNICIPIO set 	     DESCR_MUNICIPIO=@II_DESCR_MUNICIPIO,
+	     ID_PROV_MUNICIPIO=@II_ID_PROV_MUNICIPIO,
+	     ESTADO_MUNICIPIO=@II_ESTADO_MUNICIPIO
+  where ID_MUNICIPIO=@II_ID_MUNICIPIO;
+GO
+grant all on ACTMUNICIPIO to public
+
+--------------ACTDIRECCION-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTDIRECCION' AND type = 'P')
+DROP PROCEDURE ACTDIRECCION
+GO
+CREATE PROCEDURE ACTDIRECCION
+       @II_ID_TERCERO_DIRECCION  CHAR(10),
+       @II_ID_MUN_DIRECCION  CHAR(5),
+       @II_DIRECCION  VARCHAR(max),
+       @II_TIPO_DIRECCION  VARCHAR(2),
+       @II_N_LINEA_DIRECCION  INT,
+       @II_ESTADO_DIRECCION  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into DIRECCION values(	     @II_ID_TERCERO_DIRECCION,
+	     @II_ID_MUN_DIRECCION,
+	     @II_DIRECCION,
+	     @II_TIPO_DIRECCION,
+	     @II_N_LINEA_DIRECCION,
+	     @II_ESTADO_DIRECCION);
+else
+	update DIRECCION set 	     ID_MUN_DIRECCION=@II_ID_MUN_DIRECCION,
+	     DIRECCION=@II_DIRECCION,
+	     TIPO_DIRECCION=@II_TIPO_DIRECCION,
+	     N_LINEA_DIRECCION=@II_N_LINEA_DIRECCION,
+	     ESTADO_DIRECCION=@II_ESTADO_DIRECCION
+  where ID_TERCERO_DIRECCION=@II_ID_TERCERO_DIRECCION;
+GO
+grant all on ACTDIRECCION to public
+
+--------------ACTTHABITACION_CAMA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTHABITACION_CAMA' AND type = 'P')
+DROP PROCEDURE ACTTHABITACION_CAMA
+GO
+CREATE PROCEDURE ACTTHABITACION_CAMA
+       @II_ID_T_HAB_THC  CHAR(5),
+       @II_ID_CAMA_THC  CHAR(5),
+       @II_CANTIDAD_CAMAS  INT,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into thabitacion_cama values(	     @II_ID_T_HAB_THC,
+	     @II_ID_CAMA_THC,
+	     @II_CANTIDAD_CAMAS);
+else
+	update thabitacion_cama set 	     ID_CAMA_THC=@II_ID_CAMA_THC,
+	     CANTIDAD_CAMAS=@II_CANTIDAD_CAMAS
+  where ID_T_HAB_THC=@II_ID_T_HAB_THC;
+GO
+grant all on ACTTHABITACION_CAMA to public
+
+--------------ACTEMAIL-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTEMAIL' AND type = 'P')
+DROP PROCEDURE ACTEMAIL
+GO
+CREATE PROCEDURE ACTEMAIL
+       @II_ID_TERCERO_EMAIL  CHAR(10),
+       @II_EMAIL  VARCHAR(max),
+       @II_TIPO_EMAIL  VARCHAR(2),
+       @II_N_LINEA_EMAIL  INT,
+       @II_ESTADO_EMAIL  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into EMAIL values(	     @II_ID_TERCERO_EMAIL,
+	     @II_EMAIL,
+	     @II_TIPO_EMAIL,
+	     @II_N_LINEA_EMAIL,
+	     @II_ESTADO_EMAIL);
+else
+	update EMAIL set 	     EMAIL=@II_EMAIL,
+	     TIPO_EMAIL=@II_TIPO_EMAIL,
+	     N_LINEA_EMAIL=@II_N_LINEA_EMAIL,
+	     ESTADO_EMAIL=@II_ESTADO_EMAIL
+  where ID_TERCERO_EMAIL=@II_ID_TERCERO_EMAIL;
+GO
+grant all on ACTEMAIL to public
+
+--------------ACTTELEFONO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTELEFONO' AND type = 'P')
+DROP PROCEDURE ACTTELEFONO
+GO
+CREATE PROCEDURE ACTTELEFONO
+       @II_ID_TERCERO_TEL  CHAR(10),
+       @II_NUMERO_TEL  VARCHAR(20),
+       @II_TIPO_TEL  VARCHAR(2),
+       @II_N_LINEA_TEL  INT,
+       @II_ESTADO_TEL  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into TELEFONO values(	     @II_ID_TERCERO_TEL,
+	     @II_NUMERO_TEL,
+	     @II_TIPO_TEL,
+	     @II_N_LINEA_TEL,
+	     @II_ESTADO_TEL);
+else
+	update TELEFONO set 	     NUMERO_TEL=@II_NUMERO_TEL,
+	     TIPO_TEL=@II_TIPO_TEL,
+	     N_LINEA_TEL=@II_N_LINEA_TEL,
+	     ESTADO_TEL=@II_ESTADO_TEL
+  where ID_TERCERO_TEL=@II_ID_TERCERO_TEL;
+GO
+grant all on ACTTELEFONO to public
+
+--------------ACTTIPO_USUARIO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_USUARIO' AND type = 'P')
+DROP PROCEDURE ACTTIPO_USUARIO
+GO
+CREATE PROCEDURE ACTTIPO_USUARIO
+       @II_ID_T_USUARIO  CHAR(5),
+       @II_DESCRIPCION_T_USUARIO  VARCHAR(30),
+       @II_NIVEL_ACCESO_T_USUARIO  VARCHAR(3),
+       @II_ESTADO_T_USUARIO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Tipo_Usuario values(	     @II_ID_T_USUARIO,
+	     @II_DESCRIPCION_T_USUARIO,
+	     @II_NIVEL_ACCESO_T_USUARIO,
+	     @II_ESTADO_T_USUARIO);
+else
+	update Tipo_Usuario set 	     DESCRIPCION_T_USUARIO=@II_DESCRIPCION_T_USUARIO,
+	     NIVEL_ACCESO_T_USUARIO=@II_NIVEL_ACCESO_T_USUARIO,
+	     ESTADO_T_USUARIO=@II_ESTADO_T_USUARIO
+  where ID_T_USUARIO=@II_ID_T_USUARIO;
+GO
+grant all on ACTTIPO_USUARIO to public
+
+--------------ACTUSUARIO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTUSUARIO' AND type = 'P')
+DROP PROCEDURE ACTUSUARIO
+GO
+CREATE PROCEDURE ACTUSUARIO
+       @II_ID_USUARIO  CHAR(10),
+       @II_ID_TERCERO_USUARIO  CHAR(10),
+       @II_TIPO_USUARIO  CHAR(5),
+       @II_PASSWORD_USUARIO  VARCHAR(max),
+       @II_ESTADO_USUARIO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Usuario values(	     @II_ID_USUARIO,
+	     @II_ID_TERCERO_USUARIO,
+	     @II_TIPO_USUARIO,
+	     @II_PASSWORD_USUARIO,
+	     @II_ESTADO_USUARIO);
+else
+	update Usuario set 	     ID_TERCERO_USUARIO=@II_ID_TERCERO_USUARIO,
+	     TIPO_USUARIO=@II_TIPO_USUARIO,
+	     PASSWORD_USUARIO=@II_PASSWORD_USUARIO,
+	     ESTADO_USUARIO=@II_ESTADO_USUARIO
+  where ID_USUARIO=@II_ID_USUARIO;
+GO
+grant all on ACTUSUARIO to public
+
+--------------ACTPERMISOS_ADI-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTPERMISOS_ADI' AND type = 'P')
+DROP PROCEDURE ACTPERMISOS_ADI
+GO
+CREATE PROCEDURE ACTPERMISOS_ADI
+       @II_ID_OPCION  CHAR(5),
+       @II_DESCR_OPCION  VARCHAR(30),
+       @II_ESTADO_OPCION  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Permisos_Adi values(	     @II_ID_OPCION,
+	     @II_DESCR_OPCION,
+	     @II_ESTADO_OPCION);
+else
+	update Permisos_Adi set 	     DESCR_OPCION=@II_DESCR_OPCION,
+	     ESTADO_OPCION=@II_ESTADO_OPCION
+  where ID_OPCION=@II_ID_OPCION;
+GO
+grant all on ACTPERMISOS_ADI to public
+
+--------------ACTUSUARIO_PERMISOS_ADI-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTUSUARIO_PERMISOS_ADI' AND type = 'P')
+DROP PROCEDURE ACTUSUARIO_PERMISOS_ADI
+GO
+CREATE PROCEDURE ACTUSUARIO_PERMISOS_ADI
+       @II_ID_USUARIO_UP  CHAR(10),
+       @II_ID_PERMISO_UP  CHAR(5),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Usuario_Permisos_Adi values(	     @II_ID_USUARIO_UP,
+	     @II_ID_PERMISO_UP);
+else
+	update Usuario_Permisos_Adi set 	     ID_PERMISO_UP=@II_ID_PERMISO_UP
+  where ID_USUARIO_UP=@II_ID_USUARIO_UP;
+GO
+grant all on ACTUSUARIO_PERMISOS_ADI to public
+
+--------------ACTTIPO_CLIENTE-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_CLIENTE' AND type = 'P')
+DROP PROCEDURE ACTTIPO_CLIENTE
+GO
+CREATE PROCEDURE ACTTIPO_CLIENTE
+       @II_ID_T_CLIENTE_TC  CHAR(5),
+       @II_DESCR_TC  VARCHAR(50),
+       @II_ESTADO_TC  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into TIPO_CLIENTE values(	     @II_ID_T_CLIENTE_TC,
+	     @II_DESCR_TC,
+	     @II_ESTADO_TC);
+else
+	update TIPO_CLIENTE set 	     DESCR_TC=@II_DESCR_TC,
+	     ESTADO_TC=@II_ESTADO_TC
+  where ID_T_CLIENTE_TC=@II_ID_T_CLIENTE_TC;
+GO
+grant all on ACTTIPO_CLIENTE to public
+
+--------------ACTCLIENTE-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTCLIENTE' AND type = 'P')
+DROP PROCEDURE ACTCLIENTE
+GO
+CREATE PROCEDURE ACTCLIENTE
+       @II_ID_CLIENTE  CHAR(5),
+       @II_ID_TERCERO_CLIENTE  CHAR(10),
+       @II_ID_T_CLIENTE  CHAR(5),
+       @II_LIM_CRED_CLIENTE  DECIMAL,
+       @II_ESTADO_CLIENTE  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into CLIENTE values(	     @II_ID_CLIENTE,
+	     @II_ID_TERCERO_CLIENTE,
+	     @II_ID_T_CLIENTE,
+	     @II_LIM_CRED_CLIENTE,
+	     @II_ESTADO_CLIENTE);
+else
+	update CLIENTE set 	     ID_TERCERO_CLIENTE=@II_ID_TERCERO_CLIENTE,
+	     ID_T_CLIENTE=@II_ID_T_CLIENTE,
+	     LIM_CRED_CLIENTE=@II_LIM_CRED_CLIENTE,
+	     ESTADO_CLIENTE=@II_ESTADO_CLIENTE
+  where ID_CLIENTE=@II_ID_CLIENTE;
+GO
+grant all on ACTCLIENTE to public
+
+--------------ACTTIPO_EMPLEADO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_EMPLEADO' AND type = 'P')
+DROP PROCEDURE ACTTIPO_EMPLEADO
+GO
+CREATE PROCEDURE ACTTIPO_EMPLEADO
+       @II_ID_T_EMPLEADO_TE  CHAR(5),
+       @II_DESCR_TE  VARCHAR(50),
+       @II_ESTADO_TE  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into TIPO_EMPLEADO values(	     @II_ID_T_EMPLEADO_TE,
+	     @II_DESCR_TE,
+	     @II_ESTADO_TE);
+else
+	update TIPO_EMPLEADO set 	     DESCR_TE=@II_DESCR_TE,
+	     ESTADO_TE=@II_ESTADO_TE
+  where ID_T_EMPLEADO_TE=@II_ID_T_EMPLEADO_TE;
+GO
+grant all on ACTTIPO_EMPLEADO to public
+
+--------------ACTEMPLEADO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTEMPLEADO' AND type = 'P')
+DROP PROCEDURE ACTEMPLEADO
+GO
+CREATE PROCEDURE ACTEMPLEADO
+       @II_ID_EMPLEADO  CHAR(5),
+       @II_ID_TERCERO_EMPLEADO  CHAR(10),
+       @II_ID_T_EMPLEADO  CHAR(5),
+       @II_FECHA_I_EMPLEADO  DATE,
+       @II_ESTADO_EMPLEADO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into EMPLEADO values(	     @II_ID_EMPLEADO,
+	     @II_ID_TERCERO_EMPLEADO,
+	     @II_ID_T_EMPLEADO,
+	     @II_FECHA_I_EMPLEADO,
+	     @II_ESTADO_EMPLEADO);
+else
+	update EMPLEADO set 	     ID_TERCERO_EMPLEADO=@II_ID_TERCERO_EMPLEADO,
+	     ID_T_EMPLEADO=@II_ID_T_EMPLEADO,
+	     FECHA_I_EMPLEADO=@II_FECHA_I_EMPLEADO,
+	     ESTADO_EMPLEADO=@II_ESTADO_EMPLEADO
+  where ID_EMPLEADO=@II_ID_EMPLEADO;
+GO
+grant all on ACTEMPLEADO to public
+
+--------------ACTSERVICIO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTSERVICIO' AND type = 'P')
+DROP PROCEDURE ACTSERVICIO
+GO
+CREATE PROCEDURE ACTSERVICIO
+       @II_ID_SERVICIO  CHAR(5),
+       @II_DESCR_SERVICIO  VARCHAR(50),
+       @II_COSTO_SERVICIO  DECIMAL,
+       @II_ESTADO_SERVICIO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into servicio values(	     @II_ID_SERVICIO,
+	     @II_DESCR_SERVICIO,
+	     @II_COSTO_SERVICIO,
+	     @II_ESTADO_SERVICIO);
+else
+	update servicio set 	     DESCR_SERVICIO=@II_DESCR_SERVICIO,
+	     COSTO_SERVICIO=@II_COSTO_SERVICIO,
+	     ESTADO_SERVICIO=@II_ESTADO_SERVICIO
+  where ID_SERVICIO=@II_ID_SERVICIO;
+GO
+grant all on ACTSERVICIO to public
+
+--------------ACTTIPO_ALOJAMIENTO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_ALOJAMIENTO' AND type = 'P')
+DROP PROCEDURE ACTTIPO_ALOJAMIENTO
+GO
+CREATE PROCEDURE ACTTIPO_ALOJAMIENTO
+       @II_ID_T_ALOJAMIENTO  CHAR(5),
+       @II_DESCR_T_ALOJAMIENTO  VARCHAR(100),
+       @II_COSTO_T_ALOJAMIENTO  DECIMAL,
+       @II_ESTADO_T_ALOJAMIENTO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into tipo_alojamiento values(	     @II_ID_T_ALOJAMIENTO,
+	     @II_DESCR_T_ALOJAMIENTO,
+	     @II_COSTO_T_ALOJAMIENTO,
+	     @II_ESTADO_T_ALOJAMIENTO);
+else
+	update tipo_alojamiento set 	     DESCR_T_ALOJAMIENTO=@II_DESCR_T_ALOJAMIENTO,
+	     COSTO_T_ALOJAMIENTO=@II_COSTO_T_ALOJAMIENTO,
+	     ESTADO_T_ALOJAMIENTO=@II_ESTADO_T_ALOJAMIENTO
+  where ID_T_ALOJAMIENTO=@II_ID_T_ALOJAMIENTO;
+GO
+grant all on ACTTIPO_ALOJAMIENTO to public
+
+--------------ACTTALOJAMIENTO_SERVICIO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTALOJAMIENTO_SERVICIO' AND type = 'P')
+DROP PROCEDURE ACTTALOJAMIENTO_SERVICIO
+GO
+CREATE PROCEDURE ACTTALOJAMIENTO_SERVICIO
+       @II_ID_T_ALOJAMIENTO_TAS  CHAR(5),
+       @II_ID_SERVICIO_TAS  CHAR(5),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into talojamiento_servicio values(	     @II_ID_T_ALOJAMIENTO_TAS,
+	     @II_ID_SERVICIO_TAS);
+else
+	update talojamiento_servicio set 	     ID_SERVICIO_TAS=@II_ID_SERVICIO_TAS
+  where ID_T_ALOJAMIENTO_TAS=@II_ID_T_ALOJAMIENTO_TAS;
+GO
+grant all on ACTTALOJAMIENTO_SERVICIO to public
+
+--------------ACTCAMA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTCAMA' AND type = 'P')
+DROP PROCEDURE ACTCAMA
+GO
+CREATE PROCEDURE ACTCAMA
+       @II_ID_CAMA  CHAR(5),
+       @II_DESCR_CAMA  VARCHAR(50),
+       @II_CAPACIDAD_CAMA  INT,
+       @II_ESTADO_CAMA  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into cama values(	     @II_ID_CAMA,
+	     @II_DESCR_CAMA,
+	     @II_CAPACIDAD_CAMA,
+	     @II_ESTADO_CAMA);
+else
+	update cama set 	     DESCR_CAMA=@II_DESCR_CAMA,
+	     CAPACIDAD_CAMA=@II_CAPACIDAD_CAMA,
+	     ESTADO_CAMA=@II_ESTADO_CAMA
+  where ID_CAMA=@II_ID_CAMA;
+GO
+grant all on ACTCAMA to public
+
+--------------ACTTIPO_HABITACION-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_HABITACION' AND type = 'P')
+DROP PROCEDURE ACTTIPO_HABITACION
+GO
+CREATE PROCEDURE ACTTIPO_HABITACION
+       @II_ID_T_HAB  CHAR(5),
+       @II_DESCR_T_HAB  VARCHAR(50),
+       @II_CAPACIDAD_HAB  INT,
+       @II_COSTO_HAB  DECIMAL,
+       @II_ESTADO_T_HAB  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into tipo_habitacion values(	     @II_ID_T_HAB,
+	     @II_DESCR_T_HAB,
+	     @II_CAPACIDAD_HAB,
+	     @II_COSTO_HAB,
+	     @II_ESTADO_T_HAB);
+else
+	update tipo_habitacion set 	     DESCR_T_HAB=@II_DESCR_T_HAB,
+	     CAPACIDAD_HAB=@II_CAPACIDAD_HAB,
+	     COSTO_HAB=@II_COSTO_HAB,
+	     ESTADO_T_HAB=@II_ESTADO_T_HAB
+  where ID_T_HAB=@II_ID_T_HAB;
+GO
+grant all on ACTTIPO_HABITACION to public
+
+--------------ACTCARACTERISTICA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTCARACTERISTICA' AND type = 'P')
+DROP PROCEDURE ACTCARACTERISTICA
+GO
+CREATE PROCEDURE ACTCARACTERISTICA
+       @II_ID_CARACTERISTICA  CHAR(5),
+       @II_DESCR_CARACTERISTICA  VARCHAR(100),
+       @II_ESTADO_CARACTERISTICA  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into caracteristica values(	     @II_ID_CARACTERISTICA,
+	     @II_DESCR_CARACTERISTICA,
+	     @II_ESTADO_CARACTERISTICA);
+else
+	update caracteristica set 	     DESCR_CARACTERISTICA=@II_DESCR_CARACTERISTICA,
+	     ESTADO_CARACTERISTICA=@II_ESTADO_CARACTERISTICA
+  where ID_CARACTERISTICA=@II_ID_CARACTERISTICA;
+GO
+grant all on ACTCARACTERISTICA to public
+
+--------------ACTTHAB_CARACTERISTICA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTHAB_CARACTERISTICA' AND type = 'P')
+DROP PROCEDURE ACTTHAB_CARACTERISTICA
+GO
+CREATE PROCEDURE ACTTHAB_CARACTERISTICA
+       @II_ID_T_HAB_THCAR  CHAR(5),
+       @II_ID_CARACTERISTICA_THCAR  CHAR(5),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into thab_caracteristica values(	     @II_ID_T_HAB_THCAR,
+	     @II_ID_CARACTERISTICA_THCAR);
+else
+	update thab_caracteristica set 	     ID_CARACTERISTICA_THCAR=@II_ID_CARACTERISTICA_THCAR
+  where ID_T_HAB_THCAR=@II_ID_T_HAB_THCAR;
+GO
+grant all on ACTTHAB_CARACTERISTICA to public
+
+--------------ACTEDIFICIO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTEDIFICIO' AND type = 'P')
+DROP PROCEDURE ACTEDIFICIO
+GO
+CREATE PROCEDURE ACTEDIFICIO
+       @II_ID_EDIFICIO  CHAR(5),
+       @II_DESCR_EDIFICIO  VARCHAR(100),
+       @II_CANT_NIVEL_EDIFICIO  INT,
+       @II_ESTADO_EDIFICIO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into edificio values(	     @II_ID_EDIFICIO,
+	     @II_DESCR_EDIFICIO,
+	     @II_CANT_NIVEL_EDIFICIO,
+	     @II_ESTADO_EDIFICIO);
+else
+	update edificio set 	     DESCR_EDIFICIO=@II_DESCR_EDIFICIO,
+	     CANT_NIVEL_EDIFICIO=@II_CANT_NIVEL_EDIFICIO,
+	     ESTADO_EDIFICIO=@II_ESTADO_EDIFICIO
+  where ID_EDIFICIO=@II_ID_EDIFICIO;
+GO
+grant all on ACTEDIFICIO to public
+
+--------------ACTHABITACION-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTHABITACION' AND type = 'P')
+DROP PROCEDURE ACTHABITACION
+GO
+CREATE PROCEDURE ACTHABITACION
+       @II_ID_HABITACION  CHAR(5),
+       @II_DESCR_HABITACION  VARCHAR(100),
+       @II_T_HABITACION  CHAR(5),
+       @II_EDIFICIO_HABITACION  CHAR(5),
+       @II_PISO_HABITACION  INT,
+       @II_ESTADO_HABITACION  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into habitacion values(	     @II_ID_HABITACION,
+	     @II_DESCR_HABITACION,
+	     @II_T_HABITACION,
+	     @II_EDIFICIO_HABITACION,
+	     @II_PISO_HABITACION,
+	     @II_ESTADO_HABITACION);
+else
+	update habitacion set 	     DESCR_HABITACION=@II_DESCR_HABITACION,
+	     T_HABITACION=@II_T_HABITACION,
+	     EDIFICIO_HABITACION=@II_EDIFICIO_HABITACION,
+	     PISO_HABITACION=@II_PISO_HABITACION,
+	     ESTADO_HABITACION=@II_ESTADO_HABITACION
+  where ID_HABITACION=@II_ID_HABITACION;
+GO
+grant all on ACTHABITACION to public
+
+--------------ACTTIPO_MANTENIMIENTO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_MANTENIMIENTO' AND type = 'P')
+DROP PROCEDURE ACTTIPO_MANTENIMIENTO
+GO
+CREATE PROCEDURE ACTTIPO_MANTENIMIENTO
+       @II_ID_T_MANTENIMIENTO  CHAR(5),
+       @II_DESCR_T_MANTENIMIENTO  VARCHAR(100),
+       @II_ESTADO_T_MANTENIMIENTO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into tipo_mantenimiento values(	     @II_ID_T_MANTENIMIENTO,
+	     @II_DESCR_T_MANTENIMIENTO,
+	     @II_ESTADO_T_MANTENIMIENTO);
+else
+	update tipo_mantenimiento set 	     DESCR_T_MANTENIMIENTO=@II_DESCR_T_MANTENIMIENTO,
+	     ESTADO_T_MANTENIMIENTO=@II_ESTADO_T_MANTENIMIENTO
+  where ID_T_MANTENIMIENTO=@II_ID_T_MANTENIMIENTO;
+GO
+grant all on ACTTIPO_MANTENIMIENTO to public
+
+--------------ACTMANTENIMIENTO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTMANTENIMIENTO' AND type = 'P')
+DROP PROCEDURE ACTMANTENIMIENTO
+GO
+CREATE PROCEDURE ACTMANTENIMIENTO
+       @II_ID_MANTENIMIENTO  INT,
+       @II_ID_HAB_MANTENIMIENTO  CHAR(5),
+       @II_FECHA_CRE_MANTENIMIENTO  DATETIME,
+       @II_FECHA_MOD_MANTENIMIENTO  DATETIME,
+       @II_ESTADO_MANTENIMIENTO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into mantenimiento values(	     @II_ID_MANTENIMIENTO,
+	     @II_ID_HAB_MANTENIMIENTO,
+	     GETDATE(),
+	     GETDATE(),
+	     @II_ESTADO_MANTENIMIENTO);
+else
+	update mantenimiento set 	     ID_HAB_MANTENIMIENTO=@II_ID_HAB_MANTENIMIENTO,
+	     FECHA_CRE_MANTENIMIENTO=GETDATE(),
+	     FECHA_MOD_MANTENIMIENTO=GETDATE(),
+	     ESTADO_MANTENIMIENTO=@II_ESTADO_MANTENIMIENTO
+  where ID_MANTENIMIENTO=@II_ID_MANTENIMIENTO;
+GO
+grant all on ACTMANTENIMIENTO to public
+
+--------------ACTMANTENIMIENTO_DET-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTMANTENIMIENTO_DET' AND type = 'P')
+DROP PROCEDURE ACTMANTENIMIENTO_DET
+GO
+CREATE PROCEDURE ACTMANTENIMIENTO_DET
+       @II_ID_MANTENIMIENTO_DET  INT,
+       @II_ID_T_MANT_DET  CHAR(5),
+       @II_ID_EMPLEADO_DET  CHAR(5),
+       @II_ESTADO_MANTENIMIENTO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into mantenimiento_det values(	     @II_ID_MANTENIMIENTO_DET,
+	     @II_ID_T_MANT_DET,
+	     @II_ID_EMPLEADO_DET,
+	     @II_ESTADO_MANTENIMIENTO);
+else
+	update mantenimiento_det set 	     ID_T_MANT_DET=@II_ID_T_MANT_DET,
+	     ID_EMPLEADO_DET=@II_ID_EMPLEADO_DET,
+	     ESTADO_MANTENIMIENTO=@II_ESTADO_MANTENIMIENTO
+  where ID_MANTENIMIENTO_DET=@II_ID_MANTENIMIENTO_DET;
+GO
+grant all on ACTMANTENIMIENTO_DET to public
+
+--------------ACTRESERVACION-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTRESERVACION' AND type = 'P')
+DROP PROCEDURE ACTRESERVACION
+GO
+CREATE PROCEDURE ACTRESERVACION
+       @II_ID_RESERVACION  INT,
+       @II_ID_CLIENTE  CHAR(5),
+       @II_ID_T_ALOJ_RESERVACION  CHAR(5),
+       @II_FECHA_LLEG_RESERVACION  DATETIME,
+       @II_FECHA_SAL_RESERVACION  DATETIME,
+       @II_MONTO_APAGAR  DECIMAL,
+       @II_ESTADO_RESERVACION  CHAR(1),
+       @II_CREADO_POR_RESERVACION  CHAR(10),
+       @II_FECHA_CRE_RESERVACION  DATETIME,
+       @II_MOD_POR_RESERVACION  CHAR(10),
+       @II_FECHA_MOD_RESERVACION  DATETIME,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into reservacion values(	     @II_ID_RESERVACION,
+	     @II_ID_CLIENTE,
+	     @II_ID_T_ALOJ_RESERVACION,
+	     GETDATE(),
+	     GETDATE(),
+	     @II_MONTO_APAGAR,
+	     @II_ESTADO_RESERVACION,
+	     @II_CREADO_POR_RESERVACION,
+	     GETDATE(),
+	     @II_MOD_POR_RESERVACION,
+	     GETDATE());
+else
+	update reservacion set 	     ID_CLIENTE=@II_ID_CLIENTE,
+	     ID_T_ALOJ_RESERVACION=@II_ID_T_ALOJ_RESERVACION,
+	     FECHA_LLEG_RESERVACION=GETDATE(),
+	     FECHA_SAL_RESERVACION=GETDATE(),
+	     MONTO_APAGAR=@II_MONTO_APAGAR,
+	     ESTADO_RESERVACION=@II_ESTADO_RESERVACION,
+	     CREADO_POR_RESERVACION=@II_CREADO_POR_RESERVACION,
+	     FECHA_CRE_RESERVACION=GETDATE(),
+	     MOD_POR_RESERVACION=@II_MOD_POR_RESERVACION,
+	     FECHA_MOD_RESERVACION=GETDATE()
+  where ID_RESERVACION=@II_ID_RESERVACION;
+GO
+grant all on ACTRESERVACION to public
+
+--------------ACTRESERVACION_DET-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTRESERVACION_DET' AND type = 'P')
+DROP PROCEDURE ACTRESERVACION_DET
+GO
+CREATE PROCEDURE ACTRESERVACION_DET
+       @II_ID_RESERVACION_DET  INT,
+       @II_ID_THAB_RESERV_DET  CHAR(5),
+       @II_CANT_RESERV_DET  INT,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into reservacion_det values(	     @II_ID_RESERVACION_DET,
+	     @II_ID_THAB_RESERV_DET,
+	     @II_CANT_RESERV_DET);
+else
+	update reservacion_det set 	     ID_THAB_RESERV_DET=@II_ID_THAB_RESERV_DET,
+	     CANT_RESERV_DET=@II_CANT_RESERV_DET
+  where ID_RESERVACION_DET=@II_ID_RESERVACION_DET;
+GO
+grant all on ACTRESERVACION_DET to public
+
+--------------ACTCANCELACION-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTCANCELACION' AND type = 'P')
+DROP PROCEDURE ACTCANCELACION
+GO
+CREATE PROCEDURE ACTCANCELACION
+       @II_ID_CANCELACION  INT,
+       @II_ID_RESERV_CANCELACION  INT,
+       @II_FECHA_CANCELACION  DATETIME,
+       @II_MOTIVO_CANCELACION  VARCHAR(max),
+       @II_CREADO_POR_CANCELACION  CHAR(10),
+       @II_ESTADO_CANCELACION  CHAR(1),
+       @II_MOD_POR_CANCELACION  CHAR(10),
+       @II_FECHA_MOD_CANCELACION  DATETIME,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into cancelacion values(	     @II_ID_CANCELACION,
+	     @II_ID_RESERV_CANCELACION,
+	     GETDATE(),
+	     @II_MOTIVO_CANCELACION,
+	     @II_CREADO_POR_CANCELACION,
+	     @II_ESTADO_CANCELACION,
+	     @II_MOD_POR_CANCELACION,
+	     GETDATE());
+else
+	update cancelacion set 	     ID_RESERV_CANCELACION=@II_ID_RESERV_CANCELACION,
+	     FECHA_CANCELACION=GETDATE(),
+	     MOTIVO_CANCELACION=@II_MOTIVO_CANCELACION,
+	     CREADO_POR_CANCELACION=@II_CREADO_POR_CANCELACION,
+	     ESTADO_CANCELACION=@II_ESTADO_CANCELACION,
+	     MOD_POR_CANCELACION=@II_MOD_POR_CANCELACION,
+	     FECHA_MOD_CANCELACION=GETDATE()
+  where ID_CANCELACION=@II_ID_CANCELACION;
+GO
+grant all on ACTCANCELACION to public
+
+--------------ACTALOJAMIENTO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTALOJAMIENTO' AND type = 'P')
+DROP PROCEDURE ACTALOJAMIENTO
+GO
+CREATE PROCEDURE ACTALOJAMIENTO
+       @II_ID_ALOJAMIENTO  INT,
+       @II_ID_RESERV_ALOJAMIENTO  INT,
+       @II_ING_POR_ALOJAMIENTO  CHAR(10),
+       @II_FECHA_I_ALOJAMIENTO  DATETIME,
+       @II_SAL_POR_ALOJAMIENTO  CHAR(10),
+       @II_FECHA_S_ALOJAMIENTO  DATETIME,
+       @II_ESTADO_ALOJAMIENTO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into alojamiento values(	     @II_ID_ALOJAMIENTO,
+	     @II_ID_RESERV_ALOJAMIENTO,
+	     @II_ING_POR_ALOJAMIENTO,
+	     GETDATE(),
+	     @II_SAL_POR_ALOJAMIENTO,
+	     GETDATE(),
+	     @II_ESTADO_ALOJAMIENTO);
+else
+	update alojamiento set 	     ID_RESERV_ALOJAMIENTO=@II_ID_RESERV_ALOJAMIENTO,
+	     ING_POR_ALOJAMIENTO=@II_ING_POR_ALOJAMIENTO,
+	     FECHA_I_ALOJAMIENTO=GETDATE(),
+	     SAL_POR_ALOJAMIENTO=@II_SAL_POR_ALOJAMIENTO,
+	     FECHA_S_ALOJAMIENTO=GETDATE(),
+	     ESTADO_ALOJAMIENTO=@II_ESTADO_ALOJAMIENTO
+  where ID_ALOJAMIENTO=@II_ID_ALOJAMIENTO;
+GO
+grant all on ACTALOJAMIENTO to public
+
+--------------ACTALOJAMIENTO_DET-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTALOJAMIENTO_DET' AND type = 'P')
+DROP PROCEDURE ACTALOJAMIENTO_DET
+GO
+CREATE PROCEDURE ACTALOJAMIENTO_DET
+       @II_ID_ALOJAMIENTO_DET  INT,
+       @II_ID_HAB_DET  CHAR(5),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into alojamiento_det values(	     @II_ID_ALOJAMIENTO_DET,
+	     @II_ID_HAB_DET);
+else
+	update alojamiento_det set 	     ID_HAB_DET=@II_ID_HAB_DET
+  where ID_ALOJAMIENTO_DET=@II_ID_ALOJAMIENTO_DET;
+GO
+grant all on ACTALOJAMIENTO_DET to public
+
+--------------ACTNOTA_CREDITO_CLIENTE-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTNOTA_CREDITO_CLIENTE' AND type = 'P')
+DROP PROCEDURE ACTNOTA_CREDITO_CLIENTE
+GO
+CREATE PROCEDURE ACTNOTA_CREDITO_CLIENTE
+       @II_ID_NCC  INT,
+       @II_ID_CLIENTE_NCC  CHAR(5),
+       @II_MONTO_NCC  DECIMAL,
+       @II_FECHA_NCC  DATE,
+       @II_ESTADO_NCC  CHAR(1),
+       @II_CREADO_P_NCC  CHAR(10),
+       @II_FECHA_C_NCC  DATETIME,
+       @II_MOD_P_NCC  CHAR(10),
+       @II_FECHA_M_NCC  DATETIME,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into NOTA_CREDITO_CLIENTE values(	     @II_ID_NCC,
+	     @II_ID_CLIENTE_NCC,
+	     @II_MONTO_NCC,
+	     @II_FECHA_NCC,
+	     @II_ESTADO_NCC,
+	     @II_CREADO_P_NCC,
+	     GETDATE(),
+	     @II_MOD_P_NCC,
+	     GETDATE());
+else
+	update NOTA_CREDITO_CLIENTE set 	     ID_CLIENTE_NCC=@II_ID_CLIENTE_NCC,
+	     MONTO_NCC=@II_MONTO_NCC,
+	     FECHA_NCC=@II_FECHA_NCC,
+	     ESTADO_NCC=@II_ESTADO_NCC,
+	     CREADO_P_NCC=@II_CREADO_P_NCC,
+	     FECHA_C_NCC=GETDATE(),
+	     MOD_P_NCC=@II_MOD_P_NCC,
+	     FECHA_M_NCC=GETDATE()
+  where ID_NCC=@II_ID_NCC;
+GO
+grant all on ACTNOTA_CREDITO_CLIENTE to public
+
+--------------ACTNOTA_CREDITO_DETALLE-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTNOTA_CREDITO_DETALLE' AND type = 'P')
+DROP PROCEDURE ACTNOTA_CREDITO_DETALLE
+GO
+CREATE PROCEDURE ACTNOTA_CREDITO_DETALLE
+       @II_ID_NCC_DET  INT,
+       @II_ID_RESERV_NCC_DET  INT,
+       @II_VALOR_NCC_DET  DECIMAL,
+       @II_BALANCE_NCC_DET  DECIMAL,
+       @II_FECHA_NCC_DET  DATETIME,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into NOTA_CREDITO_DETALLE values(	     @II_ID_NCC_DET,
+	     @II_ID_RESERV_NCC_DET,
+	     @II_VALOR_NCC_DET,
+	     @II_BALANCE_NCC_DET,
+	     GETDATE());
+else
+	update NOTA_CREDITO_DETALLE set 	     ID_RESERV_NCC_DET=@II_ID_RESERV_NCC_DET,
+	     VALOR_NCC_DET=@II_VALOR_NCC_DET,
+	     BALANCE_NCC_DET=@II_BALANCE_NCC_DET,
+	     FECHA_NCC_DET=GETDATE()
+  where ID_NCC_DET=@II_ID_NCC_DET;
+GO
+grant all on ACTNOTA_CREDITO_DETALLE to public
+
+--------------ACTNOTA_CREDITO_ABONO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTNOTA_CREDITO_ABONO' AND type = 'P')
+DROP PROCEDURE ACTNOTA_CREDITO_ABONO
+GO
+CREATE PROCEDURE ACTNOTA_CREDITO_ABONO
+       @II_ID_NCC_AB  INT,
+       @II_ID_RESERV_NCC_AB  INT,
+       @II_N_ABONO_NCC_AB  INT,
+       @II_FECHA_ABONO_NCC_AB  DATETIME,
+       @II_BALANCE_ANT_NCC_AB  DECIMAL,
+       @II_ABONO_NCC_AB  DECIMAL,
+       @II_BALANCE_ACT_NCC_AB  DECIMAL,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into NOTA_CREDITO_ABONO values(	     @II_ID_NCC_AB,
+	     @II_ID_RESERV_NCC_AB,
+	     @II_N_ABONO_NCC_AB,
+	     GETDATE(),
+	     @II_BALANCE_ANT_NCC_AB,
+	     @II_ABONO_NCC_AB,
+	     @II_BALANCE_ACT_NCC_AB);
+else
+	update NOTA_CREDITO_ABONO set 	     ID_RESERV_NCC_AB=@II_ID_RESERV_NCC_AB,
+	     N_ABONO_NCC_AB=@II_N_ABONO_NCC_AB,
+	     FECHA_ABONO_NCC_AB=GETDATE(),
+	     BALANCE_ANT_NCC_AB=@II_BALANCE_ANT_NCC_AB,
+	     ABONO_NCC_AB=@II_ABONO_NCC_AB,
+	     BALANCE_ACT_NCC_AB=@II_BALANCE_ACT_NCC_AB
+  where ID_NCC_AB=@II_ID_NCC_AB;
+GO
+grant all on ACTNOTA_CREDITO_ABONO to public
+
+--------------ACTTEMPORADA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTEMPORADA' AND type = 'P')
+DROP PROCEDURE ACTTEMPORADA
+GO
+CREATE PROCEDURE ACTTEMPORADA
+       @II_ID_TEMPORADA  CHAR(5),
+       @II_DESCR_TEMPORADA  VARCHAR(100),
+       @II_FECHA_I_TEMPORADA  DATE,
+       @II_FECHA_F_TEMPORADA  DATE,
+       @II_ESTADO_TEMPORADA  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into TEMPORADA values(	     @II_ID_TEMPORADA,
+	     @II_DESCR_TEMPORADA,
+	     @II_FECHA_I_TEMPORADA,
+	     @II_FECHA_F_TEMPORADA,
+	     @II_ESTADO_TEMPORADA);
+else
+	update TEMPORADA set 	     DESCR_TEMPORADA=@II_DESCR_TEMPORADA,
+	     FECHA_I_TEMPORADA=@II_FECHA_I_TEMPORADA,
+	     FECHA_F_TEMPORADA=@II_FECHA_F_TEMPORADA,
+	     ESTADO_TEMPORADA=@II_ESTADO_TEMPORADA
+  where ID_TEMPORADA=@II_ID_TEMPORADA;
+GO
+grant all on ACTTEMPORADA to public
+
+--------------ACTOFERTA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTOFERTA' AND type = 'P')
+DROP PROCEDURE ACTOFERTA
+GO
+CREATE PROCEDURE ACTOFERTA
+       @II_ID_OFERTA  CHAR(5),
+       @II_DESCR_OFERTA  VARCHAR(200),
+       @II_ID_TEMP_OFERTA  CHAR(5),
+       @II_ESTADO_OFERTA  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Oferta values(	     @II_ID_OFERTA,
+	     @II_DESCR_OFERTA,
+	     @II_ID_TEMP_OFERTA,
+	     @II_ESTADO_OFERTA);
+else
+	update Oferta set 	     DESCR_OFERTA=@II_DESCR_OFERTA,
+	     ID_TEMP_OFERTA=@II_ID_TEMP_OFERTA,
+	     ESTADO_OFERTA=@II_ESTADO_OFERTA
+  where ID_OFERTA=@II_ID_OFERTA;
+GO
+grant all on ACTOFERTA to public
+
+--------------ACTOFERTA_DET_01-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTOFERTA_DET_01' AND type = 'P')
+DROP PROCEDURE ACTOFERTA_DET_01
+GO
+CREATE PROCEDURE ACTOFERTA_DET_01
+       @II_ID_OFERTA_DET01  CHAR(5),
+       @II_ID_T_ALOJ_DET01  CHAR(5),
+       @II_DESCUENTO_DET01  DECIMAL,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into oferta_det_01 values(	     @II_ID_OFERTA_DET01,
+	     @II_ID_T_ALOJ_DET01,
+	     @II_DESCUENTO_DET01);
+else
+	update oferta_det_01 set 	     ID_T_ALOJ_DET01=@II_ID_T_ALOJ_DET01,
+	     DESCUENTO_DET01=@II_DESCUENTO_DET01
+  where ID_OFERTA_DET01=@II_ID_OFERTA_DET01;
+GO
+grant all on ACTOFERTA_DET_01 to public
+
+--------------ACTOFERTA_DET_02-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTOFERTA_DET_02' AND type = 'P')
+DROP PROCEDURE ACTOFERTA_DET_02
+GO
+CREATE PROCEDURE ACTOFERTA_DET_02
+       @II_ID_OFERTA_DET02  CHAR(5),
+       @II_ID_T_CLIENTE_DET02  CHAR(5),
+       @II_DESCUENTO_DET02  DECIMAL,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into oferta_det_02 values(	     @II_ID_OFERTA_DET02,
+	     @II_ID_T_CLIENTE_DET02,
+	     @II_DESCUENTO_DET02);
+else
+	update oferta_det_02 set 	     ID_T_CLIENTE_DET02=@II_ID_T_CLIENTE_DET02,
+	     DESCUENTO_DET02=@II_DESCUENTO_DET02
+  where ID_OFERTA_DET02=@II_ID_OFERTA_DET02;
+GO
+grant all on ACTOFERTA_DET_02 to public
+
+--------------ACTOFERTA_DET_03-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTOFERTA_DET_03' AND type = 'P')
+DROP PROCEDURE ACTOFERTA_DET_03
+GO
+CREATE PROCEDURE ACTOFERTA_DET_03
+       @II_ID_OFERTA_DET03  CHAR(5),
+       @II_C_INI_ALOJ_DET03  INT,
+       @II_C_FIN_ALOJ_DET03  INT,
+       @II_DESCUENTO_DET03  DECIMAL,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into oferta_det_03 values(	     @II_ID_OFERTA_DET03,
+	     @II_C_INI_ALOJ_DET03,
+	     @II_C_FIN_ALOJ_DET03,
+	     @II_DESCUENTO_DET03);
+else
+	update oferta_det_03 set 	     C_INI_ALOJ_DET03=@II_C_INI_ALOJ_DET03,
+	     C_FIN_ALOJ_DET03=@II_C_FIN_ALOJ_DET03,
+	     DESCUENTO_DET03=@II_DESCUENTO_DET03
+  where ID_OFERTA_DET03=@II_ID_OFERTA_DET03;
+GO
+grant all on ACTOFERTA_DET_03 to public
+
+--------------ACTTIPO_ARCHIVO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_ARCHIVO' AND type = 'P')
+DROP PROCEDURE ACTTIPO_ARCHIVO
+GO
+CREATE PROCEDURE ACTTIPO_ARCHIVO
+       @II_ID_T_ARCHIVO  INT,
+       @II_DESCR_T_ARCHIVO  VARCHAR(100),
+       @II_ESTADO_T_ARCHIVO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into tipo_archivo values(	     @II_ID_T_ARCHIVO,
+	     @II_DESCR_T_ARCHIVO,
+	     @II_ESTADO_T_ARCHIVO);
+else
+	update tipo_archivo set 	     DESCR_T_ARCHIVO=@II_DESCR_T_ARCHIVO,
+	     ESTADO_T_ARCHIVO=@II_ESTADO_T_ARCHIVO
+  where ID_T_ARCHIVO=@II_ID_T_ARCHIVO;
+GO
+grant all on ACTTIPO_ARCHIVO to public
+
+--------------ACTARCHIVO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTARCHIVO' AND type = 'P')
+DROP PROCEDURE ACTARCHIVO
+GO
+CREATE PROCEDURE ACTARCHIVO
+       @II_ID_ARCHIVO  CHAR(10),
+       @II_ID_TARCHIVO  INT,
+       @II_RUTA_ARCHIVO  VARCHAR(500),
+       @II_COMENTARIO_01_ARCHIVO  VARCHAR(2000),
+       @II_COMENTARIO_02_ARCHIVO  VARCHAR(2000),
+       @II_ESTADO_ARCHIVO  CHAR(1),
+       @II_CREADO_P_ARCHIVO  CHAR(10),
+       @II_FECHA_C_ARCHIVO  DATETIME,
+       @II_MOD_P_ARCHIVO  CHAR(10),
+       @II_FECHA_M_ARCHIVO  DATETIME,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into archivo values(	     @II_ID_ARCHIVO,
+	     @II_ID_TARCHIVO,
+	     @II_RUTA_ARCHIVO,
+	     @II_COMENTARIO_01_ARCHIVO,
+	     @II_COMENTARIO_02_ARCHIVO,
+	     @II_ESTADO_ARCHIVO,
+	     @II_CREADO_P_ARCHIVO,
+	     GETDATE(),
+	     @II_MOD_P_ARCHIVO,
+	     GETDATE());
+else
+	update archivo set 	     ID_TARCHIVO=@II_ID_TARCHIVO,
+	     RUTA_ARCHIVO=@II_RUTA_ARCHIVO,
+	     COMENTARIO_01_ARCHIVO=@II_COMENTARIO_01_ARCHIVO,
+	     COMENTARIO_02_ARCHIVO=@II_COMENTARIO_02_ARCHIVO,
+	     ESTADO_ARCHIVO=@II_ESTADO_ARCHIVO,
+	     CREADO_P_ARCHIVO=@II_CREADO_P_ARCHIVO,
+	     FECHA_C_ARCHIVO=GETDATE(),
+	     MOD_P_ARCHIVO=@II_MOD_P_ARCHIVO,
+	     FECHA_M_ARCHIVO=GETDATE()
+  where ID_ARCHIVO=@II_ID_ARCHIVO;
+GO
+grant all on ACTARCHIVO to public
+
+--------------ACTHOTEL-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTHOTEL' AND type = 'P')
+DROP PROCEDURE ACTHOTEL
+GO
+CREATE PROCEDURE ACTHOTEL
+       @II_ID_HOTEL  CHAR(5),
+       @II_DESCR_HOTEL  VARCHAR(300),
+       @II_DIRECCION_HOTEL  VARCHAR(max),
+       @II_TEL_HOTEL  VARCHAR(12),
+       @II_A_CANCELACION_HOTEL  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into HOTEL values(	     @II_ID_HOTEL,
+	     @II_DESCR_HOTEL,
+	     @II_DIRECCION_HOTEL,
+	     @II_TEL_HOTEL,
+	     @II_A_CANCELACION_HOTEL);
+else
+	update HOTEL set 	     DESCR_HOTEL=@II_DESCR_HOTEL,
+	     DIRECCION_HOTEL=@II_DIRECCION_HOTEL,
+	     TEL_HOTEL=@II_TEL_HOTEL,
+	     A_CANCELACION_HOTEL=@II_A_CANCELACION_HOTEL
+  where ID_HOTEL=@II_ID_HOTEL;
+GO
+grant all on ACTHOTEL to public
+
+--------------ACTTIPO_IDENTIFICACION-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_IDENTIFICACION' AND type = 'P')
+DROP PROCEDURE ACTTIPO_IDENTIFICACION
+GO
+CREATE PROCEDURE ACTTIPO_IDENTIFICACION
+       @II_ID_TIPO_IDENT  CHAR(5),
+       @II_DESCR_TIPO_IDENT  VARCHAR(30),
+       @II_ESTADO_TIPO_IDENT  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Tipo_Identificacion values(	     @II_ID_TIPO_IDENT,
+	     @II_DESCR_TIPO_IDENT,
+	     @II_ESTADO_TIPO_IDENT);
+else
+	update Tipo_Identificacion set 	     DESCR_TIPO_IDENT=@II_DESCR_TIPO_IDENT,
+	     ESTADO_TIPO_IDENT=@II_ESTADO_TIPO_IDENT
+  where ID_TIPO_IDENT=@II_ID_TIPO_IDENT;
+GO
+grant all on ACTTIPO_IDENTIFICACION to public
+
+--------------ACTTERCERO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTERCERO' AND type = 'P')
+DROP PROCEDURE ACTTERCERO
+GO
+CREATE PROCEDURE ACTTERCERO
+       @II_ID_TERCERO  CHAR(10),
+       @II_NOMBRE_TERCERO  VARCHAR(100),
+       @II_ID_T_IDENTIF_TERCERO  CHAR(5),
+       @II_CEDULA_TERCERO  VARCHAR(20),
+       @II_FECHA_NAC_TERCERO  DATE,
+       @II_SEXO_TERCERO  CHAR(1),
+       @II_ESTADO_TERCERO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Tercero values(	     @II_ID_TERCERO,
+	     @II_NOMBRE_TERCERO,
+	     @II_ID_T_IDENTIF_TERCERO,
+	     @II_CEDULA_TERCERO,
+	     @II_FECHA_NAC_TERCERO,
+	     @II_SEXO_TERCERO,
+	     @II_ESTADO_TERCERO);
+else
+	update Tercero set 	     NOMBRE_TERCERO=@II_NOMBRE_TERCERO,
+	     ID_T_IDENTIF_TERCERO=@II_ID_T_IDENTIF_TERCERO,
+	     CEDULA_TERCERO=@II_CEDULA_TERCERO,
+	     FECHA_NAC_TERCERO=@II_FECHA_NAC_TERCERO,
+	     SEXO_TERCERO=@II_SEXO_TERCERO,
+	     ESTADO_TERCERO=@II_ESTADO_TERCERO
+  where ID_TERCERO=@II_ID_TERCERO;
+GO
+grant all on ACTTERCERO to public
+
+--------------ACTPAIS-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTPAIS' AND type = 'P')
+DROP PROCEDURE ACTPAIS
+GO
+CREATE PROCEDURE ACTPAIS
+       @II_ID_PAIS  CHAR(5),
+       @II_DESCR_PAIS  VARCHAR(50),
+       @II_ESTADO_PAIS  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into PAIS values(	     @II_ID_PAIS,
+	     @II_DESCR_PAIS,
+	     @II_ESTADO_PAIS);
+else
+	update PAIS set 	     DESCR_PAIS=@II_DESCR_PAIS,
+	     ESTADO_PAIS=@II_ESTADO_PAIS
+  where ID_PAIS=@II_ID_PAIS;
+GO
+grant all on ACTPAIS to public
+
+--------------ACTPROVINCIA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTPROVINCIA' AND type = 'P')
+DROP PROCEDURE ACTPROVINCIA
+GO
+CREATE PROCEDURE ACTPROVINCIA
+       @II_ID_PROVINCIA  CHAR(5),
+       @II_DESCR_PROVINCIA  VARCHAR(50),
+       @II_ID_PAIS_PROVINCIA  CHAR(5),
+       @II_ESTADO_PROVINCIA  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into PROVINCIA values(	     @II_ID_PROVINCIA,
+	     @II_DESCR_PROVINCIA,
+	     @II_ID_PAIS_PROVINCIA,
+	     @II_ESTADO_PROVINCIA);
+else
+	update PROVINCIA set 	     DESCR_PROVINCIA=@II_DESCR_PROVINCIA,
+	     ID_PAIS_PROVINCIA=@II_ID_PAIS_PROVINCIA,
+	     ESTADO_PROVINCIA=@II_ESTADO_PROVINCIA
+  where ID_PROVINCIA=@II_ID_PROVINCIA;
+GO
+grant all on ACTPROVINCIA to public
+
+--------------ACTMUNICIPIO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTMUNICIPIO' AND type = 'P')
+DROP PROCEDURE ACTMUNICIPIO
+GO
+CREATE PROCEDURE ACTMUNICIPIO
+       @II_ID_MUNICIPIO  CHAR(5),
+       @II_DESCR_MUNICIPIO  VARCHAR(50),
+       @II_ID_PROV_MUNICIPIO  CHAR(5),
+       @II_ESTADO_MUNICIPIO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into MUNICIPIO values(	     @II_ID_MUNICIPIO,
+	     @II_DESCR_MUNICIPIO,
+	     @II_ID_PROV_MUNICIPIO,
+	     @II_ESTADO_MUNICIPIO);
+else
+	update MUNICIPIO set 	     DESCR_MUNICIPIO=@II_DESCR_MUNICIPIO,
+	     ID_PROV_MUNICIPIO=@II_ID_PROV_MUNICIPIO,
+	     ESTADO_MUNICIPIO=@II_ESTADO_MUNICIPIO
+  where ID_MUNICIPIO=@II_ID_MUNICIPIO;
+GO
+grant all on ACTMUNICIPIO to public
+
+--------------ACTDIRECCION-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTDIRECCION' AND type = 'P')
+DROP PROCEDURE ACTDIRECCION
+GO
+CREATE PROCEDURE ACTDIRECCION
+       @II_ID_TERCERO_DIRECCION  CHAR(10),
+       @II_ID_MUN_DIRECCION  CHAR(5),
+       @II_DIRECCION  VARCHAR(max),
+       @II_TIPO_DIRECCION  VARCHAR(2),
+       @II_N_LINEA_DIRECCION  INT,
+       @II_ESTADO_DIRECCION  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into DIRECCION values(	     @II_ID_TERCERO_DIRECCION,
+	     @II_ID_MUN_DIRECCION,
+	     @II_DIRECCION,
+	     @II_TIPO_DIRECCION,
+	     @II_N_LINEA_DIRECCION,
+	     @II_ESTADO_DIRECCION);
+else
+	update DIRECCION set 	     ID_MUN_DIRECCION=@II_ID_MUN_DIRECCION,
+	     DIRECCION=@II_DIRECCION,
+	     TIPO_DIRECCION=@II_TIPO_DIRECCION,
+	     N_LINEA_DIRECCION=@II_N_LINEA_DIRECCION,
+	     ESTADO_DIRECCION=@II_ESTADO_DIRECCION
+  where ID_TERCERO_DIRECCION=@II_ID_TERCERO_DIRECCION;
+GO
+grant all on ACTDIRECCION to public
+
+--------------ACTTHABITACION_CAMA-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTHABITACION_CAMA' AND type = 'P')
+DROP PROCEDURE ACTTHABITACION_CAMA
+GO
+CREATE PROCEDURE ACTTHABITACION_CAMA
+       @II_ID_T_HAB_THC  CHAR(5),
+       @II_ID_CAMA_THC  CHAR(5),
+       @II_CANTIDAD_CAMAS  INT,
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into thabitacion_cama values(	     @II_ID_T_HAB_THC,
+	     @II_ID_CAMA_THC,
+	     @II_CANTIDAD_CAMAS);
+else
+	update thabitacion_cama set 	     ID_CAMA_THC=@II_ID_CAMA_THC,
+	     CANTIDAD_CAMAS=@II_CANTIDAD_CAMAS
+  where ID_T_HAB_THC=@II_ID_T_HAB_THC;
+GO
+grant all on ACTTHABITACION_CAMA to public
+
+--------------ACTEMAIL-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTEMAIL' AND type = 'P')
+DROP PROCEDURE ACTEMAIL
+GO
+CREATE PROCEDURE ACTEMAIL
+       @II_ID_TERCERO_EMAIL  CHAR(10),
+       @II_EMAIL  VARCHAR(max),
+       @II_TIPO_EMAIL  VARCHAR(2),
+       @II_N_LINEA_EMAIL  INT,
+       @II_ESTADO_EMAIL  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into EMAIL values(	     @II_ID_TERCERO_EMAIL,
+	     @II_EMAIL,
+	     @II_TIPO_EMAIL,
+	     @II_N_LINEA_EMAIL,
+	     @II_ESTADO_EMAIL);
+else
+	update EMAIL set 	     EMAIL=@II_EMAIL,
+	     TIPO_EMAIL=@II_TIPO_EMAIL,
+	     N_LINEA_EMAIL=@II_N_LINEA_EMAIL,
+	     ESTADO_EMAIL=@II_ESTADO_EMAIL
+  where ID_TERCERO_EMAIL=@II_ID_TERCERO_EMAIL;
+GO
+grant all on ACTEMAIL to public
+
+--------------ACTTELEFONO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTELEFONO' AND type = 'P')
+DROP PROCEDURE ACTTELEFONO
+GO
+CREATE PROCEDURE ACTTELEFONO
+       @II_ID_TERCERO_TEL  CHAR(10),
+       @II_NUMERO_TEL  VARCHAR(20),
+       @II_TIPO_TEL  VARCHAR(2),
+       @II_N_LINEA_TEL  INT,
+       @II_ESTADO_TEL  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into TELEFONO values(	     @II_ID_TERCERO_TEL,
+	     @II_NUMERO_TEL,
+	     @II_TIPO_TEL,
+	     @II_N_LINEA_TEL,
+	     @II_ESTADO_TEL);
+else
+	update TELEFONO set 	     NUMERO_TEL=@II_NUMERO_TEL,
+	     TIPO_TEL=@II_TIPO_TEL,
+	     N_LINEA_TEL=@II_N_LINEA_TEL,
+	     ESTADO_TEL=@II_ESTADO_TEL
+  where ID_TERCERO_TEL=@II_ID_TERCERO_TEL;
+GO
+grant all on ACTTELEFONO to public
+
+--------------ACTTIPO_USUARIO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_USUARIO' AND type = 'P')
+DROP PROCEDURE ACTTIPO_USUARIO
+GO
+CREATE PROCEDURE ACTTIPO_USUARIO
+       @II_ID_T_USUARIO  CHAR(5),
+       @II_DESCRIPCION_T_USUARIO  VARCHAR(30),
+       @II_NIVEL_ACCESO_T_USUARIO  VARCHAR(3),
+       @II_ESTADO_T_USUARIO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Tipo_Usuario values(	     @II_ID_T_USUARIO,
+	     @II_DESCRIPCION_T_USUARIO,
+	     @II_NIVEL_ACCESO_T_USUARIO,
+	     @II_ESTADO_T_USUARIO);
+else
+	update Tipo_Usuario set 	     DESCRIPCION_T_USUARIO=@II_DESCRIPCION_T_USUARIO,
+	     NIVEL_ACCESO_T_USUARIO=@II_NIVEL_ACCESO_T_USUARIO,
+	     ESTADO_T_USUARIO=@II_ESTADO_T_USUARIO
+  where ID_T_USUARIO=@II_ID_T_USUARIO;
+GO
+grant all on ACTTIPO_USUARIO to public
+
+--------------ACTUSUARIO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTUSUARIO' AND type = 'P')
+DROP PROCEDURE ACTUSUARIO
+GO
+CREATE PROCEDURE ACTUSUARIO
+       @II_ID_USUARIO  CHAR(10),
+       @II_ID_TERCERO_USUARIO  CHAR(10),
+       @II_TIPO_USUARIO  CHAR(5),
+       @II_PASSWORD_USUARIO  VARCHAR(max),
+       @II_ESTADO_USUARIO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Usuario values(	     @II_ID_USUARIO,
+	     @II_ID_TERCERO_USUARIO,
+	     @II_TIPO_USUARIO,
+	     @II_PASSWORD_USUARIO,
+	     @II_ESTADO_USUARIO);
+else
+	update Usuario set 	     ID_TERCERO_USUARIO=@II_ID_TERCERO_USUARIO,
+	     TIPO_USUARIO=@II_TIPO_USUARIO,
+	     PASSWORD_USUARIO=@II_PASSWORD_USUARIO,
+	     ESTADO_USUARIO=@II_ESTADO_USUARIO
+  where ID_USUARIO=@II_ID_USUARIO;
+GO
+grant all on ACTUSUARIO to public
+
+--------------ACTPERMISOS_ADI-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTPERMISOS_ADI' AND type = 'P')
+DROP PROCEDURE ACTPERMISOS_ADI
+GO
+CREATE PROCEDURE ACTPERMISOS_ADI
+       @II_ID_OPCION  CHAR(5),
+       @II_DESCR_OPCION  VARCHAR(30),
+       @II_ESTADO_OPCION  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Permisos_Adi values(	     @II_ID_OPCION,
+	     @II_DESCR_OPCION,
+	     @II_ESTADO_OPCION);
+else
+	update Permisos_Adi set 	     DESCR_OPCION=@II_DESCR_OPCION,
+	     ESTADO_OPCION=@II_ESTADO_OPCION
+  where ID_OPCION=@II_ID_OPCION;
+GO
+grant all on ACTPERMISOS_ADI to public
+
+--------------ACTUSUARIO_PERMISOS_ADI-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTUSUARIO_PERMISOS_ADI' AND type = 'P')
+DROP PROCEDURE ACTUSUARIO_PERMISOS_ADI
+GO
+CREATE PROCEDURE ACTUSUARIO_PERMISOS_ADI
+       @II_ID_USUARIO_UP  CHAR(10),
+       @II_ID_PERMISO_UP  CHAR(5),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into Usuario_Permisos_Adi values(	     @II_ID_USUARIO_UP,
+	     @II_ID_PERMISO_UP);
+else
+	update Usuario_Permisos_Adi set 	     ID_PERMISO_UP=@II_ID_PERMISO_UP
+  where ID_USUARIO_UP=@II_ID_USUARIO_UP;
+GO
+grant all on ACTUSUARIO_PERMISOS_ADI to public
+
+--------------ACTTIPO_CLIENTE-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_CLIENTE' AND type = 'P')
+DROP PROCEDURE ACTTIPO_CLIENTE
+GO
+CREATE PROCEDURE ACTTIPO_CLIENTE
+       @II_ID_T_CLIENTE_TC  CHAR(5),
+       @II_DESCR_TC  VARCHAR(50),
+       @II_ESTADO_TC  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into TIPO_CLIENTE values(	     @II_ID_T_CLIENTE_TC,
+	     @II_DESCR_TC,
+	     @II_ESTADO_TC);
+else
+	update TIPO_CLIENTE set 	     DESCR_TC=@II_DESCR_TC,
+	     ESTADO_TC=@II_ESTADO_TC
+  where ID_T_CLIENTE_TC=@II_ID_T_CLIENTE_TC;
+GO
+grant all on ACTTIPO_CLIENTE to public
+
+--------------ACTCLIENTE-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTCLIENTE' AND type = 'P')
+DROP PROCEDURE ACTCLIENTE
+GO
+CREATE PROCEDURE ACTCLIENTE
+       @II_ID_CLIENTE  CHAR(5),
+       @II_ID_TERCERO_CLIENTE  CHAR(10),
+       @II_ID_T_CLIENTE  CHAR(5),
+       @II_LIM_CRED_CLIENTE  DECIMAL,
+       @II_ESTADO_CLIENTE  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into CLIENTE values(	     @II_ID_CLIENTE,
+	     @II_ID_TERCERO_CLIENTE,
+	     @II_ID_T_CLIENTE,
+	     @II_LIM_CRED_CLIENTE,
+	     @II_ESTADO_CLIENTE);
+else
+	update CLIENTE set 	     ID_TERCERO_CLIENTE=@II_ID_TERCERO_CLIENTE,
+	     ID_T_CLIENTE=@II_ID_T_CLIENTE,
+	     LIM_CRED_CLIENTE=@II_LIM_CRED_CLIENTE,
+	     ESTADO_CLIENTE=@II_ESTADO_CLIENTE
+  where ID_CLIENTE=@II_ID_CLIENTE;
+GO
+grant all on ACTCLIENTE to public
+
+--------------ACTTIPO_EMPLEADO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_EMPLEADO' AND type = 'P')
+DROP PROCEDURE ACTTIPO_EMPLEADO
+GO
+CREATE PROCEDURE ACTTIPO_EMPLEADO
+       @II_ID_T_EMPLEADO_TE  CHAR(5),
+       @II_DESCR_TE  VARCHAR(50),
+       @II_ESTADO_TE  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into TIPO_EMPLEADO values(	     @II_ID_T_EMPLEADO_TE,
+	     @II_DESCR_TE,
+	     @II_ESTADO_TE);
+else
+	update TIPO_EMPLEADO set 	     DESCR_TE=@II_DESCR_TE,
+	     ESTADO_TE=@II_ESTADO_TE
+  where ID_T_EMPLEADO_TE=@II_ID_T_EMPLEADO_TE;
+GO
+grant all on ACTTIPO_EMPLEADO to public
+
+--------------ACTEMPLEADO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTEMPLEADO' AND type = 'P')
+DROP PROCEDURE ACTEMPLEADO
+GO
+CREATE PROCEDURE ACTEMPLEADO
+       @II_ID_EMPLEADO  CHAR(5),
+       @II_ID_TERCERO_EMPLEADO  CHAR(10),
+       @II_ID_T_EMPLEADO  CHAR(5),
+       @II_FECHA_I_EMPLEADO  DATE,
+       @II_ESTADO_EMPLEADO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into EMPLEADO values(	     @II_ID_EMPLEADO,
+	     @II_ID_TERCERO_EMPLEADO,
+	     @II_ID_T_EMPLEADO,
+	     @II_FECHA_I_EMPLEADO,
+	     @II_ESTADO_EMPLEADO);
+else
+	update EMPLEADO set 	     ID_TERCERO_EMPLEADO=@II_ID_TERCERO_EMPLEADO,
+	     ID_T_EMPLEADO=@II_ID_T_EMPLEADO,
+	     FECHA_I_EMPLEADO=@II_FECHA_I_EMPLEADO,
+	     ESTADO_EMPLEADO=@II_ESTADO_EMPLEADO
+  where ID_EMPLEADO=@II_ID_EMPLEADO;
+GO
+grant all on ACTEMPLEADO to public
+
+--------------ACTSERVICIO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTSERVICIO' AND type = 'P')
+DROP PROCEDURE ACTSERVICIO
+GO
+CREATE PROCEDURE ACTSERVICIO
+       @II_ID_SERVICIO  CHAR(5),
+       @II_DESCR_SERVICIO  VARCHAR(50),
+       @II_COSTO_SERVICIO  DECIMAL,
+       @II_ESTADO_SERVICIO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into servicio values(	     @II_ID_SERVICIO,
+	     @II_DESCR_SERVICIO,
+	     @II_COSTO_SERVICIO,
+	     @II_ESTADO_SERVICIO);
+else
+	update servicio set 	     DESCR_SERVICIO=@II_DESCR_SERVICIO,
+	     COSTO_SERVICIO=@II_COSTO_SERVICIO,
+	     ESTADO_SERVICIO=@II_ESTADO_SERVICIO
+  where ID_SERVICIO=@II_ID_SERVICIO;
+GO
+grant all on ACTSERVICIO to public
+
+--------------ACTTIPO_ALOJAMIENTO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTIPO_ALOJAMIENTO' AND type = 'P')
+DROP PROCEDURE ACTTIPO_ALOJAMIENTO
+GO
+CREATE PROCEDURE ACTTIPO_ALOJAMIENTO
+       @II_ID_T_ALOJAMIENTO  CHAR(5),
+       @II_DESCR_T_ALOJAMIENTO  VARCHAR(100),
+       @II_COSTO_T_ALOJAMIENTO  DECIMAL,
+       @II_ESTADO_T_ALOJAMIENTO  CHAR(1),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into tipo_alojamiento values(	     @II_ID_T_ALOJAMIENTO,
+	     @II_DESCR_T_ALOJAMIENTO,
+	     @II_COSTO_T_ALOJAMIENTO,
+	     @II_ESTADO_T_ALOJAMIENTO);
+else
+	update tipo_alojamiento set 	     DESCR_T_ALOJAMIENTO=@II_DESCR_T_ALOJAMIENTO,
+	     COSTO_T_ALOJAMIENTO=@II_COSTO_T_ALOJAMIENTO,
+	     ESTADO_T_ALOJAMIENTO=@II_ESTADO_T_ALOJAMIENTO
+  where ID_T_ALOJAMIENTO=@II_ID_T_ALOJAMIENTO;
+GO
+grant all on ACTTIPO_ALOJAMIENTO to public
+
+--------------ACTTALOJAMIENTO_SERVICIO-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'ACTTALOJAMIENTO_SERVICIO' AND type = 'P')
+DROP PROCEDURE ACTTALOJAMIENTO_SERVICIO
+GO
+CREATE PROCEDURE ACTTALOJAMIENTO_SERVICIO
+       @II_ID_T_ALOJAMIENTO_TAS  CHAR(5),
+       @II_ID_SERVICIO_TAS  CHAR(5),
+       @aa_Modo  char(1)
+AS
+if @aa_Modo='A' 
+	insert into talojamiento_servicio values(	     @II_ID_T_ALOJAMIENTO_TAS,
+	     @II_ID_SERVICIO_TAS);
+else
+	update talojamiento_servicio set 	     ID_SERVICIO_TAS=@II_ID_SERVICIO_TAS
+  where ID_T_ALOJAMIENTO_TAS=@II_ID_T_ALOJAMIENTO_TAS;
+GO
+grant all on ACTTALOJAMIENTO_SERVICIO to public
+

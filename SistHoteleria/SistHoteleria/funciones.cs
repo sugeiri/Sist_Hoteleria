@@ -593,6 +593,28 @@ namespace SistHoteleria
 
             return false;
         }
-       
+        public static Clases.EServicio Lee_Servicio(string id)
+        {
+            string sql = "";
+            Clases.EServicio ii_EServicio = new Clases.EServicio();
+            DataSet DS = new DataSet();
+            string Error = "";
+
+            sql = "  SELECT * from  Cama  WHERE id_Cama = '" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                ii_EServicio.id_servicio = id;
+                ii_EServicio.descr_servicio = DS.Tables[0].Rows[0]["descr_servicio"].ToString();
+                ii_EServicio.costo_servicio = decimal.Parse(DS.Tables[0].Rows[0]["costo_servicio"].ToString());
+                ii_EServicio.estado_servicio = DS.Tables[0].Rows[0]["estado_servicio"].ToString();
+
+                return ii_EServicio;
+
+            }
+            return null;
+
+        }
+
     }
 }

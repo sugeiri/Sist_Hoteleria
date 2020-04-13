@@ -175,6 +175,14 @@ namespace SistHoteleria
 
 
         }
+        public class EServicio
+        {
+            public string id_servicio = "";
+            public string descr_servicio = "";
+            public decimal costo_servicio = 0;
+            public string estado_servicio = "";
 
+
+        }
     }
 }
