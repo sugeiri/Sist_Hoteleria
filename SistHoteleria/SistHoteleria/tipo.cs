@@ -88,26 +88,30 @@ namespace SistHoteleria
                     MessageBox.Show("NO PUEDE REGISTRAR CON ESTADO DIFERENTE DE ACTIVO");
                     return;
 
-                }
-                sql = "INSERT INTO " + aa_tabla + " VALUES('" + tid.Text.ToString() + "','" + tDESCR.Text.ToString().Trim() + "','" + CB_ESTADO.SelectedItem.ToString().Trim() + "')";
-
+                } 
             }
-            else
-            {
-                DataSet ds = Conexion.EjecutaSQL("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '" + aa_tabla + "' ORDER BY ORDINAL_POSITION", ref Error);
-                int Count = ds.Tables.Count;
-                if (Count > 0)
-                {
-                    string campo_01 = ds.Tables[0].Rows[0]["COLUMN_NAME"].ToString();
-                    string campo_02 = ds.Tables[0].Rows[1]["COLUMN_NAME"].ToString();
-                    string campo_03 = ds.Tables[0].Rows[2]["COLUMN_NAME"].ToString();
-                    sql = "UPDATE " + aa_tabla + " SET " +
-                            campo_02 + "='" + tDESCR.Text.ToUpper() + "'," +
-                            campo_03 + "='" + CB_ESTADO.SelectedItem.ToString().ToUpper() + "'" +
-                            " WHERE " + campo_01 + "='" + tid.Text.ToString().Trim() + "'";
+                sql = "EXEC ACT" + aa_tabla + " '" + tid.Text.ToString() 
+                                                   + "','" + tDESCR.Text.ToString().Trim() 
+                                                   + "','" + CB_ESTADO.SelectedItem.ToString().Trim() +"',"
+                                                   + "'"+ aa_modo.ToUpper()+"'";
 
-                }
-            }
+            //}
+            //else
+            //{
+            //    DataSet ds = Conexion.EjecutaSQL("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '" + aa_tabla + "' ORDER BY ORDINAL_POSITION", ref Error);
+            //    int Count = ds.Tables.Count;
+            //    if (Count > 0)
+            //    {
+            //        string campo_01 = ds.Tables[0].Rows[0]["COLUMN_NAME"].ToString();
+            //        string campo_02 = ds.Tables[0].Rows[1]["COLUMN_NAME"].ToString();
+            //        string campo_03 = ds.Tables[0].Rows[2]["COLUMN_NAME"].ToString();
+            //        sql = "UPDATE " + aa_tabla + " SET " +
+            //                campo_02 + "='" + tDESCR.Text.ToUpper() + "'," +
+            //                campo_03 + "='" + CB_ESTADO.SelectedItem.ToString().ToUpper() + "'" +
+            //                " WHERE " + campo_01 + "='" + tid.Text.ToString().Trim() + "'";
+
+            //    }
+            //}
             if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 MessageBox.Show(Error);

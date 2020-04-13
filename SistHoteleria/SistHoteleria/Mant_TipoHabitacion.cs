@@ -131,7 +131,7 @@ namespace SistHoteleria
                 errorProvider1.SetError(tDESCR, mensaje);
                 tDESCR.Focus();
             }
-            
+
             if (aa_modo.ToUpper().Trim() == "A")
             {
                 if (CB_ESTADO.SelectedIndex != 0)
@@ -139,27 +139,18 @@ namespace SistHoteleria
                     MessageBox.Show("NO PUEDE REGISTRAR CON ESTADO DIFERENTE DE ACTIVO");
                     return;
 
-                }
-                sql = "INSERT INTO tipo_habitacion VALUES('" + tid.Text.ToString() + "','" 
-                                                             + tDESCR.Text.ToString().Trim() + "','" 
-                                                             + TCapacidad.Text.ToString().Trim() + "','"
-                                                             + TCosto.Text.ToString().Trim() + "','"
-                                                             + CB_ESTADO.SelectedItem.ToString().Trim() + "')";
-
+                } 
             }
-            else
-            {
+            sql = "EXEC ACTtipo_habitacion '" + tid.Text.ToString() + "','"
+                                              + tDESCR.Text.ToString().Trim() + "','"
+                                              + TCapacidad.Text.ToString().Trim() + "','"
+                                              + TCosto.Text.ToString().Trim() + "','"
+                                              + CB_ESTADO.SelectedItem.ToString().Trim() + "','" 
+                                              +  aa_modo.ToUpper() + "'";
 
-                sql = "UPDATE tipo_habitacion SET " +
-                        "descr_t_hab='" + tDESCR.Text.ToUpper() + "'," +
-                        "capacidad_hab=" + TCapacidad.Text.ToString().ToUpper() + "'," +
-                        "costo_hab=" + TCosto.Text.ToString().ToUpper() + "'," +
-                        "estado_t_hab='" + CB_ESTADO.SelectedItem.ToString().ToUpper() + "'" +
-                        " WHERE id_t_hab=" + tid.Text.ToString().Trim() + "";
 
-                 
-            }
-            
+
+
            if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 MessageBox.Show(Error);

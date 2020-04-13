@@ -50,10 +50,10 @@ namespace SistHoteleria
             {
                 CB_ESTADO.SelectedIndex = 1;
             }
-      
-           
+
+
         }
-        
+
         void Limpia()
         {
             tid.Text = "";
@@ -71,7 +71,8 @@ namespace SistHoteleria
 
                     tid.Text = funciones.Prox_Codigo("Edificio").ToString("######");
                 }
-                else {
+                else
+                {
                     aa_EEdificio = funciones.Lee_Edificio(tid.Text.ToString().Trim());
                     if (aa_EEdificio != null)
                     {
@@ -82,7 +83,7 @@ namespace SistHoteleria
                             CB_ESTADO.SelectedIndex = 0;
                         else
                             CB_ESTADO.SelectedIndex = 1;
-                        }
+                    }
                     else
                     {
                         Valida_codigo();
@@ -128,7 +129,7 @@ namespace SistHoteleria
                 errorProvider1.SetError(tDESCR, mensaje);
                 tDESCR.Focus();
             }
-            
+
             if (aa_modo.ToUpper().Trim() == "A")
             {
                 if (CB_ESTADO.SelectedIndex != 0)
@@ -137,25 +138,16 @@ namespace SistHoteleria
                     return;
 
                 }
-                sql = "INSERT INTO Edificio VALUES('" + tid.Text.ToString() + "','" 
-                                                             + tDESCR.Text.ToString().Trim() + "','" 
-                                                             + TNiveles.Text.ToString().Trim() + "','"
-                                                             + CB_ESTADO.SelectedItem.ToString().Trim() + "')";
-
             }
-            else
-            {
+            sql = "EXEC ACTEdificio '" + tid.Text.ToString() + "','"
+                                       + tDESCR.Text.ToString().Trim() + "','"
+                                       + TNiveles.Text.ToString().Trim() + "','"
+                                       + CB_ESTADO.SelectedItem.ToString().Trim() + "','"
+                                       + aa_modo.ToUpper().Trim() + "'";
 
-                sql = "UPDATE Edificio SET " +
-                        "descr_t_hab='" + tDESCR.Text.ToUpper() + "'," +
-                        "capacidad_hab=" + TNiveles.Text.ToString().ToUpper() + "'," +
-                        "estado_t_hab='" + CB_ESTADO.SelectedItem.ToString().ToUpper() + "'" +
-                        " WHERE id_t_hab=" + tid.Text.ToString().Trim() + "";
 
-                 
-            }
-            
-           if (!Conexion.Inserta_Datos(sql, ref Error))
+
+            if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 MessageBox.Show(Error);
                 return;

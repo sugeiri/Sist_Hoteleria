@@ -127,7 +127,7 @@ namespace SistHoteleria
                 errorProvider1.SetError(tDESCR, mensaje);
                 tDESCR.Focus();
             }
-            
+
             if (aa_modo.ToUpper().Trim() == "A")
             {
                 if (CB_ESTADO.SelectedIndex != 0)
@@ -136,20 +136,14 @@ namespace SistHoteleria
                     return;
 
                 }
-                sql = "INSERT INTO Servicio VALUES('" + tid.Text.ToString() + "','" + tDESCR.Text.ToString().Trim() + "','" + TCosto.Text.ToString().Trim() + "','"+CB_ESTADO.SelectedItem.ToString().Trim() + "')";
-
             }
-            else
-            {
+            sql = "EXEC ACTServicio '" + tid.Text.ToString() 
+                                       + "','" + tDESCR.Text.ToString().Trim() 
+                                       + "','" + TCosto.Text.ToString().Trim() 
+                                       + "','"+CB_ESTADO.SelectedItem.ToString().Trim() +"',"
+                                       + "'"+ aa_modo.ToUpper()+"'";
 
-                sql = "UPDATE Servicio SET " +
-                        "descr_Servicio='" + tDESCR.Text.ToUpper() + "'," +
-                        "costo_servicio=" + TCosto.Text.ToString().ToUpper() + "'," +
-                        "estado_Servicio='" + CB_ESTADO.SelectedItem.ToString().ToUpper() + "'" +
-                        " WHERE id_Servicio=" + tid.Text.ToString().Trim() + "";
-
-                 
-            }
+            
             if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 MessageBox.Show(Error);

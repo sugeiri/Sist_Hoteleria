@@ -83,20 +83,15 @@ namespace SistHoteleria
                     return;
 
                 }
-                sql = "INSERT INTO Municipio VALUES('" + tid.Text.ToString() + "','" + tDESCR.Text.ToString().Trim() + "','" + CB_ESTADO.SelectedItem.ToString().Trim() + "'," + TProvincia.Text.ToString().Trim() + ")";
-
             }
-            else
-            {
-
-                sql = "UPDATE Municipio SET " +
-                        "descr_municipio='" + tDESCR.Text.ToUpper() + "'," +
-                        "estado_municipio='" + CB_ESTADO.SelectedItem.ToString().ToUpper() + "'," +
-                        "id_prov_municipio=" + TProvincia.Text.ToString().ToUpper() + "'" +
-                        " WHERE id_municipio=" + tid.Text.ToString().Trim() + "";
+            sql = "EXEC ACTMunicipio '" + tid.Text.ToString()
+                                        + "','" + tDESCR.Text.ToString().Trim()
+                                        + "','" + CB_ESTADO.SelectedItem.ToString().Trim()
+                                        + "'," + TProvincia.Text.ToString().Trim() + ",'"
+                                        + aa_modo.ToUpper() + "'";
 
 
-            }
+
             if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 MessageBox.Show(Error);

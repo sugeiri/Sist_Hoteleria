@@ -74,7 +74,7 @@ namespace SistHoteleria
                 if (tid.Text.ToString().Trim() == "*")
                 {
 
-                    tid.Text = funciones.Prox_Codigo("Cama").ToString("######");
+                    tid.Text = funciones.Prox_Codigo("habitacion").ToString("######");
                 }
                 else {
                     aa_EHabitacion = funciones.Lee_Habitacion(tid.Text.ToString().Trim());
@@ -138,7 +138,7 @@ namespace SistHoteleria
                 errorProvider1.SetError(tDESCR, mensaje);
                 tDESCR.Focus();
             }
-            
+
             if (aa_modo.ToUpper().Trim() == "A")
             {
                 if (CB_ESTADO.SelectedIndex != 0)
@@ -147,26 +147,16 @@ namespace SistHoteleria
                     return;
 
                 }
-                sql = "INSERT INTO Habitacion VALUES('" + tid.Text.ToString() + "','" + tDESCR.Text.ToString().Trim() + "','" 
-                                                        + TTHabitacion.Text.ToString().Trim()+"','" 
-                                                        + TEdificio.Text.ToString().Trim() + "','"
-                                                        + TPiso.Text.ToString().Trim() + "','"
-                                                        + CB_ESTADO.SelectedItem.ToString().Trim() + "')";
-
             }
-            else
-            {
+                sql = "EXEC ACTHabitacion '" + tid.Text.ToString() + "','"  
+                                             + tDESCR.Text.ToString().Trim() + "','" 
+                                             + TTHabitacion.Text.ToString().Trim()+"','" 
+                                             + TEdificio.Text.ToString().Trim() + "','"
+                                             + TPiso.Text.ToString().Trim() + "','"
+                                             + CB_ESTADO.SelectedItem.ToString().Trim() + "','"
+                                             + aa_modo.ToUpper().Trim()+"'";
 
-                sql = "UPDATE habitacion SET " +
-                        "descr_habitacion='" + tDESCR.Text.ToUpper() + "'," +
-                        "t_habitacion='" + TTHabitacion.Text.ToString().ToUpper() + "'," +
-                        "edificio_habitacion='" + TEdificio.Text.ToString().ToUpper() + "'," +
-                        "piso_habitacion='" + TPiso.Text.ToString().ToUpper() + "'," +
-                        "estado_cama='" + CB_ESTADO.SelectedItem.ToString().ToUpper() + "'" +
-                        " WHERE id_cama='" + tid.Text.ToString().Trim() + "'";
-
-                 
-            }
+           
             if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 MessageBox.Show(Error);

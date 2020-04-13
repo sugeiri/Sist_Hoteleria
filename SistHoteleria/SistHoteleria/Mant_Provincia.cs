@@ -83,20 +83,14 @@ namespace SistHoteleria
                     return;
 
                 }
-                sql = "INSERT INTO PROVINCIA VALUES('" + tid.Text.ToString() + "','" + tDESCR.Text.ToString().Trim() + "','" + CB_ESTADO.SelectedItem.ToString().Trim() + "'," + Tpais.Text.ToString().Trim() + ")";
-
             }
-            else
-            {
+                sql = "EXEC ACTPROVINCIA '" + tid.Text.ToString() 
+                                            + "','" + tDESCR.Text.ToString().Trim() 
+                                            + "','" + CB_ESTADO.SelectedItem.ToString().Trim() 
+                                            + "',"  + Tpais.Text.ToString().Trim() 
+                                            + "'"   + aa_modo.ToUpper()+"'";
 
-                sql = "UPDATE PROVINCIA SET " +
-                        "descr_provincia='" + tDESCR.Text.ToUpper() + "'," +
-                        "estado_provincia='" + CB_ESTADO.SelectedItem.ToString().ToUpper() + "'," +
-                        "id_pais_provincia=" + Tpais.Text.ToString().ToUpper() + "'" +
-                        " WHERE id_provincia=" + tid.Text.ToString().Trim() + "";
-
-
-            }
+           
             if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 MessageBox.Show(Error);

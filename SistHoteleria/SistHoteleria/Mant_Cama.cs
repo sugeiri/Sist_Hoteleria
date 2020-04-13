@@ -49,10 +49,10 @@ namespace SistHoteleria
             {
                 CB_ESTADO.SelectedIndex = 1;
             }
-      
-           
+
+
         }
-        
+
         void Limpia()
         {
             tid.Text = "";
@@ -70,7 +70,8 @@ namespace SistHoteleria
 
                     tid.Text = funciones.Prox_Codigo("Cama").ToString("######");
                 }
-                else {
+                else
+                {
                     aa_ECama = funciones.Lee_Cama(tid.Text.ToString().Trim());
                     if (aa_ECama != null)
                     {
@@ -81,7 +82,7 @@ namespace SistHoteleria
                             CB_ESTADO.SelectedIndex = 0;
                         else
                             CB_ESTADO.SelectedIndex = 1;
-                        }
+                    }
                     else
                     {
                         Valida_codigo();
@@ -127,7 +128,6 @@ namespace SistHoteleria
                 errorProvider1.SetError(tDESCR, mensaje);
                 tDESCR.Focus();
             }
-            
             if (aa_modo.ToUpper().Trim() == "A")
             {
                 if (CB_ESTADO.SelectedIndex != 0)
@@ -136,20 +136,16 @@ namespace SistHoteleria
                     return;
 
                 }
-                sql = "INSERT INTO CAMA VALUES('" + tid.Text.ToString() + "','" + tDESCR.Text.ToString().Trim() + "','" + TCapacidad.Text.ToString().Trim() + "','"+CB_ESTADO.SelectedItem.ToString().Trim() + "')";
-
             }
-            else
-            {
 
-                sql = "UPDATE Cama SET " +
-                        "descr_cama='" + tDESCR.Text.ToUpper() + "'," +
-                        "capacidad_cama=" + TCapacidad.Text.ToString().ToUpper() + "'," +
-                        "estado_cama='" + CB_ESTADO.SelectedItem.ToString().ToUpper() + "'" +
-                        " WHERE id_cama=" + tid.Text.ToString().Trim() + "";
+            sql = "EXEC ACTCAMA '" +
+                            tid.Text.ToString() + "','" +
+                            tDESCR.Text.ToString().Trim() + "','" +
+                            TCapacidad.Text.ToString().Trim() + "','" +
+                            CB_ESTADO.SelectedItem.ToString().Trim() + "','" +
+                            aa_modo.ToUpper().Trim() + "'";
 
-                 
-            }
+
             if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 MessageBox.Show(Error);
