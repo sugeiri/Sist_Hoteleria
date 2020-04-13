@@ -11,18 +11,18 @@ using System.Windows.Forms;
 
 namespace SistHoteleria
 {
-    public partial class Mant_C_Cama : Form
+    public partial class Mant_C_Servicio : Form
     {
         public string Id = "";
         public string aa_Prov = "";
         string aa_Modo = "";
-        public Mant_C_Cama()
+        public Mant_C_Servicio()
         {
             InitializeComponent();
             CB_Filtro.Items.Add(" ");
             CB_Filtro.Items.Add("Codigo");
             CB_Filtro.Items.Add("Descripcion");
-            CB_Filtro.Items.Add("Capacidad");
+            CB_Filtro.Items.Add("Costo");
 
         }
 
@@ -125,13 +125,13 @@ namespace SistHoteleria
 
             int i = Fila_Actual();
             Id = DG_Datos.Rows[i].Cells[0].Value.ToString().Trim();
-            Clases.ECama ii_Cama = funciones.Lee_Cama(Id);
-            Mant_Cama form = new Mant_Cama("m", ii_Cama);
+            Clases.EServicio ii_Servicio = funciones.Lee_Servicio(Id);
+            Mant_Servicio form = new Mant_Servicio("m", ii_Servicio);
             if (form.ShowDialog() == DialogResult.OK)
                 Lee_Datos();
 
         }
-        private void Mant_C_Cama_Load(object sender, EventArgs e)
+        private void Mant_C_Servicio_Load(object sender, EventArgs e)
         {
             Lee_Datos();
         }
@@ -140,8 +140,8 @@ namespace SistHoteleria
             DG_Datos.Rows.Clear();
             string Error = "";
             string sql = "";
-            sql = " Select id_Cama, descr_Cama, capacidad_cama from cama " +
-                 " where  Estado_cama = 'A' ";
+            sql = " Select id_Servicio, descr_Servicio, costo_Servicio from Servicio " +
+                 " where  Estado_Servicio = 'A' ";
 
             DataSet DS = Conexion.EjecutaSQL(sql, ref Error);
             int Count = DS.Tables[0].Rows.Count;
@@ -151,9 +151,9 @@ namespace SistHoteleria
                 {
                     DataGridViewRow ii_row = new DataGridViewRow();
                     ii_row.CreateCells(DG_Datos);
-                    ii_row.Cells[0].Value = DS.Tables[0].Rows[i]["id_Cama"].ToString().Trim();
-                    ii_row.Cells[1].Value = DS.Tables[0].Rows[i]["descr_Cama"].ToString().Trim();
-                    ii_row.Cells[2].Value = DS.Tables[0].Rows[i]["Capacidad_cama"].ToString().Trim();
+                    ii_row.Cells[0].Value = DS.Tables[0].Rows[i]["id_Servicio"].ToString().Trim();
+                    ii_row.Cells[1].Value = DS.Tables[0].Rows[i]["descr_Servicio"].ToString().Trim();
+                    ii_row.Cells[2].Value = DS.Tables[0].Rows[i]["costo_Servicio"].ToString().Trim();
                     DG_Datos.Rows.Add(ii_row);
                 }
             }
@@ -166,7 +166,7 @@ namespace SistHoteleria
 
         private void BCrear_Click(object sender, EventArgs e)
         {
-            Mant_Cama form = new Mant_Cama("a");
+            Mant_Servicio form = new Mant_Servicio("a");
             form.ShowDialog();
             Lee_Datos();
         }

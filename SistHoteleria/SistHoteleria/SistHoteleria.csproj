@@ -61,6 +61,12 @@
     <Compile Include="Login.designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mant_C_Servicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Servicio.designer.cs">
+      <DependentUpon>Mant_C_Servicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mant_C_Edificio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,12 @@
     </Compile>
     <Compile Include="Mant_Cliente.designer.cs">
       <DependentUpon>Mant_Cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Temporada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Temporada.designer.cs">
+      <DependentUpon>Mant_Temporada.cs</DependentUpon>
     </Compile>
     <Compile Include="Mant_Servicio.cs">
       <SubType>Form</SubType>
@@ -207,6 +219,9 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Servicio.resx">
+      <DependentUpon>Mant_C_Servicio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mant_C_Edificio.resx">
       <DependentUpon>Mant_C_Edificio.cs</DependentUpon>
     </EmbeddedResource>
@@ -221,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Mant_Cliente.resx">
       <DependentUpon>Mant_Cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Temporada.resx">
+      <DependentUpon>Mant_Temporada.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Mant_Servicio.resx">
       <DependentUpon>Mant_Servicio.cs</DependentUpon>

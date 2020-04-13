@@ -1,6 +1,6 @@
 ﻿namespace SistHoteleria
 {
-    partial class Mant_C_TipoHabitacion
+    partial class Mant_C_Servicio
     {
         /// <summary>
         /// Required designer variable.
@@ -37,7 +37,6 @@
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DG_Datos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,8 +54,7 @@
             this.DG_Datos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo,
             this.Nombre,
-            this.Pais,
-            this.costo});
+            this.Pais});
             this.DG_Datos.Location = new System.Drawing.Point(19, 39);
             this.DG_Datos.Name = "DG_Datos";
             this.DG_Datos.Size = new System.Drawing.Size(514, 265);
@@ -134,18 +132,12 @@
             // 
             // Pais
             // 
-            this.Pais.HeaderText = "Capacidad";
+            this.Pais.HeaderText = "Costo";
             this.Pais.Name = "Pais";
             this.Pais.ReadOnly = true;
-            this.Pais.Width = 70;
+            this.Pais.Width = 150;
             // 
-            // costo
-            // 
-            this.costo.HeaderText = "Costo";
-            this.costo.Name = "costo";
-            this.costo.Width = 80;
-            // 
-            // Mant_C_TipoHabitacion
+            // Mant_C_Servicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -156,10 +148,10 @@
             this.Controls.Add(this.CB_Filtro);
             this.Controls.Add(this.DG_Datos);
             this.Controls.Add(this.TFiltro);
-            this.Name = "Mant_C_TipoHabitacion";
+            this.Name = "Mant_C_Servicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Mant_C_TipoHabitacion";
-            this.Load += new System.EventHandler(this.Mant_C_TipoHabitacion_Load);
+            this.Text = "Mant_C_Servicio";
+            this.Load += new System.EventHandler(this.Mant_C_Servicio_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DG_Datos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -176,6 +168,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pais;
-        private System.Windows.Forms.DataGridViewTextBoxColumn costo;
     }
 }

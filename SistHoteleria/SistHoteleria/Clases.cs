@@ -181,6 +181,14 @@ namespace SistHoteleria
             public string descr_servicio = "";
             public decimal costo_servicio = 0;
             public string estado_servicio = "";
+        }
+        public class ETemporada
+        {
+            public string id_temporada = "";
+            public string descr_temporada = "";
+            public string fecha_i_temporada = "";
+            public string fecha_f_temporada = "";
+            public string estado_temporada = "";
 
 
         }

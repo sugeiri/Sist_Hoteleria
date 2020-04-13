@@ -586,6 +586,29 @@ namespace SistHoteleria
             return null;
 
         }
+        public static Clases.ETemporada Lee_Temporada(string id)
+        {
+            string sql = "";
+            Clases.ETemporada ii_ETemporada = new Clases.ETemporada();
+            DataSet DS = new DataSet();
+            string Error = "";
+
+            sql = "  SELECT * from  Temporada  WHERE id_temporada = '" + id+"'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                ii_ETemporada.id_temporada = id;
+                ii_ETemporada.descr_temporada = DS.Tables[0].Rows[0]["descr_temporada"].ToString();
+                ii_ETemporada.fecha_i_temporada = DS.Tables[0].Rows[0]["fecha_i_temporada"].ToString();
+                ii_ETemporada.fecha_f_temporada = DS.Tables[0].Rows[0]["fecha_f_temporada"].ToString();
+                ii_ETemporada.estado_temporada = DS.Tables[0].Rows[0]["estado_temporada"].ToString();
+
+                return ii_ETemporada;
+
+            }
+            return null;
+
+        }
 
     }
 }

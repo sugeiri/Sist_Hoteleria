@@ -239,7 +239,7 @@ namespace SistHoteleria
 
         private void cONSULTARToolStripMenuItem11_Click(object sender, EventArgs e)
         {
-            Mant_C_Cama form = new Mant_C_Cama("");
+            Mant_C_Cama form = new Mant_C_Cama();
             form.ShowDialog();
         }
 
@@ -331,6 +331,35 @@ namespace SistHoteleria
         private void consultarToolStripMenuItem15_Click(object sender, EventArgs e)
         {
             Mant_C_Cliente form = new Mant_C_Cliente();
+            form.ShowDialog();
+        }
+
+        private void crearToolStripMenuItem17_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Mant_Servicio form = new Mant_Servicio("a");
+            form.ShowDialog();
+
+        }
+
+        private void consultarToolStripMenuItem16_Click(object sender, EventArgs e)
+        {
+            Mant_C_Servicio form = new Mant_C_Servicio();
+            form.ShowDialog();
+        }
+
+        private void crearToolStripMenuItem18_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Mant_Temporada form = new Mant_Temporada("a");
             form.ShowDialog();
         }
     }
