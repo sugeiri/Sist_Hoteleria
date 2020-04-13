@@ -299,7 +299,7 @@ namespace SistHoteleria
         bool Inserta_Tercero()
         {
             Error = "";
-            aa_ETercero = new Clases.ETercero();
+          //  aa_ETercero = new Clases.ETercero();
             if (aa_EUsuario.id_Tercero_Usuario.ToString().Trim() != "")
                 aa_ETercero.id_Tercero = aa_EUsuario.id_Tercero_Usuario;
             aa_ETercero.Nombre_Tercero = TNombreTercero.Text.ToString().Trim();

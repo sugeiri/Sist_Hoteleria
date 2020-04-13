@@ -2041,20 +2041,13 @@ CREATE PROCEDURE ACTDIRECCION
        @II_ESTADO_DIRECCION  CHAR(1),
        @aa_Modo  char(1)
 AS
-if @aa_Modo='A' 
 	insert into DIRECCION values(	     @II_ID_TERCERO_DIRECCION,
 	     @II_ID_MUN_DIRECCION,
 	     @II_DIRECCION,
 	     @II_TIPO_DIRECCION,
 	     @II_N_LINEA_DIRECCION,
 	     @II_ESTADO_DIRECCION);
-else
-	update DIRECCION set 	     ID_MUN_DIRECCION=@II_ID_MUN_DIRECCION,
-	     DIRECCION=@II_DIRECCION,
-	     TIPO_DIRECCION=@II_TIPO_DIRECCION,
-	     N_LINEA_DIRECCION=@II_N_LINEA_DIRECCION,
-	     ESTADO_DIRECCION=@II_ESTADO_DIRECCION
-  where ID_TERCERO_DIRECCION=@II_ID_TERCERO_DIRECCION;
+
 GO
 grant all on ACTDIRECCION to public
 
@@ -2093,18 +2086,12 @@ CREATE PROCEDURE ACTEMAIL
        @II_ESTADO_EMAIL  CHAR(1),
        @aa_Modo  char(1)
 AS
-if @aa_Modo='A' 
 	insert into EMAIL values(	     @II_ID_TERCERO_EMAIL,
 	     @II_EMAIL,
 	     @II_TIPO_EMAIL,
 	     @II_N_LINEA_EMAIL,
 	     @II_ESTADO_EMAIL);
-else
-	update EMAIL set 	     EMAIL=@II_EMAIL,
-	     TIPO_EMAIL=@II_TIPO_EMAIL,
-	     N_LINEA_EMAIL=@II_N_LINEA_EMAIL,
-	     ESTADO_EMAIL=@II_ESTADO_EMAIL
-  where ID_TERCERO_EMAIL=@II_ID_TERCERO_EMAIL;
+
 GO
 grant all on ACTEMAIL to public
 
@@ -2121,18 +2108,12 @@ CREATE PROCEDURE ACTTELEFONO
        @II_ESTADO_TEL  CHAR(1),
        @aa_Modo  char(1)
 AS
-if @aa_Modo='A' 
 	insert into TELEFONO values(	     @II_ID_TERCERO_TEL,
 	     @II_NUMERO_TEL,
 	     @II_TIPO_TEL,
 	     @II_N_LINEA_TEL,
 	     @II_ESTADO_TEL);
-else
-	update TELEFONO set 	     NUMERO_TEL=@II_NUMERO_TEL,
-	     TIPO_TEL=@II_TIPO_TEL,
-	     N_LINEA_TEL=@II_N_LINEA_TEL,
-	     ESTADO_TEL=@II_ESTADO_TEL
-  where ID_TERCERO_TEL=@II_ID_TERCERO_TEL;
+
 GO
 grant all on ACTTELEFONO to public
 

@@ -205,8 +205,8 @@ namespace SistHoteleria
             DataSet ds = new DataSet();
             try
             {
-                string consulta = "select * from Tercero where id_Tercero='" + id_tercero.Trim() +"'";
-                ds =Conexion.EjecutaSQL(consulta, ref Error);
+                string consulta = "select * from Tercero where id_Tercero='" + id_tercero.Trim() + "'";
+                ds = Conexion.EjecutaSQL(consulta, ref Error);
                 if (ds.Tables.Count > 0)
                 {
                     ii_ETercero.id_Tercero = ds.Tables[0].Rows[0]["id_Tercero"].ToString().Trim();
@@ -229,22 +229,15 @@ namespace SistHoteleria
         public static bool Inserta_Usuario(Clases.EUsuario ii_EUsuario, ref string Error, string modo)
         {
             string sql = "";
-            if (modo.Trim().ToUpper() == "A")
-            {
-                sql = "INSERT INTO USUARIO VALUES('" + 
-                                    ii_EUsuario.id_Usuario + "','" +
-                                    ii_EUsuario.id_Tercero_Usuario + "','" +
-                                    ii_EUsuario.id_Tipo_Usuario + "','" +
-                                    ii_EUsuario.Password_Usuario + "','" +
-                                    ii_EUsuario.Estado_Usuario + "')";
-            }
-            else
-            {
-                sql = " UPDATE Usuario SET Estado_Usuario='" + ii_EUsuario.Estado_Usuario + "'," +
-                                        "Tipo_Usuario='" + ii_EUsuario.id_Tipo_Usuario + "'," +
-                                        "Password_Usuario='" + ii_EUsuario.Password_Usuario + "'" +
-                    " WHERE id_Usuario='" + ii_EUsuario.id_Usuario + "'";
-            }
+
+            sql = "EXEC ACTUSUARIO '" +
+                                ii_EUsuario.id_Usuario + "','" +
+                                ii_EUsuario.id_Tercero_Usuario + "','" +
+                                ii_EUsuario.id_Tipo_Usuario + "','" +
+                                ii_EUsuario.Password_Usuario + "','" +
+                                ii_EUsuario.Estado_Usuario + "','" +
+                                modo.Trim().ToUpper() + "'";
+
 
             if (Conexion.Inserta_Datos(sql, ref Error))
             {
@@ -260,7 +253,7 @@ namespace SistHoteleria
             try
             {
                 string consulta = "select isnull(max(" + campo + "),0) as Id from " + tabla;
-                ds =Conexion.EjecutaSQL(consulta, ref Error);
+                ds = Conexion.EjecutaSQL(consulta, ref Error);
                 if (ds.Tables.Count > 0)
                 {
                     return (Convert.ToInt16(ds.Tables[0].Rows[0]["Id"]) + 1);
@@ -277,29 +270,25 @@ namespace SistHoteleria
         {
             int ID = 0;
             string sql = "";
+            string modo = "A";
             if (ii_ETercero.id_Tercero.Trim() != "")
             {
                 ID = int.Parse(ii_ETercero.id_Tercero);
-                sql = " UPDATE Tercero SET Nombre_Tercero='" + ii_ETercero.Nombre_Tercero.ToUpper() + "'," +
-                    "                    ID_T_Identif_Tercero='" + ii_ETercero.ID_T_Identif_Tercero + "'," +
-                    "                    Cedula_Tercero='" + ii_ETercero.Cedula_Tercero + "'," +
-                    "                    Fecha_Nac_Tercero='" + ii_ETercero.Fecha_Nac_Tercero + "'," +
-                    "                    Estado_Tercero='" + ii_ETercero.Estado_Tercero + "'," +
-                    "                    Sexo_Tercero='" + ii_ETercero.Sexo_Tercero + "'" +
-                    " WHERE id_Tercero='" + ii_ETercero.id_Tercero + "'";
+                modo = "M";
             }
             else
             {
                 ID = funciones.Genera_Codigo_Numerico("Tercero", "id_Tercero");
-
-                sql = "INSERT INTO  Tercero VALUES(" + ID + ",'" +
-                                        ii_ETercero.Nombre_Tercero + "','" +
-                                        ii_ETercero.ID_T_Identif_Tercero + "','" +
-                                        ii_ETercero.Cedula_Tercero + "','" +
-                                        ii_ETercero.Fecha_Nac_Tercero + "','" +
-                                        ii_ETercero.Sexo_Tercero + "'," +
-                                        "'A')";
             }
+            
+            sql = "EXEC ACTTercero " + ID + ",'" +
+                                    ii_ETercero.Nombre_Tercero + "','" +
+                                    ii_ETercero.ID_T_Identif_Tercero + "','" +
+                                    ii_ETercero.Cedula_Tercero + "','" +
+                                    ii_ETercero.Fecha_Nac_Tercero + "','" +
+                                    ii_ETercero.Sexo_Tercero + "'," +
+                                    "'A','"+ modo+"'";
+
             if (Conexion.Inserta_Datos(sql, ref Error))
             {
                 Error = ID.ToString();
@@ -319,11 +308,11 @@ namespace SistHoteleria
             int ii = 0;
             foreach (var Tel in ii_LETelefono)
             {
-                sql = "INSERT INTO TELEFONO VALUES('" + Tel.id_Tercero_Tel + "','" +
+                sql = "EXEC ACTTELEFONO '" + Tel.id_Tercero_Tel + "','" +
                                     Tel.Numero_Tel + "','" +
                                     Tel.TIPO_Tel + "'," +
-                                    ii +","+
-                                    "'A')";
+                                    ii + "," +
+                                    "'A'";
                 if (!Conexion.Inserta_Datos(sql, ref Error))
                 {
                     return false;
@@ -343,11 +332,11 @@ namespace SistHoteleria
             int ii = 0;
             foreach (var Email in ii_LEmail)
             {
-                sql = "INSERT INTO EMAIL VALUES('" + Email.id_Tercero_Email + "','" +
+                sql = "EXEC ACTEMAIL '" + Email.id_Tercero_Email + "','" +
                                     Email.Email + "','" +
                                     Email.TIPO_Email + "'," +
-                                    ii+","+
-                                    "'A')";
+                                    ii + "," +
+                                    "'A'";
                 if (!Conexion.Inserta_Datos(sql, ref Error))
                 {
                     return false;
@@ -364,11 +353,11 @@ namespace SistHoteleria
             {
                 return false;
             }
-            sql = "INSERT INTO DIRECCION VALUES('" + ii_EDireccion.id_Tercero_Direccion + "','" +
+            sql = "EXEC ACTDIRECCION '" + ii_EDireccion.id_Tercero_Direccion + "','" +
                                                     ii_EDireccion.id_mun_Direccion + "','" +
                                                     ii_EDireccion.Direccion + "','" +
                                                     ii_EDireccion.TIPO_DIRECCION + "'," +
-                                                    ii_EDireccion.N_LINEA_DIRECCION + ",'A')";
+                                                    ii_EDireccion.N_LINEA_DIRECCION + ",'A'";
             if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 return false;
@@ -384,7 +373,7 @@ namespace SistHoteleria
             try
             {
                 string consulta = "select * from Usuario where id_Usuario='" + Usuario.Trim() + "'";
-                ds =Conexion.EjecutaSQL(consulta, ref Error);
+                ds = Conexion.EjecutaSQL(consulta, ref Error);
                 if (ds.Tables.Count > 0)
                 {
                     ii_EUsuario.id_Usuario = ds.Tables[0].Rows[0]["id_Usuario"].ToString().Trim();
@@ -409,7 +398,7 @@ namespace SistHoteleria
             try
             {
                 string consulta = "select * from Tipo_Usuario where id_T_Usuario='" + Tipo_Usuario.Trim() + "'";
-                ds =Conexion.EjecutaSQL(consulta, ref Error);
+                ds = Conexion.EjecutaSQL(consulta, ref Error);
                 if (ds.Tables.Count > 0)
                 {
                     return ds.Tables[0].Rows[0]["Nivel_Acceso_T_Usuario"].ToString().Trim();
@@ -430,7 +419,7 @@ namespace SistHoteleria
             DataSet DS = new DataSet();
             string Error = "";
 
-            sql = "  SELECT * from  Cama  WHERE id_Cama = '" + id +"'";
+            sql = "  SELECT * from  Cama  WHERE id_Cama = '" + id + "'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
             {
@@ -445,8 +434,8 @@ namespace SistHoteleria
             return null;
 
         }
-      
-        public static Clases.EHabitacion Lee_Habitacion (string id)
+
+        public static Clases.EHabitacion Lee_Habitacion(string id)
         {
             string sql = "";
             Clases.EHabitacion ii_habitacion = new Clases.EHabitacion();
@@ -469,7 +458,7 @@ namespace SistHoteleria
             return null;
 
         }
-        
+
         public static Clases.ETHabitacion Lee_TipoHabitacion(string id)
         {
             string sql = "";
@@ -492,7 +481,7 @@ namespace SistHoteleria
             return null;
 
         }
-      
+
         public static Clases.EEdificio Lee_Edificio(string id)
         {
             string sql = "";
@@ -539,23 +528,15 @@ namespace SistHoteleria
         public static bool Inserta_Empleado(Clases.EEmpleado ii_EEmpleado, ref string Error, string modo)
         {
             string sql = "";
-            if (modo.Trim().ToUpper() == "A")
-            {
-                sql = "INSERT INTO empleado VALUES('" +
-                                    ii_EEmpleado.id_empleado + "','" +
-                                    ii_EEmpleado.id_tercero_empleado + "','" +
-                                    ii_EEmpleado.id_t_empleado + "','" +
-                                    ii_EEmpleado.fecha_i_empleado + "','" +
-                                    ii_EEmpleado.estado_empleado + "')";
-            }
-            else
-            {
-                sql = " UPDATE empleado SET id_tercero_empleado='" + ii_EEmpleado.id_tercero_empleado + "'," +
-                                        "id_t_empleado='" + ii_EEmpleado.id_t_empleado + "'," +
-                                        "fecha_i_empleado='" + ii_EEmpleado.fecha_i_empleado + "'," +
-                                        "estado_empleado='" + ii_EEmpleado.estado_empleado + "'" +
-                    " WHERE id_empleado='" + ii_EEmpleado.id_empleado + "'";
-            }
+
+            sql = "EXEC ACTempleado '" +
+                                   ii_EEmpleado.id_empleado + "','" +
+                                   ii_EEmpleado.id_tercero_empleado + "','" +
+                                   ii_EEmpleado.id_t_empleado + "','" +
+                                   ii_EEmpleado.fecha_i_empleado + "','" +
+                                   ii_EEmpleado.estado_empleado + "','"+ 
+                                   modo.Trim().ToUpper()+"'";
+            
 
             if (Conexion.Inserta_Datos(sql, ref Error))
             {
@@ -568,24 +549,14 @@ namespace SistHoteleria
         public static bool Inserta_Cliente(Clases.ECliente ii_ECliente, ref string Error, string modo)
         {
             string sql = "";
-            if (modo.Trim().ToUpper() == "A")
-            {
-                sql = "INSERT INTO Cliente VALUES('" +
-                                    ii_ECliente.ID_CLIENTE + "','" +
-                                    ii_ECliente.ID_TERCERO_CLIENTE + "','" +
-                                    ii_ECliente.ID_T_CLIENTE + "','" +
-                                    ii_ECliente.LIM_CRED_CLIENTE + "','" +
-                                    ii_ECliente.ESTADO_CLIENTE + "')";
-            }
-            else
-            {
-                sql = " UPDATE Cliente SET ID_TERCERO_CLIENTE='" + ii_ECliente.ID_TERCERO_CLIENTE + "'," +
-                                        "ID_T_CLIENTE='" + ii_ECliente.ID_T_CLIENTE + "'," +
-                                        "LIM_CRED_CLIENTE='" + ii_ECliente.LIM_CRED_CLIENTE + "'," +
-                                        "estado_empleado='" + ii_ECliente.ESTADO_CLIENTE + "'" +
-                    " WHERE id_empleado='" + ii_ECliente.ID_CLIENTE + "'";
-            }
-
+            sql = "EXEC ACTCliente '" +
+                                   ii_ECliente.ID_CLIENTE + "','" +
+                                   ii_ECliente.ID_TERCERO_CLIENTE + "','" +
+                                   ii_ECliente.ID_T_CLIENTE + "','" +
+                                   ii_ECliente.LIM_CRED_CLIENTE + "','" +
+                                   ii_ECliente.ESTADO_CLIENTE + "','"+
+                                   modo.Trim().ToUpper()+"'";
+            
             if (Conexion.Inserta_Datos(sql, ref Error))
             {
                 return true;
