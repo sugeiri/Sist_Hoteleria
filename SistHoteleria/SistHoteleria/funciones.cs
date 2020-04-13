@@ -564,5 +564,35 @@ namespace SistHoteleria
 
             return false;
         }
+
+        public static bool Inserta_Cliente(Clases.ECliente ii_ECliente, ref string Error, string modo)
+        {
+            string sql = "";
+            if (modo.Trim().ToUpper() == "A")
+            {
+                sql = "INSERT INTO Cliente VALUES('" +
+                                    ii_ECliente.ID_CLIENTE + "','" +
+                                    ii_ECliente.ID_TERCERO_CLIENTE + "','" +
+                                    ii_ECliente.ID_T_CLIENTE + "','" +
+                                    ii_ECliente.LIM_CRED_CLIENTE + "','" +
+                                    ii_ECliente.ESTADO_CLIENTE + "')";
+            }
+            else
+            {
+                sql = " UPDATE Cliente SET ID_TERCERO_CLIENTE='" + ii_ECliente.ID_TERCERO_CLIENTE + "'," +
+                                        "ID_T_CLIENTE='" + ii_ECliente.ID_T_CLIENTE + "'," +
+                                        "LIM_CRED_CLIENTE='" + ii_ECliente.LIM_CRED_CLIENTE + "'," +
+                                        "estado_empleado='" + ii_ECliente.ESTADO_CLIENTE + "'" +
+                    " WHERE id_empleado='" + ii_ECliente.ID_CLIENTE + "'";
+            }
+
+            if (Conexion.Inserta_Datos(sql, ref Error))
+            {
+                return true;
+            }
+
+            return false;
+        }
+       
     }
 }

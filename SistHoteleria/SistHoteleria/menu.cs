@@ -19,11 +19,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (Clases.Nivel_Acceso.ToUpper() == "O")
-            //{
-            //    MessageBox.Show("No Tiene Acceso");
-            //    return;
-            //}
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             tipo form = new tipo("a", "Tipo_Identificacion", "Tipo Identificacion");
             form.ShowDialog();
         }
@@ -36,11 +36,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            //if (Clases.Nivel_Acceso.ToUpper() == "O")
-            //{
-            //    MessageBox.Show("No Tiene Acceso");
-            //    return;
-            //}
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             tipo form = new tipo("a", "PAIS", "Pais");
             form.ShowDialog();
         }
@@ -53,11 +53,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            //if (Clases.Nivel_Acceso.ToUpper() == "O")
-            //{
-            //    MessageBox.Show("No Tiene Acceso");
-            //    return;
-            //}
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             tipo form = new tipo("a", "Permisos_Adi", "Permisos Adicionales");
             form.ShowDialog();
         }
@@ -70,11 +70,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            //if (Clases.Nivel_Acceso.ToUpper() == "O")
-            //{
-            //    MessageBox.Show("No Tiene Acceso");
-            //    return;
-            //}
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             tipo form = new tipo("a", "TIPO_CLIENTE", "Tipo Cliente");
             form.ShowDialog();
         }
@@ -87,11 +87,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem6_Click(object sender, EventArgs e)
         {
-            //if (Clases.Nivel_Acceso.ToUpper() == "O")
-            //{
-            //    MessageBox.Show("No Tiene Acceso");
-            //    return;
-            //}
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             tipo form = new tipo("a", "TIPO_EMPLEADO", "Tipo Empleado");
             form.ShowDialog();
         }
@@ -104,11 +104,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem7_Click(object sender, EventArgs e)
         {
-            //if (Clases.Nivel_Acceso.ToUpper() == "O")
-            //{
-            //    MessageBox.Show("No Tiene Acceso");
-            //    return;
-            //}
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             tipo form = new tipo("a", "tipo_archivo", "Tipo Archivo");
             form.ShowDialog();
 
@@ -122,11 +122,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            //if (Clases.Nivel_Acceso.ToUpper() == "O")
-            //{
-            //    MessageBox.Show("No Tiene Acceso");
-            //    return;
-            //}
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             Mant_Provincia form = new Mant_Provincia("a");
             form.ShowDialog();
         }
@@ -139,11 +139,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            //if (Clases.Nivel_Acceso.ToUpper() == "O")
-            //{
-            //    MessageBox.Show("No Tiene Acceso");
-            //    return;
-            //}
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             Mant_Municipio form = new Mant_Municipio("a");
             form.ShowDialog();
         }
@@ -156,11 +156,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem8_Click(object sender, EventArgs e)
         {
-            //if (Clases.Nivel_Acceso.ToUpper() == "O")
-            //{
-            //    MessageBox.Show("No Tiene Acceso");
-            //    return;
-            //}
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             tipo form = new tipo("a", "caracteristica", "Caracteristicas");
             form.ShowDialog();
         }
@@ -173,11 +173,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem9_Click(object sender, EventArgs e)
         {
-            //if (Clases.Nivel_Acceso.ToUpper() == "O")
-            //{
-            //    MessageBox.Show("No Tiene Acceso");
-            //    return;
-            //}
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             tipo form = new tipo("a", "tipo_mantenimiento", "Tipo Mantenimiento");
             form.ShowDialog();
         }
@@ -190,11 +190,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem10_Click(object sender, EventArgs e)
         {
-            //if (Clases.Nivel_Acceso.ToUpper() == "O")
-            //{
-            //    MessageBox.Show("No Tiene Acceso");
-            //    return;
-            //}
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             Mant_Usuario form = new Mant_Usuario();
             form.ShowDialog();
         }
@@ -228,6 +228,11 @@ namespace SistHoteleria
 
         private void cREARToolStripMenuItem11_Click(object sender, EventArgs e)
         {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             Mant_Cama form = new Mant_Cama("a");
             form.ShowDialog();
         }
@@ -240,6 +245,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem12_Click(object sender, EventArgs e)
         {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             Mant_Habitacion form = new Mant_Habitacion("a");
             form.ShowDialog();
         }
@@ -258,6 +268,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem13_Click(object sender, EventArgs e)
         {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             Mant_TipoHabitacion form = new Mant_TipoHabitacion("a");
             form.ShowDialog();
         }
@@ -270,6 +285,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem14_Click(object sender, EventArgs e)
         {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             Mant_Edificio form = new Mant_Edificio("a");
             form.ShowDialog();
         }
@@ -282,6 +302,11 @@ namespace SistHoteleria
 
         private void crearToolStripMenuItem15_Click(object sender, EventArgs e)
         {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             Mant_Empleado form = new Mant_Empleado("a");
             form.ShowDialog();
         }
@@ -289,6 +314,23 @@ namespace SistHoteleria
         private void consultarToolStripMenuItem14_Click(object sender, EventArgs e)
         {
             Mant_C_Empleado form = new Mant_C_Empleado();
+            form.ShowDialog();
+        }
+
+        private void crearToolStripMenuItem16_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Mant_Cliente form = new Mant_Cliente("a");
+            form.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem15_Click(object sender, EventArgs e)
+        {
+            Mant_C_Cliente form = new Mant_C_Cliente();
             form.ShowDialog();
         }
     }

@@ -69,7 +69,7 @@ namespace SistHoteleria
                     MessageBox.Show("Contraseña Incorrecta");
                     return false;
                 }
-                Nivel = aa_EUsuario.nivel;
+                Nivel = aa_EUsuario.nivel.Substring(0,1);
 
             }
             else

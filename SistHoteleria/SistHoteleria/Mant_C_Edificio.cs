@@ -15,7 +15,7 @@ namespace SistHoteleria
     {
         public string Id = "";
         public string aa_Prov = "";
-        string aa_Modo="";
+        string aa_Modo = "";
         public Mant_C_Edificio()
         {
             InitializeComponent();
@@ -44,9 +44,9 @@ namespace SistHoteleria
                 foreach (DataGridViewRow dr in DG_Datos.Rows)
                 {
                     fila = CB_Filtro.SelectedIndex;
-                    if(dr.Cells[fila-1].Value!=null)
+                    if (dr.Cells[fila - 1].Value != null)
                     {
-                        if ((dr.Cells[fila-1].Value.ToString().ToUpper()).IndexOf(TFiltro.Text.ToUpper()) == 0)
+                        if ((dr.Cells[fila - 1].Value.ToString().ToUpper()).IndexOf(TFiltro.Text.ToUpper()) == 0)
                         {
                             dr.Visible = true;
                         }
@@ -55,7 +55,7 @@ namespace SistHoteleria
                             dr.Visible = false;
                         }
                     }
-                    
+
 
 
                 }
@@ -108,7 +108,7 @@ namespace SistHoteleria
 
         private void DG_Datos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-         
+
             if (aa_Modo.ToUpper() == "E")
             {
                 int i = Fila_Actual();
@@ -124,8 +124,13 @@ namespace SistHoteleria
 
 
         }
-          void Modificar()
+        void Modificar()
         {
+            if (Clases.Nivel_Acceso.ToUpper() != "A" && Clases.Nivel_Acceso.ToUpper() != "E")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
             int i = Fila_Actual();
             Id = DG_Datos.Rows[i].Cells[0].Value.ToString().Trim();
             Clases.EEdificio ii_Edificio = funciones.Lee_Edificio(Id);
@@ -143,9 +148,9 @@ namespace SistHoteleria
             DG_Datos.Rows.Clear();
             string Error = "";
             string sql = "";
-                sql = " Select id_edificio, descr_edificio, cant_nivel_edificio from Edificio " +
-                     " where  estado_edificio = 'A' ";
-           
+            sql = " Select id_edificio, descr_edificio, cant_nivel_edificio from Edificio " +
+                 " where  estado_edificio = 'A' ";
+
             DataSet DS = Conexion.EjecutaSQL(sql, ref Error);
             int Count = DS.Tables[0].Rows.Count;
             if (Count > 0)

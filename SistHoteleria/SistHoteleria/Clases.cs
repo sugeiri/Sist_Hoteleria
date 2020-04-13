@@ -165,6 +165,16 @@ namespace SistHoteleria
 	
 
         }
+        public class ECliente
+        {
+            public string ID_CLIENTE = "";
+            public string ID_TERCERO_CLIENTE = "";
+            public string ID_T_CLIENTE = "";
+            public decimal LIM_CRED_CLIENTE = 0;
+            public string ESTADO_CLIENTE = "";
+
+
+        }
 
     }
 }

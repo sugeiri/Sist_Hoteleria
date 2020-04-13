@@ -10,19 +10,19 @@ using System.Windows.Forms;
 
 namespace SistHoteleria
 {
-    public partial class Mant_C_Usuario : Form
+    public partial class Mant_C_Cliente : Form
     {
 
         public string Id = "";
         string modo = "c";
         string sql = "";
        
-        public Mant_C_Usuario()
+        public Mant_C_Cliente()
         {
             InitializeComponent();
 
         }
-        public Mant_C_Usuario(string ii_sql,string ii_modo)
+        public Mant_C_Cliente(string ii_sql,string ii_modo)
         {
             InitializeComponent();
             modo = ii_modo;
@@ -87,24 +87,21 @@ namespace SistHoteleria
         }
         void Modificar()
         {
-            if (Clases.Nivel_Acceso.ToUpper() == "A" || Clases.Nivel_Acceso.ToUpper() == "E")
-            {
-                int i = Fila_Actual();
-                Id = DG_Datos.Rows[i].Cells[0].Value.ToString().Trim();
-                Mant_Usuario cs = new Mant_Usuario(Id, "b");
-                cs.ShowDialog();
-                if (cs.DialogResult == DialogResult.OK)
-                    Lee_Datos();
-            }
-            else
+            if (Clases.Nivel_Acceso.ToUpper() != "A" && Clases.Nivel_Acceso.ToUpper() != "E")
             {
                 MessageBox.Show("No Tiene Acceso");
+                return;
             }
-            
-            
+            int i = Fila_Actual();
+            Id = DG_Datos.Rows[i].Cells[0].Value.ToString().Trim();
+            Mant_Cliente form = new Mant_Cliente(Id,"m");
+            if (form.ShowDialog() == DialogResult.OK)
+                Lee_Datos();
+
+
         }
 
-        private void Mant_C_Usuario_Load(object sender, EventArgs e)
+        private void Mant_C_Cliente_Load(object sender, EventArgs e)
         {
 
             Lee_Datos();
@@ -115,7 +112,7 @@ namespace SistHoteleria
             string Error = "";
              if (modo.ToString().Trim().ToLower() != "e" || sql.ToString().Trim()=="")
             {
-                sql = "SELECT * FROM Usuario,Tercero where id_Tercero=id_Tercero_Usuario";
+                sql = "SELECT * FROM Cliente,Tercero where id_Tercero=ID_TERCERO_Cliente ";
            
             }
             DataSet DS = Conexion.EjecutaSQL(sql, ref Error);
@@ -128,10 +125,11 @@ namespace SistHoteleria
                 {
                     DataGridViewRow ii_row = new DataGridViewRow();
                     ii_row.CreateCells(DG_Datos);
-                    ii_row.Cells[0].Value = DS.Tables[0].Rows[i]["id_Usuario"].ToString().Trim();
+                    ii_row.Cells[0].Value = DS.Tables[0].Rows[i]["id_Cliente"].ToString().Trim();
                     ii_row.Cells[1].Value = DS.Tables[0].Rows[i]["Nombre_Tercero"].ToString().Trim();
-                    ii_row.Cells[2].Value = DS.Tables[0].Rows[i]["Estado_Usuario"].ToString().Trim();
-                    ii_row.Cells[3].Value = DS.Tables[0].Rows[i]["Tipo_Usuario"].ToString().Trim();
+                    ii_row.Cells[2].Value = DS.Tables[0].Rows[i]["Estado_Cliente"].ToString().Trim();
+                    ii_row.Cells[3].Value = DS.Tables[0].Rows[i]["ID_T_CLIENTE"].ToString().Trim();
+                    ii_row.Cells[4].Value = DS.Tables[0].Rows[i]["LIM_CRED_CLIENTE"].ToString().Trim();
                     DG_Datos.Rows.Add(ii_row);
                 }
             }
@@ -152,14 +150,18 @@ namespace SistHoteleria
             
             EventArgs e = new EventArgs();
             Object ob = new Object();
-            if(!string.IsNullOrWhiteSpace(TUsuario.Text.ToString().Trim()))
+            if(!string.IsNullOrWhiteSpace(TCliente.Text.ToString().Trim()))
                 TCodigo_TextChanged(ob, e);
             if (CB_Estado.SelectedIndex>0)
                 CB_Estado_Servicio_SelectedIndexChanged(ob, e);
             if (!string.IsNullOrWhiteSpace(TNombre.Text.ToString().Trim()))
                 TDescripcion_TextChanged(ob, e);
-            
-            
+            if (!string.IsNullOrWhiteSpace(TTipo.Text.ToString().Trim()))
+                TTipo_TextChanged(ob, e);
+            if (!string.IsNullOrWhiteSpace(TLimite.Text.ToString().Trim()))
+                TLimite_TextChanged(ob, e);
+
+
         }
         void Filtra(int fila,string dato,bool codigo)
         {
@@ -202,7 +204,7 @@ namespace SistHoteleria
         private void TCodigo_TextChanged(object sender, EventArgs e)
         {
 
-            string id = TUsuario.Text.ToString().Trim();
+            string id = TCliente.Text.ToString().Trim();
             if (!string.IsNullOrWhiteSpace(id))
             {
                 Filtra(0, id,false);
@@ -230,7 +232,7 @@ namespace SistHoteleria
 
         private void BLimpiar_Click(object sender, EventArgs e)
         {
-            TUsuario.Text = "";
+            TCliente.Text = "";
             TNombre.Text = "";
             CB_Estado.SelectedIndex = 0;
             foreach (DataGridViewRow dr in DG_Datos.Rows)
@@ -254,5 +256,33 @@ namespace SistHoteleria
             }
         }
 
+
+        private void TTipo_TextChanged(object sender, EventArgs e)
+        {
+            string nombre = TTipo.Text.ToString().Trim().ToUpper();
+            if (!string.IsNullOrWhiteSpace(nombre))
+            {
+                Filtra(3, nombre, false);
+
+            }
+            else
+            {
+                Muestra_Filas();
+            }
+        }
+
+        private void TLimite_TextChanged(object sender, EventArgs e)
+        {
+            string nombre = TLimite.Text.ToString().Trim().ToUpper();
+            if (!string.IsNullOrWhiteSpace(nombre))
+            {
+                Filtra(4, nombre, false);
+
+            }
+            else
+            {
+                Muestra_Filas();
+            }
+        }
     }
 }

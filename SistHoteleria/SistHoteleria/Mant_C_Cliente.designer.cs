@@ -1,6 +1,6 @@
 ﻿namespace SistHoteleria
 {
-    partial class Mant_C_Empleado
+    partial class Mant_C_Cliente
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.DG_Datos = new System.Windows.Forms.DataGridView();
             this.TNombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.TEmpleado = new System.Windows.Forms.TextBox();
+            this.TCliente = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.CB_Estado = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -40,9 +40,11 @@
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TIdentif = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Identificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaIni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LicRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TTipo = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.TLimite = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DG_Datos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +56,7 @@
             this.Nombre,
             this.TIdentif,
             this.Identificacion,
-            this.FechaIni});
+            this.LicRE});
             this.DG_Datos.Location = new System.Drawing.Point(15, 122);
             this.DG_Datos.Name = "DG_Datos";
             this.DG_Datos.Size = new System.Drawing.Size(565, 313);
@@ -65,7 +67,7 @@
             // 
             // TNombre
             // 
-            this.TNombre.Location = new System.Drawing.Point(109, 46);
+            this.TNombre.Location = new System.Drawing.Point(109, 43);
             this.TNombre.Name = "TNombre";
             this.TNombre.Size = new System.Drawing.Size(471, 20);
             this.TNombre.TabIndex = 36;
@@ -75,29 +77,29 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(31, 49);
+            this.label3.Location = new System.Drawing.Point(30, 46);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 16);
             this.label3.TabIndex = 33;
             this.label3.Text = "NOMBRE:";
             // 
-            // TEmpleado
+            // TCliente
             // 
-            this.TEmpleado.Location = new System.Drawing.Point(109, 16);
-            this.TEmpleado.Name = "TEmpleado";
-            this.TEmpleado.Size = new System.Drawing.Size(170, 20);
-            this.TEmpleado.TabIndex = 44;
-            this.TEmpleado.TextChanged += new System.EventHandler(this.TCodigo_TextChanged);
+            this.TCliente.Location = new System.Drawing.Point(109, 16);
+            this.TCliente.Name = "TCliente";
+            this.TCliente.Size = new System.Drawing.Size(196, 20);
+            this.TCliente.TabIndex = 44;
+            this.TCliente.TextChanged += new System.EventHandler(this.TCodigo_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(25, 17);
+            this.label1.Location = new System.Drawing.Point(43, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 16);
+            this.label1.Size = new System.Drawing.Size(62, 16);
             this.label1.TabIndex = 45;
-            this.label1.Text = "Empleado:";
+            this.label1.Text = "Cliente:";
             // 
             // CB_Estado
             // 
@@ -139,7 +141,7 @@
             // 
             // Codigo
             // 
-            this.Codigo.HeaderText = "Empleado";
+            this.Codigo.HeaderText = "Cliente";
             this.Codigo.Name = "Codigo";
             this.Codigo.ReadOnly = true;
             this.Codigo.Width = 70;
@@ -149,7 +151,7 @@
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 230;
+            this.Nombre.Width = 300;
             // 
             // TIdentif
             // 
@@ -160,54 +162,75 @@
             // 
             // Identificacion
             // 
-            this.Identificacion.HeaderText = "TEmp";
+            this.Identificacion.HeaderText = "TCli";
             this.Identificacion.Name = "Identificacion";
             this.Identificacion.ReadOnly = true;
-            this.Identificacion.Width = 70;
+            this.Identificacion.Width = 50;
             // 
-            // FechaIni
+            // LicRE
             // 
-            this.FechaIni.HeaderText = "FechaIni";
-            this.FechaIni.Name = "FechaIni";
-            this.FechaIni.ReadOnly = true;
+            this.LicRE.HeaderText = "LimiteC";
+            this.LicRE.Name = "LicRE";
+            this.LicRE.ReadOnly = true;
+            this.LicRE.Width = 50;
+            // 
+            // TTipo
+            // 
+            this.TTipo.Location = new System.Drawing.Point(109, 70);
+            this.TTipo.Name = "TTipo";
+            this.TTipo.Size = new System.Drawing.Size(196, 20);
+            this.TTipo.TabIndex = 53;
+            this.TTipo.TextChanged += new System.EventHandler(this.TTipo_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(17, 73);
+            this.label2.Location = new System.Drawing.Point(35, 73);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 16);
-            this.label2.TabIndex = 53;
-            this.label2.Text = "TEmpleado:";
+            this.label2.Size = new System.Drawing.Size(70, 16);
+            this.label2.TabIndex = 52;
+            this.label2.Text = "TCliente:";
             // 
-            // TTipo
+            // TLimite
             // 
-            this.TTipo.Location = new System.Drawing.Point(109, 72);
-            this.TTipo.Name = "TTipo";
-            this.TTipo.Size = new System.Drawing.Size(170, 20);
-            this.TTipo.TabIndex = 52;
-            this.TTipo.TextChanged += new System.EventHandler(this.TTipo_TextChanged);
+            this.TLimite.Location = new System.Drawing.Point(109, 96);
+            this.TLimite.Name = "TLimite";
+            this.TLimite.Size = new System.Drawing.Size(196, 20);
+            this.TLimite.TabIndex = 55;
+            this.TLimite.TextChanged += new System.EventHandler(this.TLimite_TextChanged);
             // 
-            // Mant_C_Empleado
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(13, 99);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 16);
+            this.label4.TabIndex = 54;
+            this.label4.Text = "Limite Cred:";
+            // 
+            // Mant_C_Cliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(603, 447);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.TLimite);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.TTipo);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.BLimpiar);
             this.Controls.Add(this.CB_Estado);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.TEmpleado);
+            this.Controls.Add(this.TCliente);
             this.Controls.Add(this.TNombre);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.DG_Datos);
-            this.Name = "Mant_C_Empleado";
+            this.Name = "Mant_C_Cliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Mant_C_Empleado";
-            this.Load += new System.EventHandler(this.Mant_C_Empleado_Load);
+            this.Text = "Mant_C_Cliente";
+            this.Load += new System.EventHandler(this.Mant_C_Cliente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DG_Datos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -219,7 +242,7 @@
         private System.Windows.Forms.DataGridView DG_Datos;
         private System.Windows.Forms.TextBox TNombre;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TEmpleado;
+        private System.Windows.Forms.TextBox TCliente;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CB_Estado;
         private System.Windows.Forms.Label label9;
@@ -228,8 +251,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn TIdentif;
         private System.Windows.Forms.DataGridViewTextBoxColumn Identificacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaIni;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LicRE;
         private System.Windows.Forms.TextBox TTipo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox TLimite;
+        private System.Windows.Forms.Label label4;
     }
 }

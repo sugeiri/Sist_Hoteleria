@@ -39,6 +39,8 @@
             this.mantenimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.empleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.crearToolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarToolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
             this.camaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cREARToolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             this.cONSULTARToolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,14 +109,14 @@
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.LHotel = new System.Windows.Forms.Label();
-            this.crearToolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultarToolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
+            this.crearToolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarToolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.Tan;
+            this.menuStrip1.BackColor = System.Drawing.Color.Linen;
             this.menuStrip1.Font = new System.Drawing.Font("Arial", 12F);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.transaccionesToolStripMenuItem,
@@ -189,6 +191,9 @@
             // 
             // clienteToolStripMenuItem
             // 
+            this.clienteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.crearToolStripMenuItem16,
+            this.consultarToolStripMenuItem15});
             this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
             this.clienteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clienteToolStripMenuItem.Text = "Cliente";
@@ -201,6 +206,20 @@
             this.empleadoToolStripMenuItem.Name = "empleadoToolStripMenuItem";
             this.empleadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.empleadoToolStripMenuItem.Text = "Empleado";
+            // 
+            // crearToolStripMenuItem15
+            // 
+            this.crearToolStripMenuItem15.Name = "crearToolStripMenuItem15";
+            this.crearToolStripMenuItem15.Size = new System.Drawing.Size(180, 22);
+            this.crearToolStripMenuItem15.Text = "Crear";
+            this.crearToolStripMenuItem15.Click += new System.EventHandler(this.crearToolStripMenuItem15_Click);
+            // 
+            // consultarToolStripMenuItem14
+            // 
+            this.consultarToolStripMenuItem14.Name = "consultarToolStripMenuItem14";
+            this.consultarToolStripMenuItem14.Size = new System.Drawing.Size(180, 22);
+            this.consultarToolStripMenuItem14.Text = "Consultar";
+            this.consultarToolStripMenuItem14.Click += new System.EventHandler(this.consultarToolStripMenuItem14_Click);
             // 
             // camaToolStripMenuItem1
             // 
@@ -723,24 +742,25 @@
             this.LHotel.TabIndex = 1;
             this.LHotel.Text = "LHotel";
             // 
-            // crearToolStripMenuItem15
+            // crearToolStripMenuItem16
             // 
-            this.crearToolStripMenuItem15.Name = "crearToolStripMenuItem15";
-            this.crearToolStripMenuItem15.Size = new System.Drawing.Size(180, 22);
-            this.crearToolStripMenuItem15.Text = "Crear";
-            this.crearToolStripMenuItem15.Click += new System.EventHandler(this.crearToolStripMenuItem15_Click);
+            this.crearToolStripMenuItem16.Name = "crearToolStripMenuItem16";
+            this.crearToolStripMenuItem16.Size = new System.Drawing.Size(180, 22);
+            this.crearToolStripMenuItem16.Text = "Crear";
+            this.crearToolStripMenuItem16.Click += new System.EventHandler(this.crearToolStripMenuItem16_Click);
             // 
-            // consultarToolStripMenuItem14
+            // consultarToolStripMenuItem15
             // 
-            this.consultarToolStripMenuItem14.Name = "consultarToolStripMenuItem14";
-            this.consultarToolStripMenuItem14.Size = new System.Drawing.Size(180, 22);
-            this.consultarToolStripMenuItem14.Text = "Consultar";
-            this.consultarToolStripMenuItem14.Click += new System.EventHandler(this.consultarToolStripMenuItem14_Click);
+            this.consultarToolStripMenuItem15.Name = "consultarToolStripMenuItem15";
+            this.consultarToolStripMenuItem15.Size = new System.Drawing.Size(180, 22);
+            this.consultarToolStripMenuItem15.Text = "Consultar";
+            this.consultarToolStripMenuItem15.Click += new System.EventHandler(this.consultarToolStripMenuItem15_Click);
             // 
             // menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(679, 409);
@@ -840,5 +860,7 @@
         private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem13;
         private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem15;
         private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem14;
+        private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem16;
+        private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem15;
     }
 }
