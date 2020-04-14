@@ -84,13 +84,13 @@ namespace SistHoteleria
 
                 }
             }
-                sql = "EXEC ACTPROVINCIA '" + tid.Text.ToString() 
-                                            + "','" + tDESCR.Text.ToString().Trim() 
-                                            + "','" + CB_ESTADO.SelectedItem.ToString().Trim() 
-                                            + "',"  + Tpais.Text.ToString().Trim() 
-                                            + "'"   + aa_modo.ToUpper()+"'";
+            sql = "EXEC ACTPROVINCIA '" + tid.Text.ToString()
+                                        + "','" + tDESCR.Text.ToString().Trim()
+                                        + "','" + Tpais.Text.ToString().Trim() 
+                                        + "','" + CB_ESTADO.SelectedItem.ToString().Trim()
+                                        + "','" + aa_modo.ToUpper() + "'";
 
-           
+
             if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 MessageBox.Show(Error);
@@ -126,7 +126,8 @@ namespace SistHoteleria
 
                     tid.Text = funciones.Prox_Codigo("PROVINCIA").ToString("######");
                 }
-                else {
+                else
+                {
                     aa_EProvincia = funciones.Lee_Provincia(tid.Text.ToString().Trim());
                     if (aa_EProvincia != null)
                     {
@@ -139,29 +140,29 @@ namespace SistHoteleria
                         Tpais.Text = aa_EProvincia.id_pais_provincia;
                         Tdescr_pais.Text = funciones.Lee_Descr_Pais(aa_EProvincia.id_pais_provincia);
                     }
-                    else
-                    {
-                        Valida_codigo();
-                    }
+                    //else
+                    //{
+                    //    Valida_codigo();
+                    //}
                 }
             }
         }
-        bool Valida_codigo()
-        {
-            int id = 0;
-            if (!int.TryParse(tid.Text.ToString(), out id))
-            {
-                MessageBox.Show("SOLO VALORES NUMERICOS");
-                return false;
-            }
+        //bool Valida_codigo()
+        //{
+        //    int id = 0;
+        //    if (!int.TryParse(tid.Text.ToString(), out id))
+        //    {
+        //        MessageBox.Show("SOLO VALORES NUMERICOS");
+        //        return false;
+        //    }
 
-            return true;
+        //    return true;
 
-        }
+        //}
         private void tid_TextChanged(object sender, EventArgs e)
         {
-            if (tid.Text.ToString().IndexOf("*") < 0 && tid.Text.ToString().Trim() != "")
-                Valida_codigo();
+            //if (tid.Text.ToString().IndexOf("*") < 0 && tid.Text.ToString().Trim() != "")
+            //    Valida_codigo();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -174,7 +175,7 @@ namespace SistHoteleria
         {
             tipob form = new tipob("e", "PAIS", "PAIS");
             form.ShowDialog();
-            if(form.Id.ToString().Trim()!="")
+            if (form.Id.ToString().Trim() != "")
             {
                 Tpais.Text = form.Id.ToString().Trim();
                 Tdescr_pais.Text = funciones.Lee_Descr_Pais(form.Id.ToString().Trim());

@@ -110,7 +110,7 @@ namespace SistHoteleria
         {
             DataSet DS = new DataSet();
             string Error = "";
-            string sql = "  SELECT * from  PAIS WHERE  id_pais = " + id + " and " +
+            string sql = "  SELECT * from  PAIS WHERE  id_pais = '" + id + "' and " +
                     "               estado_pais='A'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
@@ -128,7 +128,7 @@ namespace SistHoteleria
             DataSet DS = new DataSet();
             string Error = "";
 
-            sql = "  SELECT * from  PROVINCIA  WHERE id_provincia = " + id;
+            sql = "  SELECT * from  PROVINCIA  WHERE id_provincia = '" + id+"'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
             {
@@ -149,7 +149,7 @@ namespace SistHoteleria
             DataSet DS = new DataSet();
             string Error = "";
 
-            sql = "  SELECT * from  PROVINCIA  WHERE id_provincia = " + id;
+            sql = "  SELECT * from  PROVINCIA  WHERE id_provincia = '" + id+"'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
             {
@@ -166,7 +166,7 @@ namespace SistHoteleria
             DataSet DS = new DataSet();
             string Error = "";
 
-            sql = "  SELECT * from  Municipio  WHERE id_Municipio = " + id;
+            sql = "  SELECT * from  Municipio  WHERE id_Municipio = '" + id+"'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
             {
@@ -187,7 +187,7 @@ namespace SistHoteleria
             DataSet DS = new DataSet();
             string Error = "";
 
-            sql = "  SELECT * from  Municipio  WHERE id_Municipio = " + id;
+            sql = "  SELECT * from  Municipio  WHERE id_Municipio = '" + id+"'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
             {
@@ -605,6 +605,130 @@ namespace SistHoteleria
 
                 return ii_ETemporada;
 
+            }
+            return null;
+
+        }
+        public static string Lee_Descr_Tipo_Telefono(string id)
+        {
+            string sql = "";
+            DataSet DS = new DataSet();
+            string Error = "";
+
+
+            sql = "  SELECT DESCR_TIPO_T from  TIPO_TELEFONO WHERE  ID_TIPO_T = '" + id + "' AND ESTADO_TIPO_T='A'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+
+                return DS.Tables[0].Rows[0]["DESCR_TIPO_T"].ToString().ToUpper();
+
+            }
+            return "";
+
+        }
+        public static string Lee_Descr_Tipo_Email(string id)
+        {
+            string sql = "";
+            DataSet DS = new DataSet();
+            string Error = "";
+
+
+            sql = "  SELECT DESCR_TIPO_E from  TIPO_EMAIL WHERE  ID_TIPO_E = '" + id + "' AND ESTADO_TIPO_E='A'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+
+                return DS.Tables[0].Rows[0]["DESCR_TIPO_E"].ToString().ToUpper();
+
+            }
+            return "";
+
+        }
+        public static Clases.EDireccion Lee_Direccion_Tercero(string id_tercero)
+        {
+            Clases.EDireccion ii_EDireccion = new Clases.EDireccion();
+            string Error = "";
+            DataSet ds = new DataSet();
+            try
+            {
+                string consulta = " select id_Tercero_Direccion,id_mun_Direccion,Direccion,ESTADO_DIRECCION,TIPO_DIRECCION, " +
+                                  "        N_LINEA_DIRECCION,id_provincia,id_pais from DIRECCION,MUNICIPIO,PROVINCIA,PAIS   " +
+                                  " where id_mun_Direccion=id_municipio and " +
+                                  "       id_prov_municipio=id_provincia and " +
+                                  "       id_pais_provincia=id_pais and " +
+                                  "       id_Tercero_Direccion='" + id_tercero.Trim() + "'";
+                ds = Conexion.EjecutaSQL(consulta, ref Error);
+                if (ds.Tables.Count > 0)
+                {
+                    ii_EDireccion.id_Tercero_Direccion = ds.Tables[0].Rows[0]["id_Tercero_Direccion"].ToString().Trim();
+                    ii_EDireccion.id_mun_Direccion = ds.Tables[0].Rows[0]["id_mun_Direccion"].ToString().Trim();
+                    ii_EDireccion.Direccion = ds.Tables[0].Rows[0]["Direccion"].ToString().Trim();
+                    ii_EDireccion.ESTADO_DIRECCION = ds.Tables[0].Rows[0]["ESTADO_DIRECCION"].ToString().Trim();
+                    ii_EDireccion.TIPO_DIRECCION = ds.Tables[0].Rows[0]["TIPO_DIRECCION"].ToString().Trim();
+                    ii_EDireccion.N_LINEA_DIRECCION = Int16.Parse(ds.Tables[0].Rows[0]["N_LINEA_DIRECCION"].ToString().Trim());
+                    ii_EDireccion.id_Pais_Direccion = ds.Tables[0].Rows[0]["id_pais"].ToString().Trim();
+                    ii_EDireccion.id_Provincia_Direccion = ds.Tables[0].Rows[0]["id_provincia"].ToString().Trim();
+
+                    return ii_EDireccion;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Error = e.Message.ToString();
+            }
+            return null;
+        }
+        public static List<Clases.EEmail> Lee_Email_Tercero(int Tercero)
+        {
+            List<Clases.EEmail> ii_LETercero = new List<Clases.EEmail>();
+            Clases.EEmail ii_ETercero = new Clases.EEmail();
+            DataSet DS = new DataSet();
+            string Error = "";
+            string sql = "  SELECT id_Tercero_Email,Email,TIPO_Email from EMAIL " +
+                         "     WHERE id_Tercero_Email = " + Tercero;
+
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+
+                for (int i = 0; i < DS.Tables[0].Rows.Count; i++)
+                {
+                    ii_ETercero = new Clases.EEmail();
+                    ii_ETercero.id_Tercero_Email = DS.Tables[0].Rows[i]["id_Tercero_Email"].ToString();
+                    ii_ETercero.Email = DS.Tables[0].Rows[i]["Email"].ToString();
+                    ii_ETercero.TIPO_Email = DS.Tables[0].Rows[i]["Tipo_Email"].ToString().ToUpper();
+                    ii_LETercero.Add(ii_ETercero);
+                }
+                return ii_LETercero;
+            }
+            return null;
+
+        }
+        public static List<Clases.ETelefono> Lee_Telefono_Tercero(int Tercero)
+        {
+            List<Clases.ETelefono> ii_LETelefono = new List<Clases.ETelefono>();
+            Clases.ETelefono ii_ETelefono = new Clases.ETelefono();
+            DataSet DS = new DataSet();
+            string Error = "";
+
+            string sql = "  SELECT id_Tercero_Tel,Numero_Tel,TIPO_Tel from TELEFONO " +
+                        "     WHERE id_Tercero_Tel = " + Tercero;
+
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+
+                for (int i = 0; i < DS.Tables[0].Rows.Count; i++)
+                {
+                    ii_ETelefono = new Clases.ETelefono();
+                    ii_ETelefono.id_Tercero_Tel = DS.Tables[0].Rows[i]["id_Tercero_Tel"].ToString();
+                    ii_ETelefono.Numero_Tel = DS.Tables[0].Rows[i]["Numero_Tel"].ToString();
+                    ii_ETelefono.TIPO_Tel = DS.Tables[0].Rows[i]["TIPO_Tel"].ToString().ToUpper();
+                    ii_LETelefono.Add(ii_ETelefono);
+                }
+                return ii_LETelefono;
             }
             return null;
 

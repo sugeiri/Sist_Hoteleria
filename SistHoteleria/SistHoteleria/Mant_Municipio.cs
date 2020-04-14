@@ -86,9 +86,9 @@ namespace SistHoteleria
             }
             sql = "EXEC ACTMunicipio '" + tid.Text.ToString()
                                         + "','" + tDESCR.Text.ToString().Trim()
+                                        + "','" + TProvincia.Text.ToString().Trim() 
                                         + "','" + CB_ESTADO.SelectedItem.ToString().Trim()
-                                        + "'," + TProvincia.Text.ToString().Trim() + ",'"
-                                        + aa_modo.ToUpper() + "'";
+                                        + "','"+aa_modo.ToUpper() + "'";
 
 
 
@@ -141,29 +141,29 @@ namespace SistHoteleria
                         TProvincia.Text = aa_EMunicipio.id_prov_municipio;
                         Tdescr_Provincia.Text = funciones.Lee_Provincia(aa_EMunicipio.id_prov_municipio).descr_provincia;
                     }
-                    else
-                    {
-                        Valida_codigo();
-                    }
+                    //else
+                    //{
+                    //    Valida_codigo();
+                    //}
                 }
             }
         }
-        bool Valida_codigo()
-        {
-            int id = 0;
-            if (!int.TryParse(tid.Text.ToString(), out id))
-            {
-                MessageBox.Show("SOLO VALORES NUMERICOS");
-                return false;
-            }
+        //bool Valida_codigo()
+        //{
+        //    int id = 0;
+        //    if (!int.TryParse(tid.Text.ToString(), out id))
+        //    {
+        //        MessageBox.Show("SOLO VALORES NUMERICOS");
+        //        return false;
+        //    }
 
-            return true;
+        //    return true;
 
-        }
+        //}
         private void tid_TextChanged(object sender, EventArgs e)
         {
-            if (tid.Text.ToString().IndexOf("*") < 0 && tid.Text.ToString().Trim() != "")
-                Valida_codigo();
+            //if (tid.Text.ToString().IndexOf("*") < 0 && tid.Text.ToString().Trim() != "")
+            //    Valida_codigo();
         }
 
         private void button2_Click(object sender, EventArgs e)
