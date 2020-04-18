@@ -213,5 +213,13 @@ namespace SistHoteleria
             public string Nivel_Acceso_T_Usuario = "";
             public string Estado_T_Usuario = "";
         }
+        public class EOferta
+        {
+            public string id_oferta = "";
+            public string descr_oferta = "";
+            public string estado_oferta = "";
+            public string id_temp_oferta = "";
+
+        }
     }
 }
