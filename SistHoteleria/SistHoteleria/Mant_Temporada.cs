@@ -50,10 +50,10 @@ namespace SistHoteleria
             {
                 CB_ESTADO.SelectedIndex = 1;
             }
-      
-           
+
+
         }
-        
+
         void Limpia()
         {
             tid.Text = "";
@@ -67,32 +67,26 @@ namespace SistHoteleria
         {
             if (tid.Text.ToString().Trim() != "")
             {
-                if (tid.Text.ToString().Trim() == "*")
+                aa_ETemporada = funciones.Lee_Temporada(tid.Text.ToString().Trim());
+                if (aa_ETemporada != null)
                 {
+                    aa_modo = "m";
+                    tDESCR.Text = aa_ETemporada.descr_temporada;
+                    FechaIni.Value = DateTime.Parse(aa_ETemporada.fecha_i_temporada);
+                    FechaFin.Value = DateTime.Parse(aa_ETemporada.fecha_f_temporada);
+                    if (aa_ETemporada.estado_temporada.ToUpper() == "A")
+                        CB_ESTADO.SelectedIndex = 0;
+                    else
+                        CB_ESTADO.SelectedIndex = 1;
+                }
 
-                    tid.Text = funciones.Prox_Codigo("Temporada").ToString("######");
-                }
-                else {
-                    aa_ETemporada = funciones.Lee_Temporada(tid.Text.ToString().Trim());
-                    if (aa_ETemporada != null)
-                    {
-                        aa_modo = "m";
-                        tDESCR.Text = aa_ETemporada.descr_temporada;
-                        FechaIni.Value = DateTime.Parse(aa_ETemporada.fecha_i_temporada);
-                        FechaFin.Value = DateTime.Parse(aa_ETemporada.fecha_f_temporada);
-                        if (aa_ETemporada.estado_temporada.ToUpper() == "A")
-                            CB_ESTADO.SelectedIndex = 0;
-                        else
-                            CB_ESTADO.SelectedIndex = 1;
-                        }
-                   
-                }
+
             }
         }
-       
+
         private void tid_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
 
@@ -125,14 +119,14 @@ namespace SistHoteleria
 
                 }
             }
-            sql = "EXEC ACTTemporada '" + tid.Text.ToString() 
-                                       + "','" + tDESCR.Text.ToString().Trim() 
+            sql = "EXEC ACTTemporada '" + tid.Text.ToString()
+                                       + "','" + tDESCR.Text.ToString().Trim()
                                        + "','" + FechaIni.Value.ToString("yyyy-MM-dd").ToString().Trim()
                                        + "','" + FechaFin.Value.ToString("yyyy-MM-dd").ToString().Trim()
-                                       + "','"+CB_ESTADO.SelectedItem.ToString().Trim() +"',"
-                                       + "'"+ aa_modo.ToUpper()+"'";
+                                       + "','" + CB_ESTADO.SelectedItem.ToString().Trim() + "',"
+                                       + "'" + aa_modo.ToUpper() + "'";
 
-            
+
             if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 MessageBox.Show(Error);

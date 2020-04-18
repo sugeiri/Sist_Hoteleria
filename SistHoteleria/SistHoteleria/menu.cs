@@ -418,5 +418,11 @@ namespace SistHoteleria
             Mant_C_TipoUsuario form = new Mant_C_TipoUsuario();
             form.ShowDialog();
         }
+
+        private void consultarToolStripMenuItem17_Click(object sender, EventArgs e)
+        {
+            Mant_C_Temporada form = new Mant_C_Temporada();
+            form.ShowDialog();
+        }
     }
 }

@@ -81,6 +81,12 @@
     <Compile Include="Login.designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mant_C_Temporada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Temporada.designer.cs">
+      <DependentUpon>Mant_C_Temporada.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mant_C_TipoUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,6 +274,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Temporada.resx">
+      <DependentUpon>Mant_C_Temporada.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Mant_C_TipoUsuario.resx">
       <DependentUpon>Mant_C_TipoUsuario.cs</DependentUpon>
