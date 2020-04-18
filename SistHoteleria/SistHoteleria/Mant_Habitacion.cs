@@ -201,7 +201,7 @@ namespace SistHoteleria
 
         private void BEdificio_Click(object sender, EventArgs e)
         {
-            Mant_C_Edificio form = new Mant_C_Edificio("e");
+            Mant_C_TipoUsuario form = new Mant_C_TipoUsuario("e");
             form.ShowDialog();
             if (form.Id.ToString().Trim() != "")
             {

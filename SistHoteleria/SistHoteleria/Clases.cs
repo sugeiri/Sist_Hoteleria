@@ -206,5 +206,12 @@ namespace SistHoteleria
             public decimal costo_t_alojamiento = 0;
             public string estado_t_alojamiento = "";
         }
+        public class ETipoUsuario
+        {
+            public string id_T_Usuario = "";
+            public string Descripcion_T_Usuario = "";
+            public string Nivel_Acceso_T_Usuario = "";
+            public string Estado_T_Usuario = "";
+        }
     }
 }

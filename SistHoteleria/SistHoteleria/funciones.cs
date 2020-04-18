@@ -63,7 +63,7 @@ namespace SistHoteleria
             if (DS.Tables[0].Rows.Count > 0)
             {
                 return DS.Tables[0].Rows[0][1].ToString();
-                
+
 
             }
             return "";
@@ -155,7 +155,7 @@ namespace SistHoteleria
             DataSet DS = new DataSet();
             string Error = "";
 
-            sql = "  SELECT * from  PROVINCIA  WHERE id_provincia = '" + id+"'";
+            sql = "  SELECT * from  PROVINCIA  WHERE id_provincia = '" + id + "'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
             {
@@ -176,7 +176,7 @@ namespace SistHoteleria
             DataSet DS = new DataSet();
             string Error = "";
 
-            sql = "  SELECT * from  PROVINCIA  WHERE id_provincia = '" + id+"'";
+            sql = "  SELECT * from  PROVINCIA  WHERE id_provincia = '" + id + "'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
             {
@@ -193,7 +193,7 @@ namespace SistHoteleria
             DataSet DS = new DataSet();
             string Error = "";
 
-            sql = "  SELECT * from  Municipio  WHERE id_Municipio = '" + id+"'";
+            sql = "  SELECT * from  Municipio  WHERE id_Municipio = '" + id + "'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
             {
@@ -214,7 +214,7 @@ namespace SistHoteleria
             DataSet DS = new DataSet();
             string Error = "";
 
-            sql = "  SELECT * from  Municipio  WHERE id_Municipio = '" + id+"'";
+            sql = "  SELECT * from  Municipio  WHERE id_Municipio = '" + id + "'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
             {
@@ -307,14 +307,14 @@ namespace SistHoteleria
             {
                 ID = funciones.Genera_Codigo_Numerico("Tercero", "id_Tercero");
             }
-            
+
             sql = "EXEC ACTTercero " + ID + ",'" +
                                     ii_ETercero.Nombre_Tercero + "','" +
                                     ii_ETercero.ID_T_Identif_Tercero + "','" +
                                     ii_ETercero.Cedula_Tercero + "','" +
                                     ii_ETercero.Fecha_Nac_Tercero + "','" +
                                     ii_ETercero.Sexo_Tercero + "'," +
-                                    "'A','"+ modo+"'";
+                                    "'A','" + modo + "'";
 
             if (Conexion.Inserta_Datos(sql, ref Error))
             {
@@ -561,9 +561,9 @@ namespace SistHoteleria
                                    ii_EEmpleado.id_tercero_empleado + "','" +
                                    ii_EEmpleado.id_t_empleado + "','" +
                                    ii_EEmpleado.fecha_i_empleado + "','" +
-                                   ii_EEmpleado.estado_empleado + "','"+ 
-                                   modo.Trim().ToUpper()+"'";
-            
+                                   ii_EEmpleado.estado_empleado + "','" +
+                                   modo.Trim().ToUpper() + "'";
+
 
             if (Conexion.Inserta_Datos(sql, ref Error))
             {
@@ -581,9 +581,9 @@ namespace SistHoteleria
                                    ii_ECliente.ID_TERCERO_CLIENTE + "','" +
                                    ii_ECliente.ID_T_CLIENTE + "','" +
                                    ii_ECliente.LIM_CRED_CLIENTE + "','" +
-                                   ii_ECliente.ESTADO_CLIENTE + "','"+
-                                   modo.Trim().ToUpper()+"'";
-            
+                                   ii_ECliente.ESTADO_CLIENTE + "','" +
+                                   modo.Trim().ToUpper() + "'";
+
             if (Conexion.Inserta_Datos(sql, ref Error))
             {
                 return true;
@@ -620,7 +620,7 @@ namespace SistHoteleria
             DataSet DS = new DataSet();
             string Error = "";
 
-            sql = "  SELECT * from  Temporada  WHERE id_temporada = '" + id+"'";
+            sql = "  SELECT * from  Temporada  WHERE id_temporada = '" + id + "'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
             {
@@ -818,12 +818,37 @@ namespace SistHoteleria
             {
                 ii_ETipoAlojamiento.id_t_alojamiento = id;
                 ii_ETipoAlojamiento.descr_t_alojamiento = DS.Tables[0].Rows[0]["descr_t_alojamiento"].ToString();
-                ii_ETipoAlojamiento.costo_t_alojamiento= decimal.Parse(DS.Tables[0].Rows[0]["costo_t_alojamiento"].ToString());
+                ii_ETipoAlojamiento.costo_t_alojamiento = decimal.Parse(DS.Tables[0].Rows[0]["costo_t_alojamiento"].ToString());
                 ii_ETipoAlojamiento.estado_t_alojamiento = DS.Tables[0].Rows[0]["estado_t_alojamiento"].ToString();
 
                 return ii_ETipoAlojamiento;
 
             }
+            return null;
+
+        }
+        public static Clases.ETipoUsuario Lee_TipoUsuario(string id)
+        {
+            Clases.ETipoUsuario aa_ETipo_Usuario = new Clases.ETipoUsuario();
+            string sql = "SELECT * FROM Tipo_Usuario where id_T_Usuario='" + id + "'";
+
+            string Error = "";
+            DataSet DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+               int i = 0;
+                aa_ETipo_Usuario = new Clases.ETipoUsuario();
+                aa_ETipo_Usuario.id_T_Usuario = DS.Tables[0].Rows[i]["id_T_Usuario"].ToString();
+                aa_ETipo_Usuario.Descripcion_T_Usuario = DS.Tables[0].Rows[i]["Descripcion_T_Usuario"].ToString();
+                aa_ETipo_Usuario.Estado_T_Usuario = DS.Tables[0].Rows[i]["Estado_T_Usuario"].ToString();
+                aa_ETipo_Usuario.Nivel_Acceso_T_Usuario = DS.Tables[0].Rows[i]["Nivel_Acceso_T_Usuario"].ToString();
+
+
+                return aa_ETipo_Usuario;
+
+
+            }
+
             return null;
 
         }

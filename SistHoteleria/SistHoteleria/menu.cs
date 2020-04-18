@@ -401,5 +401,22 @@ namespace SistHoteleria
             Mant_C_TipoAlojamiento form = new Mant_C_TipoAlojamiento();
             form.ShowDialog();
         }
+
+        private void crearToolStripMenuItem21_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Mant_TipoUsuario form = new Mant_TipoUsuario("a");
+            form.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem20_Click(object sender, EventArgs e)
+        {
+            Mant_C_TipoUsuario form = new Mant_C_TipoUsuario();
+            form.ShowDialog();
+        }
     }
 }
