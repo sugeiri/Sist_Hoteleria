@@ -21,29 +21,44 @@ namespace SistHoteleria
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            EjemploConsulta();
         }
-        void EjemploConsulta()
+        public static void Imprime(string sql, string reporte, bool Directa)
+        {
+            string Error = "";
+            DataSet DS = new DataSet();
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+
+            if (DS.Tables.Count <= 0)
+            {
+                MessageBox.Show("No Encontro Datos En La Busqueda");
+                return;
+            }
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                try
+                {
+                    string rep_nom = reporte;
+                    string titulo = Clases.Nombre_Hotel.ToString().ToUpper();
+                    funciones.Reporte_PorPantalla(rep_nom, titulo, DS);
+
+                }
+                catch (SystemException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            else
+            {
+                MessageBox.Show("No Encontro Datos En La Busqueda");
+                return;
+            }
+
+        }
+
+        private void crystalReportViewer1_Load(object sender, EventArgs e)
         {
 
-            string sql = "SELECT * FROM hotel";
-            try
-            {
-                DS = Conexion.EjecutaSQL(sql, ref Error);
-                if (DS.Tables.Count > 0)
-                {
-                    
-                    MessageBox.Show(DS.Tables[0].Rows[0]["descr_hotel"].ToString());
-                }
-                else
-                {
-                    MessageBox.Show("NO ENCONTRO DATOS");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
+
     }
 }

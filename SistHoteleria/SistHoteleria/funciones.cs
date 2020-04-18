@@ -1,9 +1,11 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SistHoteleria
 {
@@ -852,7 +854,26 @@ namespace SistHoteleria
             return null;
 
         }
-        
+        public static void Reporte_PorPantalla(string ii_nombre, string ii_titulo, DataSet DAtSet)
+        {
+            ReportDocument rp = new ReportDocument();
+            try
+            {
+                rp.Load(@"C:\SistHot\Reportes\" + ii_nombre + ".rpt");
+                rp.SummaryInfo.ReportTitle = ii_titulo.ToUpper();
+                rp.SetDataSource(DAtSet.Tables[0]);
+                Form1 obj = new Form1();
+
+                obj.crystalReportViewer1.ReportSource = rp;
+                obj.WindowState = FormWindowState.Maximized;
+                obj.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
 
     }
 }

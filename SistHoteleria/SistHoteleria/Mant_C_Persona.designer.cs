@@ -44,6 +44,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.BLimpiar = new System.Windows.Forms.Button();
+            this.BImprimir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DG_Datos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -216,11 +217,26 @@
             this.BLimpiar.UseVisualStyleBackColor = false;
             this.BLimpiar.Click += new System.EventHandler(this.BLimpiar_Click);
             // 
+            // BImprimir
+            // 
+            this.BImprimir.BackColor = System.Drawing.Color.Transparent;
+            this.BImprimir.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
+            this.BImprimir.FlatAppearance.BorderSize = 2;
+            this.BImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BImprimir.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.BImprimir.Location = new System.Drawing.Point(85, 359);
+            this.BImprimir.Name = "BImprimir";
+            this.BImprimir.Size = new System.Drawing.Size(96, 36);
+            this.BImprimir.TabIndex = 60;
+            this.BImprimir.Text = "&IMPRIMIR";
+            this.BImprimir.UseVisualStyleBackColor = false;
+            // 
             // Mant_C_Persona
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(562, 407);
+            this.Controls.Add(this.BImprimir);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.BLimpiar);
@@ -260,5 +276,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button BLimpiar;
+        private System.Windows.Forms.Button BImprimir;
     }
 }

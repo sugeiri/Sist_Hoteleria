@@ -16,6 +16,7 @@ namespace SistHoteleria
         public string Id = "";
         public string aa_Prov = "";
         string aa_Modo = "";
+        string sql = "";
         public Mant_C_Cama()
         {
             InitializeComponent();
@@ -139,8 +140,8 @@ namespace SistHoteleria
         {
             DG_Datos.Rows.Clear();
             string Error = "";
-            string sql = "";
-            sql = " Select id_Cama, descr_Cama, capacidad_cama from cama " +
+            
+            sql = " Select * from cama " +
                  " where  Estado_cama = 'A' ";
 
             DataSet DS = Conexion.EjecutaSQL(sql, ref Error);
@@ -180,5 +181,15 @@ namespace SistHoteleria
         {
             Lee_Datos();
         }
+
+        private void BImprimir_Click(object sender, EventArgs e)
+        {
+            Imprime_Datos();
+        }
+        void Imprime_Datos()
+        {
+            Form1.Imprime(sql, "RP_LCama", false);
+        }
+
     }
 }

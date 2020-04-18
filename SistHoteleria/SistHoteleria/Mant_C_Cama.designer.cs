@@ -30,13 +30,14 @@
         {
             this.TFiltro = new System.Windows.Forms.TextBox();
             this.DG_Datos = new System.Windows.Forms.DataGridView();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CB_Filtro = new System.Windows.Forms.ComboBox();
             this.BCrear = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.BLimpiar = new System.Windows.Forms.Button();
-            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BImprimir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DG_Datos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,6 +63,27 @@
             this.DG_Datos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_Datos_CellDoubleClick);
             this.DG_Datos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DG_Datos_CellMouseDoubleClick);
             this.DG_Datos.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.DG_Datos_PreviewKeyDown);
+            // 
+            // Codigo
+            // 
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            this.Codigo.Width = 70;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Descripcion";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 250;
+            // 
+            // Pais
+            // 
+            this.Pais.HeaderText = "Capacidad";
+            this.Pais.Name = "Pais";
+            this.Pais.ReadOnly = true;
+            this.Pais.Width = 150;
             // 
             // CB_Filtro
             // 
@@ -116,32 +138,27 @@
             this.BLimpiar.UseVisualStyleBackColor = false;
             this.BLimpiar.Click += new System.EventHandler(this.BLimpiar_Click);
             // 
-            // Codigo
+            // BImprimir
             // 
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.Name = "Codigo";
-            this.Codigo.ReadOnly = true;
-            this.Codigo.Width = 70;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Descripcion";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 250;
-            // 
-            // Pais
-            // 
-            this.Pais.HeaderText = "Capacidad";
-            this.Pais.Name = "Pais";
-            this.Pais.ReadOnly = true;
-            this.Pais.Width = 150;
+            this.BImprimir.BackColor = System.Drawing.Color.Transparent;
+            this.BImprimir.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
+            this.BImprimir.FlatAppearance.BorderSize = 2;
+            this.BImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BImprimir.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.BImprimir.Location = new System.Drawing.Point(143, 310);
+            this.BImprimir.Name = "BImprimir";
+            this.BImprimir.Size = new System.Drawing.Size(96, 36);
+            this.BImprimir.TabIndex = 59;
+            this.BImprimir.Text = "&IMPRIMIR";
+            this.BImprimir.UseVisualStyleBackColor = false;
+            this.BImprimir.Click += new System.EventHandler(this.BImprimir_Click);
             // 
             // Mant_C_Cama
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(546, 372);
+            this.Controls.Add(this.BImprimir);
             this.Controls.Add(this.BCrear);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.BLimpiar);
@@ -168,5 +185,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pais;
+        private System.Windows.Forms.Button BImprimir;
     }
 }

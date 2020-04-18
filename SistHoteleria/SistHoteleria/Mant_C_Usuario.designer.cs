@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.DG_Datos = new System.Windows.Forms.DataGridView();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TIdentif = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Identificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TNombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TUsuario = new System.Windows.Forms.TextBox();
@@ -36,10 +40,7 @@
             this.CB_Estado = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.BLimpiar = new System.Windows.Forms.Button();
-            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TIdentif = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Identificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BImprimir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DG_Datos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,6 +59,33 @@
             this.DG_Datos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_Datos_CellDoubleClick);
             this.DG_Datos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DG_Datos_CellMouseDoubleClick);
             this.DG_Datos.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.DG_Datos_PreviewKeyDown);
+            // 
+            // Codigo
+            // 
+            this.Codigo.HeaderText = "Usuario";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            this.Codigo.Width = 70;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 300;
+            // 
+            // TIdentif
+            // 
+            this.TIdentif.HeaderText = "Estado";
+            this.TIdentif.Name = "TIdentif";
+            this.TIdentif.ReadOnly = true;
+            this.TIdentif.Width = 50;
+            // 
+            // Identificacion
+            // 
+            this.Identificacion.HeaderText = "Tipo Usuario";
+            this.Identificacion.Name = "Identificacion";
+            this.Identificacion.ReadOnly = true;
             // 
             // TNombre
             // 
@@ -133,38 +161,26 @@
             this.BLimpiar.UseVisualStyleBackColor = false;
             this.BLimpiar.Click += new System.EventHandler(this.BLimpiar_Click);
             // 
-            // Codigo
+            // BImprimir
             // 
-            this.Codigo.HeaderText = "Usuario";
-            this.Codigo.Name = "Codigo";
-            this.Codigo.ReadOnly = true;
-            this.Codigo.Width = 70;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 300;
-            // 
-            // TIdentif
-            // 
-            this.TIdentif.HeaderText = "Estado";
-            this.TIdentif.Name = "TIdentif";
-            this.TIdentif.ReadOnly = true;
-            this.TIdentif.Width = 50;
-            // 
-            // Identificacion
-            // 
-            this.Identificacion.HeaderText = "Tipo Usuario";
-            this.Identificacion.Name = "Identificacion";
-            this.Identificacion.ReadOnly = true;
+            this.BImprimir.BackColor = System.Drawing.Color.Transparent;
+            this.BImprimir.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
+            this.BImprimir.FlatAppearance.BorderSize = 2;
+            this.BImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BImprimir.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.BImprimir.Location = new System.Drawing.Point(361, 80);
+            this.BImprimir.Name = "BImprimir";
+            this.BImprimir.Size = new System.Drawing.Size(96, 36);
+            this.BImprimir.TabIndex = 60;
+            this.BImprimir.Text = "&IMPRIMIR";
+            this.BImprimir.UseVisualStyleBackColor = false;
             // 
             // Mant_C_Usuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(603, 447);
+            this.Controls.Add(this.BImprimir);
             this.Controls.Add(this.BLimpiar);
             this.Controls.Add(this.CB_Estado);
             this.Controls.Add(this.label9);
@@ -197,5 +213,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn TIdentif;
         private System.Windows.Forms.DataGridViewTextBoxColumn Identificacion;
+        private System.Windows.Forms.Button BImprimir;
     }
 }
