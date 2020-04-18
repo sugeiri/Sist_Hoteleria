@@ -42,6 +42,33 @@ namespace SistHoteleria
             return null;
 
         }
+        public static string Lee_Descr_Tipo(string id, string tabla)
+        {
+            string sql = "";
+            Clases.ETipo ii_Tipo = new Clases.ETipo();
+            DataSet DS = new DataSet();
+            string Error = "";
+            string campo = "";
+            string tipo = "";
+            sql = "select COLUMN_NAME,DATA_TYPE from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME = '" + tabla + "' and ORDINAL_POSITION = 1";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                campo = DS.Tables[0].Rows[0]["COLUMN_NAME"].ToString();
+                tipo = DS.Tables[0].Rows[0]["DATA_TYPE"].ToString();
+            }
+
+            sql = "  SELECT * from  " + tabla + " WHERE  " + campo + " = '" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                return DS.Tables[0].Rows[0][1].ToString();
+                
+
+            }
+            return "";
+
+        }
         public static bool TipoPK(string tabla)
         {
             string sql = "";
@@ -729,6 +756,73 @@ namespace SistHoteleria
                     ii_LETelefono.Add(ii_ETelefono);
                 }
                 return ii_LETelefono;
+            }
+            return null;
+
+        }
+        public static List<Clases.Ethab_caracteristica> Lee_Caracteristicas_THabitacion(string id)
+        {
+            List<Clases.Ethab_caracteristica> ii_LECarTH = new List<Clases.Ethab_caracteristica>();
+            Clases.Ethab_caracteristica ii_ECarTH = new Clases.Ethab_caracteristica();
+            DataSet DS = new DataSet();
+            string Error = "";
+            string sql = "  SELECT * from thab_caracteristica WHERE id_t_hab_thcar = '" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+
+                for (int i = 0; i < DS.Tables[0].Rows.Count; i++)
+                {
+                    ii_ECarTH = new Clases.Ethab_caracteristica();
+                    ii_ECarTH.id_t_hab_thcar = DS.Tables[0].Rows[i]["id_t_hab_thcar"].ToString();
+                    ii_ECarTH.id_caracteristica_thcar = DS.Tables[0].Rows[i]["id_caracteristica_thcar"].ToString();
+
+                    ii_LECarTH.Add(ii_ECarTH);
+                }
+                return ii_LECarTH;
+            }
+            return null;
+
+        }
+        public static bool Inserta_Caracteristicas_THabitacion(List<Clases.Ethab_caracteristica> ii_LEthab_caracteristica, ref string Error)
+        {
+            string sql = "";
+            sql = "DELETE thab_caracteristica WHERE id_t_hab_thcar='" + ii_LEthab_caracteristica[0].id_t_hab_thcar + "'";
+            if (!Conexion.Inserta_Datos(sql, ref Error))
+            {
+                return false;
+            }
+            int ii = 0;
+            foreach (var dato in ii_LEthab_caracteristica)
+            {
+                sql = "EXEC ACTthab_caracteristica '" + dato.id_t_hab_thcar + "','" +
+                                    dato.id_caracteristica_thcar + "'";
+                if (!Conexion.Inserta_Datos(sql, ref Error))
+                {
+                    return false;
+                }
+                ii++;
+            }
+            return true;
+        }
+        public static Clases.ETipoAlojamiento Lee_TipoAlojamiento(string id)
+        {
+            string sql = "";
+            Clases.ETipoAlojamiento ii_ETipoAlojamiento = new Clases.ETipoAlojamiento();
+            DataSet DS = new DataSet();
+            string Error = "";
+
+            sql = "  SELECT * from  tipo_alojamiento  WHERE id_t_alojamiento = '" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                ii_ETipoAlojamiento.id_t_alojamiento = id;
+                ii_ETipoAlojamiento.descr_t_alojamiento = DS.Tables[0].Rows[0]["descr_t_alojamiento"].ToString();
+                ii_ETipoAlojamiento.costo_t_alojamiento= decimal.Parse(DS.Tables[0].Rows[0]["costo_t_alojamiento"].ToString());
+                ii_ETipoAlojamiento.estado_t_alojamiento = DS.Tables[0].Rows[0]["estado_t_alojamiento"].ToString();
+
+                return ii_ETipoAlojamiento;
+
             }
             return null;
 

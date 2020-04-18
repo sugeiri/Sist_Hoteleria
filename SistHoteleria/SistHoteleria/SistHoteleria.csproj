@@ -56,6 +56,18 @@
   <ItemGroup>
     <Compile Include="Clases.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="Conf_CaractTHabitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_CaractTHabitacion.designer.cs">
+      <DependentUpon>Conf_CaractTHabitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_C_CaractTHabitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_C_CaractTHabitacion.designer.cs">
+      <DependentUpon>Conf_C_CaractTHabitacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +80,12 @@
     </Compile>
     <Compile Include="Login.designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_TipoAlojamiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_TipoAlojamiento.designer.cs">
+      <DependentUpon>Mant_C_TipoAlojamiento.cs</DependentUpon>
     </Compile>
     <Compile Include="Mant_C_Servicio.cs">
       <SubType>Form</SubType>
@@ -104,6 +122,12 @@
     </Compile>
     <Compile Include="Mant_Cliente.designer.cs">
       <DependentUpon>Mant_Cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_TipoAlojamiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_TipoAlojamiento.designer.cs">
+      <DependentUpon>Mant_TipoAlojamiento.cs</DependentUpon>
     </Compile>
     <Compile Include="Mant_Temporada.cs">
       <SubType>Form</SubType>
@@ -221,11 +245,20 @@
     <Compile Include="tipob.designer.cs">
       <DependentUpon>tipob.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Conf_CaractTHabitacion.resx">
+      <DependentUpon>Conf_CaractTHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_C_CaractTHabitacion.resx">
+      <DependentUpon>Conf_C_CaractTHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_TipoAlojamiento.resx">
+      <DependentUpon>Mant_C_TipoAlojamiento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Mant_C_Servicio.resx">
       <DependentUpon>Mant_C_Servicio.cs</DependentUpon>
@@ -244,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Mant_Cliente.resx">
       <DependentUpon>Mant_Cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_TipoAlojamiento.resx">
+      <DependentUpon>Mant_TipoAlojamiento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Mant_Temporada.resx">
       <DependentUpon>Mant_Temporada.cs</DependentUpon>

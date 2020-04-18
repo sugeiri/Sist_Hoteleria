@@ -460,8 +460,36 @@ namespace SistHoteleria
                 errorProvider1.SetError(DT_Fecha_NAc, "La fecha de Nacimiento no Puede ser la fecha actual");
                 return false;
             }
-
-
+            if(TTipoCliente.Text.ToString().Trim()=="")
+            {
+                MessageBox.Show("Debe Indicar Tipo de cliente");
+                errorProvider1.SetError(TTipoCliente, "Debe Indicar Tipo de cliente");
+                return false;
+            }
+            if (Tpais.Text.ToString().Trim() == "")
+            {
+                MessageBox.Show(Msj);
+                errorProvider1.SetError(Tpais, Msj);
+                return false;
+            }
+            if (Tprovincia.Text.ToString().Trim() == "")
+            {
+                MessageBox.Show(Msj);
+                errorProvider1.SetError(Tprovincia, Msj);
+                return false;
+            }
+            if (Tmunicipio.Text.ToString().Trim() == "")
+            {
+                MessageBox.Show(Msj);
+                errorProvider1.SetError(Tmunicipio, Msj);
+                return false;
+            }
+            if (TDireccion.Text.ToString().Trim() == "")
+            {
+                MessageBox.Show(Msj);
+                errorProvider1.SetError(TDireccion, Msj);
+                return false;
+            }
             return true;
         }
         void Lanza_Error(TextBox Campo, string Msj)
@@ -488,6 +516,8 @@ namespace SistHoteleria
         }
         void Llena_Datos_Tercero(Clases.ETercero ii_ETercero)
         {
+            if (ii_ETercero == null)
+                return;
             TNombreTercero.Text = ii_ETercero.Nombre_Tercero.Trim();
             TIdentificacion.Text = ii_ETercero.Cedula_Tercero.Trim();
             DT_Fecha_NAc.Value = DateTime.Parse(ii_ETercero.Fecha_Nac_Tercero);

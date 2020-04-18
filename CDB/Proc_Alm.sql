@@ -81,15 +81,11 @@ DROP PROCEDURE ACTTHAB_CARACTERISTICA
 GO
 CREATE PROCEDURE ACTTHAB_CARACTERISTICA
        @II_ID_T_HAB_THCAR  CHAR(5),
-       @II_ID_CARACTERISTICA_THCAR  CHAR(5),
-       @aa_Modo  char(1)
+       @II_ID_CARACTERISTICA_THCAR  CHAR(5)
 AS
-if @aa_Modo='A' 
 	insert into thab_caracteristica values(	     @II_ID_T_HAB_THCAR,
 	     @II_ID_CARACTERISTICA_THCAR);
-else
-	update thab_caracteristica set 	     ID_CARACTERISTICA_THCAR=@II_ID_CARACTERISTICA_THCAR
-  where ID_T_HAB_THCAR=@II_ID_T_HAB_THCAR;
+
 GO
 grant all on ACTTHAB_CARACTERISTICA to public
 

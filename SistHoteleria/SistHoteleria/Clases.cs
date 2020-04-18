@@ -192,5 +192,19 @@ namespace SistHoteleria
 
 
         }
+        public class Ethab_caracteristica
+        {
+            public string id_t_hab_thcar  = "";
+            public string id_caracteristica_thcar = "";
+
+
+        }
+        public class ETipoAlojamiento
+        {
+            public string id_t_alojamiento = "";
+            public string descr_t_alojamiento = "";
+            public decimal costo_t_alojamiento = 0;
+            public string estado_t_alojamiento = "";
+        }
     }
 }

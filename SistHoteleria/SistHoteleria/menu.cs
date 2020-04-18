@@ -362,5 +362,44 @@ namespace SistHoteleria
             Mant_Temporada form = new Mant_Temporada("a");
             form.ShowDialog();
         }
+
+        private void asignarAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void crearToolStripMenuItem19_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Conf_CaractTHabitacion form = new Conf_CaractTHabitacion("a","");
+            form.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem18_Click(object sender, EventArgs e)
+        {
+            Conf_C_CaractTHabitacion form = new Conf_C_CaractTHabitacion("c");
+            form.ShowDialog();
+        }
+
+        private void crearToolStripMenuItem20_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Mant_TipoAlojamiento form = new Mant_TipoAlojamiento("a");
+            form.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem19_Click(object sender, EventArgs e)
+        {
+            Mant_C_TipoAlojamiento form = new Mant_C_TipoAlojamiento();
+            form.ShowDialog();
+        }
     }
 }
