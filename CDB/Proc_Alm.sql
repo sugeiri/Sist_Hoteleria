@@ -305,6 +305,7 @@ CREATE PROCEDURE ACTCANCELACION
        @aa_Modo  char(1)
 AS
 if @aa_Modo='A' 
+begin
 	insert into cancelacion values(	     @II_ID_CANCELACION,
 	     @II_ID_RESERV_CANCELACION,
 	     GETDATE(),
@@ -313,6 +314,8 @@ if @aa_Modo='A'
 	     @II_ESTADO_CANCELACION,
 	     @II_MOD_POR_CANCELACION,
 	     GETDATE());
+	update reservacion set estado_reservacion = 'I' where id_reservacion = @II_ID_RESERV_CANCELACION;
+end
 else
 	update cancelacion set 	     ID_RESERV_CANCELACION=@II_ID_RESERV_CANCELACION,
 	     FECHA_CANCELACION=GETDATE(),
