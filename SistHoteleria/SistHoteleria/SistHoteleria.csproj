@@ -43,6 +43,7 @@
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,6 +80,18 @@
     </Compile>
     <Compile Include="Conf_C_CaractTHabitacion.designer.cs">
       <DependentUpon>Conf_C_CaractTHabitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Estadisticas.Designer.cs">
+      <DependentUpon>Estadisticas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas\ReservacionesxMes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Estadisticas\ReservacionesxMes.Designer.cs">
+      <DependentUpon>ReservacionesxMes.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -286,6 +299,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Conf_C_CaractTHabitacion.resx">
       <DependentUpon>Conf_C_CaractTHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Estadisticas.resx">
+      <DependentUpon>Estadisticas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Estadisticas\ReservacionesxMes.resx">
+      <DependentUpon>ReservacionesxMes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
