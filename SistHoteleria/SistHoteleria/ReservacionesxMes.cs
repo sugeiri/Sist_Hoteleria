@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SistHoteleria.Estadisticas
+namespace SistHoteleria
 {
     public partial class ReservacionesxMes : Form
     {

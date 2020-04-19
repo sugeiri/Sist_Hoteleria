@@ -473,5 +473,11 @@ namespace SistHoteleria
             C_Reserva form = new C_Reserva("c");
             form.ShowDialog();
         }
+
+        private void estadisticasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Estadisticas es = new Estadisticas();
+            es.Show();
+        }
     }
 }
