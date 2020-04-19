@@ -56,6 +56,18 @@
   <ItemGroup>
     <Compile Include="Clases.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="Conf_C_TAlojServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_C_TAlojServicio.designer.cs">
+      <DependentUpon>Conf_C_TAlojServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_TAlojServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_TAlojServicio.designer.cs">
+      <DependentUpon>Conf_TAlojServicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Conf_CaractTHabitacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,6 +275,12 @@
     <Compile Include="tipob.designer.cs">
       <DependentUpon>tipob.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Conf_C_TAlojServicio.resx">
+      <DependentUpon>Conf_C_TAlojServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_TAlojServicio.resx">
+      <DependentUpon>Conf_TAlojServicio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Conf_CaractTHabitacion.resx">
       <DependentUpon>Conf_CaractTHabitacion.cs</DependentUpon>
     </EmbeddedResource>

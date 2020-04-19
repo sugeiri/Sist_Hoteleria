@@ -1162,15 +1162,11 @@ DROP PROCEDURE ACTTALOJAMIENTO_SERVICIO
 GO
 CREATE PROCEDURE ACTTALOJAMIENTO_SERVICIO
        @II_ID_T_ALOJAMIENTO_TAS  CHAR(5),
-       @II_ID_SERVICIO_TAS  CHAR(5),
-       @aa_Modo  char(1)
+       @II_ID_SERVICIO_TAS  CHAR(5)
 AS
-if @aa_Modo='A' 
 	insert into talojamiento_servicio values(	     @II_ID_T_ALOJAMIENTO_TAS,
 	     @II_ID_SERVICIO_TAS);
-else
-	update talojamiento_servicio set 	     ID_SERVICIO_TAS=@II_ID_SERVICIO_TAS
-  where ID_T_ALOJAMIENTO_TAS=@II_ID_T_ALOJAMIENTO_TAS;
+
 GO
 grant all on ACTTALOJAMIENTO_SERVICIO to public
 

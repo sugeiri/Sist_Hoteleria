@@ -13,16 +13,18 @@ namespace SistHoteleria
 {
     public partial class Mant_C_TipoAlojamiento : Form
     {
+        string sql = "";
         public string Id = "";
         public string aa_Prov = "";
         string aa_Modo = "";
-        public Mant_C_TipoAlojamiento()
+        public Mant_C_TipoAlojamiento(string ii_modo)
         {
             InitializeComponent();
             CB_Filtro.Items.Add(" ");
             CB_Filtro.Items.Add("Codigo");
             CB_Filtro.Items.Add("Descripcion");
             CB_Filtro.Items.Add("Costo");
+            aa_Modo = ii_modo;
 
         }
 
@@ -139,7 +141,6 @@ namespace SistHoteleria
         {
             DG_Datos.Rows.Clear();
             string Error = "";
-            string sql = "";
             sql = " Select * from tipo_alojamiento " +
                  " where  estado_t_alojamiento = 'A' ";
 
@@ -179,6 +180,11 @@ namespace SistHoteleria
         private void button1_Click(object sender, EventArgs e)
         {
             Lee_Datos();
+        }
+
+        private void BImprimir_Click(object sender, EventArgs e)
+        {
+            Form1.Imprime(sql, "RP_LTipoAlojamiento", false);
         }
     }
 }

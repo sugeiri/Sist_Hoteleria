@@ -16,7 +16,8 @@ namespace SistHoteleria
         public string Id = "";
         public string aa_Prov = "";
         string aa_Modo = "";
-        public Mant_C_Habitacion()
+        string sql = "";
+        public Mant_C_Habitacion(string ii_modo)
         {
             InitializeComponent();
             CB_Filtro.Items.Add(" ");
@@ -25,6 +26,7 @@ namespace SistHoteleria
             CB_Filtro.Items.Add("Tipo Habitacion");
             CB_Filtro.Items.Add("Edificio");
             CB_Filtro.Items.Add("Piso");
+            aa_Modo = ii_modo;
 
         }
 
@@ -140,7 +142,7 @@ namespace SistHoteleria
         {
             DG_Datos.Rows.Clear();
             string Error = "";
-            string sql = "";
+            sql = "";
             sql = " Select id_habitacion, descr_habitacion, t_habitacion, edificio_habitacion, piso_habitacion from habitacion " +
                  " where  Estado_habitacion = 'A' ";
 
@@ -185,6 +187,11 @@ namespace SistHoteleria
         private void button1_Click(object sender, EventArgs e)
         {
             Lee_Datos();
+        }
+
+        private void BImprimir_Click(object sender, EventArgs e)
+        {
+            Form1.Imprime(sql, "RP_LHabitacion", false);
         }
     }
 }

@@ -224,6 +224,7 @@
             this.BImprimir.TabIndex = 60;
             this.BImprimir.Text = "&IMPRIMIR";
             this.BImprimir.UseVisualStyleBackColor = false;
+            this.BImprimir.Click += new System.EventHandler(this.BImprimir_Click);
             // 
             // Mant_C_Cliente
             // 

@@ -239,7 +239,7 @@ namespace SistHoteleria
 
         private void cONSULTARToolStripMenuItem11_Click(object sender, EventArgs e)
         {
-            Mant_C_Cama form = new Mant_C_Cama();
+            Mant_C_Cama form = new Mant_C_Cama("c");
             form.ShowDialog();
         }
 
@@ -256,7 +256,7 @@ namespace SistHoteleria
 
         private void consultasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Mant_C_Habitacion form = new Mant_C_Habitacion();
+            Mant_C_Habitacion form = new Mant_C_Habitacion("c");
             form.ShowDialog();
 
         }
@@ -296,7 +296,7 @@ namespace SistHoteleria
 
         private void consultarToolStripMenuItem13_Click(object sender, EventArgs e)
         {
-            Mant_C_Edificio form = new Mant_C_Edificio();
+            Mant_C_Edificio form = new Mant_C_Edificio("c");
             form.ShowDialog();
         }
 
@@ -348,7 +348,7 @@ namespace SistHoteleria
 
         private void consultarToolStripMenuItem16_Click(object sender, EventArgs e)
         {
-            Mant_C_Servicio form = new Mant_C_Servicio();
+            Mant_C_Servicio form = new Mant_C_Servicio("c");
             form.ShowDialog();
         }
 
@@ -398,7 +398,7 @@ namespace SistHoteleria
 
         private void consultarToolStripMenuItem19_Click(object sender, EventArgs e)
         {
-            Mant_C_TipoAlojamiento form = new Mant_C_TipoAlojamiento();
+            Mant_C_TipoAlojamiento form = new Mant_C_TipoAlojamiento("c");
             form.ShowDialog();
         }
 
@@ -422,6 +422,28 @@ namespace SistHoteleria
         private void consultarToolStripMenuItem17_Click(object sender, EventArgs e)
         {
             Mant_C_Temporada form = new Mant_C_Temporada();
+            form.ShowDialog();
+        }
+
+        private void tipoAlojamientoServicioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void crearToolStripMenuItem22_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Conf_TAlojServicio form = new Conf_TAlojServicio("a","");
+            form.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem21_Click(object sender, EventArgs e)
+        {
+            Conf_C_TAlojServicio form = new Conf_C_TAlojServicio("c");
             form.ShowDialog();
         }
     }

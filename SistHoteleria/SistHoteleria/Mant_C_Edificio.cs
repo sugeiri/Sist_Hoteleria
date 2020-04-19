@@ -15,7 +15,7 @@ namespace SistHoteleria
     {
         public string Id = "";
         public string aa_Prov = "";
-        string aa_Modo = "";
+        string aa_Modo = "c";
         public Mant_C_Edificio()
         {
             InitializeComponent();
@@ -23,7 +23,6 @@ namespace SistHoteleria
             CB_Filtro.Items.Add("Codigo");
             CB_Filtro.Items.Add("Descripcion");
             CB_Filtro.Items.Add("Pisos");
-
         }
         public Mant_C_Edificio(string ii_modo)
         {

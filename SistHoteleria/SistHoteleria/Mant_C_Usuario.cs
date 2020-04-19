@@ -254,5 +254,9 @@ namespace SistHoteleria
             }
         }
 
+        private void BImprimir_Click(object sender, EventArgs e)
+        {
+            Form1.Imprime(sql, "RP_LUsuario", false);
+        }
     }
 }

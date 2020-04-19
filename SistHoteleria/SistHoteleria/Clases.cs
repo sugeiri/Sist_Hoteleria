@@ -221,5 +221,12 @@ namespace SistHoteleria
             public string id_temp_oferta = "";
 
         }
+        public class Etalojamiento_servicio
+        {
+            public string id_t_alojamiento_tas = "";
+            public string id_servicio_tas = "";
+
+
+        }
     }
 }

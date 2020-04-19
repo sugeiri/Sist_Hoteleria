@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace SistHoteleria
 {
-    public partial class Conf_CaractTHabitacion : Form
+    public partial class Conf_TAlojServicio : Form
     {
         string aa_modo = "a";
         string aa_id = "";
         string Error = "";
-        Clases.ETHabitacion aa_THabitacion = new Clases.ETHabitacion();
-        List<Clases.Ethab_caracteristica> aa_LECaracteristicas = new List<Clases.Ethab_caracteristica>();
-        public Conf_CaractTHabitacion(string ii_modo, string ii_id)
+        Clases.ETipoAlojamiento aa_EAlojamiento = new Clases.ETipoAlojamiento();
+        List<Clases.Etalojamiento_servicio> aa_LEServicios = new List<Clases.Etalojamiento_servicio>();
+        public Conf_TAlojServicio(string ii_modo, string ii_id)
         {
             InitializeComponent();
             aa_modo = ii_modo;
@@ -30,7 +30,7 @@ namespace SistHoteleria
         {
 
             //LEE Caracteristicas PARA ENCADENAR
-            tipob form = new tipob("e", "caracteristica", "Caracteristicas");
+            Mant_C_Servicio form = new Mant_C_Servicio("e");
             form.ShowDialog();
             string id_T = form.Id.Trim();
             if (!string.IsNullOrWhiteSpace(id_T.Trim()))
@@ -46,7 +46,7 @@ namespace SistHoteleria
             {
                 if (dg_Caracteristicas.Rows[i].Cells[0].Value.ToString().Trim() == id.ToString().Trim())
                 {
-                    MessageBox.Show("Ya Existe Esta Caracteristicas para el Tipo de Habitacion");
+                    MessageBox.Show("Ya Existe Este Servicio para el Tipo de Alojamiento");
                     return;
                 }
             }
@@ -54,7 +54,7 @@ namespace SistHoteleria
             DataGridViewRow ii_row = new DataGridViewRow();
             ii_row.CreateCells(dg_Caracteristicas);
             ii_row.Cells[0].Value = id;
-            ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(id, "caracteristica");
+            ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(id, "servicio");
             dg_Caracteristicas.Rows.Add(ii_row);
         }
 
@@ -62,7 +62,7 @@ namespace SistHoteleria
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             //LEE Caracteristicas PARA ENCADENAR
-            tipob form = new tipob("e", "caracteristica", "Caracteristicas");
+            Mant_C_Servicio form = new Mant_C_Servicio("e");
             form.ShowDialog();
             string id_T = form.Id.Trim();
             if (!string.IsNullOrWhiteSpace(id_T.Trim()))
@@ -73,7 +73,7 @@ namespace SistHoteleria
 
         }
 
-        private void Conf_CaractTHabitacion_Load(object sender, EventArgs e)
+        private void Conf_TAlojServicio_Load(object sender, EventArgs e)
         {
 
 
@@ -84,7 +84,7 @@ namespace SistHoteleria
             }
             else
             {
-                aa_THabitacion = funciones.Lee_TipoHabitacion(aa_id.ToString());
+                aa_EAlojamiento = funciones.Lee_TipoAlojamiento(aa_id.ToString());
                 Pasa_Datos();
 
 
@@ -96,19 +96,19 @@ namespace SistHoteleria
         bool Inserta_Datos()
         {
             Error = "";
-            List<Clases.Ethab_caracteristica> aa_LECaracteristicasTHab = new List<Clases.Ethab_caracteristica>();
-            Clases.Ethab_caracteristica aa_ECaracteristicasTHab = new Clases.Ethab_caracteristica();
+            List<Clases.Etalojamiento_servicio> aa_LEServiciosTHab = new List<Clases.Etalojamiento_servicio>();
+            Clases.Etalojamiento_servicio aa_ECaracteristicasTHab = new Clases.Etalojamiento_servicio();
             for (int ii = 0; ii < dg_Caracteristicas.RowCount - 1; ii++)
             {
-                aa_ECaracteristicasTHab = new Clases.Ethab_caracteristica();
+                aa_ECaracteristicasTHab = new Clases.Etalojamiento_servicio();
 
-                aa_ECaracteristicasTHab.id_t_hab_thcar = TTHabitacion.Text;
-                aa_ECaracteristicasTHab.id_caracteristica_thcar = dg_Caracteristicas.Rows[ii].Cells[0].Value.ToString().Trim();
+                aa_ECaracteristicasTHab.id_t_alojamiento_tas = TTHabitacion.Text;
+                aa_ECaracteristicasTHab.id_servicio_tas = dg_Caracteristicas.Rows[ii].Cells[0].Value.ToString().Trim();
 
-                aa_LECaracteristicasTHab.Add(aa_ECaracteristicasTHab);
+                aa_LEServiciosTHab.Add(aa_ECaracteristicasTHab);
             }
 
-            if (funciones.Inserta_Caracteristicas_THabitacion(aa_LECaracteristicasTHab, ref Error))
+            if (funciones.Inserta_Servicio_TAlojamiento(aa_LEServiciosTHab, ref Error))
             {
                 return true;
             }
@@ -139,7 +139,7 @@ namespace SistHoteleria
 
                 if (dg_Caracteristicas.RowCount <= 1)
                 {
-                    MessageBox.Show("Debe Indicar Al menos Una Caracteristicas");
+                    MessageBox.Show("Debe Indicar Al menos Un Servicio");
                     return false;
                 }
 
@@ -150,22 +150,22 @@ namespace SistHoteleria
         }
         void Pasa_Datos()
         {
-            TTHabitacion.Text = aa_THabitacion.id_t_hab.ToString();
-            TdescTHabitacion.Text = aa_THabitacion.descr_t_hab.ToString().ToUpper();
-            aa_LECaracteristicas = new List<Clases.Ethab_caracteristica>();
-            aa_LECaracteristicas = funciones.Lee_Caracteristicas_THabitacion(aa_THabitacion.id_t_hab);
+            TTHabitacion.Text = aa_EAlojamiento.id_t_alojamiento.ToString();
+            TdescTHabitacion.Text = aa_EAlojamiento.descr_t_alojamiento.ToString().ToUpper();
+            aa_LEServicios = new List<Clases.Etalojamiento_servicio>();
+            aa_LEServicios = funciones.Lee_Servicio_Talojamiento(aa_EAlojamiento.id_t_alojamiento);
 
-            if (aa_LECaracteristicas != null)
+            if (aa_LEServicios != null)
             {
 
                 dg_Caracteristicas.Rows.Clear();
-                foreach (var Caracteristicas in aa_LECaracteristicas)
+                foreach (var Caracteristicas in aa_LEServicios)
                 {
 
                     DataGridViewRow ii_row = new DataGridViewRow();
                     ii_row.CreateCells(dg_Caracteristicas);
-                    ii_row.Cells[0].Value = Caracteristicas.id_caracteristica_thcar.ToString().Trim();
-                    ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(Caracteristicas.id_caracteristica_thcar.ToString(), "caracteristica");
+                    ii_row.Cells[0].Value = Caracteristicas.id_servicio_tas.ToString().Trim();
+                    ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(Caracteristicas.id_servicio_tas.ToString(), "servicio");
                     dg_Caracteristicas.Rows.Add(ii_row);
                 }
             }
@@ -179,7 +179,7 @@ namespace SistHoteleria
             {
                 if (Inserta_Datos())
                 {
-                    MessageBox.Show("DATOS GUARDADOS, THabitacion -->" + aa_THabitacion.id_t_hab);
+                    MessageBox.Show("DATOS GUARDADOS, TIPO ALOJAMIENTO -->" + aa_EAlojamiento.id_t_alojamiento);
                     if (aa_modo.ToUpper() != "A")
                     {
                         this.DialogResult = DialogResult.OK;
@@ -193,7 +193,7 @@ namespace SistHoteleria
             }
             else
             {
-                MessageBox.Show("No Pudo Grabar THabitacion-->" + Error);
+                MessageBox.Show("No Pudo Grabar TIPO ALOJAMIENTO - SERVICIO -->" + Error);
             }
 
 
@@ -203,7 +203,7 @@ namespace SistHoteleria
 
         void Limpia_Datos()
         {
-            aa_THabitacion = new Clases.ETHabitacion();
+            aa_EAlojamiento = new Clases.ETipoAlojamiento();
             aa_id = "";
             aa_modo = "a";
             foreach (Control item in this.Controls)
@@ -260,7 +260,7 @@ namespace SistHoteleria
                             string n = dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value.ToString();
                             if (dg_Caracteristicas.Rows[i].Cells[0].Value.ToString().Trim() == n)
                             {
-                                MessageBox.Show("Ya Existe Esta Caracteristicas para el THabitacion");
+                                MessageBox.Show("Ya Existe Este servicio para el TAlojamiento");
                                 dg_Caracteristicas.Rows.RemoveAt(e.RowIndex);
                                 return;
 
@@ -269,10 +269,10 @@ namespace SistHoteleria
                         }
 
                         string SelectedText = dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value.ToString();
-                        string descr = funciones.Lee_Descr_Tipo(SelectedText, "caracteristica").ToString().Trim();
+                        string descr = funciones.Lee_Descr_Tipo(SelectedText, "servicio").ToString().Trim();
                         if (descr == "")
                         {
-                            MessageBox.Show("No Existe Esta Caracteristica");
+                            MessageBox.Show("No Existe Este Servicio");
                             return;
 
                         }
@@ -296,14 +296,14 @@ namespace SistHoteleria
                 string id = CP.Id.ToString().Trim();
                 if (id.Trim() != "0")
                 {
-                    string descr = funciones.Lee_Descr_Tipo(id, "tipo_habitacion");
+                    string descr = funciones.Lee_Descr_Tipo(id, "tipo_alojamiento");
                     if (descr.Trim() != "")
                     {
                         TTHabitacion.Text = id;
-                        List<Clases.Ethab_caracteristica> int_med_Esp = funciones.Lee_Caracteristicas_THabitacion(id);
+                        List<Clases.Etalojamiento_servicio> int_med_Esp = funciones.Lee_Servicio_Talojamiento(id);
                         if (int_med_Esp != null)
                         {
-                            DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Caracteristicas para este Tipo de Habitacion , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
+                            DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Servicio para este Tipo de Alojamiento , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
                             if (dialogResult == DialogResult.No)
                             {
                                 TTHabitacion.Text = "";
@@ -312,13 +312,13 @@ namespace SistHoteleria
                             }
                             aa_modo = "m";
                             TTHabitacion.Enabled = true;
-                            aa_THabitacion.id_t_hab = int_med_Esp[0].id_t_hab_thcar;
+                            aa_EAlojamiento.id_t_alojamiento = int_med_Esp[0].id_t_alojamiento_tas;
                             Pasa_Datos();
                         }
                     }
                     else
                     {
-                        MessageBox.Show("No Existe este Tipo de Habitacion en la Base de Datos");
+                        MessageBox.Show("No Existe este Tipo de Alojamiento en la Base de Datos");
                         return;
                     }
 
@@ -329,13 +329,13 @@ namespace SistHoteleria
             {
                 if (TTHabitacion.Text.ToString().Trim() != "")
                 {
-                    string descr = funciones.Lee_Descr_Tipo(TTHabitacion.Text, "tipo_habitacion");
+                    string descr = funciones.Lee_Descr_Tipo(TTHabitacion.Text, "tipo_alojamiento");
                     if (descr.Trim() != "")
                     {
-                        List<Clases.Ethab_caracteristica> int_med_Esp = funciones.Lee_Caracteristicas_THabitacion(TTHabitacion.Text);
+                        List<Clases.Etalojamiento_servicio> int_med_Esp = funciones.Lee_Servicio_Talojamiento(TTHabitacion.Text);
                         if (int_med_Esp != null)
                         {
-                            DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Caracteristicas para este Tipo de Habitacion , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
+                            DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Servicios para este Tipo de Alojamiento , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
                             if (dialogResult == DialogResult.No)
                             {
                                 TTHabitacion.Text = "";
@@ -344,13 +344,13 @@ namespace SistHoteleria
                             }
                             aa_modo = "m";
                             TTHabitacion.Enabled = true;
-                            aa_THabitacion.id_t_hab = int_med_Esp[0].id_t_hab_thcar;
+                            aa_EAlojamiento.id_t_alojamiento = int_med_Esp[0].id_t_alojamiento_tas;
                             Pasa_Datos();
                         }
                     }
                     else
                     {
-                        MessageBox.Show("No Existe este Tipo de Habitacion en la Base de Datos");
+                        MessageBox.Show("No Existe este Tipo de Alojamiento en la Base de Datos");
                         return;
                     }
                 }

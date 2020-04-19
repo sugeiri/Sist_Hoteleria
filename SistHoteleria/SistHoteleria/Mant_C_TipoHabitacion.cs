@@ -13,6 +13,7 @@ namespace SistHoteleria
 {
     public partial class Mant_C_TipoHabitacion : Form
     {
+        string sql = "";
         public string Id = "";
         public string aa_Prov = "";
         string aa_Modo = "";
@@ -148,7 +149,6 @@ namespace SistHoteleria
         {
             DG_Datos.Rows.Clear();
             string Error = "";
-            string sql = "";
             sql = " Select id_t_hab, descr_t_hab, capacidad_hab, costo_hab from tipo_habitacion " +
                  " where  estado_t_hab = 'A' ";
 
@@ -189,6 +189,11 @@ namespace SistHoteleria
         private void button1_Click(object sender, EventArgs e)
         {
             Lee_Datos();
+        }
+
+        private void BImprimir_Click(object sender, EventArgs e)
+        {
+            Form1.Imprime(sql, "RP_LTipoHabitacion", false);
         }
     }
 }

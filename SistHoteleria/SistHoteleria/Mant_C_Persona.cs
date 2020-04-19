@@ -13,7 +13,7 @@ namespace SistHoteleria
     public partial class Mant_C_Persona : Form
     {
         public string Id = "";
-
+        string sql = "";
         string aa_Ultima_Descr_filtro = "";
         public Mant_C_Persona()
         {
@@ -64,7 +64,7 @@ namespace SistHoteleria
         {
             DG_Datos.Rows.Clear();
             string Error = "";
-            string sql = "Select * from Tercero";
+            sql = "Select * from Tercero";
             DataSet DS = Conexion.EjecutaSQL(sql, ref Error);
             int Count = DS.Tables.Count;
             if (Count > 0)
@@ -258,6 +258,11 @@ namespace SistHoteleria
         private void BLimpiar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void BImprimir_Click(object sender, EventArgs e)
+        {
+            Form1.Imprime(sql, "RP_LPersona", false);
         }
     }
 }

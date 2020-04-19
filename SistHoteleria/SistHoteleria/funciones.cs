@@ -859,7 +859,9 @@ namespace SistHoteleria
             ReportDocument rp = new ReportDocument();
             try
             {
-                rp.Load(@"C:\SistHot\Reportes\" + ii_nombre + ".rpt");
+                string ruta= @"C:\SistHot\Reportes\" + ii_nombre + ".rpt";
+            
+                rp.Load(ruta);
                 rp.SummaryInfo.ReportTitle = ii_titulo.ToUpper();
                 rp.SetDataSource(DAtSet.Tables[0]);
                 Form1 obj = new Form1();
@@ -872,6 +874,51 @@ namespace SistHoteleria
             {
                 MessageBox.Show(ex.Message);
             }
+
+        }
+        public static bool Inserta_Servicio_TAlojamiento(List<Clases.Etalojamiento_servicio> ii_LEtalojamiento_servicio, ref string Error)
+        {
+            string sql = "";
+            sql = "DELETE talojamiento_servicio WHERE id_t_alojamiento_tas='" + ii_LEtalojamiento_servicio[0].id_t_alojamiento_tas + "'";
+            if (!Conexion.Inserta_Datos(sql, ref Error))
+            {
+                return false;
+            }
+            int ii = 0;
+            foreach (var dato in ii_LEtalojamiento_servicio)
+            {
+                sql = "EXEC ACTtalojamiento_servicio '" + dato.id_t_alojamiento_tas + "','" +
+                                    dato.id_servicio_tas + "'";
+                if (!Conexion.Inserta_Datos(sql, ref Error))
+                {
+                    return false;
+                }
+                ii++;
+            }
+            return true;
+        }
+        public static List<Clases.Etalojamiento_servicio> Lee_Servicio_Talojamiento(string id)
+        {
+            List<Clases.Etalojamiento_servicio> ii_LECarTH = new List<Clases.Etalojamiento_servicio>();
+            Clases.Etalojamiento_servicio ii_ECarTH = new Clases.Etalojamiento_servicio();
+            DataSet DS = new DataSet();
+            string Error = "";
+            string sql = "  SELECT * from talojamiento_servicio WHERE id_t_alojamiento_tas = '" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+
+                for (int i = 0; i < DS.Tables[0].Rows.Count; i++)
+                {
+                    ii_ECarTH = new Clases.Etalojamiento_servicio();
+                    ii_ECarTH.id_t_alojamiento_tas = DS.Tables[0].Rows[i]["id_t_alojamiento_tas"].ToString();
+                    ii_ECarTH.id_servicio_tas = DS.Tables[0].Rows[i]["id_servicio_tas"].ToString();
+
+                    ii_LECarTH.Add(ii_ECarTH);
+                }
+                return ii_LECarTH;
+            }
+            return null;
 
         }
 

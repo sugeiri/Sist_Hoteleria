@@ -17,14 +17,14 @@ namespace SistHoteleria
         public string aa_Prov = "";
         string aa_Modo = "";
         string sql = "";
-        public Mant_C_Cama()
+        public Mant_C_Cama(string ii_modo)
         {
             InitializeComponent();
             CB_Filtro.Items.Add(" ");
             CB_Filtro.Items.Add("Codigo");
             CB_Filtro.Items.Add("Descripcion");
             CB_Filtro.Items.Add("Capacidad");
-
+            aa_Modo = ii_modo;
         }
 
         private void TFiltro_TextChanged(object sender, EventArgs e)
