@@ -921,6 +921,34 @@ namespace SistHoteleria
             return null;
 
         }
+        public static string Lee_Descr_Tercero(string id, string tabla)
+        {
+            
+            DataSet DS = new DataSet();
+            string id_busca = "";
+            string Error = "";
+            id_busca = id;
+            if (tabla != "tercero")
+            {
+                string buscacodigo = "select ID_TERCERO_" + tabla + " from " + tabla + " where ID_" + tabla + "= '" + id + "'";
+               
+                DS = Conexion.EjecutaSQL(buscacodigo, ref Error);
+                if (DS.Tables[0].Rows.Count > 0)
+                {
+                    id_busca= DS.Tables[0].Rows[0]["ID_TERCERO_"+tabla].ToString().Trim();
 
+                }
+            }
+              Error = "";
+            string sql = "  SELECT * from  tercero WHERE  id_Tercero = '" + id_busca + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                return DS.Tables[0].Rows[0]["Nombre_Tercero"].ToString();
+
+            }
+            return "";
+
+        }
     }
 }
