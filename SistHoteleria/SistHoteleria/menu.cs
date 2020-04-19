@@ -446,5 +446,32 @@ namespace SistHoteleria
             Conf_C_TAlojServicio form = new Conf_C_TAlojServicio("c");
             form.ShowDialog();
         }
+
+        private void reservacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void servicioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void crearToolStripMenuItem23_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Reserva form = new Reserva("a", "");
+            form.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem22_Click(object sender, EventArgs e)
+        {
+            C_Reserva form = new C_Reserva("c");
+            form.ShowDialog();
+        }
     }
 }

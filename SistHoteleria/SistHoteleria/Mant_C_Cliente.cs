@@ -28,7 +28,11 @@ namespace SistHoteleria
             modo = ii_modo;
             sql = ii_sql;
         }
-
+        public Mant_C_Cliente( string ii_modo)
+        {
+            InitializeComponent();
+            modo = ii_modo;
+        }
         int Fila_Actual()
         {
             return DG_Datos.CurrentRow.Index;
