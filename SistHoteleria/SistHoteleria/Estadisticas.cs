@@ -22,5 +22,23 @@ namespace SistHoteleria
             ReservacionesxMes rs = new ReservacionesxMes();
             rs.ShowDialog();
         }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            TipoHabMasReservadas rs = new TipoHabMasReservadas();
+            rs.ShowDialog();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            ReservacionesxTemporada rs = new ReservacionesxTemporada();
+            rs.ShowDialog();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            ReservasVsCancelaciones rs = new ReservasVsCancelaciones();
+            rs.ShowDialog();
+        }
     }
 }

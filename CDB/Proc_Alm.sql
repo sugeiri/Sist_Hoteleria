@@ -2351,3 +2351,25 @@ else
 GO
 grant all on ACTTALOJAMIENTO_SERVICIO to public
 
+
+
+--------------CReservasVsCancelaciones-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'CReservasVsCancelaciones' AND type = 'P')
+DROP PROCEDURE CReservasVsCancelaciones
+GO
+CREATE PROCEDURE CReservasVsCancelaciones
+       @II_FechaI  date,
+       @II_FechaF  date
+AS
+	select 'Res',count(*)
+	from reservacion 
+	where not exists (select * from cancelacion where id_reserv_cancelacion=id_reservacion) and
+		  fecha_lleg_reservacion between @II_FechaI and @II_FechaF
+	Union All
+	select 'Can',count(*)
+	from reservacion 
+	where exists (select * from cancelacion where id_reserv_cancelacion=id_reservacion) and
+		  fecha_lleg_reservacion between @II_FechaI and @II_FechaF
+GO
+grant all on CReservasVsCancelaciones to public

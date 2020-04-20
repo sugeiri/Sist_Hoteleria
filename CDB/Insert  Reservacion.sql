@@ -1,0 +1,16 @@
+--select * from reservacion
+
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-06-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-06-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-06-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-06-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-06-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-06-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-06-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-07-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-07-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-07-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-07-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-07-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-07-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
+insert into reservacion values((select Max(id_reservacion)+1from reservacion),'C-001','1','2020-07-01 00:00:00.000','2020-01-10 00:00:00.000',7500.00,'A','SQL','2020-01-01 00:00:00.000','SQL','2020-01-01 00:00:00.000')
