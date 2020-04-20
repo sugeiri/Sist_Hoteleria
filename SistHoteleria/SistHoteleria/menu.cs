@@ -525,5 +525,23 @@ namespace SistHoteleria
             Mant_C_Oferta form = new Mant_C_Oferta("","c");
             form.ShowDialog();
         }
+
+        private void crearToolStripMenuItem26_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Conf_OfertaTAloj form = new Conf_OfertaTAloj("a","");
+            form.ShowDialog();
+
+        }
+
+        private void consultarToolStripMenuItem26_Click(object sender, EventArgs e)
+        {
+            Conf_C_OfertaTAaloj form = new Conf_C_OfertaTAaloj("", "c");
+            form.ShowDialog();
+        }
     }
 }

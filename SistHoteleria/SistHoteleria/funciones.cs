@@ -1335,5 +1335,52 @@ namespace SistHoteleria
             return null;
 
         }
+        public static bool Inserta_Oferta_TAlojamiento(List<Clases.EOfertatalojamiento> ii_LEOfertatalojamiento, ref string Error)
+        {
+            string sql = "";
+            sql = "DELETE oferta_det_01 WHERE id_oferta_det01='" + ii_LEOfertatalojamiento[0].id_oferta_det01 + "'";
+            if (!Conexion.Inserta_Datos(sql, ref Error))
+            {
+                return false;
+            }
+            int ii = 0;
+            foreach (var dato in ii_LEOfertatalojamiento)
+            {
+                sql = "EXEC ACToferta_det_01 '" + dato.id_oferta_det01 + "','" +
+                                    dato.id_t_aloj_det01 + "','"+
+                                    dato.descuento_det01 + "'";
+                if (!Conexion.Inserta_Datos(sql, ref Error))
+                {
+                    return false;
+                }
+                ii++;
+            }
+            return true;
+        }
+        public static List<Clases.EOfertatalojamiento> Lee_Oferta_Talojamiento(string id)
+        {
+            List<Clases.EOfertatalojamiento> ii_LECarTH = new List<Clases.EOfertatalojamiento>();
+            Clases.EOfertatalojamiento ii_ECarTH = new Clases.EOfertatalojamiento();
+            DataSet DS = new DataSet();
+            string Error = "";
+            string sql = "  SELECT * from oferta_det_01 WHERE id_oferta_det01 = '" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+
+                for (int i = 0; i < DS.Tables[0].Rows.Count; i++)
+                {
+                    ii_ECarTH = new Clases.EOfertatalojamiento();
+                    ii_ECarTH.id_oferta_det01 = DS.Tables[0].Rows[i]["id_oferta_det01"].ToString();
+                    ii_ECarTH.id_t_aloj_det01 = DS.Tables[0].Rows[i]["id_t_aloj_det01"].ToString();
+                    ii_ECarTH.descuento_det01 = decimal.Parse(DS.Tables[0].Rows[i]["descuento_det01"].ToString());
+
+                    ii_LECarTH.Add(ii_ECarTH);
+                }
+                return ii_LECarTH;
+            }
+            return null;
+
+        }
     }
 }

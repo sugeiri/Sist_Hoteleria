@@ -264,5 +264,13 @@ namespace SistHoteleria
             public string id_empleado_det = "";
             public string estado_mantenimiento = "";
         }
+        public class EOfertatalojamiento
+        {
+            public string id_oferta_det01 = "";
+            public string id_t_aloj_det01 = "";
+            public decimal descuento_det01 = 0;
+
+
+        }
     }
 }

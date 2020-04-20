@@ -67,6 +67,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conf_C_OfertaTAaloj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_C_OfertaTAaloj.designer.cs">
+      <DependentUpon>Conf_C_OfertaTAaloj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_OfertaTAloj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_OfertaTAloj.designer.cs">
+      <DependentUpon>Conf_OfertaTAloj.cs</DependentUpon>
+    </Compile>
     <Compile Include="C_Mantenimiento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -366,6 +378,12 @@
     <Compile Include="Trans_Cancelacion.Designer.cs">
       <DependentUpon>Trans_Cancelacion.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Conf_C_OfertaTAaloj.resx">
+      <DependentUpon>Conf_C_OfertaTAaloj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_OfertaTAloj.resx">
+      <DependentUpon>Conf_OfertaTAloj.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="C_Mantenimiento.resx">
       <DependentUpon>C_Mantenimiento.cs</DependentUpon>
     </EmbeddedResource>
