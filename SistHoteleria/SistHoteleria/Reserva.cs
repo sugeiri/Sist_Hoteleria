@@ -207,7 +207,7 @@ namespace SistHoteleria
             DT_Fecha_Ini.Value = DateTime.Parse(fecha.ToString("dd/MM/yyyy"));
             fecha = DateTime.Parse(aa_EReserva.fecha_sal_reservacion);
             DT_Fecha_Fin.Value = DateTime.Parse(fecha.ToString("dd/MM/yyyy"));
-            if (estado.ToString().Trim().ToUpper() == "A")
+            if (aa_EReserva.estado_reservacion.ToString().Trim().ToUpper() == "A")
             {
                 CB_Estado.SelectedIndex = 0;
             }
