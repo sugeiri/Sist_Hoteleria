@@ -248,6 +248,20 @@ namespace SistHoteleria
 
 
         }
-  
+
+        public class EMantenimiento
+        {
+            public int id_mantenimiento = 0;
+            public string id_hab_mantenimiento = "";
+            public string fecha_cre_mantenimiento = "";
+            public string estado_mantenimiento = "";
+            public List<EDetMantenimiento> LEDetalle = new List<EDetMantenimiento>();
+        }
+        public class EDetMantenimiento
+        {
+            public string id_t_mant_det = "";
+            public string id_empleado_det = "";
+            public string estado_mantenimiento = "";
+        }
     }
 }

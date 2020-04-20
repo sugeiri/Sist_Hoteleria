@@ -175,8 +175,6 @@ GO
 CREATE PROCEDURE ACTMANTENIMIENTO
        @II_ID_MANTENIMIENTO  INT,
        @II_ID_HAB_MANTENIMIENTO  CHAR(5),
-       @II_FECHA_CRE_MANTENIMIENTO  DATETIME,
-       @II_FECHA_MOD_MANTENIMIENTO  DATETIME,
        @II_ESTADO_MANTENIMIENTO  CHAR(1),
        @aa_Modo  char(1)
 AS
@@ -2373,3 +2371,54 @@ AS
 		  fecha_lleg_reservacion between @II_FechaI and @II_FechaF
 GO
 grant all on CReservasVsCancelaciones to public
+
+
+
+--------------CReservasVsCancelaciones-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'CReservasVsCancelaciones' AND type = 'P')
+DROP PROCEDURE CReservasVsCancelaciones
+GO
+CREATE PROCEDURE CReservasVsCancelaciones
+       @II_FechaI  date,
+       @II_FechaF  date
+AS
+	select 'Res',count(*)
+	from reservacion 
+	where not exists (select * from cancelacion where id_reserv_cancelacion=id_reservacion) and
+		  fecha_lleg_reservacion between @II_FechaI and @II_FechaF
+	Union All
+	select 'Can',count(*)
+	from reservacion 
+	where exists (select * from cancelacion where id_reserv_cancelacion=id_reservacion) and
+		  fecha_lleg_reservacion between @II_FechaI and @II_FechaF
+GO
+grant all on CReservasVsCancelaciones to public
+
+--------------CMantActivos-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'CMantActivos' AND type = 'P')
+DROP PROCEDURE CMantActivos
+GO
+CREATE PROCEDURE CMantActivos
+       @II_id  char(5)
+AS
+	select * from 
+			mantenimiento 
+	where id_hab_mantenimiento=@II_id and 
+	estado_mantenimiento='P'
+GO
+grant all on CMantActivos to public
+
+--------------CDetMant-------------------------
+IF EXISTS (SELECT name FROM sysobjects 
+WHERE name = 'CDetMant' AND type = 'P')
+DROP PROCEDURE CDetMant
+GO
+CREATE PROCEDURE CDetMant
+       @II_id  int
+AS
+	select * from mantenimiento_det 
+	where id_mantenimiento_det=@II_id
+GO
+grant all on CDetMant to public

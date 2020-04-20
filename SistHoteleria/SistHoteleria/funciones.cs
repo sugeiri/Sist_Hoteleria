@@ -1023,5 +1023,64 @@ namespace SistHoteleria
             }
             return true;
         }
+
+        public static bool Inserta_Mantenimiento(Clases.EMantenimiento ii_EMantenimiento, ref string Error, string modo)
+        {
+            string sql = "";
+            if (ii_EMantenimiento.id_mantenimiento == 0)
+                ii_EMantenimiento.id_mantenimiento = Prox_Codigo("mantenimiento");
+            sql = "EXEC ACTmantenimiento " +
+                                   ii_EMantenimiento.id_mantenimiento + ",'" +
+                                   ii_EMantenimiento.id_hab_mantenimiento + "','" +
+                                   ii_EMantenimiento.estado_mantenimiento + "','" +
+                                   modo.Trim().ToUpper() + "'";
+
+            if (Conexion.Inserta_Datos(sql, ref Error))
+            {
+                return true;
+            }
+            foreach (var x in ii_EMantenimiento.LEDetalle)
+            {
+                sql = "EXEC ACTmantenimiento_det " +
+                                   ii_EMantenimiento.id_mantenimiento + ",'" +
+                                   x.id_t_mant_det + "','" +
+                                   x.id_empleado_det + "','" +
+                                   x.estado_mantenimiento + "','" +
+                                   modo.Trim().ToUpper() + "'";
+
+                if (Conexion.Inserta_Datos(sql, ref Error))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        public static Clases.EMantenimiento Lee_Mantenimiento(string id)
+        {
+            //List<Clases.Etalojamiento_servicio> ii_LECarTH = new List<Clases.Etalojamiento_servicio>();
+            Clases.EMantenimiento ii_EMantenimiento = new Clases.EMantenimiento();
+            DataSet DS = new DataSet();
+            string Error = "";
+            string sql = "  Exec CMantActivos '" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                ii_EMantenimiento.id_mantenimiento = DS.Tables[0].Rows[i]["id_t_alojamiento_tas"].ToString();
+                ii_EMantenimiento.id_hab_mantenimiento = DS.Tables[0].Rows[i]["id_t_alojamiento_tas"].ToString();
+                ii_EMantenimiento.estado_mantenimiento = DS.Tables[0].Rows[i]["id_t_alojamiento_tas"].ToString();
+                for (int i = 0; i < DS.Tables[0].Rows.Count; i++)
+                {
+                    ii_ECarTH = new Clases.Etalojamiento_servicio();
+                    ii_ECarTH.id_t_alojamiento_tas = DS.Tables[0].Rows[i]["id_t_alojamiento_tas"].ToString();
+                    ii_ECarTH.id_servicio_tas = DS.Tables[0].Rows[i]["id_servicio_tas"].ToString();
+
+                    ii_LECarTH.Add(ii_ECarTH);
+                }
+                return ii_LECarTH;
+            }
+            return null;
+
+        }
     }
 }

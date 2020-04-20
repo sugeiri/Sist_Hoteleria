@@ -130,7 +130,7 @@ namespace SistHoteleria
             {
                 DirectoryInfo di = Directory.CreateDirectory(@"C:\SistHot\Estadisticas\");
             }
-
+            
         }
     }
 }
