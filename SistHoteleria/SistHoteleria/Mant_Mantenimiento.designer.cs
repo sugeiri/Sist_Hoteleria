@@ -32,6 +32,11 @@
             this.BLimpiar = new System.Windows.Forms.Button();
             this.BSeguir = new System.Windows.Forms.Button();
             this.dg_Caracteristicas = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodEmp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Finalizado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
@@ -46,11 +51,6 @@
             this.Tnombre = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.TFechaC = new System.Windows.Forms.TextBox();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CodEmp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Finalizado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dg_Caracteristicas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -104,6 +104,38 @@
             this.dg_Caracteristicas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dg_Caracteristicas.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_Caracteristicas_CellEndEdit);
             this.dg_Caracteristicas.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "TMant";
+            this.dataGridViewTextBoxColumn1.MaxInputLength = 12;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 50;
+            // 
+            // Descr
+            // 
+            this.Descr.HeaderText = "Descripcion";
+            this.Descr.Name = "Descr";
+            this.Descr.Width = 200;
+            // 
+            // CodEmp
+            // 
+            this.CodEmp.HeaderText = "Empleado";
+            this.CodEmp.Name = "CodEmp";
+            this.CodEmp.Width = 80;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 200;
+            // 
+            // Finalizado
+            // 
+            this.Finalizado.HeaderText = "Finalizado";
+            this.Finalizado.Name = "Finalizado";
+            this.Finalizado.Width = 70;
             // 
             // errorProvider1
             // 
@@ -201,6 +233,7 @@
             this.TEmpleado.Name = "TEmpleado";
             this.TEmpleado.Size = new System.Drawing.Size(62, 20);
             this.TEmpleado.TabIndex = 83;
+            this.TEmpleado.Leave += new System.EventHandler(this.TEmpleado_Leave);
             // 
             // BEmpleado
             // 
@@ -210,6 +243,7 @@
             this.BEmpleado.TabIndex = 82;
             this.BEmpleado.Text = "Empleado";
             this.BEmpleado.UseVisualStyleBackColor = true;
+            this.BEmpleado.Click += new System.EventHandler(this.BEmpleado_Click);
             // 
             // Tnombre
             // 
@@ -236,38 +270,6 @@
             this.TFechaC.Name = "TFechaC";
             this.TFechaC.Size = new System.Drawing.Size(94, 20);
             this.TFechaC.TabIndex = 86;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "TMant";
-            this.dataGridViewTextBoxColumn1.MaxInputLength = 12;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 50;
-            // 
-            // Descr
-            // 
-            this.Descr.HeaderText = "Descripcion";
-            this.Descr.Name = "Descr";
-            this.Descr.Width = 200;
-            // 
-            // CodEmp
-            // 
-            this.CodEmp.HeaderText = "Empleado";
-            this.CodEmp.Name = "CodEmp";
-            this.CodEmp.Width = 80;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 200;
-            // 
-            // Finalizado
-            // 
-            this.Finalizado.HeaderText = "Finalizado";
-            this.Finalizado.Name = "Finalizado";
-            this.Finalizado.Width = 70;
             // 
             // Mant_Mantenimiento
             // 

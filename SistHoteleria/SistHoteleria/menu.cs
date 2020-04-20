@@ -480,5 +480,16 @@ namespace SistHoteleria
             Estadisticas es = new Estadisticas();
             es.Show();
         }
+
+        private void crearToolStripMenuItem24_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Mant_Mantenimiento form = new Mant_Mantenimiento("a", "");
+            form.ShowDialog();
+        }
     }
 }

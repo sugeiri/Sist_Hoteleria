@@ -71,18 +71,19 @@ namespace SistHoteleria
             DataGridViewRow ii_row = new DataGridViewRow();
             ii_row.CreateCells(dg_Caracteristicas);
             ii_row.Cells[0].Value = id;
-            ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(id, "caracteristica");
+            ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(id, "tipo_mantenimiento");
             if (aa_modo.Trim() == "a" && TEmpleado.Text.ToString().Trim() != "")
             {
                 ii_row.Cells[2].Value = TEmpleado.Text;
                 ii_row.Cells[3].Value = Tnombre.Text.ToString();
             }
+            ii_row.Cells[4].Value = "";
             dg_Caracteristicas.Rows.Add(ii_row);
         }
         void Agrega_Empleado(string id, int index)
         {
-            dg_Caracteristicas.Rows[index].Cells[2].Value = TEmpleado.Text;
-            dg_Caracteristicas.Rows[index].Cells[3].Value = Tnombre.Text.ToString();
+            dg_Caracteristicas.Rows[index].Cells[2].Value = id;
+            dg_Caracteristicas.Rows[index].Cells[3].Value = funciones.Lee_Descr_Tercero(funciones.Lee_Empleado(id).id_tercero_empleado, "tercero");
         }
 
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -122,6 +123,7 @@ namespace SistHoteleria
             CB_Estado.Items.Add("Pendiente");
             CB_Estado.Items.Add("Finalizado");
             CB_Estado.Items.Add("Cancelado");
+            CB_Estado.SelectedIndex = 0;
 
             if (aa_modo.ToUpper() == "A")
             {
@@ -146,29 +148,31 @@ namespace SistHoteleria
         bool Inserta_Datos()
         {
             Error = "";
-            Clases.EMantenimiento aa_EMantenimiento = new Clases.EMantenimiento();
-            aa_EMantenimiento.id_hab_mantenimiento = THabitacion.Text.ToString();
-            aa_EMantenimiento.estado_mantenimiento = CB_Estado.SelectedIndex.ToString().Substring(0, 1);
+           aa_EMantenimiento.id_hab_mantenimiento = THabitacion.Text.ToString();
+            aa_EMantenimiento.estado_mantenimiento = CB_Estado.SelectedItem.ToString().Substring(0, 1);
             Clases.EDetMantenimiento LEDetalle = new Clases.EDetMantenimiento();
 
             Clases.EDetMantenimiento EDet = new Clases.EDetMantenimiento();
+            aa_EMantenimiento.LEDetalle = new List<Clases.EDetMantenimiento>();
             for (int ii = 0; ii < dg_Caracteristicas.RowCount - 1; ii++)
             {
                 LEDetalle = new Clases.EDetMantenimiento();
                 LEDetalle.id_t_mant_det = dg_Caracteristicas.Rows[ii].Cells[0].Value.ToString().Trim();
                 LEDetalle.id_empleado_det = dg_Caracteristicas.Rows[ii].Cells[2].Value.ToString().Trim();
-                if (dg_Caracteristicas.Rows[ii].Cells[4].Value.ToString().Trim() == "X")
+                if (dg_Caracteristicas.Rows[ii].Cells[4].Value.ToString().Trim().ToUpper() == "X")
                     LEDetalle.estado_mantenimiento = "F";
                 else
                     LEDetalle.estado_mantenimiento = "P";
 
                 if (aa_EMantenimiento.estado_mantenimiento.Trim().ToLower() == "c")
                     LEDetalle.estado_mantenimiento = "C";
+                if (aa_EMantenimiento.estado_mantenimiento.Trim().ToLower() == "f")
+                    LEDetalle.estado_mantenimiento = "F";
 
                 aa_EMantenimiento.LEDetalle.Add(LEDetalle);
             }
 
-            if (funciones.Inserta_Mantenimiento(aa_EMantenimiento, ref Error,aa_modo))
+            if (funciones.Inserta_Mantenimiento(aa_EMantenimiento, ref Error, aa_modo))
             {
                 return true;
             }
@@ -195,16 +199,28 @@ namespace SistHoteleria
                     errorProvider1.SetError(THabitacion, Msj);
                     return false;
                 }
-                
+
 
                 if (dg_Caracteristicas.RowCount <= 1)
                 {
                     MessageBox.Show("Debe Indicar Al Menos 1 Mantenimiento a realizar");
                     return false;
                 }
-                if(TEmpleado.Text=="")
+
+
+
+            }
+            if (TEmpleado.Text == "")
+            {
+                for (int i = 0; i < dg_Caracteristicas.RowCount - 1; i++)
                 {
-                    for(int i =0;i<dg_Caracteristicas.RowCount-1;i++)
+                    if (dg_Caracteristicas.Rows[i].Cells[2].Value == null)
+                    {
+
+                        MessageBox.Show("Debe Indicar Empleado que realizara la accion, Linea-->" + i);
+                        return false;
+                    }
+                    else
                     {
                         if (dg_Caracteristicas.Rows[i].Cells[2].Value.ToString().Trim() == "")
                         {
@@ -213,8 +229,6 @@ namespace SistHoteleria
                         }
                     }
                 }
-
-
             }
             return true;
         }
@@ -223,19 +237,26 @@ namespace SistHoteleria
             THabitacion.Text = aa_Habitacion.id_habitacion.ToString();
             TdescHabitacion.Text = aa_Habitacion.descr_habitacion.ToString().ToUpper();
             aa_EMantenimiento = new Clases.EMantenimiento();
-            aa_EMantenimiento = funciones.Lee_Caracteristicas_Habitacion(aa_Habitacion.id_t_hab);
+            aa_EMantenimiento = funciones.Lee_Mantenimiento(aa_Habitacion.id_habitacion);
 
             if (aa_EMantenimiento != null)
             {
-
+                TFechaC.Text = DateTime.Parse(aa_EMantenimiento.fecha_cre_mantenimiento).ToString("dd/MM/yyyy");
+                TEmpleado.ReadOnly = true;
                 dg_Caracteristicas.Rows.Clear();
-                foreach (var Caracteristicas in aa_EMantenimiento)
+                label2.Visible = true;
+                TFechaC.Visible = true;
+                foreach (var Mant in aa_EMantenimiento.LEDetalle)
                 {
 
                     DataGridViewRow ii_row = new DataGridViewRow();
                     ii_row.CreateCells(dg_Caracteristicas);
-                    ii_row.Cells[0].Value = Caracteristicas.id_caracteristica_thcar.ToString().Trim();
-                    ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(Caracteristicas.id_caracteristica_thcar.ToString(), "caracteristica");
+                    ii_row.Cells[0].Value = Mant.id_t_mant_det.ToString().Trim();
+                    ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(Mant.id_t_mant_det.ToString(), "tipo_mantenimiento");
+                    ii_row.Cells[2].Value = Mant.id_empleado_det.ToString().Trim();
+
+                    ii_row.Cells[3].Value = funciones.Lee_Descr_Tercero(funciones.Lee_Empleado(Mant.id_empleado_det.ToString()).id_tercero_empleado, "tercero");
+                    ii_row.Cells[4].Value = Mant.estado_mantenimiento;
                     dg_Caracteristicas.Rows.Add(ii_row);
                 }
             }
@@ -249,7 +270,7 @@ namespace SistHoteleria
             {
                 if (Inserta_Datos())
                 {
-                    MessageBox.Show("DATOS GUARDADOS, Habitacion -->" + aa_Habitacion.id_t_hab);
+                    MessageBox.Show("DATOS GUARDADOS");
                     if (aa_modo.ToUpper() != "A")
                     {
                         this.DialogResult = DialogResult.OK;
@@ -263,7 +284,7 @@ namespace SistHoteleria
             }
             else
             {
-                MessageBox.Show("No Pudo Grabar Habitacion-->" + Error);
+                MessageBox.Show("No Pudo Grabar Datos-->" + Error);
             }
 
 
@@ -274,6 +295,7 @@ namespace SistHoteleria
         void Limpia_Datos()
         {
             aa_Habitacion = new Clases.EHabitacion();
+            aa_EMantenimiento = new Clases.EMantenimiento();
             aa_id = "";
             aa_modo = "a";
             foreach (Control item in this.Controls)
@@ -289,9 +311,13 @@ namespace SistHoteleria
                 }
                 catch { }
             }
-
+            TFechaC.Text = "";
+            CB_Estado.SelectedIndex = 0;
             dg_Caracteristicas.Rows.Clear();
             THabitacion.Enabled = true;
+            TEmpleado.ReadOnly = false;
+            TFechaC.Visible = false;
+            label2.Visible = false;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -330,7 +356,7 @@ namespace SistHoteleria
                             string n = dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value.ToString();
                             if (dg_Caracteristicas.Rows[i].Cells[0].Value.ToString().Trim() == n)
                             {
-                                MessageBox.Show("Ya Existe Esta Caracteristicas para el Habitacion");
+                                MessageBox.Show("Ya Existe Este Mantenimiento para la Habitacion");
                                 dg_Caracteristicas.Rows.RemoveAt(e.RowIndex);
                                 return;
 
@@ -339,20 +365,57 @@ namespace SistHoteleria
                         }
 
                         string SelectedText = dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value.ToString();
-                        string descr = funciones.Lee_Descr_Tipo(SelectedText, "caracteristica").ToString().Trim();
+                        string descr = funciones.Lee_Descr_Tipo(SelectedText, "tipo_mantenimiento").ToString().Trim();
                         if (descr == "")
                         {
-                            MessageBox.Show("No Existe Esta Caracteristica");
+                            MessageBox.Show("No Existe Este Mantenimiento");
                             return;
 
                         }
                         dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value = int.Parse(SelectedText);
                         dg_Caracteristicas.Rows[e.RowIndex].Cells[1].Value = descr.ToUpper();
+                        if (TEmpleado.Text.Trim() != "" && dg_Caracteristicas.Rows[e.RowIndex].Cells[2].Value.ToString().Trim() == "")
+                        {
+                            dg_Caracteristicas.Rows[e.RowIndex].Cells[2].Value = TEmpleado.Text.Trim();
+                            dg_Caracteristicas.Rows[e.RowIndex].Cells[3].Value = Tnombre.Text.Trim();
+
+                        }
                     }
                 }
                 else
                 {
                     dg_Caracteristicas.Rows.RemoveAt(e.RowIndex);
+                }
+
+            }
+            else
+            {
+                if (e.ColumnIndex == 2 && dg_Caracteristicas.Rows[e.RowIndex].Cells[2] != null && (e.RowIndex < dg_Caracteristicas.Rows.Count - 1))
+                {
+                    if (dg_Caracteristicas.Rows[e.RowIndex].Cells[2].Value != null)
+                    {
+                        for (int i = 0; i < dg_Caracteristicas.Rows.Count - 1; i++)
+                        {
+                            string SelectedText = dg_Caracteristicas.Rows[e.RowIndex].Cells[2].Value.ToString();
+                            string descr = funciones.Lee_Descr_Tercero(funciones.Lee_Empleado(SelectedText).id_tercero_empleado, "tercero");
+                            if (descr == "")
+                            {
+                                MessageBox.Show("No Existe Este Empleado");
+                                return;
+
+                            }
+
+                            dg_Caracteristicas.Rows[e.RowIndex].Cells[3].Value = descr;
+
+
+
+                        }
+                    }
+                    else
+                    {
+                        dg_Caracteristicas.Rows.RemoveAt(e.RowIndex);
+                    }
+
                 }
 
             }
@@ -370,7 +433,8 @@ namespace SistHoteleria
                 if (descr.Trim() != "")
                 {
                     THabitacion.Text = id;
-                    List<Clases.EMantenimiento> int_med_Esp = funciones.Lee_Caracteristicas_Habitacion(id);
+                    TdescHabitacion.Text = descr;
+                    Clases.EMantenimiento int_med_Esp = funciones.Lee_Mantenimiento(id);
                     if (int_med_Esp != null)
                     {
                         DialogResult dialogResult = MessageBox.Show("Esta Habitacion Tiene Mantenimientos en Proceso, Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
@@ -382,7 +446,7 @@ namespace SistHoteleria
                         }
                         aa_modo = "m";
                         THabitacion.Enabled = true;
-                        aa_Habitacion.id_t_hab = int_med_Esp[0].id_t_hab_thcar;
+                        aa_Habitacion.id_habitacion = int_med_Esp.id_hab_mantenimiento;
                         Pasa_Datos();
                     }
                 }
@@ -399,13 +463,14 @@ namespace SistHoteleria
         {
             if (THabitacion.Text.ToString().Trim() != "")
             {
-                string descr = funciones.Lee_Descr_Tipo(THabitacion.Text, "tipo_habitacion");
+                string descr = funciones.Lee_Descr_Tipo(THabitacion.Text, "habitacion");
                 if (descr.Trim() != "")
                 {
-                    List<Clases.EMantenimiento> int_med_Esp = funciones.Lee_Caracteristicas_Habitacion(THabitacion.Text);
+                    TdescHabitacion.Text = descr;
+                    Clases.EMantenimiento int_med_Esp = funciones.Lee_Mantenimiento(THabitacion.Text);
                     if (int_med_Esp != null)
                     {
-                        DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Caracteristicas para este Tipo de Habitacion , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
+                        DialogResult dialogResult = MessageBox.Show("Esta Habitacion Tiene Mantenimientos en Proceso, Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.No)
                         {
                             THabitacion.Text = "";
@@ -414,13 +479,13 @@ namespace SistHoteleria
                         }
                         aa_modo = "m";
                         THabitacion.Enabled = true;
-                        aa_Habitacion.id_t_hab = int_med_Esp[0].id_t_hab_thcar;
+                        aa_Habitacion.id_habitacion = int_med_Esp.id_hab_mantenimiento;
                         Pasa_Datos();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("No Existe este Tipo de Habitacion en la Base de Datos");
+                    MessageBox.Show("No Existe esta Habitacion en la Base de Datos");
                     return;
                 }
             }
@@ -430,6 +495,49 @@ namespace SistHoteleria
         private void BLimpiar_Click(object sender, EventArgs e)
         {
             Limpia_Datos();
+        }
+
+        private void BEmpleado_Click(object sender, EventArgs e)
+        {
+            Mant_C_Empleado CP = new Mant_C_Empleado("", "e");
+            CP.ShowDialog();
+            string id = CP.Id.ToString().Trim();
+            if (id.Trim() != "")
+            {
+                string descr = funciones.Lee_Descr_Tipo(id, "empleado");
+                if (descr.Trim() != "")
+                {
+                    TEmpleado.Text = id;
+                    Tnombre.Text = descr;
+
+                }
+                else
+                {
+                    MessageBox.Show("No Existe este Empleado en la Base de Datos");
+                    return;
+                }
+
+            }
+        }
+
+        private void TEmpleado_Leave(object sender, EventArgs e)
+        {
+            if (TEmpleado.Text.ToString().Trim() != "")
+            {
+                string descr = funciones.Lee_Descr_Tipo(TEmpleado.Text.ToString().Trim(), "empleado");
+                if (descr.Trim() != "")
+                {
+                    Tnombre.Text = descr;
+
+                }
+                else
+                {
+                    MessageBox.Show("No Existe este Empleado en la Base de Datos");
+                    return;
+                }
+
+
+            }
         }
     }
 }

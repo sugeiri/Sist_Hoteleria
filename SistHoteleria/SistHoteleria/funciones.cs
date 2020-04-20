@@ -1027,7 +1027,7 @@ namespace SistHoteleria
         public static bool Inserta_Mantenimiento(Clases.EMantenimiento ii_EMantenimiento, ref string Error, string modo)
         {
             string sql = "";
-            if (ii_EMantenimiento.id_mantenimiento == 0)
+            if (ii_EMantenimiento.id_mantenimiento == 0 && modo == "a")
                 ii_EMantenimiento.id_mantenimiento = Prox_Codigo("mantenimiento");
             sql = "EXEC ACTmantenimiento " +
                                    ii_EMantenimiento.id_mantenimiento + ",'" +
@@ -1035,9 +1035,9 @@ namespace SistHoteleria
                                    ii_EMantenimiento.estado_mantenimiento + "','" +
                                    modo.Trim().ToUpper() + "'";
 
-            if (Conexion.Inserta_Datos(sql, ref Error))
+            if (!Conexion.Inserta_Datos(sql, ref Error))
             {
-                return true;
+                return false;
             }
             foreach (var x in ii_EMantenimiento.LEDetalle)
             {
@@ -1048,36 +1048,70 @@ namespace SistHoteleria
                                    x.estado_mantenimiento + "','" +
                                    modo.Trim().ToUpper() + "'";
 
-                if (Conexion.Inserta_Datos(sql, ref Error))
-                {
-                    return true;
-                }
+                Conexion.Inserta_Datos(sql, ref Error);
             }
 
-            return false;
+            return true;
         }
         public static Clases.EMantenimiento Lee_Mantenimiento(string id)
         {
             //List<Clases.Etalojamiento_servicio> ii_LECarTH = new List<Clases.Etalojamiento_servicio>();
             Clases.EMantenimiento ii_EMantenimiento = new Clases.EMantenimiento();
+            Clases.EDetMantenimiento ii_EDet = new Clases.EDetMantenimiento();
             DataSet DS = new DataSet();
             string Error = "";
             string sql = "  Exec CMantActivos '" + id + "'";
             DS = Conexion.EjecutaSQL(sql, ref Error);
             if (DS.Tables[0].Rows.Count > 0)
             {
-                ii_EMantenimiento.id_mantenimiento = DS.Tables[0].Rows[i]["id_t_alojamiento_tas"].ToString();
-                ii_EMantenimiento.id_hab_mantenimiento = DS.Tables[0].Rows[i]["id_t_alojamiento_tas"].ToString();
-                ii_EMantenimiento.estado_mantenimiento = DS.Tables[0].Rows[i]["id_t_alojamiento_tas"].ToString();
+                ii_EMantenimiento.id_mantenimiento = int.Parse(DS.Tables[0].Rows[0]["id_mantenimiento"].ToString());
+                ii_EMantenimiento.id_hab_mantenimiento = DS.Tables[0].Rows[0]["id_hab_mantenimiento"].ToString();
+                ii_EMantenimiento.estado_mantenimiento = DS.Tables[0].Rows[0]["estado_mantenimiento"].ToString();
+                ii_EMantenimiento.fecha_cre_mantenimiento = DS.Tables[0].Rows[0]["fecha_cre_mantenimiento"].ToString();
+                sql = "  Exec CDetMant " + id + "";
+                DS = new DataSet();
+                DS = Conexion.EjecutaSQL(sql, ref Error);
                 for (int i = 0; i < DS.Tables[0].Rows.Count; i++)
                 {
-                    ii_ECarTH = new Clases.Etalojamiento_servicio();
-                    ii_ECarTH.id_t_alojamiento_tas = DS.Tables[0].Rows[i]["id_t_alojamiento_tas"].ToString();
-                    ii_ECarTH.id_servicio_tas = DS.Tables[0].Rows[i]["id_servicio_tas"].ToString();
+                    ii_EDet = new Clases.EDetMantenimiento();
+                    ii_EDet.id_t_mant_det = DS.Tables[0].Rows[i]["id_t_mant_det"].ToString();
+                    ii_EDet.id_empleado_det = DS.Tables[0].Rows[i]["id_empleado_det"].ToString();
+                    ii_EDet.estado_mantenimiento = DS.Tables[0].Rows[i]["estado_mantenimiento"].ToString();
 
-                    ii_LECarTH.Add(ii_ECarTH);
+                    ii_EMantenimiento.LEDetalle.Add(ii_EDet);
                 }
-                return ii_LECarTH;
+                return ii_EMantenimiento;
+            }
+            return null;
+
+        }
+        public static Clases.EMantenimiento Lee_Mantenimiento_XCod(int id)
+        {
+            //List<Clases.Etalojamiento_servicio> ii_LECarTH = new List<Clases.Etalojamiento_servicio>();
+            Clases.EMantenimiento ii_EMantenimiento = new Clases.EMantenimiento();
+            Clases.EDetMantenimiento ii_EDet = new Clases.EDetMantenimiento();
+            DataSet DS = new DataSet();
+            string Error = "";
+            string sql = "  select * from mantenimiento where id_mantenimiento= " + id + "";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                ii_EMantenimiento.id_mantenimiento = int.Parse(DS.Tables[0].Rows[0]["id_mantenimiento"].ToString());
+                ii_EMantenimiento.id_hab_mantenimiento = DS.Tables[0].Rows[0]["id_hab_mantenimiento"].ToString();
+                ii_EMantenimiento.estado_mantenimiento = DS.Tables[0].Rows[0]["estado_mantenimiento"].ToString();
+                sql = "  Exec CDetMant " + id + "";
+                DS = new DataSet();
+                DS = Conexion.EjecutaSQL(sql, ref Error);
+                for (int i = 0; i < DS.Tables[0].Rows.Count; i++)
+                {
+                    ii_EDet = new Clases.EDetMantenimiento();
+                    ii_EDet.id_t_mant_det = DS.Tables[0].Rows[i]["id_t_mant_det"].ToString();
+                    ii_EDet.id_empleado_det = DS.Tables[0].Rows[i]["id_empleado_det"].ToString();
+                    ii_EDet.estado_mantenimiento = DS.Tables[0].Rows[i]["estado_mantenimiento"].ToString();
+
+                    ii_EMantenimiento.LEDetalle.Add(ii_EDet);
+                }
+                return ii_EMantenimiento;
             }
             return null;
 

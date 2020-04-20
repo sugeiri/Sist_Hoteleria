@@ -68,17 +68,17 @@
   <ItemGroup>
     <Compile Include="Clases.cs" />
     <Compile Include="Conexion.cs" />
-    <Compile Include="Mant_Mantenimiento.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Mant_Mantenimiento.designer.cs">
-      <DependentUpon>Mant_Mantenimiento.cs</DependentUpon>
-    </Compile>
     <Compile Include="Estadisticas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Estadisticas.Designer.cs">
       <DependentUpon>Estadisticas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Mantenimiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Mantenimiento.designer.cs">
+      <DependentUpon>Mant_Mantenimiento.cs</DependentUpon>
     </Compile>
     <Compile Include="Reserva.cs">
       <SubType>Form</SubType>
@@ -341,11 +341,11 @@
     <Compile Include="tipob.designer.cs">
       <DependentUpon>tipob.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Mant_Mantenimiento.resx">
-      <DependentUpon>Mant_Mantenimiento.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Estadisticas.resx">
       <DependentUpon>Estadisticas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Mantenimiento.resx">
+      <DependentUpon>Mant_Mantenimiento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reserva.resx">
       <DependentUpon>Reserva.cs</DependentUpon>
