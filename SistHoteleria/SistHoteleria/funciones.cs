@@ -980,49 +980,57 @@ namespace SistHoteleria
             return "0";
 
         }
-        public static bool Inserta_Reserva(Clases.EReserva ii_EReserva, ref string Error)
+        public static bool Inserta_Reserva(Clases.EReserva ii_EReserva, string modo, ref string Error)
         {
             string sql = "";
 
-        
-           
-                sql = "EXEC ACTRESERVACION '" + ii_EReserva.id_reservacion + "','" +
-                                    ii_EReserva.id_cliente + "','" +
-                                    ii_EReserva.id_t_aloj_reservacion + "','" +
-                                    ii_EReserva.fecha_lleg_reservacion + "','" +
-                                    ii_EReserva.fecha_sal_reservacion + "','" +
-                                    ii_EReserva.Monto_apagar + "','" +
-                                    ii_EReserva.estado_reservacion + "','" +
-                                    Clases.Usuario + "','" +
-                                    Clases.Usuario + "'," +
-                                    "'A'";
 
-                if (!Conexion.Inserta_Datos(sql, ref Error))
-                {
-                    return false;
-                }
+
+            sql = "EXEC ACTRESERVACION '" + ii_EReserva.id_reservacion + "','" +
+                                ii_EReserva.id_cliente + "','" +
+                                ii_EReserva.id_t_aloj_reservacion + "','" +
+                                ii_EReserva.fecha_lleg_reservacion + "','" +
+                               ii_EReserva.fecha_sal_reservacion + "','" +
+                                ii_EReserva.Monto_apagar + "','" +
+                                ii_EReserva.estado_reservacion + "','" +
+                                Clases.Usuario + "','" +
+                                Clases.Usuario + "','" +
+                                modo + "'";
+
+            if (!Conexion.Inserta_Datos(sql, ref Error))
+            {
+                return false;
+            }
             return true;
         }
-        public static bool Inserta_Detalle_Reserva(List<Clases.EReserva_Detalle> ii_LEReserva_Detalle, ref string Error)
+        public static bool Inserta_Detalle_Reserva(List<Clases.EReserva_Detalle> ii_LEReserva_Detalle, string reserva, ref string Error)
         {
-            string modo = "A";
+
             string sql = "";
-           
+            sql = "delete from reservacion_det where id_reservacion_det='" + reserva + "'";
+            if (!Conexion.Inserta_Datos(sql, ref Error))
+            {
+                return false;
+            }
+
             int ii = 0;
             foreach (var dato in ii_LEReserva_Detalle)
             {
                 sql = "EXEC ACTRESERVACION_DET '" + dato.id_reservacion_det + "','" +
-                                    dato.id_thab_reserv_det + "','"+
-                                    dato.cant_reserv_det+"',"+
-                                    modo;
+                                    dato.id_thab_reserv_det + "','" +
+                                    dato.cant_reserv_det + "'";
                 if (!Conexion.Inserta_Datos(sql, ref Error))
                 {
+                    string Dsql = "delete from reservacion where id_reservacion='" + reserva + "'";
+                    Conexion.Inserta_Datos(sql, ref Error);
+
                     return false;
                 }
                 ii++;
             }
             return true;
         }
+
 
         public static bool Inserta_Mantenimiento(Clases.EMantenimiento ii_EMantenimiento, ref string Error, string modo)
         {

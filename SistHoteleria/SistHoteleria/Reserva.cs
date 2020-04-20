@@ -115,9 +115,9 @@ namespace SistHoteleria
             aa_EReserva.id_reservacion = TReserva.Text.ToString();
             aa_EReserva.id_cliente = TCliente.Text.ToString();
             aa_EReserva.id_t_aloj_reservacion = TTAlojamiento.Text.ToString();
-            aa_EReserva.fecha_lleg_reservacion = DT_Fecha_Ini.Value.ToString("yyyy-MM-dd").Trim();
+            aa_EReserva.fecha_lleg_reservacion = DT_Fecha_Ini.Value.ToString("yyyy/MM/dd").Trim();
 
-            aa_EReserva.fecha_sal_reservacion = DT_Fecha_Fin.Value.ToString("yyyy-MM-dd").Trim();
+            aa_EReserva.fecha_sal_reservacion = DT_Fecha_Fin.Value.ToString("yyyy/MM/dd").Trim();
             aa_EReserva.Monto_apagar = LTotalN.Text.ToString();
             aa_EReserva.estado_reservacion = CB_Estado.SelectedItem.ToString().Trim().ToUpper().Substring(0, 1);
 
@@ -136,9 +136,9 @@ namespace SistHoteleria
 
 
             // INSERTA ENCABEZADO
-            if (funciones.Inserta_Reserva(aa_EReserva, ref Error))
+            if (funciones.Inserta_Reserva(aa_EReserva,aa_modo, ref Error))
             {
-                if (funciones.Inserta_Detalle_Reserva(aa_LEReserva_Detalle, ref Error))
+                if (funciones.Inserta_Detalle_Reserva(aa_LEReserva_Detalle, aa_EReserva.id_reservacion, ref Error))
                 {
                     return true;
                 }
