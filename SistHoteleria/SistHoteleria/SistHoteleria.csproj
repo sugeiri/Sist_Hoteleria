@@ -317,12 +317,6 @@
     <Compile Include="R_Reserva.designer.cs">
       <DependentUpon>R_Reserva.cs</DependentUpon>
     </Compile>
-    <Compile Include="tipodecancelar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="tipodecancelar.Designer.cs">
-      <DependentUpon>tipodecancelar.cs</DependentUpon>
-    </Compile>
     <Compile Include="TipoHabMasReservadas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -490,9 +484,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="R_Reserva.resx">
       <DependentUpon>R_Reserva.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="tipodecancelar.resx">
-      <DependentUpon>tipodecancelar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TipoHabMasReservadas.resx">
       <DependentUpon>TipoHabMasReservadas.cs</DependentUpon>

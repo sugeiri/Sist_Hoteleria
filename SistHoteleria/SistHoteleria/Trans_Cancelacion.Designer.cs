@@ -255,6 +255,7 @@
             this.Controls.Add(this.BLimpiar);
             this.Controls.Add(this.button1);
             this.Name = "Trans_Cancelacion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Trans_Cancelacion";
             this.Load += new System.EventHandler(this.Trans_Cancelacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

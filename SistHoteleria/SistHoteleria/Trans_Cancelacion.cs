@@ -21,11 +21,11 @@ namespace SistHoteleria
 
         private void BTCliente_Click(object sender, EventArgs e)
         {
-            tipodecancelar form = new tipodecancelar("e", "reservacion", "Reservacion");
+            C_Reserva form = new C_Reserva("e");
             form.ShowDialog();
-            if (form.Id.ToString().Trim() != "")
+            if (form.aa_id.ToString().Trim() != "")
             {
-                Codreservacion.Text = form.Id.ToString().Trim();
+                Codreservacion.Text = form.aa_id.ToString().Trim();
             }
         }
 
@@ -86,7 +86,6 @@ namespace SistHoteleria
                             ii_arch.ToString().Trim() + "','" +
                             Clases.Usuario + "','" +
                             CB_Estado.SelectedItem.ToString().Substring(0,1).Trim() + "','" +
-                            Clases.Usuario + "','" +
                             aa_modo + "'";
 
             if (!Conexion.Inserta_Datos(sql, ref Error))
@@ -126,9 +125,10 @@ namespace SistHoteleria
                     return;
                 }
             }
-            
+            Limpia();
 
-            
+
+
         }
 
 
@@ -143,6 +143,10 @@ namespace SistHoteleria
 
         private void BLimpiar_Click(object sender, EventArgs e)
         {
+            Limpia();
+        }
+        void Limpia()
+        {
             textBox1.Text = "";
             textBox4.Text = "";
             Codreservacion.Text = "";
@@ -150,7 +154,6 @@ namespace SistHoteleria
             richTextBox1.Text = "";
             textBox2.Text = "";
         }
-
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
 

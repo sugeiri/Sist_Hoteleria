@@ -14,7 +14,7 @@ namespace SistHoteleria
     public partial class C_Reserva : Form
     {
         string aa_modo = "a";
-        string aa_id = "";
+        public string aa_id = "";
         string Error = "";
         Clases.EReserva aa_EReserva = new Clases.EReserva();
         List<Clases.EReserva_Detalle> aa_LEReserva_Detalle = new List<Clases.EReserva_Detalle>();
@@ -85,9 +85,15 @@ namespace SistHoteleria
             string sql = "select * from reservacion ";
             sql += where;
             
-            R_Reserva CP = new R_Reserva(sql,"C");
+            R_Reserva CP = new R_Reserva(sql,aa_modo.ToUpper());
             CP.ShowDialog();
-           
+            if (aa_modo.ToUpper() == "E")
+            {
+                aa_id = CP.Id;
+                this.Close();
+            }
+
+
 
         }
 

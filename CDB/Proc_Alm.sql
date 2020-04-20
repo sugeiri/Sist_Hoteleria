@@ -304,7 +304,7 @@ begin
 	     @II_ESTADO_CANCELACION,
 	     @II_CREADO_POR_CANCELACION,
 	     GETDATE());
-	update reservacion set estado_reservacion = 'I' where id_reservacion = @II_ID_RESERV_CANCELACION;
+	update reservacion set estado_reservacion = 'C' where id_reservacion = @II_ID_RESERV_CANCELACION;
 end
 else
 	update cancelacion set 	     ID_RESERV_CANCELACION=@II_ID_RESERV_CANCELACION,
@@ -1720,48 +1720,48 @@ else
 GO
 grant all on ACTTIPO_ARCHIVO to public
 
---------------ACTARCHIVO-------------------------
-IF EXISTS (SELECT name FROM sysobjects 
-WHERE name = 'ACTARCHIVO' AND type = 'P')
-DROP PROCEDURE ACTARCHIVO
-GO
-CREATE PROCEDURE ACTARCHIVO
-       @II_ID_ARCHIVO  CHAR(10),
-       @II_ID_TARCHIVO  INT,
-       @II_RUTA_ARCHIVO  VARCHAR(500),
-       @II_COMENTARIO_01_ARCHIVO  VARCHAR(2000),
-       @II_COMENTARIO_02_ARCHIVO  VARCHAR(2000),
-       @II_ESTADO_ARCHIVO  CHAR(1),
-       @II_CREADO_P_ARCHIVO  CHAR(10),
-       @II_FECHA_C_ARCHIVO  DATETIME,
-       @II_MOD_P_ARCHIVO  CHAR(10),
-       @II_FECHA_M_ARCHIVO  DATETIME,
-       @aa_Modo  char(1)
-AS
-if @aa_Modo='A' 
-	insert into archivo values(	     @II_ID_ARCHIVO,
-	     @II_ID_TARCHIVO,
-	     @II_RUTA_ARCHIVO,
-	     @II_COMENTARIO_01_ARCHIVO,
-	     @II_COMENTARIO_02_ARCHIVO,
-	     @II_ESTADO_ARCHIVO,
-	     @II_CREADO_P_ARCHIVO,
-	     GETDATE(),
-	     @II_MOD_P_ARCHIVO,
-	     GETDATE());
-else
-	update archivo set 	     ID_TARCHIVO=@II_ID_TARCHIVO,
-	     RUTA_ARCHIVO=@II_RUTA_ARCHIVO,
-	     COMENTARIO_01_ARCHIVO=@II_COMENTARIO_01_ARCHIVO,
-	     COMENTARIO_02_ARCHIVO=@II_COMENTARIO_02_ARCHIVO,
-	     ESTADO_ARCHIVO=@II_ESTADO_ARCHIVO,
-	     CREADO_P_ARCHIVO=@II_CREADO_P_ARCHIVO,
-	     FECHA_C_ARCHIVO=GETDATE(),
-	     MOD_P_ARCHIVO=@II_MOD_P_ARCHIVO,
-	     FECHA_M_ARCHIVO=GETDATE()
-  where ID_ARCHIVO=@II_ID_ARCHIVO;
-GO
-grant all on ACTARCHIVO to public
+----------------ACTARCHIVO-------------------------
+--IF EXISTS (SELECT name FROM sysobjects 
+--WHERE name = 'ACTARCHIVO' AND type = 'P')
+--DROP PROCEDURE ACTARCHIVO
+--GO
+--CREATE PROCEDURE ACTARCHIVO
+--       @II_ID_ARCHIVO  CHAR(10),
+--       @II_ID_TARCHIVO  INT,
+--       @II_RUTA_ARCHIVO  VARCHAR(500),
+--       @II_COMENTARIO_01_ARCHIVO  VARCHAR(2000),
+--       @II_COMENTARIO_02_ARCHIVO  VARCHAR(2000),
+--       @II_ESTADO_ARCHIVO  CHAR(1),
+--       @II_CREADO_P_ARCHIVO  CHAR(10),
+--       @II_FECHA_C_ARCHIVO  DATETIME,
+--       @II_MOD_P_ARCHIVO  CHAR(10),
+--       @II_FECHA_M_ARCHIVO  DATETIME,
+--       @aa_Modo  char(1)
+--AS
+--if @aa_Modo='A' 
+--	insert into archivo values(	     @II_ID_ARCHIVO,
+--	     @II_ID_TARCHIVO,
+--	     @II_RUTA_ARCHIVO,
+--	     @II_COMENTARIO_01_ARCHIVO,
+--	     @II_COMENTARIO_02_ARCHIVO,
+--	     @II_ESTADO_ARCHIVO,
+--	     @II_CREADO_P_ARCHIVO,
+--	     GETDATE(),
+--	     @II_MOD_P_ARCHIVO,
+--	     GETDATE());
+--else
+--	update archivo set 	     ID_TARCHIVO=@II_ID_TARCHIVO,
+--	     RUTA_ARCHIVO=@II_RUTA_ARCHIVO,
+--	     COMENTARIO_01_ARCHIVO=@II_COMENTARIO_01_ARCHIVO,
+--	     COMENTARIO_02_ARCHIVO=@II_COMENTARIO_02_ARCHIVO,
+--	     ESTADO_ARCHIVO=@II_ESTADO_ARCHIVO,
+--	     CREADO_P_ARCHIVO=@II_CREADO_P_ARCHIVO,
+--	     FECHA_C_ARCHIVO=GETDATE(),
+--	     MOD_P_ARCHIVO=@II_MOD_P_ARCHIVO,
+--	     FECHA_M_ARCHIVO=GETDATE()
+--  where ID_ARCHIVO=@II_ID_ARCHIVO;
+--GO
+--grant all on ACTARCHIVO to public
 
 --------------ACTHOTEL-------------------------
 IF EXISTS (SELECT name FROM sysobjects 
