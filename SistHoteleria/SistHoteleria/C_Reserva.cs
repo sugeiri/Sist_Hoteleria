@@ -79,16 +79,16 @@ namespace SistHoteleria
             string sql = "select * from reservacion ";
             sql += where;
 
-            R_Reserva CP = new R_Reserva("e");
-            CP.ShowDialog();
-            string id = CP.Id.ToString().Trim();
-            if (id.Trim() != "0")
-            {
-                TTAlojamiento.Text = id;
-                TdescTAlojamiento.Text = funciones.Lee_Descr_TipoAlojamiento(id);
+            //R_Reserva CP = new R_Reserva("e");
+          //  CP.ShowDialog();
+           // string id = CP.Id.ToString().Trim();
+            //if (id.Trim() != "0")
+            //{
+            //    TTAlojamiento.Text = id;
+            //    TdescTAlojamiento.Text = funciones.Lee_Descr_TipoAlojamiento(id);
 
 
-            }
+            //}
 
         }
 
