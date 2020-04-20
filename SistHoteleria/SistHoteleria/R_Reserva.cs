@@ -29,6 +29,7 @@ namespace SistHoteleria
             InitializeComponent();
             aa_modo = ii_modo;
             sql = ii_sql;
+
         }
 
         int Fila_Actual()
@@ -115,25 +116,27 @@ namespace SistHoteleria
 
              DG_Datos.Rows.Clear();
             string Error = "";
-            string sql = "select id_caracteristica,descr_caracteristica,id_t_hab,descr_t_hab " +
-                                " from thab_caracteristica,tipo_habitacion,caracteristica  " +
-                                " where id_t_hab=id_t_hab_thcar and " +
-                                "   id_caracteristica=id_caracteristica_thcar  ";
+           
             DataSet DS = Conexion.EjecutaSQL(sql, ref Error);
             int Count = DS.Tables.Count;
             if (Count > 0)
             {
+                DateTime fecha;
                 Count = DS.Tables[0].Rows.Count;
                 for (int i = 0; i < Count; i++)
                 {
                     DataGridViewRow ii_row = new DataGridViewRow();
                     ii_row.CreateCells(DG_Datos);
-                    ii_row.Cells[0].Value = DS.Tables[0].Rows[i]["id_caracteristica"].ToString().Trim();
-                    ii_row.Cells[1].Value = DS.Tables[0].Rows[i]["descr_caracteristica"].ToString().Trim();
-                    ii_row.Cells[2].Value = DS.Tables[0].Rows[i]["id_t_hab"].ToString().Trim();
-                    ii_row.Cells[3].Value = DS.Tables[0].Rows[i]["descr_t_hab"].ToString().Trim();
-                   
-                    
+                    ii_row.Cells[0].Value = DS.Tables[0].Rows[i]["id_reservacion"].ToString().Trim();
+                    ii_row.Cells[2].Value = funciones.Lee_Descr_Tercero( DS.Tables[0].Rows[i]["id_cliente"].ToString().Trim(),"Cliente");
+                    ii_row.Cells[4].Value = funciones.Lee_Descr_Tipo(DS.Tables[0].Rows[i]["id_t_aloj_reservacion"].ToString().Trim(), "TIPO_ALOJAMIENTO");
+                   fecha = DateTime.Parse(DS.Tables[0].Rows[i]["fecha_lleg_reservacion"].ToString().Trim());
+                    ii_row.Cells[5].Value = fecha.ToString("dd/MM/yyyy");
+                    fecha = DateTime.Parse(DS.Tables[0].Rows[i]["fecha_sal_reservacion"].ToString().Trim());
+                    ii_row.Cells[6].Value = fecha.ToString("dd/MM/yyyy");
+                    ii_row.Cells[5].Value = DS.Tables[0].Rows[i]["Monto_apagar"].ToString().Trim();
+                    ii_row.Cells[5].Value = DS.Tables[0].Rows[i]["estado_reservacion"].ToString().Trim();
+
                     DG_Datos.Rows.Add(ii_row);
                 }
             }

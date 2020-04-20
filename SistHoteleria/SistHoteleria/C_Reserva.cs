@@ -78,17 +78,10 @@ namespace SistHoteleria
             where = where.Replace("where and", "where ");
             string sql = "select * from reservacion ";
             sql += where;
-
-            //R_Reserva CP = new R_Reserva("e");
-          //  CP.ShowDialog();
-           // string id = CP.Id.ToString().Trim();
-            //if (id.Trim() != "0")
-            //{
-            //    TTAlojamiento.Text = id;
-            //    TdescTAlojamiento.Text = funciones.Lee_Descr_TipoAlojamiento(id);
-
-
-            //}
+            
+            R_Reserva CP = new R_Reserva(sql,"C");
+            CP.ShowDialog();
+           
 
         }
 
@@ -171,6 +164,16 @@ namespace SistHoteleria
                
 
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TFecha_Ini_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
     }
