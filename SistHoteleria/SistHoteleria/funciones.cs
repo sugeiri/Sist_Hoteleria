@@ -1429,54 +1429,5 @@ namespace SistHoteleria
             return null;
 
         }
-        public static bool Inserta_Oferta_xRango(List<Clases.EOfertaxRangoAlojamientos> ii_LEOferta, ref string Error)
-        {
-            string sql = "";
-            sql = "DELETE oferta_det_03 WHERE id_oferta_det03='" + ii_LEOferta[0].id_oferta_det03 + "'";
-            if (!Conexion.Inserta_Datos(sql, ref Error))
-            {
-                return false;
-            }
-            int ii = 0;
-            foreach (var dato in ii_LEOferta)
-            {
-                sql = "EXEC ACToferta_det_03 '" + dato.id_oferta_det03 + "'," +
-                                    dato.c_ini_aloj_det03 + "," +
-                                    dato.c_ini_aloj_det03 + ",'" +
-                                    dato.descuento_det03 + "'";
-                if (!Conexion.Inserta_Datos(sql, ref Error))
-                {
-                    return false;
-                }
-                ii++;
-            }
-            return true;
-        }
-        public static List<Clases.EOfertaxRangoAlojamientos> Lee_Oferta_XRango(string id)
-        {
-            List<Clases.EOfertaxRangoAlojamientos> ii_LECarTH = new List<Clases.EOfertaxRangoAlojamientos>();
-            Clases.EOfertaxRangoAlojamientos ii_ECarTH = new Clases.EOfertaxRangoAlojamientos();
-            DataSet DS = new DataSet();
-            string Error = "";
-            string sql = "  SELECT * from oferta_det_03 WHERE id_oferta_det03 = '" + id + "'";
-            DS = Conexion.EjecutaSQL(sql, ref Error);
-            if (DS.Tables[0].Rows.Count > 0)
-            {
-
-                for (int i = 0; i < DS.Tables[0].Rows.Count; i++)
-                {
-                    ii_ECarTH = new Clases.EOfertaxRangoAlojamientos();
-                    ii_ECarTH.id_oferta_det03 = DS.Tables[0].Rows[i]["id_oferta_det03"].ToString();
-                    ii_ECarTH.c_ini_aloj_det03 = int.Parse(DS.Tables[0].Rows[i]["c_ini_aloj_det03"].ToString());
-                    ii_ECarTH.c_fin_aloj_det03 = int.Parse(DS.Tables[0].Rows[i]["c_fin_aloj_det03"].ToString());
-                    ii_ECarTH.descuento_det03 = decimal.Parse(DS.Tables[0].Rows[i]["descuento_det03"].ToString());
-
-                    ii_LECarTH.Add(ii_ECarTH);
-                }
-                return ii_LECarTH;
-            }
-            return null;
-
-        }
     }
 }

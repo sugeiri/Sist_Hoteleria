@@ -1,0 +1,602 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C60BC10-81D4-4033-A0BD-BC6CE4EBDE25}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SistHoteleria</RootNamespace>
+    <AssemblyName>SistHoteleria</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Quilvio_C55\Desktop\YORDANY\CrystalDecisions.CrystalReports.Engine\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Quilvio_C55\Desktop\YORDANY\CrystalDecisions.Windows.Forms\CrystalDecisions.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.0.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Alojamiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Alojamiento.designer.cs">
+      <DependentUpon>Alojamiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clases.cs" />
+    <Compile Include="Conf_C_OfertaTCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_C_OfertaTCliente.designer.cs">
+      <DependentUpon>Conf_C_OfertaTCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_C_OfertaTAaloj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_C_OfertaTAaloj.designer.cs">
+      <DependentUpon>Conf_C_OfertaTAaloj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_C_OfertaxRango.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_C_OfertaxRango.designer.cs">
+      <DependentUpon>Conf_C_OfertaxRango.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_OfertaTCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_OfertaTCliente.designer.cs">
+      <DependentUpon>Conf_OfertaTCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_OfertaTAloj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_OfertaTAloj.designer.cs">
+      <DependentUpon>Conf_OfertaTAloj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_OfertaxCantAlojamiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_OfertaxCantAlojamiento.designer.cs">
+      <DependentUpon>Conf_OfertaxCantAlojamiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C_Mantenimiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C_Mantenimiento.designer.cs">
+      <DependentUpon>C_Mantenimiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion.cs" />
+    <Compile Include="Estadisticas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Estadisticas.Designer.cs">
+      <DependentUpon>Estadisticas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Oferta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Oferta.designer.cs">
+      <DependentUpon>Mant_C_Oferta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Mantenimiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Mantenimiento.designer.cs">
+      <DependentUpon>Mant_Mantenimiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Oferta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Oferta.designer.cs">
+      <DependentUpon>Mant_Oferta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reserva.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reserva.designer.cs">
+      <DependentUpon>Reserva.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C_Reserva.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C_Reserva.designer.cs">
+      <DependentUpon>C_Reserva.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_C_TAlojServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_C_TAlojServicio.designer.cs">
+      <DependentUpon>Conf_C_TAlojServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_TAlojServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_TAlojServicio.designer.cs">
+      <DependentUpon>Conf_TAlojServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_CaractTHabitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_CaractTHabitacion.designer.cs">
+      <DependentUpon>Conf_CaractTHabitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_C_CaractTHabitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_C_CaractTHabitacion.designer.cs">
+      <DependentUpon>Conf_C_CaractTHabitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="funciones.cs" />
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Temporada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Temporada.designer.cs">
+      <DependentUpon>Mant_C_Temporada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_TipoUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_TipoUsuario.designer.cs">
+      <DependentUpon>Mant_C_TipoUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_TipoAlojamiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_TipoAlojamiento.designer.cs">
+      <DependentUpon>Mant_C_TipoAlojamiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Servicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Servicio.designer.cs">
+      <DependentUpon>Mant_C_Servicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Edificio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Edificio.designer.cs">
+      <DependentUpon>Mant_C_Edificio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Cliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Cliente.designer.cs">
+      <DependentUpon>Mant_C_Cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Empleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Empleado.designer.cs">
+      <DependentUpon>Mant_C_Empleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_TipoUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_TipoUsuario.designer.cs">
+      <DependentUpon>Mant_TipoUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Edificio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Edificio.designer.cs">
+      <DependentUpon>Mant_Edificio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Cliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Cliente.designer.cs">
+      <DependentUpon>Mant_Cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_TipoAlojamiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_TipoAlojamiento.designer.cs">
+      <DependentUpon>Mant_TipoAlojamiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Temporada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Temporada.designer.cs">
+      <DependentUpon>Mant_Temporada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Servicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Servicio.designer.cs">
+      <DependentUpon>Mant_Servicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_TipoHabitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_TipoHabitacion.designer.cs">
+      <DependentUpon>Mant_TipoHabitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_TipoHabitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_TipoHabitacion.designer.cs">
+      <DependentUpon>Mant_C_TipoHabitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Habitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Habitacion.designer.cs">
+      <DependentUpon>Mant_C_Habitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Habitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Habitacion.designer.cs">
+      <DependentUpon>Mant_Habitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Cama.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Cama.designer.cs">
+      <DependentUpon>Mant_C_Cama.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Municipio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Municipio.designer.cs">
+      <DependentUpon>Mant_C_Municipio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Persona.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Persona.designer.cs">
+      <DependentUpon>Mant_C_Persona.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Provincia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Provincia.designer.cs">
+      <DependentUpon>Mant_C_Provincia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_C_Usuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Usuario.designer.cs">
+      <DependentUpon>Mant_C_Usuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Cama.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Cama.designer.cs">
+      <DependentUpon>Mant_Cama.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Municipio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Municipio.designer.cs">
+      <DependentUpon>Mant_Municipio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Provincia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Provincia.designer.cs">
+      <DependentUpon>Mant_Provincia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Empleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Empleado.designer.cs">
+      <DependentUpon>Mant_Empleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Usuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Usuario.designer.cs">
+      <DependentUpon>Mant_Usuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menu.Designer.cs">
+      <DependentUpon>menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReservasVsCancelaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReservasVsCancelaciones.designer.cs">
+      <DependentUpon>ReservasVsCancelaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="R_Reserva.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="R_Reserva.designer.cs">
+      <DependentUpon>R_Reserva.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TipoHabMasReservadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TipoHabMasReservadas.designer.cs">
+      <DependentUpon>TipoHabMasReservadas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReservacionesxTemporada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReservacionesxTemporada.designer.cs">
+      <DependentUpon>ReservacionesxTemporada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReservacionesxMes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReservacionesxMes.designer.cs">
+      <DependentUpon>ReservacionesxMes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tipo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tipo.designer.cs">
+      <DependentUpon>tipo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tipob.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tipob.designer.cs">
+      <DependentUpon>tipob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Trans_Cancelacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Trans_Cancelacion.Designer.cs">
+      <DependentUpon>Trans_Cancelacion.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Alojamiento.resx">
+      <DependentUpon>Alojamiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_C_OfertaTCliente.resx">
+      <DependentUpon>Conf_C_OfertaTCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_C_OfertaTAaloj.resx">
+      <DependentUpon>Conf_C_OfertaTAaloj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_C_OfertaxRango.resx">
+      <DependentUpon>Conf_C_OfertaxRango.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_OfertaTCliente.resx">
+      <DependentUpon>Conf_OfertaTCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_OfertaTAloj.resx">
+      <DependentUpon>Conf_OfertaTAloj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_OfertaxCantAlojamiento.resx">
+      <DependentUpon>Conf_OfertaxCantAlojamiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C_Mantenimiento.resx">
+      <DependentUpon>C_Mantenimiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Estadisticas.resx">
+      <DependentUpon>Estadisticas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Oferta.resx">
+      <DependentUpon>Mant_C_Oferta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Mantenimiento.resx">
+      <DependentUpon>Mant_Mantenimiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Oferta.resx">
+      <DependentUpon>Mant_Oferta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reserva.resx">
+      <DependentUpon>Reserva.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C_Reserva.resx">
+      <DependentUpon>C_Reserva.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_C_TAlojServicio.resx">
+      <DependentUpon>Conf_C_TAlojServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_TAlojServicio.resx">
+      <DependentUpon>Conf_TAlojServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_CaractTHabitacion.resx">
+      <DependentUpon>Conf_CaractTHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_C_CaractTHabitacion.resx">
+      <DependentUpon>Conf_C_CaractTHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Temporada.resx">
+      <DependentUpon>Mant_C_Temporada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_TipoUsuario.resx">
+      <DependentUpon>Mant_C_TipoUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_TipoAlojamiento.resx">
+      <DependentUpon>Mant_C_TipoAlojamiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Servicio.resx">
+      <DependentUpon>Mant_C_Servicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Edificio.resx">
+      <DependentUpon>Mant_C_Edificio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Cliente.resx">
+      <DependentUpon>Mant_C_Cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Empleado.resx">
+      <DependentUpon>Mant_C_Empleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_TipoUsuario.resx">
+      <DependentUpon>Mant_TipoUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Edificio.resx">
+      <DependentUpon>Mant_Edificio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Cliente.resx">
+      <DependentUpon>Mant_Cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_TipoAlojamiento.resx">
+      <DependentUpon>Mant_TipoAlojamiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Temporada.resx">
+      <DependentUpon>Mant_Temporada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Servicio.resx">
+      <DependentUpon>Mant_Servicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_TipoHabitacion.resx">
+      <DependentUpon>Mant_TipoHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_TipoHabitacion.resx">
+      <DependentUpon>Mant_C_TipoHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Habitacion.resx">
+      <DependentUpon>Mant_C_Habitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Habitacion.resx">
+      <DependentUpon>Mant_Habitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Cama.resx">
+      <DependentUpon>Mant_C_Cama.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Municipio.resx">
+      <DependentUpon>Mant_C_Municipio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Persona.resx">
+      <DependentUpon>Mant_C_Persona.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Provincia.resx">
+      <DependentUpon>Mant_C_Provincia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Usuario.resx">
+      <DependentUpon>Mant_C_Usuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Cama.resx">
+      <DependentUpon>Mant_Cama.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Municipio.resx">
+      <DependentUpon>Mant_Municipio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Provincia.resx">
+      <DependentUpon>Mant_Provincia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Empleado.resx">
+      <DependentUpon>Mant_Empleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Usuario.resx">
+      <DependentUpon>Mant_Usuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menu.resx">
+      <DependentUpon>menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ReservasVsCancelaciones.resx">
+      <DependentUpon>ReservasVsCancelaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="R_Reserva.resx">
+      <DependentUpon>R_Reserva.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TipoHabMasReservadas.resx">
+      <DependentUpon>TipoHabMasReservadas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReservacionesxTemporada.resx">
+      <DependentUpon>ReservacionesxTemporada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReservacionesxMes.resx">
+      <DependentUpon>ReservacionesxMes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tipo.resx">
+      <DependentUpon>tipo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tipob.resx">
+      <DependentUpon>tipob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Trans_Cancelacion.resx">
+      <DependentUpon>Trans_Cancelacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
