@@ -311,6 +311,12 @@
     <Compile Include="R_Reserva.designer.cs">
       <DependentUpon>R_Reserva.cs</DependentUpon>
     </Compile>
+    <Compile Include="tipodecancelar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tipodecancelar.Designer.cs">
+      <DependentUpon>tipodecancelar.cs</DependentUpon>
+    </Compile>
     <Compile Include="TipoHabMasReservadas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -340,6 +346,12 @@
     </Compile>
     <Compile Include="tipob.designer.cs">
       <DependentUpon>tipob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Trans_Cancelacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Trans_Cancelacion.Designer.cs">
+      <DependentUpon>Trans_Cancelacion.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Estadisticas.resx">
       <DependentUpon>Estadisticas.cs</DependentUpon>
@@ -470,6 +482,9 @@
     <EmbeddedResource Include="R_Reserva.resx">
       <DependentUpon>R_Reserva.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="tipodecancelar.resx">
+      <DependentUpon>tipodecancelar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TipoHabMasReservadas.resx">
       <DependentUpon>TipoHabMasReservadas.cs</DependentUpon>
     </EmbeddedResource>
@@ -484,6 +499,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="tipob.resx">
       <DependentUpon>tipob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Trans_Cancelacion.resx">
+      <DependentUpon>Trans_Cancelacion.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
