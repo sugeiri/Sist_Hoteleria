@@ -138,7 +138,7 @@ namespace SistHoteleria
                 label2.Visible = true;
                 Pasa_Datos_XCodigo(int.Parse(aa_id));
 
-                if (aa_modo.ToUpper()=="D")
+                if (aa_modo.ToUpper() == "D")
                 {
                     Inactiva_Pantalla();
                 }
@@ -177,7 +177,7 @@ namespace SistHoteleria
         bool Inserta_Datos()
         {
             Error = "";
-           aa_EMantenimiento.id_hab_mantenimiento = THabitacion.Text.ToString();
+            aa_EMantenimiento.id_hab_mantenimiento = THabitacion.Text.ToString();
             aa_EMantenimiento.estado_mantenimiento = CB_Estado.SelectedItem.ToString().Substring(0, 1);
             Clases.EDetMantenimiento LEDetalle = new Clases.EDetMantenimiento();
 
@@ -299,7 +299,7 @@ namespace SistHoteleria
             if (aa_EMantenimiento != null)
             {
                 THabitacion.Text = aa_EMantenimiento.id_hab_mantenimiento;
-                TdescHabitacion.Text = funciones.Lee_Descr_Tipo(aa_EMantenimiento.id_hab_mantenimiento,"habitacion").ToString().ToUpper();
+                TdescHabitacion.Text = funciones.Lee_Descr_Tipo(aa_EMantenimiento.id_hab_mantenimiento, "habitacion").ToString().ToUpper();
 
                 TFechaC.Text = DateTime.Parse(aa_EMantenimiento.fecha_cre_mantenimiento).ToString("dd/MM/yyyy");
                 TEmpleado.ReadOnly = true;
@@ -457,6 +457,12 @@ namespace SistHoteleria
                         for (int i = 0; i < dg_Caracteristicas.Rows.Count - 1; i++)
                         {
                             string SelectedText = dg_Caracteristicas.Rows[e.RowIndex].Cells[2].Value.ToString();
+                            if (funciones.Lee_Empleado(SelectedText) == null)
+                            {
+                                MessageBox.Show("No Existe Este Empleado");
+                                return;
+
+                            }
                             string descr = funciones.Lee_Descr_Tercero(funciones.Lee_Empleado(SelectedText).id_tercero_empleado, "tercero");
                             if (descr == "")
                             {
