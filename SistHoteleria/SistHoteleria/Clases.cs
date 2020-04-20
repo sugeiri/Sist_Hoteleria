@@ -272,5 +272,13 @@ namespace SistHoteleria
 
 
         }
+        public class EOfertaTCliente
+        {
+            public string id_oferta_det02 = "";
+            public string id_t_cliente_det02 = "";
+            public decimal descuento_det02 = 0;
+
+
+        }
     }
 }

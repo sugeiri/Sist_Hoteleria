@@ -1382,5 +1382,52 @@ namespace SistHoteleria
             return null;
 
         }
+        public static bool Inserta_Oferta_TCliente(List<Clases.EOfertaTCliente> ii_LEOferta, ref string Error)
+        {
+            string sql = "";
+            sql = "DELETE oferta_det_02 WHERE id_oferta_det02='" + ii_LEOferta[0].id_oferta_det02 + "'";
+            if (!Conexion.Inserta_Datos(sql, ref Error))
+            {
+                return false;
+            }
+            int ii = 0;
+            foreach (var dato in ii_LEOferta)
+            {
+                sql = "EXEC ACToferta_det_02 '" + dato.id_oferta_det02 + "','" +
+                                    dato.id_t_cliente_det02 + "','" +
+                                    dato.descuento_det02 + "'";
+                if (!Conexion.Inserta_Datos(sql, ref Error))
+                {
+                    return false;
+                }
+                ii++;
+            }
+            return true;
+        }
+        public static List<Clases.EOfertaTCliente> Lee_Oferta_TCliente(string id)
+        {
+            List<Clases.EOfertaTCliente> ii_LECarTH = new List<Clases.EOfertaTCliente>();
+            Clases.EOfertaTCliente ii_ECarTH = new Clases.EOfertaTCliente();
+            DataSet DS = new DataSet();
+            string Error = "";
+            string sql = "  SELECT * from oferta_det_02 WHERE id_oferta_det02 = '" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+
+                for (int i = 0; i < DS.Tables[0].Rows.Count; i++)
+                {
+                    ii_ECarTH = new Clases.EOfertaTCliente();
+                    ii_ECarTH.id_oferta_det02 = DS.Tables[0].Rows[i]["id_oferta_det02"].ToString();
+                    ii_ECarTH.id_t_cliente_det02 = DS.Tables[0].Rows[i]["id_t_cliente_det02"].ToString();
+                    ii_ECarTH.descuento_det02 = decimal.Parse(DS.Tables[0].Rows[i]["descuento_det02"].ToString());
+
+                    ii_LECarTH.Add(ii_ECarTH);
+                }
+                return ii_LECarTH;
+            }
+            return null;
+
+        }
     }
 }

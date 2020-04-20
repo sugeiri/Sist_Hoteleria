@@ -543,5 +543,22 @@ namespace SistHoteleria
             Conf_C_OfertaTAaloj form = new Conf_C_OfertaTAaloj("", "c");
             form.ShowDialog();
         }
+
+        private void crearToolStripMenuItem27_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Conf_OfertaTCliente form = new Conf_OfertaTCliente("a", "");
+            form.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem27_Click(object sender, EventArgs e)
+        {
+            Conf_C_OfertaTCliente form = new Conf_C_OfertaTCliente("", "c");
+            form.ShowDialog();
+        }
     }
 }

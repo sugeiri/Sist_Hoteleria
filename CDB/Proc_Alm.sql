@@ -550,17 +550,11 @@ GO
 CREATE PROCEDURE ACTOFERTA_DET_02
        @II_ID_OFERTA_DET02  CHAR(5),
        @II_ID_T_CLIENTE_DET02  CHAR(5),
-       @II_DESCUENTO_DET02  DECIMAL,
-       @aa_Modo  char(1)
+       @II_DESCUENTO_DET02  DECIMAL
 AS
-if @aa_Modo='A' 
 	insert into oferta_det_02 values(	     @II_ID_OFERTA_DET02,
 	     @II_ID_T_CLIENTE_DET02,
 	     @II_DESCUENTO_DET02);
-else
-	update oferta_det_02 set 	     ID_T_CLIENTE_DET02=@II_ID_T_CLIENTE_DET02,
-	     DESCUENTO_DET02=@II_DESCUENTO_DET02
-  where ID_OFERTA_DET02=@II_ID_OFERTA_DET02;
 GO
 grant all on ACTOFERTA_DET_02 to public
 
@@ -1622,50 +1616,6 @@ else
   where ID_OFERTA=@II_ID_OFERTA;
 GO
 grant all on ACTOFERTA to public
-
---------------ACTOFERTA_DET_01-------------------------
-IF EXISTS (SELECT name FROM sysobjects 
-WHERE name = 'ACTOFERTA_DET_01' AND type = 'P')
-DROP PROCEDURE ACTOFERTA_DET_01
-GO
-CREATE PROCEDURE ACTOFERTA_DET_01
-       @II_ID_OFERTA_DET01  CHAR(5),
-       @II_ID_T_ALOJ_DET01  CHAR(5),
-       @II_DESCUENTO_DET01  DECIMAL,
-       @aa_Modo  char(1)
-AS
-if @aa_Modo='A' 
-	insert into oferta_det_01 values(	     @II_ID_OFERTA_DET01,
-	     @II_ID_T_ALOJ_DET01,
-	     @II_DESCUENTO_DET01);
-else
-	update oferta_det_01 set 	     ID_T_ALOJ_DET01=@II_ID_T_ALOJ_DET01,
-	     DESCUENTO_DET01=@II_DESCUENTO_DET01
-  where ID_OFERTA_DET01=@II_ID_OFERTA_DET01;
-GO
-grant all on ACTOFERTA_DET_01 to public
-
---------------ACTOFERTA_DET_02-------------------------
-IF EXISTS (SELECT name FROM sysobjects 
-WHERE name = 'ACTOFERTA_DET_02' AND type = 'P')
-DROP PROCEDURE ACTOFERTA_DET_02
-GO
-CREATE PROCEDURE ACTOFERTA_DET_02
-       @II_ID_OFERTA_DET02  CHAR(5),
-       @II_ID_T_CLIENTE_DET02  CHAR(5),
-       @II_DESCUENTO_DET02  DECIMAL,
-       @aa_Modo  char(1)
-AS
-if @aa_Modo='A' 
-	insert into oferta_det_02 values(	     @II_ID_OFERTA_DET02,
-	     @II_ID_T_CLIENTE_DET02,
-	     @II_DESCUENTO_DET02);
-else
-	update oferta_det_02 set 	     ID_T_CLIENTE_DET02=@II_ID_T_CLIENTE_DET02,
-	     DESCUENTO_DET02=@II_DESCUENTO_DET02
-  where ID_OFERTA_DET02=@II_ID_OFERTA_DET02;
-GO
-grant all on ACTOFERTA_DET_02 to public
 
 --------------ACTOFERTA_DET_03-------------------------
 IF EXISTS (SELECT name FROM sysobjects 
