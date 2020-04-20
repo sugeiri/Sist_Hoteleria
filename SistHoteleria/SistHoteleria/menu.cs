@@ -491,5 +491,11 @@ namespace SistHoteleria
             Mant_Mantenimiento form = new Mant_Mantenimiento("a", "");
             form.ShowDialog();
         }
+
+        private void consultarToolStripMenuItem23_Click(object sender, EventArgs e)
+        {
+            C_Mantenimiento form = new C_Mantenimiento("", "c");
+            form.ShowDialog();
+        }
     }
 }

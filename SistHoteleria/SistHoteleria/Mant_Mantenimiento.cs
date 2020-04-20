@@ -134,14 +134,46 @@ namespace SistHoteleria
             else
             {
 
-                aa_Habitacion = funciones.Lee_Habitacion(aa_id.ToString());
-                Pasa_Datos();
                 TFechaC.Visible = true;
                 label2.Visible = true;
+                if(aa_modo.ToUpper()=="D")
+                {
+                    Pasa_Datos_XCodigo(int.Parse(aa_id));
+                    Inactiva_Pantalla();
+                }
+                else
+                {
+                    aa_Habitacion = funciones.Lee_Habitacion(aa_id.ToString());
+                    Pasa_Datos();
 
+                }
 
             }
 
+
+        }
+        void Inactiva_Pantalla()
+        {
+            foreach (Control item in this.Controls)
+            {
+                try
+                {
+                    if (item is TextBox)
+                    {
+                        item.Enabled = false;
+
+                    }
+                    if (item is Button)
+                    {
+                        item.Enabled = false;
+
+                    }
+
+                }
+                catch { }
+            }
+            dg_Caracteristicas.ReadOnly = true;
+            CB_Estado.Enabled = false;
 
         }
 
@@ -241,6 +273,37 @@ namespace SistHoteleria
 
             if (aa_EMantenimiento != null)
             {
+                TFechaC.Text = DateTime.Parse(aa_EMantenimiento.fecha_cre_mantenimiento).ToString("dd/MM/yyyy");
+                TEmpleado.ReadOnly = true;
+                dg_Caracteristicas.Rows.Clear();
+                label2.Visible = true;
+                TFechaC.Visible = true;
+                foreach (var Mant in aa_EMantenimiento.LEDetalle)
+                {
+
+                    DataGridViewRow ii_row = new DataGridViewRow();
+                    ii_row.CreateCells(dg_Caracteristicas);
+                    ii_row.Cells[0].Value = Mant.id_t_mant_det.ToString().Trim();
+                    ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(Mant.id_t_mant_det.ToString(), "tipo_mantenimiento");
+                    ii_row.Cells[2].Value = Mant.id_empleado_det.ToString().Trim();
+
+                    ii_row.Cells[3].Value = funciones.Lee_Descr_Tercero(funciones.Lee_Empleado(Mant.id_empleado_det.ToString()).id_tercero_empleado, "tercero");
+                    ii_row.Cells[4].Value = Mant.estado_mantenimiento;
+                    dg_Caracteristicas.Rows.Add(ii_row);
+                }
+            }
+
+        }
+        void Pasa_Datos_XCodigo(int id)
+        {
+            aa_EMantenimiento = new Clases.EMantenimiento();
+            aa_EMantenimiento = funciones.Lee_Mantenimiento_XCod(id);
+
+            if (aa_EMantenimiento != null)
+            {
+                THabitacion.Text = aa_EMantenimiento.id_hab_mantenimiento;
+                TdescHabitacion.Text = funciones.Lee_Descr_Tipo(aa_EMantenimiento.id_hab_mantenimiento,"habitacion").ToString().ToUpper();
+
                 TFechaC.Text = DateTime.Parse(aa_EMantenimiento.fecha_cre_mantenimiento).ToString("dd/MM/yyyy");
                 TEmpleado.ReadOnly = true;
                 dg_Caracteristicas.Rows.Clear();

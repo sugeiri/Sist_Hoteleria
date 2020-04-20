@@ -1099,6 +1099,7 @@ namespace SistHoteleria
                 ii_EMantenimiento.id_mantenimiento = int.Parse(DS.Tables[0].Rows[0]["id_mantenimiento"].ToString());
                 ii_EMantenimiento.id_hab_mantenimiento = DS.Tables[0].Rows[0]["id_hab_mantenimiento"].ToString();
                 ii_EMantenimiento.estado_mantenimiento = DS.Tables[0].Rows[0]["estado_mantenimiento"].ToString();
+                ii_EMantenimiento.fecha_cre_mantenimiento = DS.Tables[0].Rows[0]["fecha_cre_mantenimiento"].ToString();
                 sql = "  Exec CDetMant " + id + "";
                 DS = new DataSet();
                 DS = Conexion.EjecutaSQL(sql, ref Error);
@@ -1151,6 +1152,158 @@ namespace SistHoteleria
             }
             return null;
 
+        }
+        public static void Genera_Condicion_Fecha_Para_Query(string ii_text, ref string rr_Condicion, ref string rr_Fecha_Ini, ref string rr_Fecha_Fin)
+        {
+            string ii_fecha_ini = "";
+            string ii_fecha_fin = "";
+            string ii_Condicion = "";
+            bool usa_doble_fecha = false;
+            for (int i = 0; i < ii_text.Length; i++)
+            {
+                switch (ii_text[i].ToString())
+                {
+                    case ":":
+                        usa_doble_fecha = true;
+                        break;
+                    case ">":
+                        ii_Condicion = ii_Condicion + ">";
+                        break;
+                    case "<":
+                        ii_Condicion = ii_Condicion + "<";
+                        break;
+                    case "=":
+                        ii_Condicion = ii_Condicion + "=";
+                        break;
+
+                }
+
+            }
+            string Between = "";
+            if (usa_doble_fecha)
+            {
+                int posicion = ii_text.IndexOf(":");
+                if (ii_Condicion.Length > 0)
+                {
+                    ii_fecha_ini = DateTime.Parse(ii_text.Substring(ii_text.Length - ii_Condicion.Length, posicion)).ToString("yyyy-MM-dd HH:mm:ss");
+                    ii_text.Replace(":", "");
+                    ii_fecha_fin = DateTime.Parse(ii_text.Substring(posicion, ii_text.Length - ii_fecha_ini.Length)).ToString("yyyy-MM-dd HH:mm:ss");
+                    Between = "BETWEEN '" + ii_fecha_ini + "' and '" + ii_fecha_fin + "'";
+                }
+                else
+                {
+                    ii_fecha_ini = DateTime.Parse(ii_text.Substring(0, posicion).Replace(".", ":")).ToString("yyyy-MM-dd HH:mm:ss");
+                    //ii_fecha_fin = ii_fecha_fin.Replace(":", "");
+                    ii_fecha_fin = DateTime.Parse(ii_text.Substring(posicion + 1, ii_text.Length - (ii_fecha_ini.Length + 1)).Replace(".", ":")).ToString("yyyy-MM-dd HH:mm:ss");
+                    Between = "BETWEEN '" + ii_fecha_ini + "' and '" + ii_fecha_fin + "'";
+                }
+                rr_Condicion = Between;
+                rr_Fecha_Ini = DateTime.Parse(ii_fecha_ini).ToString("dd/MM/yyyy HH:mm:ss");
+                rr_Fecha_Fin = DateTime.Parse(ii_fecha_fin).ToString("dd/MM/yyyy HH:mm:ss");
+
+            }
+            else
+            {
+                if (ii_Condicion.Length > 0)
+                {
+                    ii_text = ii_text.ToString().Replace(".", ":");
+                    ii_fecha_ini = DateTime.Parse(ii_text.Substring(ii_Condicion.Length, ii_text.Length - ii_Condicion.Length)).ToString("yyyy-MM-dd HH:mm:ss");
+                    ii_Condicion = ii_Condicion + "'" + ii_fecha_ini + "'";
+
+                }
+                else
+                {
+                    ii_text = ii_text.ToString().Replace(".", ":");
+                    ii_fecha_ini = DateTime.Parse(ii_text).ToString("yyyy-MM-dd HH:mm:ss");
+                    ii_Condicion = "BETWEEN '" + ii_fecha_ini + "' and '" + DateTime.Parse(ii_fecha_ini).ToString("yyyy-MM-dd") + " 23:59:59'";
+                }
+
+                rr_Condicion = ii_Condicion;
+                rr_Fecha_Ini = DateTime.Parse(ii_fecha_ini).ToString("dd/MM/yyyy HH:mm:ss");
+                rr_Fecha_Fin = DateTime.Parse(ii_fecha_ini).ToString("dd/MM/yyyy") + " 23:59:59";
+
+            }
+            return;
+        }
+        public static bool Genera_Condicion_Fecha(string ii_text, ref string ii_Condicion, ref string ii_fecha_ini, ref string ii_fecha_fin)
+        {
+            bool usa_doble_fecha = false;
+            for (int i = 0; i < ii_text.Length; i++)
+            {
+                switch (ii_text[i].ToString())
+                {
+                    case ":":
+                        usa_doble_fecha = true;
+                        break;
+                    case ">":
+                        ii_Condicion = ii_Condicion + ">";
+                        break;
+                    case "<":
+                        ii_Condicion = ii_Condicion + "<";
+                        break;
+                    case "=":
+                        ii_Condicion = ii_Condicion + "=";
+                        break;
+
+                }
+
+            }
+            if (usa_doble_fecha)
+            {
+                int posicion = ii_text.IndexOf(":");
+
+                if (ii_Condicion.Length > 0)
+                {
+                    try
+                    {
+                        ii_fecha_ini = DateTime.Parse(ii_text.Substring(ii_text.Length - ii_Condicion.Length, posicion)).ToString("yyyy-MM-dd HH:mm:ss");
+                        ii_text.Replace(":", "");
+                        ii_fecha_fin = DateTime.Parse(ii_text.Substring(posicion, ii_text.Length - ii_fecha_ini.Length)).ToString("yyyy-MM-dd HH:mm:ss");
+
+                    }
+                    catch (FormatException ne)
+                    {
+                        MessageBox.Show(ne.Message);
+                        return false;
+
+                    }
+
+
+                }
+                else
+                {
+                    try
+                    {
+                        ii_fecha_ini = DateTime.Parse(ii_text.Substring(0, posicion).Replace(".", ":")).ToString("yyyy-MM-dd HH:mm:ss");
+                        ii_fecha_fin = DateTime.Parse(ii_text.Substring(posicion + 1, ii_text.Length - (ii_fecha_ini.Length + 1)).Replace(".", ":")).ToString("yyyy-MM-dd HH:mm:ss");
+                    }
+                    catch (FormatException ne)
+                    {
+                        MessageBox.Show(ne.Message);
+                        return false;
+                    }
+
+
+                }
+
+            }
+            else
+            {
+                if (ii_Condicion.Length > 0)
+                {
+                    ii_fecha_ini = ii_text.Substring(ii_Condicion.Length, ii_text.Length - ii_Condicion.Length);
+
+
+                }
+                else
+                {
+                    ii_fecha_ini = ii_text;
+                }
+
+                ii_fecha_fin = "1900-01-01";
+
+            }
+            return true;
         }
     }
 }

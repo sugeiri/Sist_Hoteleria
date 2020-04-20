@@ -66,6 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="C_Mantenimiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C_Mantenimiento.designer.cs">
+      <DependentUpon>C_Mantenimiento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clases.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Estadisticas.cs">
@@ -353,6 +359,9 @@
     <Compile Include="Trans_Cancelacion.Designer.cs">
       <DependentUpon>Trans_Cancelacion.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="C_Mantenimiento.resx">
+      <DependentUpon>C_Mantenimiento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Estadisticas.resx">
       <DependentUpon>Estadisticas.cs</DependentUpon>
     </EmbeddedResource>
