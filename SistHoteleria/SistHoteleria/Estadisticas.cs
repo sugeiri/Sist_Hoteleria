@@ -16,5 +16,11 @@ namespace SistHoteleria
         {
             InitializeComponent();
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            ReservacionesxMes rs = new ReservacionesxMes();
+            rs.ShowDialog();
+        }
     }
 }
