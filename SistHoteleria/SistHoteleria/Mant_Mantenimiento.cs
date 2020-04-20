@@ -136,16 +136,11 @@ namespace SistHoteleria
 
                 TFechaC.Visible = true;
                 label2.Visible = true;
-                if(aa_modo.ToUpper()=="D")
-                {
-                    Pasa_Datos_XCodigo(int.Parse(aa_id));
-                    Inactiva_Pantalla();
-                }
-                else
-                {
-                    aa_Habitacion = funciones.Lee_Habitacion(aa_id.ToString());
-                    Pasa_Datos();
+                Pasa_Datos_XCodigo(int.Parse(aa_id));
 
+                if (aa_modo.ToUpper()=="D")
+                {
+                    Inactiva_Pantalla();
                 }
 
             }
@@ -174,6 +169,8 @@ namespace SistHoteleria
             }
             dg_Caracteristicas.ReadOnly = true;
             CB_Estado.Enabled = false;
+            button5.Enabled = false;
+            button6.Enabled = false;
 
         }
 

@@ -205,13 +205,13 @@ namespace SistHoteleria
 
         private void BImprimir_Click(object sender, EventArgs e)
         {
-            Imprime_Datos("Rp_C_Mantenimiento");
+            Imprime_Datos("RP_LMantenimiento");
         }
         void Imprime_Datos(string reporte)
         {
             Limpia_Temporal();
             Inserta_Temporal();
-            //Reporte.Imprime("SELECT * FROM RP_ListaFacturas", reporte,true);
+            Form1.Imprime("SELECT * FROM rp_Mantenimiento where usuario_crea='"+Clases.Usuario+"'", reporte,false);
 
 
         }
@@ -220,35 +220,42 @@ namespace SistHoteleria
         {
             string sql = "";
             string Error = "";
-            sql = "DELETE from RP_ListaFacturas  WHERE NUMERO_FACT_CC>0;";
-            //if (!Funciones.Ejecuta_Delete(sql, ref Error))
-            //    MessageBox.Show(Error);
+            sql = "DELETE from rp_Mantenimiento  WHERE usuario_crea='"+Clases.Usuario+"';";
+            if (!Conexion.Inserta_Datos(sql, ref Error))
+                MessageBox.Show(Error);
 
         }
         void Inserta_Temporal()
         {
+            Clases.EMantenimiento ii_mant = new Clases.EMantenimiento();
             string sql = "";
             string Error = "";
             for (int ii = 0; ii < DG_Datos.RowCount - 1; ii++)
             {
+                ii_mant = new Clases.EMantenimiento();
                 int cod = Int16.Parse(DG_Datos.Rows[ii].Cells[1].Value.ToString());
-                string fecha = DateTime.Parse(DG_Datos.Rows[ii].Cells[3].Value.ToString()).ToString("yyyy-MM-dd");
-                string hora = DateTime.Parse(DG_Datos.Rows[ii].Cells[4].Value.ToString()).ToString("HH:mm:ss");
-                DateTime dt = DateTime.Parse(fecha + " " + hora);
-                decimal monto = decimal.Parse(DG_Datos.Rows[ii].Cells[5].Value.ToString());
-                //bool Respuesta = Funciones.Inserta_Lista_Detalle_Factura(cod, dt, monto,0,0);
-                //if (!Respuesta)
-                //{
-                //    sql = "DELETE FROM RP_ListaFacturas WHERE NUMERO_FACT_CC>0;";
-                //    if (!Funciones.Ejecuta_Delete(sql, ref Error))
-                //    {
-                //        MessageBox.Show(Error);
+                ii_mant = funciones.Lee_Mantenimiento_XCod(cod);
+                sql = "INSERT INTO rp_Mantenimiento VALUES(" +
+                        ii_mant.id_mantenimiento + ",'" +
+                        ii_mant.id_hab_mantenimiento + "','" +
+                        funciones.Lee_Descr_Tipo(ii_mant.id_hab_mantenimiento, "habitacion") + "','" +
+                        DateTime.Parse(ii_mant.fecha_cre_mantenimiento).ToString("yyyy-MM-dd HH:mm:ss") + "','" +
+                        ii_mant.estado_mantenimiento + "'," +
+                         ii_mant.id_mantenimiento + ",'";
 
-                //    }
-                //    MessageBox.Show(Error);
-                //    return;
 
-                //}
+                foreach (var i in ii_mant.LEDetalle)
+                {
+                    string det= sql+ i.id_t_mant_det + "','" +
+                          funciones.Lee_Descr_Tipo(i.id_t_mant_det, "tipo_mantenimiento") + "','" +
+                          i.id_empleado_det + "','" +
+                          funciones.Lee_Descr_Tercero(funciones.Lee_Empleado(i.id_empleado_det.ToString()).id_tercero_empleado, "tercero") + "','" +
+                          i.estado_mantenimiento + "','" +
+                          Clases.Usuario + "')";
+
+                    Conexion.Inserta_Datos(det, ref Error);
+                }
+
             }
 
         }

@@ -41,12 +41,12 @@
             this.LSuma = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.THabitacion = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.TipoFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DG_Datos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -127,8 +127,9 @@
             this.CB_Estado.FormattingEnabled = true;
             this.CB_Estado.Items.AddRange(new object[] {
             "TODAS",
-            "ACTIVAS",
-            "NULAS"});
+            "PENDIENTES",
+            "FINALIZADAS",
+            "CANCELADAS"});
             this.CB_Estado.Location = new System.Drawing.Point(338, 14);
             this.CB_Estado.Name = "CB_Estado";
             this.CB_Estado.Size = new System.Drawing.Size(81, 21);
@@ -188,11 +189,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(33, 71);
+            this.label4.Location = new System.Drawing.Point(64, 69);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 16);
+            this.label4.Size = new System.Drawing.Size(86, 16);
             this.label4.TabIndex = 121;
-            this.label4.Text = "TipoHabitacion:";
+            this.label4.Text = "Habitacion:";
             // 
             // THabitacion
             // 
@@ -201,6 +202,21 @@
             this.THabitacion.Size = new System.Drawing.Size(100, 20);
             this.THabitacion.TabIndex = 120;
             this.THabitacion.TextChanged += new System.EventHandler(this.THabitacion_TextChanged);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
+            this.button1.FlatAppearance.BorderSize = 2;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.button1.Location = new System.Drawing.Point(155, 94);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(120, 36);
+            this.button1.TabIndex = 107;
+            this.button1.Text = "&Ver Detalle";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // TipoFactura
             // 
@@ -211,7 +227,7 @@
             // 
             // Numero
             // 
-            this.Numero.HeaderText = "TipoHab";
+            this.Numero.HeaderText = "Habitacion";
             this.Numero.Name = "Numero";
             this.Numero.ReadOnly = true;
             this.Numero.Width = 110;
@@ -235,21 +251,6 @@
             this.Hora.Name = "Hora";
             this.Hora.ReadOnly = true;
             this.Hora.Width = 80;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
-            this.button1.FlatAppearance.BorderSize = 2;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.button1.Location = new System.Drawing.Point(155, 94);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 36);
-            this.button1.TabIndex = 107;
-            this.button1.Text = "&Ver Detalle";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // C_Mantenimiento
             // 
@@ -295,11 +296,11 @@
         private System.Windows.Forms.Label LSuma;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox THabitacion;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoFactura;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora;
-        private System.Windows.Forms.Button button1;
     }
 }

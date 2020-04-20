@@ -21,3 +21,19 @@ CREATE TABLE rp_usuario(
 	Estado_Usuario CHAR(1) NOT NULL,
 	Tipo_Usuario       char(5) NOT NULL
 )
+
+CREATE TABLE rp_Mantenimiento(
+	id_mantenimiento int not null,
+	id_hab_mantenimiento  char(5) not null,
+	descr_habitacion varchar(100) not null,
+	fecha_cre_mantenimiento datetime not null,
+	estado_mantenimiento char(1) not null,
+	id_mantenimiento_det int not null,
+	id_t_mant_det char(5) not null,
+	descr_t_mantenimiento varchar(100) not null,
+	id_empleado_det	char(5) not null,
+	Nombre_Tercero			varchar(100) NOT NULL,
+	estado_mantenimiento_det char(1) not null,
+	usuario_crea  char(20) not null
+)
+
