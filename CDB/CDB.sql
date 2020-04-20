@@ -228,6 +228,7 @@ create table cancelacion(
 	id_reserv_cancelacion int not null  Constraint FK_reserv_canc FOREIGN KEY REFERENCES reservacion(id_reservacion),
 	fecha_cancelacion		datetime not null,
 	motivo_cancelacion		varchar(MAX) not null,
+	id_archivo_cancelacion	char(10) not null Constraint FK_archivo_canc FOREIGN KEY REFERENCES archivo(id_archivo),
 	creado_por_cancelacion char(10) not null,
 	estado_cancelacion		char(1) not null,
 	mod_por_cancelacion	char(10) not null,
@@ -329,8 +330,9 @@ create table tipo_archivo
 	descr_t_archivo varchar(100) not null,
 	estado_t_archivo char(1) not null
 )
+
 create table archivo(
-	id_archivo				char(10) not null,
+	id_archivo				int not null primary key,
 	id_tarchivo				int not null  CONSTRAINT FK_tipo_archivo FOREIGN KEY REFERENCES tipo_archivo(id_t_archivo),
 	ruta_archivo			varchar(500) not null,
 	comentario_01_archivo	varchar(2000) not null,

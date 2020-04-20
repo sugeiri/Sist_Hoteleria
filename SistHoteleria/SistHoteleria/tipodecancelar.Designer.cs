@@ -33,6 +33,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.CB_ESTADO = new System.Windows.Forms.ComboBox();
             this.DG_DATOS = new System.Windows.Forms.DataGridView();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
@@ -40,9 +43,6 @@
             this.BLimpiar = new System.Windows.Forms.Button();
             this.tid = new System.Windows.Forms.TextBox();
             this.LCodigo = new System.Windows.Forms.Label();
-            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DG_DATOS)).BeginInit();
@@ -81,16 +81,16 @@
             this.panel1.Controls.Add(this.tid);
             this.panel1.Controls.Add(this.LCodigo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 75);
+            this.panel1.Location = new System.Drawing.Point(0, -16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(444, 375);
+            this.panel1.Size = new System.Drawing.Size(444, 410);
             this.panel1.TabIndex = 7;
             // 
             // CB_ESTADO
             // 
             this.CB_ESTADO.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.CB_ESTADO.FormattingEnabled = true;
-            this.CB_ESTADO.Location = new System.Drawing.Point(348, 29);
+            this.CB_ESTADO.Location = new System.Drawing.Point(348, 15);
             this.CB_ESTADO.Name = "CB_ESTADO";
             this.CB_ESTADO.Size = new System.Drawing.Size(86, 21);
             this.CB_ESTADO.TabIndex = 22;
@@ -103,19 +103,40 @@
             this.codigo,
             this.Descr,
             this.estado});
-            this.DG_DATOS.Location = new System.Drawing.Point(6, 97);
+            this.DG_DATOS.Location = new System.Drawing.Point(6, 65);
             this.DG_DATOS.Name = "DG_DATOS";
-            this.DG_DATOS.Size = new System.Drawing.Size(429, 228);
+            this.DG_DATOS.Size = new System.Drawing.Size(429, 273);
             this.DG_DATOS.TabIndex = 10;
             this.DG_DATOS.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_DATOS_CellDoubleClick);
             this.DG_DATOS.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.DG_DATOS_PreviewKeyDown);
+            // 
+            // codigo
+            // 
+            this.codigo.HeaderText = "Codigo";
+            this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
+            this.codigo.Width = 80;
+            // 
+            // Descr
+            // 
+            this.Descr.HeaderText = "Tipo de alojamiento";
+            this.Descr.Name = "Descr";
+            this.Descr.ReadOnly = true;
+            this.Descr.Width = 230;
+            // 
+            // estado
+            // 
+            this.estado.HeaderText = "Estado";
+            this.estado.Name = "estado";
+            this.estado.ReadOnly = true;
+            this.estado.Width = 70;
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(284, 31);
+            this.label2.Location = new System.Drawing.Point(284, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 16);
             this.label2.TabIndex = 21;
@@ -127,9 +148,9 @@
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.BLimpiar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 331);
+            this.panel2.Location = new System.Drawing.Point(0, 356);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(444, 44);
+            this.panel2.Size = new System.Drawing.Size(444, 54);
             this.panel2.TabIndex = 9;
             // 
             // button2
@@ -180,7 +201,7 @@
             // tid
             // 
             this.tid.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tid.Location = new System.Drawing.Point(114, 29);
+            this.tid.Location = new System.Drawing.Point(114, 15);
             this.tid.Name = "tid";
             this.tid.Size = new System.Drawing.Size(164, 20);
             this.tid.TabIndex = 18;
@@ -191,41 +212,21 @@
             this.LCodigo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.LCodigo.AutoSize = true;
             this.LCodigo.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LCodigo.Location = new System.Drawing.Point(49, 29);
+            this.LCodigo.Location = new System.Drawing.Point(49, 15);
             this.LCodigo.Name = "LCodigo";
             this.LCodigo.Size = new System.Drawing.Size(69, 16);
             this.LCodigo.TabIndex = 17;
             this.LCodigo.Text = "CODIGO:";
             // 
-            // codigo
-            // 
-            this.codigo.HeaderText = "Codigo";
-            this.codigo.Name = "codigo";
-            this.codigo.ReadOnly = true;
-            this.codigo.Width = 80;
-            // 
-            // Descr
-            // 
-            this.Descr.HeaderText = "Tipo de alojamiento";
-            this.Descr.Name = "Descr";
-            this.Descr.ReadOnly = true;
-            this.Descr.Width = 230;
-            // 
-            // estado
-            // 
-            this.estado.HeaderText = "Estado";
-            this.estado.Name = "estado";
-            this.estado.ReadOnly = true;
-            this.estado.Width = 70;
-            // 
             // tipodecancelar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(444, 450);
+            this.ClientSize = new System.Drawing.Size(444, 394);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "tipodecancelar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "tipodecancelar";
             this.Load += new System.EventHandler(this.tipodecancelar_Load);
             this.panel3.ResumeLayout(false);

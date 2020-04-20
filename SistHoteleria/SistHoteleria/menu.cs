@@ -497,5 +497,16 @@ namespace SistHoteleria
             C_Mantenimiento form = new C_Mantenimiento("", "c");
             form.ShowDialog();
         }
+
+        private void crearToolStripMenuItem25_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Trans_Cancelacion form = new Trans_Cancelacion("a");
+            form.ShowDialog();
+        }
     }
 }

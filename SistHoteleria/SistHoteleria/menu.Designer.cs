@@ -122,6 +122,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LHotel = new System.Windows.Forms.Label();
+            this.crearToolStripMenuItem25 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -187,6 +188,8 @@
             // 
             // cancelaciomToolStripMenuItem
             // 
+            this.cancelaciomToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.crearToolStripMenuItem25});
             this.cancelaciomToolStripMenuItem.Name = "cancelaciomToolStripMenuItem";
             this.cancelaciomToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cancelaciomToolStripMenuItem.Text = "Cancelacion";
@@ -872,6 +875,13 @@
             this.LHotel.TabIndex = 1;
             this.LHotel.Text = "LHotel";
             // 
+            // crearToolStripMenuItem25
+            // 
+            this.crearToolStripMenuItem25.Name = "crearToolStripMenuItem25";
+            this.crearToolStripMenuItem25.Size = new System.Drawing.Size(180, 22);
+            this.crearToolStripMenuItem25.Text = "Crear";
+            this.crearToolStripMenuItem25.Click += new System.EventHandler(this.crearToolStripMenuItem25_Click);
+            // 
             // menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -989,5 +999,6 @@
         private System.Windows.Forms.ToolStripMenuItem estadisticasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem24;
         private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem23;
+        private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem25;
     }
 }

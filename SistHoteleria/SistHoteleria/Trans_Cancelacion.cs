@@ -12,9 +12,11 @@ namespace SistHoteleria
 {
     public partial class Trans_Cancelacion : Form
     {
-        public Trans_Cancelacion()
+        string aa_modo = "a";
+        public Trans_Cancelacion(string modo)
         {
             InitializeComponent();
+            aa_modo = modo;
         }
 
         private void BTCliente_Click(object sender, EventArgs e)
@@ -32,7 +34,6 @@ namespace SistHoteleria
             CB_Estado.Items.Add("A");
             CB_Estado.Items.Add("I");
             CB_Estado.SelectedIndex = 0;
-            radioButton1.Checked = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,33 +42,11 @@ namespace SistHoteleria
             string sql = "";
             errorProvider1.Clear();
             string mensaje = "ESTE CAMPO NO PUEDE ESTAR EN BLANCO";
-            if (string.IsNullOrWhiteSpace(textBox3.Text.ToString().Trim()))
-            {
-                MessageBox.Show(mensaje);
-                errorProvider1.SetError(textBox3, mensaje);
-                textBox3.Focus();
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(textBox2.Text.ToString().Trim()))
-            {
-                MessageBox.Show(mensaje);
-                errorProvider1.SetError(textBox2, mensaje);
-                textBox2.Focus();
-                return;
-            }
             if (string.IsNullOrWhiteSpace(Codreservacion.Text.ToString().Trim()))
             {
                 MessageBox.Show(mensaje);
                 errorProvider1.SetError(Codreservacion, mensaje);
                 Codreservacion.Focus();
-                return;
-            }
-           
-            if (string.IsNullOrWhiteSpace(textBox1.Text.ToString().Trim()))
-            {
-                MessageBox.Show(mensaje);
-                errorProvider1.SetError(textBox1, mensaje);
-                textBox1.Focus();
                 return;
             }
             if (string.IsNullOrWhiteSpace(motivo.Text.ToString().Trim()))
@@ -77,30 +56,47 @@ namespace SistHoteleria
                 motivo.Focus();
                 return;
             }
-            sql = "EXEC ACTCANCELACION '" +
-                            textBox1.Text.ToString() + "','" +
-                            Codreservacion.Text.ToString().Trim() + "','" +
-                            "" + "','" + motivo.Text.ToString().Trim() + "','" +
-                            textBox3.Text.ToString().Trim() + "','" +
-                            CB_Estado.SelectedItem.ToString().Trim() + "','" +
-                            textBox3.Text.ToString().Trim() + "','" +
-                            "" + "','" +
-                            "A" + "'";
+            if (groupBox2.Visible)
+            {
+                if (string.IsNullOrWhiteSpace(textBox4.Text.ToString().Trim()))
+                {
+                    MessageBox.Show(mensaje);
+                    errorProvider1.SetError(textBox4, mensaje);
+                    textBox4.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(richTextBox1.Text.ToString().Trim()))
+                {
+                    MessageBox.Show(mensaje);
+                    errorProvider1.SetError(richTextBox1, mensaje);
+                    richTextBox1.Focus();
+                    return;
+                }
+            }
+            int Cod = funciones.Prox_Codigo("cancelacion");
+            string ii_arch = "";
+            if (groupBox2.Visible)
+                ii_arch = funciones.Prox_Codigo("archivo").ToString();
+            
+            sql = "EXEC ACTCANCELACION " +
+                            Cod + "," +
+                            Codreservacion.Text.ToString().Trim() + ",'" +
+                            motivo.Text.ToString().Trim() + "','" +
+                            ii_arch.ToString().Trim() + "','" +
+                            Clases.Usuario + "','" +
+                            CB_Estado.SelectedItem.ToString().Substring(0,1).Trim() + "','" +
+                            Clases.Usuario + "','" +
+                            aa_modo + "'";
 
             if (!Conexion.Inserta_Datos(sql, ref Error))
             {
                 MessageBox.Show(Error);
                 return;
             }
-            if (radioButton1.Checked == true)
+            if (ii_arch.Trim()!="")
             {
-                if (string.IsNullOrWhiteSpace(textBox4.Text.ToString().Trim()))
-                {
-                    MessageBox.Show(mensaje);
-                    errorProvider1.SetError(textBox4, mensaje);
-                    motivo.Focus();
-                    return;
-                }
+               
                 string coment1 = "";
                 string coment2 = "";
                 
@@ -115,15 +111,15 @@ namespace SistHoteleria
                     coment1 = richTextBox1.Text.ToString().Trim();
                 }
                 
-                sql = "EXEC ACTARCHIVO '" +
-                        textBox1.Text.ToString() + "','" +
-                        "1" + "','" + textBox4.Text.ToString().Trim() + "','" +
+                sql = "EXEC ACTARCHIVO " +
+                        ii_arch + "," +
+                        textBox2.Text.ToString().Trim() + ",'" +
+                        textBox4.Text.ToString().Trim() + "','" +
                         coment1 + "','" +
                         coment2 + "','" +
-                        CB_Estado.SelectedItem.ToString().Trim() + "','" +
-                        textBox3.Text.ToString().Trim() + "','" + "" + "','" +
-                        textBox3.Text.ToString().Trim() + "','" + "" + "','" +
-                        "A" + "'";
+                        "A','" +
+                        Clases.Usuario + "','"+
+                        "A'";
                 if (!Conexion.Inserta_Datos(sql, ref Error))
                 {
                     MessageBox.Show(Error);
@@ -135,28 +131,10 @@ namespace SistHoteleria
             
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton1.Checked == true)
-            {
-                textBox4.Enabled = true;
-                button2.Enabled = true;
-                richTextBox1.Enabled = true;
-            }
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton2.Checked == true)
-            {
-                textBox4.Enabled = false;
-                button2.Enabled = false;
-                richTextBox1.Enabled = false;
-            }
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            groupBox2.Visible = true;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 textBox4.Text = openFileDialog1.FileName;
@@ -166,13 +144,32 @@ namespace SistHoteleria
         private void BLimpiar_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
             textBox4.Text = "";
             Codreservacion.Text = "";
             motivo.Text = "";
             richTextBox1.Text = "";
-            radioButton1.Checked = true;
+            textBox2.Text = "";
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            tipob form = new tipob("e", "tipo_archivo", "Tipo Archivo");
+            form.ShowDialog();
+            if (form.Id.ToString().Trim() != "")
+            {
+                textBox2.Text = form.Id.ToString().Trim();
+                
+            }
         }
     }
 }
