@@ -128,7 +128,7 @@ namespace SistHoteleria
             TOferta.Text = aa_EOFerta.id_oferta.ToString();
             TdescOferta.Text = aa_EOFerta.descr_oferta.ToString().ToUpper();
             aa_Rango = new List<Clases.EOfertaxRangoAlojamientos>();
-            aa_Rango = funciones.Lee_Oferta_XRango(aa_EOFerta.id_oferta);
+            aa_Rango = funciones.Lee_Oferta_xRango(aa_EOFerta.id_oferta);
 
             if (aa_Rango != null)
             {
@@ -241,7 +241,7 @@ namespace SistHoteleria
                 {
                     TOferta.Text = id;
                     TdescOferta.Text = descr;
-                    List<Clases.EOfertaxRangoAlojamientos> int_med_Esp = funciones.Lee_Oferta_XRango(id);
+                    List<Clases.EOfertaxRangoAlojamientos> int_med_Esp = funciones.Lee_Oferta_xRango(id);
                     if (int_med_Esp != null)
                     {
                         DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Rangos para esta Oferta , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
@@ -274,7 +274,7 @@ namespace SistHoteleria
                 if (descr.Trim() != "")
                 {
                     TdescOferta.Text = descr;
-                    List<Clases.EOfertaxRangoAlojamientos> int_med_Esp = funciones.Lee_Oferta_XRango(TOferta.Text);
+                    List<Clases.EOfertaxRangoAlojamientos> int_med_Esp = funciones.Lee_Oferta_xRango(TOferta.Text);
                     if (int_med_Esp != null)
                     {
                         DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Rangos para esta Oferta , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
