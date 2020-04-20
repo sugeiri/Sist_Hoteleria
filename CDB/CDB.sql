@@ -247,7 +247,8 @@ create table alojamiento(
 create table alojamiento_det(
 	id_alojamiento_det int not null Constraint FK_aloj_det FOREIGN KEY REFERENCES alojamiento(id_alojamiento),
 	id_hab_det		   char(5) not null Constraint FK_hab_aloj_det FOREIGN KEY REFERENCES habitacion(id_habitacion),
-	primary key(id_alojamiento_det,id_hab_det)
+	id_clie_det		   char(5) not null Constraint FK_clie_aloj_det FOREIGN KEY REFERENCES cliente(ID_CLIENTE),
+	primary key(id_alojamiento_det,id_hab_det,id_clie_det)
 )
 
 --CXC CLIENTE

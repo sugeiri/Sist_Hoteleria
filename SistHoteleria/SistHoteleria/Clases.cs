@@ -280,5 +280,27 @@ namespace SistHoteleria
 
 
         }
+
+        public class EAlojamiento
+        {
+            public string id_alojamiento = "";
+            public string id_reserv_alojamiento = "";
+            public string ing_por_alojamiento = "";
+            public string fecha_i_alojamiento = "";
+            public string sal_por_alojamiento = "";
+            public string fecha_s_alojamiento = "";
+            public string estado_alojamiento = "";
+            public List<EAlojamiento_Detalle> LEDetalle = new List<EAlojamiento_Detalle>();
+
+
+        }
+        public class EAlojamiento_Detalle
+        {
+            public string id_alojamiento_det = "";
+            public string id_hab_det = "";
+            public string id_clie_det = "";
+
+        }
+
     }
 }
