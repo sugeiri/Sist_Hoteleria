@@ -179,7 +179,8 @@ CREATE PROCEDURE ACTMANTENIMIENTO
        @aa_Modo  char(1)
 AS
 if @aa_Modo='A' 
-	insert into mantenimiento values(	     @II_ID_MANTENIMIENTO,
+	insert into mantenimiento values(	   
+	    @II_ID_MANTENIMIENTO,
 	     @II_ID_HAB_MANTENIMIENTO,
 	     GETDATE(),
 	     GETDATE(),
@@ -205,16 +206,14 @@ CREATE PROCEDURE ACTMANTENIMIENTO_DET
        @II_ESTADO_MANTENIMIENTO  CHAR(1),
        @aa_Modo  char(1)
 AS
-if @aa_Modo='A' 
+	delete mantenimiento_det where id_mantenimiento_det=@II_ID_MANTENIMIENTO_DET 
+	and id_t_mant_det=@II_ID_T_MANT_DET
+
 	insert into mantenimiento_det values(	     @II_ID_MANTENIMIENTO_DET,
 	     @II_ID_T_MANT_DET,
 	     @II_ID_EMPLEADO_DET,
 	     @II_ESTADO_MANTENIMIENTO);
-else
-	update mantenimiento_det set 	     ID_T_MANT_DET=@II_ID_T_MANT_DET,
-	     ID_EMPLEADO_DET=@II_ID_EMPLEADO_DET,
-	     ESTADO_MANTENIMIENTO=@II_ESTADO_MANTENIMIENTO
-  where ID_MANTENIMIENTO_DET=@II_ID_MANTENIMIENTO_DET;
+
 GO
 grant all on ACTMANTENIMIENTO_DET to public
 
