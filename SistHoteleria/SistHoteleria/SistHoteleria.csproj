@@ -45,7 +45,7 @@
       <HintPath>C:\Users\Quilvio_C55\Desktop\YORDANY\CrystalDecisions.Windows.Forms\CrystalDecisions.Windows.Forms.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\itextsharp.dll</HintPath>
+      <HintPath>C:\Users\Quilvio_C55\Desktop\YORDANY\itextsharp\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

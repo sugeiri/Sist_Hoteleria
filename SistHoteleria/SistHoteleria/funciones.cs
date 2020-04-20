@@ -1116,5 +1116,41 @@ namespace SistHoteleria
             return null;
 
         }
+
+
+        public static Clases.EReserva Lee_Reserva(string id)
+        {
+            Clases.EReserva ii_EReserva = new Clases.EReserva();
+            Clases.EReserva_Detalle ii_EDet = new Clases.EReserva_Detalle();
+            DataSet DS = new DataSet();
+            string Error = "";
+            string sql = " select * from reservacion where  id_reservacion='" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                ii_EReserva.id_reservacion = DS.Tables[0].Rows[0]["id_reservacion"].ToString();
+                ii_EReserva.id_cliente = DS.Tables[0].Rows[0]["id_cliente"].ToString();
+                ii_EReserva.id_t_aloj_reservacion = DS.Tables[0].Rows[0]["id_t_aloj_reservacion"].ToString();
+                ii_EReserva.fecha_lleg_reservacion = DS.Tables[0].Rows[0]["fecha_lleg_reservacion"].ToString();
+                ii_EReserva.fecha_sal_reservacion = DS.Tables[0].Rows[0]["fecha_sal_reservacion"].ToString();
+                ii_EReserva.Monto_apagar = DS.Tables[0].Rows[0]["Monto_apagar"].ToString();
+                ii_EReserva.estado_reservacion = DS.Tables[0].Rows[0]["estado_reservacion"].ToString();
+                sql = "  select * from reservacion_det where  id_reservacion_det='" + id + "'";
+                DS = new DataSet();
+                DS = Conexion.EjecutaSQL(sql, ref Error);
+                for (int i = 0; i < DS.Tables[0].Rows.Count; i++)
+                {
+                    ii_EDet = new Clases.EReserva_Detalle();
+                    ii_EDet.id_reservacion_det = DS.Tables[0].Rows[i]["id_reservacion_det"].ToString();
+                    ii_EDet.id_thab_reserv_det = DS.Tables[0].Rows[i]["id_thab_reserv_det"].ToString();
+                    ii_EDet.cant_reserv_det = int.Parse(DS.Tables[0].Rows[i]["cant_reserv_det"].ToString());
+
+                    ii_EReserva.LEDetalle.Add(ii_EDet);
+                }
+                return ii_EReserva;
+            }
+            return null;
+
+        }
     }
 }

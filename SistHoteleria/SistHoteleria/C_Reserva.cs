@@ -31,14 +31,13 @@ namespace SistHoteleria
         {
            
 
-                CB_Estado.SelectedIndex = 0;
                 DateTime fecha = DateTime.Today;
                 
         }
 
         string Valida_Datos()
         {
-            String where = "where";
+            String where = "";
             if (TReserva.Text.ToString().Trim() != "")
             {
                 where += " id_reservacion='" + TReserva.Text.ToString().Trim() + "'";
@@ -65,7 +64,10 @@ namespace SistHoteleria
             {
                 where += " and Monto_apagar='" + TTotal.Text.ToString().Trim() + "'";
             }
-
+            if (TStatus.Text.ToString().Trim() != "")
+            {
+                where += " and estado_reservacion='" + TStatus.Text.ToString().Trim() + "'";
+            }
             return where;
         }
       
@@ -75,6 +77,10 @@ namespace SistHoteleria
         {
 
             string where = Valida_Datos();
+            if (where != "")
+            {
+                where = "where" + where;
+            }
             where = where.Replace("where and", "where ");
             string sql = "select * from reservacion ";
             sql += where;

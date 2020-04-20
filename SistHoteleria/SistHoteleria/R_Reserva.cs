@@ -93,8 +93,8 @@ namespace SistHoteleria
             if (Clases.Nivel_Acceso.ToUpper() == "A" || Clases.Nivel_Acceso.ToUpper() == "E")
             {
                 int i = Fila_Actual();
-            Id = DG_Datos.Rows[i].Cells[2].Value.ToString().Trim();
-            Conf_CaractTHabitacion mm = new Conf_CaractTHabitacion("m", Id);
+            Id = DG_Datos.Rows[i].Cells[0].Value.ToString().Trim();
+            Reserva mm = new Reserva("m", Id);
             mm.ShowDialog();
             Lee_Datos();
             }
@@ -134,8 +134,8 @@ namespace SistHoteleria
                     ii_row.Cells[5].Value = fecha.ToString("dd/MM/yyyy");
                     fecha = DateTime.Parse(DS.Tables[0].Rows[i]["fecha_sal_reservacion"].ToString().Trim());
                     ii_row.Cells[6].Value = fecha.ToString("dd/MM/yyyy");
-                    ii_row.Cells[5].Value = DS.Tables[0].Rows[i]["Monto_apagar"].ToString().Trim();
-                    ii_row.Cells[5].Value = DS.Tables[0].Rows[i]["estado_reservacion"].ToString().Trim();
+                    ii_row.Cells[7].Value = DS.Tables[0].Rows[i]["Monto_apagar"].ToString().Trim();
+                    ii_row.Cells[8].Value = DS.Tables[0].Rows[i]["estado_reservacion"].ToString().Trim();
 
                     DG_Datos.Rows.Add(ii_row);
                 }
@@ -160,19 +160,9 @@ namespace SistHoteleria
 
             EventArgs e = new EventArgs();
             Object ob = new Object();
-            if (!string.IsNullOrWhiteSpace(TCodigo.Text.ToString().Trim()) && fila_buscada != TCodigo)
-                TCodigo_TextChanged(ob, e);
-
-            if (!string.IsNullOrWhiteSpace(TCliente.Text.ToString().Trim()) && fila_buscada != TCliente)
-                TNombreTercero_TextChanged(ob, e);
-
-            
-            if (!string.IsNullOrWhiteSpace(TTAlojamiento.Text.ToString().Trim()) && fila_buscada != TTAlojamiento)
-                TConsultorio_TextChanged(ob, e);
-
-            if (!string.IsNullOrWhiteSpace(TdescTAlojamiento.Text.ToString().Trim()) && fila_buscada != TdescTAlojamiento)
-                TDescConsultorio_TextChanged(ob, e);
-
+           
+          
+           
 
         }
         
@@ -215,52 +205,13 @@ namespace SistHoteleria
             }
         }
 
-        private void TCodigo_TextChanged(object sender, EventArgs e)
-        {
+      
 
-            string id = TCodigo.Text.ToString().Trim();
-            if (!string.IsNullOrWhiteSpace(id))
-            {
-                fila_buscada = sender;
-                Filtra(0, id, true);
-
-            }
-            else
-            {
-                Muestra_Filas();
-            }
-        }
-
-        private void TNombreTercero_TextChanged(object sender, EventArgs e)
-        {
-            bool muestra = false;
-            string nombre = TCliente.Text.ToString().Trim().ToUpper();
-            if (!string.IsNullOrWhiteSpace(nombre))
-            {
-                fila_buscada = sender;
-                if (nombre.Length < aa_Ultima_Descr_filtro.Length)
-                {
-                    muestra = true;
-                }
-                aa_Ultima_Descr_filtro = nombre;
-                if (muestra)
-                    Muestra_Filas();
-
-                Filtra(1, nombre, false);
-
-            }
-            else
-            {
-                Muestra_Filas();
-            }
-        }
+    
         
         private void BLimpiar_Click(object sender, EventArgs e)
         {
-            TCodigo.Text = "";
-            TCliente.Text = "";
-            TTAlojamiento.Text = "";
-            TdescTAlojamiento.Text = "";
+           
             foreach (DataGridViewRow dr in DG_Datos.Rows)
             {
                 dr.Visible = true;
@@ -269,57 +220,10 @@ namespace SistHoteleria
         }
         
 
-        private void TConsultorio_TextChanged(object sender, EventArgs e)
-        {
-            string nombre = TTAlojamiento.Text.ToString().Trim().ToUpper();
-            bool muestra = false;
-            if (!string.IsNullOrWhiteSpace(nombre))
-            {
-                fila_buscada = sender;
-                if (nombre.Length < aa_Ultima_Descr_filtro.Length)
-                {
-                    muestra = true;
-                }
-                aa_Ultima_Descr_filtro = nombre;
-                if (muestra)
-                    Muestra_Filas();
-
-                Filtra(2, nombre, false);
-
-            }
-            else
-            {
-                Muestra_Filas();
-            }
-        }
-
-        private void TDescConsultorio_TextChanged(object sender, EventArgs e)
-        {
-            string nombre = TdescTAlojamiento.Text.ToString().Trim().ToUpper();
-            bool muestra = false;
-            if (!string.IsNullOrWhiteSpace(nombre))
-            {
-                fila_buscada = sender;
-                if (nombre.Length < aa_Ultima_Descr_filtro.Length)
-                {
-                    muestra = true;
-                }
-                aa_Ultima_Descr_filtro = nombre;
-                if (muestra)
-                    Muestra_Filas();
-
-                Filtra(3, nombre, false);
-
-            }
-            else
-            {
-                Muestra_Filas();
-            }
-        }
 
         private void BCrear_Click(object sender, EventArgs e)
         {
-            Conf_CaractTHabitacion form = new Conf_CaractTHabitacion("a", "");
+            Reserva form = new Reserva("a", "");
             form.ShowDialog();
             Lee_Datos();
 
@@ -328,37 +232,14 @@ namespace SistHoteleria
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
+            C_Reserva form = new C_Reserva("C");
+            form.ShowDialog();
             Lee_Datos();
         }
 
-        private void BConsultorio_Click(object sender, EventArgs e)
-        {
-            Mant_C_TipoAlojamiento CP = new Mant_C_TipoAlojamiento("e");
-            CP.ShowDialog();
-            string id = CP.Id.ToString().Trim();
-            if (id.Trim() != "0")
-            {
-                TTAlojamiento.Text = id;
-                TdescTAlojamiento.Text = funciones.Lee_Descr_TipoAlojamiento(id);
+    
 
-
-            }
-        }
-
-        private void BCliente_Click(object sender, EventArgs e)
-        {
-
-            Mant_C_Cliente CP = new Mant_C_Cliente("e");
-            CP.ShowDialog();
-            string id = CP.Id.ToString().Trim();
-            if (id.Trim() != "0")
-            {
-                TCliente.Text = id;
-                TdescCliente.Text = funciones.Lee_Descr_Tercero(id, "cliente");
-
-
-            }
-        }
+      
     }
 }

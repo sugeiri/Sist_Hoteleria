@@ -245,6 +245,7 @@ namespace SistHoteleria
             public string fecha_sal_reservacion = "";
             public string Monto_apagar = "";
             public string estado_reservacion = "";
+            public List<EReserva_Detalle> LEDetalle = new List<EReserva_Detalle>();
 
 
         }

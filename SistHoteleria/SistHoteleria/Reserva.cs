@@ -98,8 +98,8 @@ namespace SistHoteleria
             
             else
             {
-               
-                // aa_THabitacion = funciones.Lee_TipoHabitacion(aa_id.ToString());
+
+                aa_EReserva = funciones.Lee_Reserva(aa_id.ToString());
                 Pasa_Datos();
 
 
@@ -198,25 +198,55 @@ namespace SistHoteleria
         }
         void Pasa_Datos()
         {
+            TReserva.Text = aa_EReserva.id_reservacion;
+            TCliente.Text = aa_EReserva.id_cliente;
+            TdescCliente.Text = funciones.Lee_Descr_Tercero(aa_EReserva.id_cliente,"CLIENTE");
             TTAlojamiento.Text = aa_EReserva.id_t_aloj_reservacion.ToString();
-            TdescTAlojamiento.Text = funciones.Lee_Descr_Tipo(aa_EReserva.id_t_aloj_reservacion,"TIPO");
-            aa_LEReserva_Detalle = new List<Clases.EReserva_Detalle>();
-           // aa_LEReserva_Detalle = funciones.Lee_Caracteristicas_THabitacion(aa_THabitacion.id_t_hab);
-
-            if (aa_LEReserva_Detalle != null)
+            TdescTAlojamiento.Text = funciones.Lee_Descr_Tipo(aa_EReserva.id_t_aloj_reservacion,"TIPO_alojamiento");
+            DateTime fecha = DateTime.Parse(aa_EReserva.fecha_lleg_reservacion);
+            DT_Fecha_Ini.Value = DateTime.Parse(fecha.ToString("dd/MM/yyyy"));
+            fecha = DateTime.Parse(aa_EReserva.fecha_sal_reservacion);
+            DT_Fecha_Fin.Value = DateTime.Parse(fecha.ToString("dd/MM/yyyy"));
+            if (estado.ToString().Trim().ToUpper() == "A")
+            {
+                CB_Estado.SelectedIndex = 0;
+            }
+            else
+            {
+                CB_Estado.SelectedIndex = 1;
+            }
+            foreach (var Det in aa_EReserva.LEDetalle)
             {
 
-                dg_Reservas.Rows.Clear();
-                foreach (var Caracteristicas in aa_LEReserva_Detalle)
-                {
+                DataGridViewRow ii_row = new DataGridViewRow();
+                ii_row.CreateCells(dg_Reservas);
+                ii_row.Cells[0].Value = Det.id_thab_reserv_det.ToString().Trim();
+                ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(Det.id_thab_reserv_det.ToString(), "tipo_habitacion");
+                ii_row.Cells[2].Value = funciones.Lee_Costo_TipoHabitacion(Det.id_thab_reserv_det.ToString());
+                ii_row.Cells[3].Value = Det.cant_reserv_det.ToString().Trim();
+                ii_row.Cells[4].Value = double.Parse(ii_row.Cells[2].Value.ToString()) * int.Parse(ii_row.Cells[3].Value.ToString());
+                ii_row.Cells[5].Value = double.Parse(ii_row.Cells[4].Value.ToString()) * int.Parse(LNoches.Text.ToString());
 
-                    DataGridViewRow ii_row = new DataGridViewRow();
-                    ii_row.CreateCells(dg_Reservas);
-                 //   ii_row.Cells[0].Value = Caracteristicas.id_caracteristica_thcar.ToString().Trim();
-                  //  ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(Caracteristicas.id_caracteristica_thcar.ToString(), "caracteristica");
-                    dg_Reservas.Rows.Add(ii_row);
-                }
+                dg_Reservas.Rows.Add(ii_row);
+
+
+
+             
             }
+            double sumNo = 0;
+            double sumT = 0;
+            for (int i = 0; i < dg_Reservas.Rows.Count; ++i)
+            {
+                if (dg_Reservas.Rows[i].Cells[1].Value == null)
+                { break; }
+                double di = double.Parse(dg_Reservas.Rows[i].Cells[4].Value.ToString());
+                double total = double.Parse(dg_Reservas.Rows[i].Cells[5].Value.ToString());
+                sumNo += di;
+                sumT += total;
+            }
+            LTotalN.Text = sumNo.ToString();
+            LTotal.Text = sumT.ToString();
+
 
         }
 
@@ -426,11 +456,14 @@ namespace SistHoteleria
 
         private void DT_Fecha_Ini_ValueChanged(object sender, EventArgs e)
         {
-            if (DateTime.Today > DT_Fecha_Ini.Value)
-            {
-                MessageBox.Show("La fecha salida no puede ser menor a la de hoy");
-                return;
+            if (aa_modo == "A") {
+                if (DateTime.Today > DT_Fecha_Ini.Value)
+                {
+                    MessageBox.Show("La fecha salida no puede ser menor a la de hoy");
+                    return;
+                }
             }
+             
             TimeSpan dias = DT_Fecha_Fin.Value - DT_Fecha_Ini.Value;
             if(dias.Days<0)
             {
@@ -457,11 +490,16 @@ namespace SistHoteleria
 
         private void DT_Fecha_Fin_ValueChanged(object sender, EventArgs e)
         {
-            if(DateTime.Today> DT_Fecha_Fin.Value)
+            if (aa_modo == "A")
             {
-                MessageBox.Show("La fecha salida no puede ser menor a la de hoy");
-                return;
+
+                if (DateTime.Today > DT_Fecha_Fin.Value)
+                {
+                    MessageBox.Show("La fecha salida no puede ser menor a la de hoy");
+                    return;
+                }
             }
+            
             TimeSpan dias = DT_Fecha_Fin.Value - DT_Fecha_Ini.Value;
             if (dias.Days < 0)
             {

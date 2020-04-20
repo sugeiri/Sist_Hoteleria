@@ -42,12 +42,12 @@
             this.BCliente = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.CB_Estado = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.TTotal = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.TFecha_Ini = new System.Windows.Forms.TextBox();
             this.TFecha_Fin = new System.Windows.Forms.TextBox();
+            this.TStatus = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -177,17 +177,6 @@
             this.label3.TabIndex = 88;
             this.label3.Text = "Salida";
             // 
-            // CB_Estado
-            // 
-            this.CB_Estado.FormattingEnabled = true;
-            this.CB_Estado.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
-            this.CB_Estado.Location = new System.Drawing.Point(275, 31);
-            this.CB_Estado.Name = "CB_Estado";
-            this.CB_Estado.Size = new System.Drawing.Size(86, 21);
-            this.CB_Estado.TabIndex = 90;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -230,16 +219,23 @@
             this.TFecha_Fin.Size = new System.Drawing.Size(101, 20);
             this.TFecha_Fin.TabIndex = 96;
             // 
+            // TStatus
+            // 
+            this.TStatus.Location = new System.Drawing.Point(271, 34);
+            this.TStatus.Name = "TStatus";
+            this.TStatus.Size = new System.Drawing.Size(101, 20);
+            this.TStatus.TabIndex = 97;
+            // 
             // C_Reserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 268);
+            this.Controls.Add(this.TStatus);
             this.Controls.Add(this.TFecha_Fin);
             this.Controls.Add(this.TFecha_Ini);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.TTotal);
-            this.Controls.Add(this.CB_Estado);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -277,11 +273,11 @@
         private System.Windows.Forms.TextBox TReserva;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox CB_Estado;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox TFecha_Fin;
         private System.Windows.Forms.TextBox TFecha_Ini;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox TTotal;
+        private System.Windows.Forms.TextBox TStatus;
     }
 }
