@@ -326,7 +326,7 @@ namespace SistHoteleria
 
             if (dg_Alojamientos.Columns[e.ColumnIndex].Name == "idClie")
             {
-                string SelectedText = dg_Alojamientos.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string SelectedText = dg_Alojamientos.Rows[e.RowIndex].Cells[2].Value.ToString();
                 string descr = funciones.Lee_Descr_Tercero(SelectedText, "Cliente").ToString().Trim();
                 if (descr == "")
                 {
