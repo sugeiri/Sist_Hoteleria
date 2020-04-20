@@ -67,7 +67,7 @@ namespace SistHoteleria
             if (aa_modo.ToUpper() == "A")
             {
                 CB_Estado.SelectedIndex = 0;
-                TAlojamiento.Text = funciones.Prox_Codigo("Alojamientocion").ToString();
+                TAlojamiento.Text = funciones.Prox_Codigo("alojamiento").ToString();
                 DateTime fecha = DateTime.Today;
                // DT_Fecha_Ini.Value = fecha;
 
@@ -127,19 +127,10 @@ namespace SistHoteleria
 
              
             }
-            double sumNo = 0;
-            double sumT = 0;
-            for (int i = 0; i < dg_Alojamientos.Rows.Count; ++i)
-            {
-                if (dg_Alojamientos.Rows[i].Cells[1].Value == null)
-                { break; }
-                double di = double.Parse(dg_Alojamientos.Rows[i].Cells[4].Value.ToString());
-                double total = double.Parse(dg_Alojamientos.Rows[i].Cells[5].Value.ToString());
-                sumNo += di;
-                sumT += total;
-            }
-            LTotalN.Text = sumNo.ToString();
-            LTotal.Text = sumT.ToString();
+            
+            LNoches.Text = dias.Days.ToString();
+            LTotalN.Text = (double.Parse(aa_EReserva.Monto_apagar) / int.Parse(LNoches.Text.ToString())).ToString();
+            LTotal.Text = aa_EReserva.Monto_apagar;
 
 
         }
@@ -317,43 +308,19 @@ namespace SistHoteleria
 
             if (e.ColumnIndex == 0 && dg_Alojamientos.Rows[e.RowIndex].Cells[0] != null && (e.RowIndex < dg_Alojamientos.Rows.Count - 1))
             {
-                if (dg_Alojamientos.Rows[e.RowIndex].Cells[2].Value != null)
+                string SelectedText = dg_Alojamientos.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string descr = funciones.Lee_Descr_Tipo(SelectedText, "habitacion").ToString().Trim();
+                if (descr == "")
                 {
-                    for (int i = 0; i < dg_Alojamientos.Rows.Count - 1; i++)
-                    {
-                        if (i != e.RowIndex)
-                        {
-                            string n = dg_Alojamientos.Rows[e.RowIndex].Cells[0].Value.ToString();
-                            if (dg_Alojamientos.Rows[i].Cells[0].Value.ToString().Trim() == n)
-                            {
-                                MessageBox.Show("Este Cliente ya tiene habitacion");
-                                dg_Alojamientos.Rows.RemoveAt(e.RowIndex);
-                                return;
-
-
-                            }
-                        }
-
-                        string SelectedText = dg_Alojamientos.Rows[e.RowIndex].Cells[0].Value.ToString();
-                        string descr = funciones.Lee_Descr_Tipo(SelectedText, "habitacion").ToString().Trim();
-                        if (descr == "")
-                        {
-                            MessageBox.Show("No Existe Esta  Habitacion");
-                            return;
-
-                        }
-                        dg_Alojamientos.Rows[e.RowIndex].Cells[0].Value = int.Parse(SelectedText);
-                        dg_Alojamientos.Rows[e.RowIndex].Cells[1].Value = descr.ToUpper();
-
-                        }
+                    MessageBox.Show("No Existe Esta  Habitacion");
+                    return;
 
                 }
-                else
-                {
-                    dg_Alojamientos.Rows.RemoveAt(e.RowIndex);
-                }
+                dg_Alojamientos.Rows[e.RowIndex].Cells[0].Value = int.Parse(SelectedText);
+                dg_Alojamientos.Rows[e.RowIndex].Cells[1].Value = descr.ToUpper();
 
-              
+
+           
 
             }
 
@@ -367,8 +334,8 @@ namespace SistHoteleria
                     return;
 
                 }
-                dg_Alojamientos.Rows[e.RowIndex].Cells[0].Value = int.Parse(SelectedText);
-                dg_Alojamientos.Rows[e.RowIndex].Cells[1].Value = descr.ToUpper();
+                dg_Alojamientos.Rows[e.RowIndex].Cells[2].Value = int.Parse(SelectedText);
+                dg_Alojamientos.Rows[e.RowIndex].Cells[3].Value = descr.ToUpper();
             }
            
            

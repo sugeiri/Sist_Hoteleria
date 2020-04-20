@@ -117,17 +117,23 @@
       <DependentUpon>C_Mantenimiento.cs</DependentUpon>
     </Compile>
     <Compile Include="Conexion.cs" />
-    <Compile Include="C_Alojamiento.cs">
+    <Compile Include="Consul_Alojamiento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="C_Alojamiento.designer.cs">
-      <DependentUpon>C_Alojamiento.cs</DependentUpon>
+    <Compile Include="Consul_Alojamiento.designer.cs">
+      <DependentUpon>Consul_Alojamiento.cs</DependentUpon>
     </Compile>
     <Compile Include="Estadisticas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Estadisticas.Designer.cs">
       <DependentUpon>Estadisticas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C_Alojamiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C_Alojamiento.designer.cs">
+      <DependentUpon>C_Alojamiento.cs</DependentUpon>
     </Compile>
     <Compile Include="Mant_C_Oferta.cs">
       <SubType>Form</SubType>
@@ -438,11 +444,14 @@
     <EmbeddedResource Include="C_Mantenimiento.resx">
       <DependentUpon>C_Mantenimiento.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="C_Alojamiento.resx">
-      <DependentUpon>C_Alojamiento.cs</DependentUpon>
+    <EmbeddedResource Include="Consul_Alojamiento.resx">
+      <DependentUpon>Consul_Alojamiento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Estadisticas.resx">
       <DependentUpon>Estadisticas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C_Alojamiento.resx">
+      <DependentUpon>C_Alojamiento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Mant_C_Oferta.resx">
       <DependentUpon>Mant_C_Oferta.cs</DependentUpon>

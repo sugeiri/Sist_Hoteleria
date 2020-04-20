@@ -577,5 +577,22 @@ namespace SistHoteleria
             Conf_C_OfertaxRango form = new Conf_C_OfertaxRango("", "c");
             form.ShowDialog();
         }
+
+        private void crearToolStripMenuItem29_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Alojamiento form = new Alojamiento("a", "");
+            form.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem29_Click(object sender, EventArgs e)
+        {
+            Consul_Alojamiento form = new Consul_Alojamiento("m");
+            form.ShowDialog();
+        }
     }
 }

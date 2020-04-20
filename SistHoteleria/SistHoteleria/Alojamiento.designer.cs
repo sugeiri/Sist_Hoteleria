@@ -32,10 +32,6 @@
             this.BLimpiar = new System.Windows.Forms.Button();
             this.BSeguir = new System.Windows.Forms.Button();
             this.dg_Alojamientos = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idClie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.LTotal = new System.Windows.Forms.Label();
@@ -57,6 +53,10 @@
             this.TFecha_ini_Reserva = new System.Windows.Forms.TextBox();
             this.TFecha_Fin_Reserva = new System.Windows.Forms.TextBox();
             this.BReserva = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idClie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dg_Alojamientos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -109,34 +109,6 @@
             this.dg_Alojamientos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dg_Alojamientos.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_Alojamiento_CellEndEdit);
             this.dg_Alojamientos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID Hab";
-            this.dataGridViewTextBoxColumn1.MaxInputLength = 12;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 80;
-            // 
-            // Descr
-            // 
-            this.Descr.HeaderText = "Descripcion";
-            this.Descr.Name = "Descr";
-            this.Descr.ReadOnly = true;
-            this.Descr.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Descr.Width = 225;
-            // 
-            // idClie
-            // 
-            this.idClie.HeaderText = "ID Cliente";
-            this.idClie.Name = "idClie";
-            this.idClie.ReadOnly = true;
-            this.idClie.Width = 80;
-            // 
-            // Cant
-            // 
-            this.Cant.HeaderText = "Nombre";
-            this.Cant.Name = "Cant";
-            this.Cant.Width = 225;
             // 
             // errorProvider1
             // 
@@ -351,6 +323,34 @@
             this.BReserva.Text = "Reserva";
             this.BReserva.UseVisualStyleBackColor = true;
             this.BReserva.Click += new System.EventHandler(this.BReserva_Click);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID Hab";
+            this.dataGridViewTextBoxColumn1.MaxInputLength = 12;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 80;
+            // 
+            // Descr
+            // 
+            this.Descr.HeaderText = "Descripcion";
+            this.Descr.Name = "Descr";
+            this.Descr.ReadOnly = true;
+            this.Descr.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Descr.Width = 225;
+            // 
+            // idClie
+            // 
+            this.idClie.HeaderText = "ID Cliente";
+            this.idClie.Name = "idClie";
+            this.idClie.Width = 80;
+            // 
+            // Cant
+            // 
+            this.Cant.HeaderText = "Nombre";
+            this.Cant.Name = "Cant";
+            this.Cant.ReadOnly = true;
+            this.Cant.Width = 225;
             // 
             // Alojamiento
             // 

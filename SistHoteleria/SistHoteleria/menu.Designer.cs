@@ -40,7 +40,6 @@
             this.mantenimientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearToolStripMenuItem24 = new System.Windows.Forms.ToolStripMenuItem();
             this.consultarToolStripMenuItem23 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pagasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mantenimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearToolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,6 +121,8 @@
             this.crearToolStripMenuItem27 = new System.Windows.Forms.ToolStripMenuItem();
             this.consultarToolStripMenuItem27 = new System.Windows.Forms.ToolStripMenuItem();
             this.xRangoDeFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.crearToolStripMenuItem28 = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarToolStripMenuItem28 = new System.Windows.Forms.ToolStripMenuItem();
             this.claveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearToolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,8 +135,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LHotel = new System.Windows.Forms.Label();
-            this.crearToolStripMenuItem28 = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultarToolStripMenuItem28 = new System.Windows.Forms.ToolStripMenuItem();
+            this.crearToolStripMenuItem29 = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarToolStripMenuItem29 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -163,8 +164,7 @@
             this.reservacionToolStripMenuItem,
             this.alojamientoToolStripMenuItem,
             this.cancelaciomToolStripMenuItem,
-            this.mantenimientoToolStripMenuItem,
-            this.pagasToolStripMenuItem});
+            this.mantenimientoToolStripMenuItem});
             this.transaccionesToolStripMenuItem.Name = "transaccionesToolStripMenuItem";
             this.transaccionesToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.transaccionesToolStripMenuItem.Text = "Transacciones";
@@ -175,28 +175,31 @@
             this.crearToolStripMenuItem23,
             this.consultarToolStripMenuItem22});
             this.reservacionToolStripMenuItem.Name = "reservacionToolStripMenuItem";
-            this.reservacionToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.reservacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reservacionToolStripMenuItem.Text = "Reservacion";
             this.reservacionToolStripMenuItem.Click += new System.EventHandler(this.reservacionToolStripMenuItem_Click);
             // 
             // crearToolStripMenuItem23
             // 
             this.crearToolStripMenuItem23.Name = "crearToolStripMenuItem23";
-            this.crearToolStripMenuItem23.Size = new System.Drawing.Size(142, 22);
+            this.crearToolStripMenuItem23.Size = new System.Drawing.Size(180, 22);
             this.crearToolStripMenuItem23.Text = "Crear";
             this.crearToolStripMenuItem23.Click += new System.EventHandler(this.crearToolStripMenuItem23_Click);
             // 
             // consultarToolStripMenuItem22
             // 
             this.consultarToolStripMenuItem22.Name = "consultarToolStripMenuItem22";
-            this.consultarToolStripMenuItem22.Size = new System.Drawing.Size(142, 22);
+            this.consultarToolStripMenuItem22.Size = new System.Drawing.Size(180, 22);
             this.consultarToolStripMenuItem22.Text = "Consultar";
             this.consultarToolStripMenuItem22.Click += new System.EventHandler(this.consultarToolStripMenuItem22_Click);
             // 
             // alojamientoToolStripMenuItem
             // 
+            this.alojamientoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.crearToolStripMenuItem29,
+            this.consultarToolStripMenuItem29});
             this.alojamientoToolStripMenuItem.Name = "alojamientoToolStripMenuItem";
-            this.alojamientoToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.alojamientoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.alojamientoToolStripMenuItem.Text = "Alojamiento";
             // 
             // cancelaciomToolStripMenuItem
@@ -204,7 +207,7 @@
             this.cancelaciomToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.crearToolStripMenuItem25});
             this.cancelaciomToolStripMenuItem.Name = "cancelaciomToolStripMenuItem";
-            this.cancelaciomToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.cancelaciomToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cancelaciomToolStripMenuItem.Text = "Cancelacion";
             // 
             // crearToolStripMenuItem25
@@ -220,7 +223,7 @@
             this.crearToolStripMenuItem24,
             this.consultarToolStripMenuItem23});
             this.mantenimientoToolStripMenuItem.Name = "mantenimientoToolStripMenuItem";
-            this.mantenimientoToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.mantenimientoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.mantenimientoToolStripMenuItem.Text = "Mantenimiento";
             // 
             // crearToolStripMenuItem24
@@ -236,12 +239,6 @@
             this.consultarToolStripMenuItem23.Size = new System.Drawing.Size(142, 22);
             this.consultarToolStripMenuItem23.Text = "Consultar";
             this.consultarToolStripMenuItem23.Click += new System.EventHandler(this.consultarToolStripMenuItem23_Click);
-            // 
-            // pagasToolStripMenuItem
-            // 
-            this.pagasToolStripMenuItem.Name = "pagasToolStripMenuItem";
-            this.pagasToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.pagasToolStripMenuItem.Text = "Pago";
             // 
             // mantenimientosToolStripMenuItem
             // 
@@ -893,6 +890,20 @@
             this.xRangoDeFechaToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.xRangoDeFechaToolStripMenuItem.Text = "X Cant de Alojamientos";
             // 
+            // crearToolStripMenuItem28
+            // 
+            this.crearToolStripMenuItem28.Name = "crearToolStripMenuItem28";
+            this.crearToolStripMenuItem28.Size = new System.Drawing.Size(142, 22);
+            this.crearToolStripMenuItem28.Text = "Crear";
+            this.crearToolStripMenuItem28.Click += new System.EventHandler(this.crearToolStripMenuItem28_Click);
+            // 
+            // consultarToolStripMenuItem28
+            // 
+            this.consultarToolStripMenuItem28.Name = "consultarToolStripMenuItem28";
+            this.consultarToolStripMenuItem28.Size = new System.Drawing.Size(142, 22);
+            this.consultarToolStripMenuItem28.Text = "Consultar";
+            this.consultarToolStripMenuItem28.Click += new System.EventHandler(this.consultarToolStripMenuItem28_Click);
+            // 
             // claveToolStripMenuItem
             // 
             this.claveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -985,19 +996,19 @@
             this.LHotel.TabIndex = 1;
             this.LHotel.Text = "LHotel";
             // 
-            // crearToolStripMenuItem28
+            // crearToolStripMenuItem29
             // 
-            this.crearToolStripMenuItem28.Name = "crearToolStripMenuItem28";
-            this.crearToolStripMenuItem28.Size = new System.Drawing.Size(180, 22);
-            this.crearToolStripMenuItem28.Text = "Crear";
-            this.crearToolStripMenuItem28.Click += new System.EventHandler(this.crearToolStripMenuItem28_Click);
+            this.crearToolStripMenuItem29.Name = "crearToolStripMenuItem29";
+            this.crearToolStripMenuItem29.Size = new System.Drawing.Size(180, 22);
+            this.crearToolStripMenuItem29.Text = "Crear";
+            this.crearToolStripMenuItem29.Click += new System.EventHandler(this.crearToolStripMenuItem29_Click);
             // 
-            // consultarToolStripMenuItem28
+            // consultarToolStripMenuItem29
             // 
-            this.consultarToolStripMenuItem28.Name = "consultarToolStripMenuItem28";
-            this.consultarToolStripMenuItem28.Size = new System.Drawing.Size(180, 22);
-            this.consultarToolStripMenuItem28.Text = "Consultar";
-            this.consultarToolStripMenuItem28.Click += new System.EventHandler(this.consultarToolStripMenuItem28_Click);
+            this.consultarToolStripMenuItem29.Name = "consultarToolStripMenuItem29";
+            this.consultarToolStripMenuItem29.Size = new System.Drawing.Size(180, 22);
+            this.consultarToolStripMenuItem29.Text = "Consultar";
+            this.consultarToolStripMenuItem29.Click += new System.EventHandler(this.consultarToolStripMenuItem29_Click);
             // 
             // menu
             // 
@@ -1083,7 +1094,6 @@
         private System.Windows.Forms.ToolStripMenuItem alojamientoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancelaciomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mantenimientoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pagasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem habitacionToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem temporadaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
@@ -1130,5 +1140,7 @@
         private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem27;
         private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem28;
         private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem28;
+        private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem29;
+        private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem29;
     }
 }

@@ -28,28 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.BLimpiar = new System.Windows.Forms.Button();
-            this.BSeguir = new System.Windows.Forms.Button();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.TdescTAlojamiento = new System.Windows.Forms.TextBox();
-            this.TTAlojamiento = new System.Windows.Forms.TextBox();
-            this.BTAlojamiento = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.TReserva = new System.Windows.Forms.TextBox();
-            this.TdescCliente = new System.Windows.Forms.TextBox();
-            this.TCliente = new System.Windows.Forms.TextBox();
-            this.BCliente = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.DG_Datos = new System.Windows.Forms.DataGridView();
+            this.TAlojamiento = new System.Windows.Forms.TextBox();
+            this.CB_Estado = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.TTotal = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.TFecha_Ini = new System.Windows.Forms.TextBox();
-            this.TFecha_Fin = new System.Windows.Forms.TextBox();
-            this.TStatus = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.BLimpiar = new System.Windows.Forms.Button();
+            this.TReserva = new System.Windows.Forms.TextBox();
+            this.BImprimir = new System.Windows.Forms.Button();
+            this.BReserva = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Identificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LicRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TIdentif = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.DG_Datos)).BeginInit();
             this.SuspendLayout();
+            // 
+            // DG_Datos
+            // 
+            this.DG_Datos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DG_Datos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Codigo,
+            this.Nombre,
+            this.Identificacion,
+            this.LicRE,
+            this.TIdentif});
+            this.DG_Datos.Location = new System.Drawing.Point(18, 43);
+            this.DG_Datos.Name = "DG_Datos";
+            this.DG_Datos.Size = new System.Drawing.Size(565, 313);
+            this.DG_Datos.TabIndex = 30;
+            this.DG_Datos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_Datos_CellDoubleClick);
+            this.DG_Datos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DG_Datos_CellMouseDoubleClick);
+            this.DG_Datos.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.DG_Datos_PreviewKeyDown);
+            // 
+            // TAlojamiento
+            // 
+            this.TAlojamiento.Location = new System.Drawing.Point(56, 14);
+            this.TAlojamiento.Name = "TAlojamiento";
+            this.TAlojamiento.Size = new System.Drawing.Size(114, 20);
+            this.TAlojamiento.TabIndex = 44;
+            this.TAlojamiento.TextChanged += new System.EventHandler(this.TCodigo_TextChanged);
+            // 
+            // CB_Estado
+            // 
+            this.CB_Estado.FormattingEnabled = true;
+            this.CB_Estado.Items.AddRange(new object[] {
+            "",
+            "Activo",
+            "Inactivo"});
+            this.CB_Estado.Location = new System.Drawing.Point(497, 14);
+            this.CB_Estado.Name = "CB_Estado";
+            this.CB_Estado.Size = new System.Drawing.Size(86, 21);
+            this.CB_Estado.TabIndex = 49;
+            this.CB_Estado.SelectedIndexChanged += new System.EventHandler(this.CB_Estado_Servicio_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(428, 19);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(60, 16);
+            this.label9.TabIndex = 48;
+            this.label9.Text = "Estado:";
             // 
             // BLimpiar
             // 
@@ -57,227 +99,130 @@
             this.BLimpiar.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
             this.BLimpiar.FlatAppearance.BorderSize = 2;
             this.BLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BLimpiar.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BLimpiar.Location = new System.Drawing.Point(115, 204);
+            this.BLimpiar.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.BLimpiar.Location = new System.Drawing.Point(463, 399);
             this.BLimpiar.Name = "BLimpiar";
-            this.BLimpiar.Size = new System.Drawing.Size(120, 38);
-            this.BLimpiar.TabIndex = 13;
-            this.BLimpiar.Text = "&Limpiar Todo";
+            this.BLimpiar.Size = new System.Drawing.Size(120, 36);
+            this.BLimpiar.TabIndex = 51;
+            this.BLimpiar.Text = "&Limpiar Filtro";
             this.BLimpiar.UseVisualStyleBackColor = false;
             this.BLimpiar.Click += new System.EventHandler(this.BLimpiar_Click);
             // 
-            // BSeguir
-            // 
-            this.BSeguir.BackColor = System.Drawing.Color.Transparent;
-            this.BSeguir.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
-            this.BSeguir.FlatAppearance.BorderSize = 2;
-            this.BSeguir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BSeguir.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.BSeguir.Location = new System.Drawing.Point(241, 204);
-            this.BSeguir.Name = "BSeguir";
-            this.BSeguir.Size = new System.Drawing.Size(120, 38);
-            this.BSeguir.TabIndex = 12;
-            this.BSeguir.Text = "&Consultar";
-            this.BSeguir.UseVisualStyleBackColor = false;
-            this.BSeguir.Click += new System.EventHandler(this.BSeguir_Click);
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // TdescTAlojamiento
-            // 
-            this.TdescTAlojamiento.BackColor = System.Drawing.SystemColors.Info;
-            this.TdescTAlojamiento.Location = new System.Drawing.Point(192, 86);
-            this.TdescTAlojamiento.Name = "TdescTAlojamiento";
-            this.TdescTAlojamiento.ReadOnly = true;
-            this.TdescTAlojamiento.Size = new System.Drawing.Size(169, 20);
-            this.TdescTAlojamiento.TabIndex = 49;
-            // 
-            // TTAlojamiento
-            // 
-            this.TTAlojamiento.Location = new System.Drawing.Point(124, 86);
-            this.TTAlojamiento.Name = "TTAlojamiento";
-            this.TTAlojamiento.Size = new System.Drawing.Size(62, 20);
-            this.TTAlojamiento.TabIndex = 48;
-            this.TTAlojamiento.Leave += new System.EventHandler(this.TTAlojamiento_Leave);
-            // 
-            // BTAlojamiento
-            // 
-            this.BTAlojamiento.Location = new System.Drawing.Point(14, 84);
-            this.BTAlojamiento.Name = "BTAlojamiento";
-            this.BTAlojamiento.Size = new System.Drawing.Size(107, 23);
-            this.BTAlojamiento.TabIndex = 47;
-            this.BTAlojamiento.Text = "T Alojamiento";
-            this.BTAlojamiento.UseVisualStyleBackColor = true;
-            this.BTAlojamiento.Click += new System.EventHandler(this.BTAlojamiento_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(95, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(22, 16);
-            this.label1.TabIndex = 80;
-            this.label1.Text = "ID";
-            // 
             // TReserva
             // 
-            this.TReserva.BackColor = System.Drawing.SystemColors.Window;
-            this.TReserva.Location = new System.Drawing.Point(124, 32);
+            this.TReserva.Location = new System.Drawing.Point(289, 15);
             this.TReserva.Name = "TReserva";
-            this.TReserva.Size = new System.Drawing.Size(79, 20);
-            this.TReserva.TabIndex = 81;
+            this.TReserva.Size = new System.Drawing.Size(123, 20);
+            this.TReserva.TabIndex = 53;
+            this.TReserva.TextChanged += new System.EventHandler(this.TTipo_TextChanged);
             // 
-            // TdescCliente
+            // BImprimir
             // 
-            this.TdescCliente.BackColor = System.Drawing.SystemColors.Info;
-            this.TdescCliente.Location = new System.Drawing.Point(192, 60);
-            this.TdescCliente.Name = "TdescCliente";
-            this.TdescCliente.ReadOnly = true;
-            this.TdescCliente.Size = new System.Drawing.Size(169, 20);
-            this.TdescCliente.TabIndex = 84;
+            this.BImprimir.BackColor = System.Drawing.Color.Transparent;
+            this.BImprimir.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
+            this.BImprimir.FlatAppearance.BorderSize = 2;
+            this.BImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BImprimir.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.BImprimir.Location = new System.Drawing.Point(361, 398);
+            this.BImprimir.Name = "BImprimir";
+            this.BImprimir.Size = new System.Drawing.Size(96, 36);
+            this.BImprimir.TabIndex = 60;
+            this.BImprimir.Text = "&IMPRIMIR";
+            this.BImprimir.UseVisualStyleBackColor = false;
+            this.BImprimir.Click += new System.EventHandler(this.BImprimir_Click);
             // 
-            // TCliente
+            // BReserva
             // 
-            this.TCliente.Location = new System.Drawing.Point(124, 60);
-            this.TCliente.Name = "TCliente";
-            this.TCliente.Size = new System.Drawing.Size(62, 20);
-            this.TCliente.TabIndex = 83;
+            this.BReserva.Location = new System.Drawing.Point(176, 14);
+            this.BReserva.Name = "BReserva";
+            this.BReserva.Size = new System.Drawing.Size(107, 23);
+            this.BReserva.TabIndex = 101;
+            this.BReserva.Text = "Reserva";
+            this.BReserva.UseVisualStyleBackColor = true;
+            this.BReserva.Click += new System.EventHandler(this.BReserva_Click);
             // 
-            // BCliente
+            // label5
             // 
-            this.BCliente.Location = new System.Drawing.Point(14, 58);
-            this.BCliente.Name = "BCliente";
-            this.BCliente.Size = new System.Drawing.Size(107, 23);
-            this.BCliente.TabIndex = 82;
-            this.BCliente.Text = "Cliente";
-            this.BCliente.UseVisualStyleBackColor = true;
-            this.BCliente.Click += new System.EventHandler(this.BCliente_Click);
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.label5.Location = new System.Drawing.Point(28, 18);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(22, 16);
+            this.label5.TabIndex = 98;
+            this.label5.Text = "ID";
             // 
-            // label2
+            // Codigo
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(34, 121);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 16);
-            this.label2.TabIndex = 86;
-            this.label2.Text = "Llegada";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.Codigo.HeaderText = "Alojamiento";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            this.Codigo.Width = 125;
             // 
-            // label3
+            // Nombre
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(204, 124);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 16);
-            this.label3.TabIndex = 88;
-            this.label3.Text = "Salida";
+            this.Nombre.HeaderText = "Reservacion";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 125;
             // 
-            // label9
+            // Identificacion
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(209, 34);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(60, 16);
-            this.label9.TabIndex = 89;
-            this.label9.Text = "Estado:";
+            this.Identificacion.HeaderText = "Fecha Ini";
+            this.Identificacion.Name = "Identificacion";
+            this.Identificacion.ReadOnly = true;
             // 
-            // TTotal
+            // LicRE
             // 
-            this.TTotal.Location = new System.Drawing.Point(124, 158);
-            this.TTotal.Name = "TTotal";
-            this.TTotal.Size = new System.Drawing.Size(62, 20);
-            this.TTotal.TabIndex = 93;
+            this.LicRE.HeaderText = "Fecha fin";
+            this.LicRE.Name = "LicRE";
+            this.LicRE.ReadOnly = true;
             // 
-            // label4
+            // TIdentif
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(76, 162);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 16);
-            this.label4.TabIndex = 94;
-            this.label4.Text = "Total";
-            // 
-            // TFecha_Ini
-            // 
-            this.TFecha_Ini.Location = new System.Drawing.Point(98, 121);
-            this.TFecha_Ini.Name = "TFecha_Ini";
-            this.TFecha_Ini.Size = new System.Drawing.Size(101, 20);
-            this.TFecha_Ini.TabIndex = 95;
-            this.TFecha_Ini.TextChanged += new System.EventHandler(this.TFecha_Ini_TextChanged);
-            // 
-            // TFecha_Fin
-            // 
-            this.TFecha_Fin.Location = new System.Drawing.Point(260, 121);
-            this.TFecha_Fin.Name = "TFecha_Fin";
-            this.TFecha_Fin.Size = new System.Drawing.Size(101, 20);
-            this.TFecha_Fin.TabIndex = 96;
-            // 
-            // TStatus
-            // 
-            this.TStatus.Location = new System.Drawing.Point(271, 34);
-            this.TStatus.Name = "TStatus";
-            this.TStatus.Size = new System.Drawing.Size(101, 20);
-            this.TStatus.TabIndex = 97;
+            this.TIdentif.HeaderText = "Estado";
+            this.TIdentif.Name = "TIdentif";
+            this.TIdentif.ReadOnly = true;
+            this.TIdentif.Width = 50;
             // 
             // C_Alojamiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 268);
-            this.Controls.Add(this.TStatus);
-            this.Controls.Add(this.TFecha_Fin);
-            this.Controls.Add(this.TFecha_Ini);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.TTotal);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.TdescCliente);
-            this.Controls.Add(this.TCliente);
-            this.Controls.Add(this.BCliente);
+            this.ClientSize = new System.Drawing.Size(603, 447);
+            this.Controls.Add(this.BReserva);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.BImprimir);
             this.Controls.Add(this.TReserva);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.TdescTAlojamiento);
-            this.Controls.Add(this.TTAlojamiento);
             this.Controls.Add(this.BLimpiar);
-            this.Controls.Add(this.BTAlojamiento);
-            this.Controls.Add(this.BSeguir);
+            this.Controls.Add(this.CB_Estado);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.TAlojamiento);
+            this.Controls.Add(this.DG_Datos);
             this.Name = "C_Alojamiento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Reserva";
-            this.Load += new System.EventHandler(this.Reserva_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.Text = "C_Alojamiento";
+            this.Load += new System.EventHandler(this.C_Alojamiento_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DG_Datos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button BLimpiar;
-        private System.Windows.Forms.Button BSeguir;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.TextBox TdescTAlojamiento;
-        private System.Windows.Forms.TextBox TTAlojamiento;
-        private System.Windows.Forms.Button BTAlojamiento;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TdescCliente;
-        private System.Windows.Forms.TextBox TCliente;
-        private System.Windows.Forms.Button BCliente;
-        private System.Windows.Forms.TextBox TReserva;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+
+        private System.Windows.Forms.DataGridView DG_Datos;
+        private System.Windows.Forms.TextBox TAlojamiento;
+        private System.Windows.Forms.ComboBox CB_Estado;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox TFecha_Fin;
-        private System.Windows.Forms.TextBox TFecha_Ini;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox TTotal;
-        private System.Windows.Forms.TextBox TStatus;
+        private System.Windows.Forms.Button BLimpiar;
+        private System.Windows.Forms.TextBox TReserva;
+        private System.Windows.Forms.Button BImprimir;
+        private System.Windows.Forms.Button BReserva;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Identificacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LicRE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TIdentif;
     }
 }
