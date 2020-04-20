@@ -1313,5 +1313,27 @@ namespace SistHoteleria
             }
             return true;
         }
+        public static Clases.EOferta Lee_Oferta(string id)
+        {
+            string sql = "";
+            Clases.EOferta ii_Oferta= new Clases.EOferta();
+            DataSet DS = new DataSet();
+            string Error = "";
+
+            sql = "  SELECT * from  Oferta  WHERE id_oferta = '" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                ii_Oferta.id_oferta = id;
+                ii_Oferta.descr_oferta = DS.Tables[0].Rows[0]["descr_oferta"].ToString();
+                ii_Oferta.estado_oferta = DS.Tables[0].Rows[0]["estado_oferta"].ToString();
+                ii_Oferta.id_temp_oferta = DS.Tables[0].Rows[0]["id_temp_oferta"].ToString();
+
+                return ii_Oferta;
+
+            }
+            return null;
+
+        }
     }
 }

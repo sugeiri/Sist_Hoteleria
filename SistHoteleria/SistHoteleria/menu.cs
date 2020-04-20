@@ -508,5 +508,22 @@ namespace SistHoteleria
             Trans_Cancelacion form = new Trans_Cancelacion("a");
             form.ShowDialog();
         }
+
+        private void consultarToolStripMenuItem24_Click(object sender, EventArgs e)
+        {
+            if (Clases.Nivel_Acceso.ToUpper() == "O")
+            {
+                MessageBox.Show("No Tiene Acceso");
+                return;
+            }
+            Mant_Oferta form = new Mant_Oferta("a");
+            form.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem25_Click(object sender, EventArgs e)
+        {
+            Mant_C_Oferta form = new Mant_C_Oferta("","c");
+            form.ShowDialog();
+        }
     }
 }

@@ -44,8 +44,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\Quilvio_C55\Desktop\YORDANY\CrystalDecisions.Windows.Forms\CrystalDecisions.Windows.Forms.dll</HintPath>
     </Reference>
-    <Reference Include="itextsharp">
-      <HintPath>C:\Users\Quilvio_C55\Desktop\YORDANY\itextsharp\itextsharp.dll</HintPath>
+    <Reference Include="itextsharp, Version=5.0.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -80,11 +81,23 @@
     <Compile Include="Estadisticas.Designer.cs">
       <DependentUpon>Estadisticas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mant_C_Oferta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_C_Oferta.designer.cs">
+      <DependentUpon>Mant_C_Oferta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mant_Mantenimiento.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Mant_Mantenimiento.designer.cs">
       <DependentUpon>Mant_Mantenimiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Oferta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Oferta.designer.cs">
+      <DependentUpon>Mant_Oferta.cs</DependentUpon>
     </Compile>
     <Compile Include="Reserva.cs">
       <SubType>Form</SubType>
@@ -359,8 +372,14 @@
     <EmbeddedResource Include="Estadisticas.resx">
       <DependentUpon>Estadisticas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Mant_C_Oferta.resx">
+      <DependentUpon>Mant_C_Oferta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mant_Mantenimiento.resx">
       <DependentUpon>Mant_Mantenimiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Oferta.resx">
+      <DependentUpon>Mant_Oferta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reserva.resx">
       <DependentUpon>Reserva.cs</DependentUpon>
