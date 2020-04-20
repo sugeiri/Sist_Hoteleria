@@ -289,53 +289,55 @@ namespace SistHoteleria
                     dg_Caracteristicas.Rows.RemoveAt(e.RowIndex);
                 }
 
-                }
-
             }
 
-            private void BTHabitacion_Click(object sender, EventArgs e)
+        }
+
+        private void BTHabitacion_Click(object sender, EventArgs e)
+        {
+            Mant_C_Oferta CP = new Mant_C_Oferta("", "e");
+            CP.ShowDialog();
+            string id = CP.Id.ToString().Trim();
+            if (id.Trim() != "0")
             {
-                Mant_C_Oferta CP = new Mant_C_Oferta("","e");
-                CP.ShowDialog();
-                string id = CP.Id.ToString().Trim();
-                if (id.Trim() != "0")
+                string descr = funciones.Lee_Descr_Tipo(id, "Oferta");
+                if (descr.Trim() != "")
                 {
-                    string descr = funciones.Lee_Descr_Tipo(id, "Oferta");
-                    if (descr.Trim() != "")
+                    TOferta.Text = id;
+                    TdescOferta.Text = descr;
+                    List<Clases.EOfertatalojamiento> int_med_Esp = funciones.Lee_Oferta_Talojamiento(id);
+                    if (int_med_Esp != null)
                     {
-                        TOferta.Text = id;
-                        List<Clases.EOfertatalojamiento> int_med_Esp = funciones.Lee_Oferta_Talojamiento(id);
-                        if (int_med_Esp != null)
+                        DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Tipos de Alojamiento para esta Oferta , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.No)
                         {
-                            DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Tipos de Alojamiento para esta Oferta , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
-                            if (dialogResult == DialogResult.No)
-                            {
-                                TOferta.Text = "";
-                                return;
+                            TOferta.Text = "";
+                            return;
 
-                            }
-                            aa_modo = "m";
-                            TOferta.Enabled = true;
-                            aa_EOFerta.id_oferta = int_med_Esp[0].id_oferta_det01;
-                            Pasa_Datos();
                         }
+                        aa_modo = "m";
+                        TOferta.Enabled = true;
+                        aa_EOFerta.id_oferta = int_med_Esp[0].id_oferta_det01;
+                        Pasa_Datos();
                     }
-                    else
-                    {
-                        MessageBox.Show("No Existe esta Oferta en la Base de Datos");
-                        return;
-                    }
-
                 }
-            }
-
-            private void TTHabitacion_Leave(object sender, EventArgs e)
-            {
-                if (TOferta.Text.ToString().Trim() != "")
+                else
                 {
+                    MessageBox.Show("No Existe esta Oferta en la Base de Datos");
+                    return;
+                }
+
+            }
+        }
+
+        private void TTHabitacion_Leave(object sender, EventArgs e)
+        {
+            if (TOferta.Text.ToString().Trim() != "")
+            {
                 string descr = funciones.Lee_Descr_Tipo(TOferta.Text, "Oferta");
                 if (descr.Trim() != "")
                 {
+                    TdescOferta.Text = descr;
                     List<Clases.EOfertatalojamiento> int_med_Esp = funciones.Lee_Oferta_Talojamiento(TOferta.Text);
                     if (int_med_Esp != null)
                     {
@@ -359,11 +361,11 @@ namespace SistHoteleria
                 }
             }
 
-            }
+        }
 
-            private void BLimpiar_Click(object sender, EventArgs e)
-            {
-                Limpia_Datos();
-            }
+        private void BLimpiar_Click(object sender, EventArgs e)
+        {
+            Limpia_Datos();
         }
     }
+}

@@ -300,7 +300,8 @@ namespace SistHoteleria
                     if (descr.Trim() != "")
                     {
                         TTHabitacion.Text = id;
-                        List<Clases.Ethab_caracteristica> int_med_Esp = funciones.Lee_Caracteristicas_THabitacion(id);
+                    TdescTHabitacion.Text = descr;
+                    List<Clases.Ethab_caracteristica> int_med_Esp = funciones.Lee_Caracteristicas_THabitacion(id);
                         if (int_med_Esp != null)
                         {
                             DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Caracteristicas para este Tipo de Habitacion , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
@@ -332,7 +333,8 @@ namespace SistHoteleria
                     string descr = funciones.Lee_Descr_Tipo(TTHabitacion.Text, "tipo_habitacion");
                     if (descr.Trim() != "")
                     {
-                        List<Clases.Ethab_caracteristica> int_med_Esp = funciones.Lee_Caracteristicas_THabitacion(TTHabitacion.Text);
+                    TdescTHabitacion.Text = descr;
+                    List<Clases.Ethab_caracteristica> int_med_Esp = funciones.Lee_Caracteristicas_THabitacion(TTHabitacion.Text);
                         if (int_med_Esp != null)
                         {
                             DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Caracteristicas para este Tipo de Habitacion , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);

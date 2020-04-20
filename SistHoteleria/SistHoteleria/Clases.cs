@@ -280,5 +280,14 @@ namespace SistHoteleria
 
 
         }
+        public class EOfertaxRangoAlojamientos
+        {
+            public string id_oferta_det03 = "";
+            public int c_ini_aloj_det03 = 0;
+            public int c_fin_aloj_det03 = 0;
+            public decimal descuento_det03 = 0;
+
+
+        }
     }
 }

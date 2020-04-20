@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace SistHoteleria
 {
-    public partial class Conf_OfertaTCliente : Form
+    public partial class Conf_OfertaxCantAlojamiento : Form
     {
         string aa_modo = "a";
         string aa_id = "";
         string Error = "";
         Clases.EOferta aa_EOFerta = new Clases.EOferta();
-        List<Clases.EOfertaTCliente> aa_LETCliente = new List<Clases.EOfertaTCliente>();
-        public Conf_OfertaTCliente(string ii_modo, string ii_id)
+        List<Clases.EOfertaxRangoAlojamientos> aa_Rango = new List<Clases.EOfertaxRangoAlojamientos>();
+        public Conf_OfertaxCantAlojamiento(string ii_modo, string ii_id)
         {
             InitializeComponent();
             aa_modo = ii_modo;
@@ -29,52 +29,24 @@ namespace SistHoteleria
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            //LEE Caracteristicas PARA ENCADENAR
-            tipob form = new tipob("e", "tipo_cliente", "Tipo Cliente");
-            form.ShowDialog();
-            string id_T = form.Id.Trim();
-            if (!string.IsNullOrWhiteSpace(id_T.Trim()))
-            {
-                Agrega_Fila(id_T);
-            }
+
 
         }
         void Agrega_Fila(string id)
         {
 
-            for (int i = 0; i < dg_Caracteristicas.Rows.Count - 1; i++)
-            {
-                if (dg_Caracteristicas.Rows[i].Cells[0].Value.ToString().Trim() == id.ToString().Trim())
-                {
-                    MessageBox.Show("Ya Existe Este Tipo Cliente para la Oferta");
-                    return;
-                }
-            }
 
-            DataGridViewRow ii_row = new DataGridViewRow();
-            ii_row.CreateCells(dg_Caracteristicas);
-            ii_row.Cells[0].Value = id;
-            ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(id, "tipo_cliente");
-            ii_row.Cells[2].Value = "0";
-            dg_Caracteristicas.Rows.Add(ii_row);
         }
 
 
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //LEE Caracteristicas PARA ENCADENAR
-            Mant_C_Cliente form = new Mant_C_Cliente("e");
-            form.ShowDialog();
-            string id_T = form.Id.Trim();
-            if (!string.IsNullOrWhiteSpace(id_T.Trim()))
-            {
-                Agrega_Fila(id_T);
-            }
+
 
 
         }
 
-        private void Conf_OfertaTCliente_Load(object sender, EventArgs e)
+        private void Conf_OfertaxCantAlojamiento_Load(object sender, EventArgs e)
         {
 
 
@@ -97,20 +69,21 @@ namespace SistHoteleria
         bool Inserta_Datos()
         {
             Error = "";
-            List<Clases.EOfertaTCliente> aa_LETClienteTHab = new List<Clases.EOfertaTCliente>();
-            Clases.EOfertaTCliente aa_ECaracteristicasTHab = new Clases.EOfertaTCliente();
+            List<Clases.EOfertaxRangoAlojamientos> aa_RangoTHab = new List<Clases.EOfertaxRangoAlojamientos>();
+            Clases.EOfertaxRangoAlojamientos aa_ECaracteristicasTHab = new Clases.EOfertaxRangoAlojamientos();
             for (int ii = 0; ii < dg_Caracteristicas.RowCount - 1; ii++)
             {
-                aa_ECaracteristicasTHab = new Clases.EOfertaTCliente();
+                aa_ECaracteristicasTHab = new Clases.EOfertaxRangoAlojamientos();
 
-                aa_ECaracteristicasTHab.id_oferta_det02 = TOferta.Text;
-                aa_ECaracteristicasTHab.id_t_cliente_det02 = dg_Caracteristicas.Rows[ii].Cells[0].Value.ToString().Trim();
-                aa_ECaracteristicasTHab.descuento_det02 = decimal.Parse(dg_Caracteristicas.Rows[ii].Cells[2].Value.ToString().Trim());
+                aa_ECaracteristicasTHab.id_oferta_det03 = TOferta.Text;
+                aa_ECaracteristicasTHab.c_ini_aloj_det03 = int.Parse(dg_Caracteristicas.Rows[ii].Cells[0].Value.ToString().Trim());
+                aa_ECaracteristicasTHab.c_fin_aloj_det03 = int.Parse(dg_Caracteristicas.Rows[ii].Cells[1].Value.ToString().Trim());
+                aa_ECaracteristicasTHab.descuento_det03 = decimal.Parse(dg_Caracteristicas.Rows[ii].Cells[2].Value.ToString().Trim());
 
-                aa_LETClienteTHab.Add(aa_ECaracteristicasTHab);
+                aa_RangoTHab.Add(aa_ECaracteristicasTHab);
             }
 
-            if (funciones.Inserta_Oferta_TCliente(aa_LETClienteTHab, ref Error))
+            if (funciones.Inserta_Oferta_xRango(aa_RangoTHab, ref Error))
             {
                 return true;
             }
@@ -141,7 +114,7 @@ namespace SistHoteleria
 
                 if (dg_Caracteristicas.RowCount <= 1)
                 {
-                    MessageBox.Show("Debe Indicar Al menos Un Tipo de Cliente");
+                    MessageBox.Show("Debe Indicar Al menos Un Rango");
                     return false;
                 }
 
@@ -154,21 +127,21 @@ namespace SistHoteleria
         {
             TOferta.Text = aa_EOFerta.id_oferta.ToString();
             TdescOferta.Text = aa_EOFerta.descr_oferta.ToString().ToUpper();
-            aa_LETCliente = new List<Clases.EOfertaTCliente>();
-            aa_LETCliente = funciones.Lee_Oferta_TCliente(aa_EOFerta.id_oferta);
+            aa_Rango = new List<Clases.EOfertaxRangoAlojamientos>();
+            aa_Rango = funciones.Lee_Oferta_XRango(aa_EOFerta.id_oferta);
 
-            if (aa_LETCliente != null)
+            if (aa_Rango != null)
             {
 
                 dg_Caracteristicas.Rows.Clear();
-                foreach (var Caracteristicas in aa_LETCliente)
+                foreach (var Caracteristicas in aa_Rango)
                 {
 
                     DataGridViewRow ii_row = new DataGridViewRow();
                     ii_row.CreateCells(dg_Caracteristicas);
-                    ii_row.Cells[0].Value = Caracteristicas.id_t_cliente_det02.ToString().Trim();
-                    ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(Caracteristicas.id_t_cliente_det02.ToString(), "tipo_cliente");
-                    ii_row.Cells[2].Value = Caracteristicas.descuento_det02.ToString().Trim();
+                    ii_row.Cells[0].Value = Caracteristicas.c_ini_aloj_det03.ToString().Trim();
+                    ii_row.Cells[1].Value = Caracteristicas.c_fin_aloj_det03.ToString().Trim();
+                    ii_row.Cells[2].Value = Caracteristicas.descuento_det03.ToString().Trim();
                     dg_Caracteristicas.Rows.Add(ii_row);
                 }
             }
@@ -196,7 +169,7 @@ namespace SistHoteleria
             }
             else
             {
-                MessageBox.Show("No Pudo Grabar OFERTA -Tipo Cliente  -->" + Error);
+                MessageBox.Show("No Pudo Grabar OFERTA x Rango -->" + Error);
             }
 
 
@@ -252,44 +225,7 @@ namespace SistHoteleria
         private void dg_Caracteristicas_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
 
-            if (e.ColumnIndex == 0 && dg_Caracteristicas.Rows[e.RowIndex].Cells[0] != null && (e.RowIndex < dg_Caracteristicas.Rows.Count - 1))
-            {
-                if (dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value != null)
-                {
-                    for (int i = 0; i < dg_Caracteristicas.Rows.Count - 1; i++)
-                    {
-                        if (i != e.RowIndex)
-                        {
-                            string n = dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value.ToString();
-                            if (dg_Caracteristicas.Rows[i].Cells[0].Value.ToString().Trim() == n)
-                            {
-                                MessageBox.Show("Ya Existe Este Tipo de Cliente para la oferta");
-                                dg_Caracteristicas.Rows.RemoveAt(e.RowIndex);
-                                return;
 
-
-                            }
-                        }
-
-                        string SelectedText = dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value.ToString();
-                        string descr = funciones.Lee_Descr_Tipo(SelectedText, "tipo_cliente").ToString().Trim();
-                        if (descr == "")
-                        {
-                            MessageBox.Show("No Existe Este Tipo de Cliente");
-                            return;
-
-                        }
-                        dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value = int.Parse(SelectedText);
-                        dg_Caracteristicas.Rows[e.RowIndex].Cells[1].Value = descr.ToUpper();
-                        dg_Caracteristicas.Rows[e.RowIndex].Cells[2].Value = 0;
-                    }
-                }
-                else
-                {
-                    dg_Caracteristicas.Rows.RemoveAt(e.RowIndex);
-                }
-
-            }
 
         }
 
@@ -305,10 +241,10 @@ namespace SistHoteleria
                 {
                     TOferta.Text = id;
                     TdescOferta.Text = descr;
-                    List<Clases.EOfertaTCliente> int_med_Esp = funciones.Lee_Oferta_TCliente(id);
+                    List<Clases.EOfertaxRangoAlojamientos> int_med_Esp = funciones.Lee_Oferta_XRango(id);
                     if (int_med_Esp != null)
                     {
-                        DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Tipo de Cliente para esta Oferta , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
+                        DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Rangos para esta Oferta , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.No)
                         {
                             TOferta.Text = "";
@@ -317,7 +253,7 @@ namespace SistHoteleria
                         }
                         aa_modo = "m";
                         TOferta.Enabled = true;
-                        aa_EOFerta.id_oferta = int_med_Esp[0].id_oferta_det02;
+                        aa_EOFerta.id_oferta = int_med_Esp[0].id_oferta_det03;
                         Pasa_Datos();
                     }
                 }
@@ -338,10 +274,10 @@ namespace SistHoteleria
                 if (descr.Trim() != "")
                 {
                     TdescOferta.Text = descr;
-                    List<Clases.EOfertaTCliente> int_med_Esp = funciones.Lee_Oferta_TCliente(TOferta.Text);
+                    List<Clases.EOfertaxRangoAlojamientos> int_med_Esp = funciones.Lee_Oferta_XRango(TOferta.Text);
                     if (int_med_Esp != null)
                     {
-                        DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Tipo de Cliente para esta Oferta , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
+                        DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Rangos para esta Oferta , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.No)
                         {
                             TOferta.Text = "";
@@ -350,7 +286,7 @@ namespace SistHoteleria
                         }
                         aa_modo = "m";
                         TOferta.Enabled = true;
-                        aa_EOFerta.id_oferta = int_med_Esp[0].id_oferta_det02;
+                        aa_EOFerta.id_oferta = int_med_Esp[0].id_oferta_det03;
                         Pasa_Datos();
                     }
                 }

@@ -119,6 +119,8 @@
             this.crearToolStripMenuItem26 = new System.Windows.Forms.ToolStripMenuItem();
             this.consultarToolStripMenuItem26 = new System.Windows.Forms.ToolStripMenuItem();
             this.xTipoClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.crearToolStripMenuItem27 = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarToolStripMenuItem27 = new System.Windows.Forms.ToolStripMenuItem();
             this.xRangoDeFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.claveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,8 +134,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LHotel = new System.Windows.Forms.Label();
-            this.crearToolStripMenuItem27 = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultarToolStripMenuItem27 = new System.Windows.Forms.ToolStripMenuItem();
+            this.crearToolStripMenuItem28 = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarToolStripMenuItem28 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -842,7 +844,7 @@
             this.crearToolStripMenuItem26,
             this.consultarToolStripMenuItem26});
             this.xTipoAlojamientoToolStripMenuItem.Name = "xTipoAlojamientoToolStripMenuItem";
-            this.xTipoAlojamientoToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.xTipoAlojamientoToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.xTipoAlojamientoToolStripMenuItem.Text = "X Tipo Alojamiento";
             // 
             // crearToolStripMenuItem26
@@ -865,14 +867,31 @@
             this.crearToolStripMenuItem27,
             this.consultarToolStripMenuItem27});
             this.xTipoClienteToolStripMenuItem.Name = "xTipoClienteToolStripMenuItem";
-            this.xTipoClienteToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.xTipoClienteToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.xTipoClienteToolStripMenuItem.Text = "X Tipo Cliente";
+            // 
+            // crearToolStripMenuItem27
+            // 
+            this.crearToolStripMenuItem27.Name = "crearToolStripMenuItem27";
+            this.crearToolStripMenuItem27.Size = new System.Drawing.Size(142, 22);
+            this.crearToolStripMenuItem27.Text = "Crear";
+            this.crearToolStripMenuItem27.Click += new System.EventHandler(this.crearToolStripMenuItem27_Click);
+            // 
+            // consultarToolStripMenuItem27
+            // 
+            this.consultarToolStripMenuItem27.Name = "consultarToolStripMenuItem27";
+            this.consultarToolStripMenuItem27.Size = new System.Drawing.Size(142, 22);
+            this.consultarToolStripMenuItem27.Text = "Consultar";
+            this.consultarToolStripMenuItem27.Click += new System.EventHandler(this.consultarToolStripMenuItem27_Click);
             // 
             // xRangoDeFechaToolStripMenuItem
             // 
+            this.xRangoDeFechaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.crearToolStripMenuItem28,
+            this.consultarToolStripMenuItem28});
             this.xRangoDeFechaToolStripMenuItem.Name = "xRangoDeFechaToolStripMenuItem";
-            this.xRangoDeFechaToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.xRangoDeFechaToolStripMenuItem.Text = "X Rango de fecha";
+            this.xRangoDeFechaToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.xRangoDeFechaToolStripMenuItem.Text = "X Cant de Alojamientos";
             // 
             // claveToolStripMenuItem
             // 
@@ -966,19 +985,19 @@
             this.LHotel.TabIndex = 1;
             this.LHotel.Text = "LHotel";
             // 
-            // crearToolStripMenuItem27
+            // crearToolStripMenuItem28
             // 
-            this.crearToolStripMenuItem27.Name = "crearToolStripMenuItem27";
-            this.crearToolStripMenuItem27.Size = new System.Drawing.Size(180, 22);
-            this.crearToolStripMenuItem27.Text = "Crear";
-            this.crearToolStripMenuItem27.Click += new System.EventHandler(this.crearToolStripMenuItem27_Click);
+            this.crearToolStripMenuItem28.Name = "crearToolStripMenuItem28";
+            this.crearToolStripMenuItem28.Size = new System.Drawing.Size(180, 22);
+            this.crearToolStripMenuItem28.Text = "Crear";
+            this.crearToolStripMenuItem28.Click += new System.EventHandler(this.crearToolStripMenuItem28_Click);
             // 
-            // consultarToolStripMenuItem27
+            // consultarToolStripMenuItem28
             // 
-            this.consultarToolStripMenuItem27.Name = "consultarToolStripMenuItem27";
-            this.consultarToolStripMenuItem27.Size = new System.Drawing.Size(180, 22);
-            this.consultarToolStripMenuItem27.Text = "Consultar";
-            this.consultarToolStripMenuItem27.Click += new System.EventHandler(this.consultarToolStripMenuItem27_Click);
+            this.consultarToolStripMenuItem28.Name = "consultarToolStripMenuItem28";
+            this.consultarToolStripMenuItem28.Size = new System.Drawing.Size(180, 22);
+            this.consultarToolStripMenuItem28.Text = "Consultar";
+            this.consultarToolStripMenuItem28.Click += new System.EventHandler(this.consultarToolStripMenuItem28_Click);
             // 
             // menu
             // 
@@ -1109,5 +1128,7 @@
         private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem26;
         private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem27;
         private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem27;
+        private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem28;
+        private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem28;
     }
 }

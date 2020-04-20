@@ -558,31 +558,6 @@ AS
 GO
 grant all on ACTOFERTA_DET_02 to public
 
---------------ACTOFERTA_DET_03-------------------------
-IF EXISTS (SELECT name FROM sysobjects 
-WHERE name = 'ACTOFERTA_DET_03' AND type = 'P')
-DROP PROCEDURE ACTOFERTA_DET_03
-GO
-CREATE PROCEDURE ACTOFERTA_DET_03
-       @II_ID_OFERTA_DET03  CHAR(5),
-       @II_C_INI_ALOJ_DET03  INT,
-       @II_C_FIN_ALOJ_DET03  INT,
-       @II_DESCUENTO_DET03  DECIMAL,
-       @aa_Modo  char(1)
-AS
-if @aa_Modo='A' 
-	insert into oferta_det_03 values(	     @II_ID_OFERTA_DET03,
-	     @II_C_INI_ALOJ_DET03,
-	     @II_C_FIN_ALOJ_DET03,
-	     @II_DESCUENTO_DET03);
-else
-	update oferta_det_03 set 	     C_INI_ALOJ_DET03=@II_C_INI_ALOJ_DET03,
-	     C_FIN_ALOJ_DET03=@II_C_FIN_ALOJ_DET03,
-	     DESCUENTO_DET03=@II_DESCUENTO_DET03
-  where ID_OFERTA_DET03=@II_ID_OFERTA_DET03;
-GO
-grant all on ACTOFERTA_DET_03 to public
-
 --------------ACTTIPO_ARCHIVO-------------------------
 IF EXISTS (SELECT name FROM sysobjects 
 WHERE name = 'ACTTIPO_ARCHIVO' AND type = 'P')
@@ -1626,19 +1601,13 @@ CREATE PROCEDURE ACTOFERTA_DET_03
        @II_ID_OFERTA_DET03  CHAR(5),
        @II_C_INI_ALOJ_DET03  INT,
        @II_C_FIN_ALOJ_DET03  INT,
-       @II_DESCUENTO_DET03  DECIMAL,
-       @aa_Modo  char(1)
+       @II_DESCUENTO_DET03  DECIMAL
 AS
-if @aa_Modo='A' 
+
 	insert into oferta_det_03 values(	     @II_ID_OFERTA_DET03,
 	     @II_C_INI_ALOJ_DET03,
 	     @II_C_FIN_ALOJ_DET03,
 	     @II_DESCUENTO_DET03);
-else
-	update oferta_det_03 set 	     C_INI_ALOJ_DET03=@II_C_INI_ALOJ_DET03,
-	     C_FIN_ALOJ_DET03=@II_C_FIN_ALOJ_DET03,
-	     DESCUENTO_DET03=@II_DESCUENTO_DET03
-  where ID_OFERTA_DET03=@II_ID_OFERTA_DET03;
 GO
 grant all on ACTOFERTA_DET_03 to public
 
