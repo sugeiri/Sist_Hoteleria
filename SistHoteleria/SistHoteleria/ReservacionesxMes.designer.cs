@@ -117,7 +117,7 @@
             series1.IsValueShownAsLabel = true;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
-            series1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
+            series1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
             this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(750, 433);
             this.chart1.TabIndex = 8;

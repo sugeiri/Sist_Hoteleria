@@ -1294,30 +1294,30 @@ GO
 grant all on ACTTIPO_MANTENIMIENTO to public
 
 
---------------ACTMANTENIMIENTO_DET-------------------------
-IF EXISTS (SELECT name FROM sysobjects 
-WHERE name = 'ACTMANTENIMIENTO_DET' AND type = 'P')
-DROP PROCEDURE ACTMANTENIMIENTO_DET
-GO
-CREATE PROCEDURE ACTMANTENIMIENTO_DET
-       @II_ID_MANTENIMIENTO_DET  INT,
-       @II_ID_T_MANT_DET  CHAR(5),
-       @II_ID_EMPLEADO_DET  CHAR(5),
-       @II_ESTADO_MANTENIMIENTO  CHAR(1),
-       @aa_Modo  char(1)
-AS
-if @aa_Modo='A' 
-	insert into mantenimiento_det values(	     @II_ID_MANTENIMIENTO_DET,
-	     @II_ID_T_MANT_DET,
-	     @II_ID_EMPLEADO_DET,
-	     @II_ESTADO_MANTENIMIENTO);
-else
-	update mantenimiento_det set 	     ID_T_MANT_DET=@II_ID_T_MANT_DET,
-	     ID_EMPLEADO_DET=@II_ID_EMPLEADO_DET,
-	     ESTADO_MANTENIMIENTO=@II_ESTADO_MANTENIMIENTO
-  where ID_MANTENIMIENTO_DET=@II_ID_MANTENIMIENTO_DET;
-GO
-grant all on ACTMANTENIMIENTO_DET to public
+----------------ACTMANTENIMIENTO_DET-------------------------
+--IF EXISTS (SELECT name FROM sysobjects 
+--WHERE name = 'ACTMANTENIMIENTO_DET' AND type = 'P')
+--DROP PROCEDURE ACTMANTENIMIENTO_DET
+--GO
+--CREATE PROCEDURE ACTMANTENIMIENTO_DET
+--       @II_ID_MANTENIMIENTO_DET  INT,
+--       @II_ID_T_MANT_DET  CHAR(5),
+--       @II_ID_EMPLEADO_DET  CHAR(5),
+--       @II_ESTADO_MANTENIMIENTO  CHAR(1),
+--       @aa_Modo  char(1)
+--AS
+--if @aa_Modo='A' 
+--	insert into mantenimiento_det values(	     @II_ID_MANTENIMIENTO_DET,
+--	     @II_ID_T_MANT_DET,
+--	     @II_ID_EMPLEADO_DET,
+--	     @II_ESTADO_MANTENIMIENTO);
+--else
+--	update mantenimiento_det set 	     ID_T_MANT_DET=@II_ID_T_MANT_DET,
+--	     ID_EMPLEADO_DET=@II_ID_EMPLEADO_DET,
+--	     ESTADO_MANTENIMIENTO=@II_ESTADO_MANTENIMIENTO
+--  where ID_MANTENIMIENTO_DET=@II_ID_MANTENIMIENTO_DET;
+--GO
+--grant all on ACTMANTENIMIENTO_DET to public
 
 
 ----------------ACTCANCELACION-------------------------

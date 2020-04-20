@@ -306,6 +306,18 @@ namespace SistHoteleria
                 dg_Caracteristicas.Rows.Clear();
                 label2.Visible = true;
                 TFechaC.Visible = true;
+                switch(aa_EMantenimiento.estado_mantenimiento.ToUpper().Trim())
+                {
+                    case "P":
+                        CB_Estado.SelectedIndex = 0;
+                        break;
+                    case "F":
+                        CB_Estado.SelectedIndex = 1;
+                        break;
+                    case "C":
+                        CB_Estado.SelectedIndex = 2;
+                        break;
+                }
                 foreach (var Mant in aa_EMantenimiento.LEDetalle)
                 {
 

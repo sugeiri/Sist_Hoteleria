@@ -92,7 +92,7 @@ namespace SistHoteleria
             if (Clases.Nivel_Acceso.ToUpper() == "A" || Clases.Nivel_Acceso.ToUpper() == "E")
             {
                 int i = Fila_Actual();
-            Id = DG_Datos.Rows[i].Cells[0].Value.ToString().Trim();
+            Id = DG_Datos.Rows[i].Cells[2].Value.ToString().Trim();
             Conf_OfertaTAloj mm = new Conf_OfertaTAloj("m", Id);
             mm.ShowDialog();
             Lee_Datos();
