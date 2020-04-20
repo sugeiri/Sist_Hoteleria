@@ -950,5 +950,78 @@ namespace SistHoteleria
             return "";
 
         }
+        public static string Lee_Descr_TipoAlojamiento(string id)
+        {
+            DataSet DS = new DataSet();
+            string Error = "";
+            string sql = "  SELECT * from  Tipo_Alojamiento WHERE  id_t_alojamiento  = '" + id + "' and " +
+                    "               estado_t_alojamiento='A'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                return DS.Tables[0].Rows[0]["descr_t_alojamiento"].ToString();
+
+            }
+            return "";
+
+        }
+        public static string Lee_Costo_TipoHabitacion(string id)
+        {
+            DataSet DS = new DataSet();
+            string Error = "";
+            string sql = "  SELECT * from  tipo_habitacion WHERE  id_t_hab  = '" + id + "' and " +
+                    "               estado_t_hab='A'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                return DS.Tables[0].Rows[0]["costo_hab"].ToString();
+
+            }
+            return "0";
+
+        }
+        public static bool Inserta_Reserva(Clases.EReserva ii_EReserva, ref string Error)
+        {
+            string sql = "";
+
+        
+           
+                sql = "EXEC ACTRESERVACION '" + ii_EReserva.id_reservacion + "','" +
+                                    ii_EReserva.id_cliente + "','" +
+                                    ii_EReserva.id_t_aloj_reservacion + "','" +
+                                    ii_EReserva.fecha_lleg_reservacion + "','" +
+                                    ii_EReserva.fecha_sal_reservacion + "','" +
+                                    ii_EReserva.Monto_apagar + "','" +
+                                    ii_EReserva.estado_reservacion + "','" +
+                                    Clases.Usuario + "','" +
+                                    Clases.Usuario + "'," +
+                                    "'A'";
+
+                if (!Conexion.Inserta_Datos(sql, ref Error))
+                {
+                    return false;
+                }
+            return true;
+        }
+        public static bool Inserta_Detalle_Reserva(List<Clases.EReserva_Detalle> ii_LEReserva_Detalle, ref string Error)
+        {
+            string modo = "A";
+            string sql = "";
+           
+            int ii = 0;
+            foreach (var dato in ii_LEReserva_Detalle)
+            {
+                sql = "EXEC ACTRESERVACION_DET '" + dato.id_reservacion_det + "','" +
+                                    dato.id_thab_reserv_det + "','"+
+                                    dato.cant_reserv_det+"',"+
+                                    modo;
+                if (!Conexion.Inserta_Datos(sql, ref Error))
+                {
+                    return false;
+                }
+                ii++;
+            }
+            return true;
+        }
     }
 }

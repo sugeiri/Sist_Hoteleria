@@ -471,6 +471,7 @@ namespace SistHoteleria
         private void consultarToolStripMenuItem22_Click(object sender, EventArgs e)
         {
             C_Reserva form = new C_Reserva("c");
+            
             form.ShowDialog();
         }
 

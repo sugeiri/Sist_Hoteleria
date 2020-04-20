@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,335 +13,164 @@ namespace SistHoteleria
 {
     public partial class C_Reserva : Form
     {
-      
-        public string Id = "";
-        string aa_modo = "C";
-        string sql = "";
-
-        string aa_Ultima_Descr_filtro = "";
-        Object fila_buscada = new object();
+        string aa_modo = "a";
+        string aa_id = "";
+        string Error = "";
+        Clases.EReserva aa_EReserva = new Clases.EReserva();
+        List<Clases.EReserva_Detalle> aa_LEReserva_Detalle = new List<Clases.EReserva_Detalle>();
         public C_Reserva(string ii_modo)
         {
             InitializeComponent();
             aa_modo = ii_modo;
         }
-        public C_Reserva(string ii_sql, string ii_modo)
-        {
-            InitializeComponent();
-            aa_modo = ii_modo;
-            sql = ii_sql;
-        }
 
-        int Fila_Actual()
-        {
-            return DG_Datos.CurrentRow.Index;
-        }
-       
-        private void DG_Datos_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (aa_modo.ToUpper() == "E")
-                {
-                    int i = Fila_Actual();
-                    Id = DG_Datos.Rows[i].Cells[0].Value.ToString().Trim();
-                    this.DialogResult = DialogResult.OK;
-                    this.Dispose();
-                }
-                else
-                {
-                    Modificar();
-                }
-                return;
-
-            }
-        }
-
-        private void DG_Datos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (aa_modo.ToUpper() == "E")
-            {
-                int i = Fila_Actual();
-                Id = DG_Datos.Rows[i].Cells[0].Value.ToString().Trim();
-                this.DialogResult = DialogResult.OK;
-                this.Dispose();
-            }
-            else
-            {
-                Modificar();
-            }
-            return;
-        }
-
-        private void DG_Datos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (aa_modo.ToUpper() == "E")
-            {
-                int i = Fila_Actual();
-                Id = DG_Datos.Rows[i].Cells[0].Value.ToString().Trim();
-                this.DialogResult = DialogResult.OK;
-                this.Dispose();
-            }
-            else
-            {
-                Modificar();
-            }
-            return;
-        }
-        void Modificar()
-        {
-            if (Clases.Nivel_Acceso.ToUpper() == "A" || Clases.Nivel_Acceso.ToUpper() == "E")
-            {
-                int i = Fila_Actual();
-            Id = DG_Datos.Rows[i].Cells[2].Value.ToString().Trim();
-            Conf_CaractTHabitacion mm = new Conf_CaractTHabitacion("m", Id);
-            mm.ShowDialog();
-            Lee_Datos();
-            }
-            else
-            {
-                MessageBox.Show("No Tiene Acceso");
-            }
-
-
-        }
-
-        private void C_Reserva_Load(object sender, EventArgs e)
-        {
-            TCodigo.Text = funciones.Prox_Codigo("reservacion").ToString();
-          //  Lee_Datos();
-        }
-        void Lee_Datos()
-        {
-
-             DG_Datos.Rows.Clear();
-            string Error = "";
-            string sql = "select id_caracteristica,descr_caracteristica,id_t_hab,descr_t_hab " +
-                                " from thab_caracteristica,tipo_habitacion,caracteristica  " +
-                                " where id_t_hab=id_t_hab_thcar and " +
-                                "   id_caracteristica=id_caracteristica_thcar  ";
-            DataSet DS = Conexion.EjecutaSQL(sql, ref Error);
-            int Count = DS.Tables.Count;
-            if (Count > 0)
-            {
-                Count = DS.Tables[0].Rows.Count;
-                for (int i = 0; i < Count; i++)
-                {
-                    DataGridViewRow ii_row = new DataGridViewRow();
-                    ii_row.CreateCells(DG_Datos);
-                    ii_row.Cells[0].Value = DS.Tables[0].Rows[i]["id_caracteristica"].ToString().Trim();
-                    ii_row.Cells[1].Value = DS.Tables[0].Rows[i]["descr_caracteristica"].ToString().Trim();
-                    ii_row.Cells[2].Value = DS.Tables[0].Rows[i]["id_t_hab"].ToString().Trim();
-                    ii_row.Cells[3].Value = DS.Tables[0].Rows[i]["descr_t_hab"].ToString().Trim();
-                   
-                    
-                    DG_Datos.Rows.Add(ii_row);
-                }
-            }
-            else
-            {
-                MessageBox.Show("NO ENCONTRO DATO DE LA BUSQUEDA");
-            }
-
-        }
 
        
+       
+        private void Reserva_Load(object sender, EventArgs e)
+        {
+           
+
+                CB_Estado.SelectedIndex = 0;
+                DateTime fecha = DateTime.Today;
+                
+        }
+
+        string Valida_Datos()
+        {
+            String where = "where";
+            if (TReserva.Text.ToString().Trim() != "")
+            {
+                where += " id_reservacion='" + TReserva.Text.ToString().Trim() + "'";
+            }
+            if (TCliente.Text.ToString().Trim() != "")
+            {
+                where += " and id_cliente='" + TCliente.Text.ToString().Trim() + "'";
+            }
+
+            if (TTAlojamiento.Text.ToString().Trim() != "")
+            {
+                where += " and id_t_aloj_reservacion='" + TTAlojamiento.Text.ToString().Trim() + "'";
+            }
+
+            if (TFecha_Ini.Text.ToString().Trim() != "" )
+            {
+                where += " and fecha_lleg_reservacion='" + TFecha_Ini.Text.ToString().Trim() + "'";
+            }
+            if (TFecha_Fin.Text.ToString().Trim() != "")
+            {
+                where += " and fecha_sal_reservacion='" + TFecha_Fin.Text.ToString().Trim() + "'";
+            }
+            if (TTotal.Text.ToString().Trim() != "")
+            {
+                where += " and Monto_apagar='" + TTotal.Text.ToString().Trim() + "'";
+            }
+
+            return where;
+        }
       
-        void Muestra_Filas()
+
+
+        private void BSeguir_Click(object sender, EventArgs e)
         {
 
-            foreach (DataGridViewRow dr in DG_Datos.Rows)
+            string where = Valida_Datos();
+            where = where.Replace("where and", "where ");
+            string sql = "select * from reservacion ";
+            sql += where;
+
+            R_Reserva CP = new R_Reserva("e");
+            CP.ShowDialog();
+            string id = CP.Id.ToString().Trim();
+            if (id.Trim() != "0")
             {
-                dr.Visible = true;
+                TTAlojamiento.Text = id;
+                TdescTAlojamiento.Text = funciones.Lee_Descr_TipoAlojamiento(id);
+
 
             }
-
-            EventArgs e = new EventArgs();
-            Object ob = new Object();
-            if (!string.IsNullOrWhiteSpace(TCodigo.Text.ToString().Trim()) && fila_buscada != TCodigo)
-                TCodigo_TextChanged(ob, e);
-
-            if (!string.IsNullOrWhiteSpace(TDescr.Text.ToString().Trim()) && fila_buscada != TDescr)
-                TNombreTercero_TextChanged(ob, e);
-
-            
-            if (!string.IsNullOrWhiteSpace(TAseg.Text.ToString().Trim()) && fila_buscada != TAseg)
-                TConsultorio_TextChanged(ob, e);
-
-            if (!string.IsNullOrWhiteSpace(TDescAseg.Text.ToString().Trim()) && fila_buscada != TDescAseg)
-                TDescConsultorio_TextChanged(ob, e);
-
 
         }
-        
-        void Filtra(int fila, string dato, bool codigo)
+
+        void Limpia_Datos()
         {
-            bool tiene_filtro = false;
-            if (DG_Datos.Rows.Count > DG_Datos.Rows.GetRowCount(DataGridViewElementStates.Visible))
+          //  aa_THabitacion = new Clases.ETHabitacion();
+            aa_id = "";
+            aa_modo = "a";
+            foreach (Control item in this.Controls)
             {
-                tiene_filtro = true;
+                try
+                {
+                    if (item is TextBox)
+                    {
+                        item.Text = "";
+
+                    }
+
+                }
+                catch { }
             }
 
-            foreach (DataGridViewRow dr in DG_Datos.Rows)
+           
+            
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("ESTA SEGURO DE QUERER LIMPIAR LOS DATOS?", "Alerta", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.No)
             {
-                if (tiene_filtro && dr.Visible == false)
-                {
-                    continue;
-                }
-                else
-                {
+                return;
+            }
+           
+        }
+
+      private void BTAlojamiento_Click(object sender, EventArgs e)
+            {
+            Mant_C_TipoAlojamiento CP = new Mant_C_TipoAlojamiento("e");
+            CP.ShowDialog();
+            string id = CP.Id.ToString().Trim();
+            if (id.Trim() != "0")
+            {
+                TTAlojamiento.Text = id;
+                TdescTAlojamiento.Text = funciones.Lee_Descr_TipoAlojamiento(id);
 
 
-                    if (dr.Cells[fila].Value != null)
+            }
+           
+        }
+
+            private void TTAlojamiento_Leave(object sender, EventArgs e)
+            {
+                if (TTAlojamiento.Text.ToString().Trim() != "")
+                {
+                    string descr = funciones.Lee_Descr_Tipo(TTAlojamiento.Text, "Tipo_alojamiento");
+                    if (descr.Trim() != "")
                     {
-                        string cod = "";
-                        if (codigo)
-                            cod = int.Parse(dr.Cells[fila].Value.ToString().Trim()).ToString().Trim();
-                        else
-                            cod = dr.Cells[fila].Value.ToString().Trim();
-                        if ((cod.ToLower()).IndexOf(dato.ToLower()) >= 0)
-                        {
-                            dr.Visible = true;
-                        }
-                        else
-                        {
-                            dr.Visible = false;
-                        }
+                     TTAlojamiento.Text = descr;
                     }
                 }
 
             }
-        }
 
-        private void TCodigo_TextChanged(object sender, EventArgs e)
+            private void BLimpiar_Click(object sender, EventArgs e)
+            {
+                Limpia_Datos();
+            }
+
+        private void BCliente_Click(object sender, EventArgs e)
         {
 
-            string id = TCodigo.Text.ToString().Trim();
-            if (!string.IsNullOrWhiteSpace(id))
+            Mant_C_Cliente CP = new Mant_C_Cliente("e");
+            CP.ShowDialog();
+            string id = CP.Id.ToString().Trim();
+            if (id.Trim() != "0")
             {
-                fila_buscada = sender;
-                Filtra(0, id, true);
+                TCliente.Text = id;
+                TdescCliente.Text = funciones.Lee_Descr_Tercero(id, "cliente");
+               
 
-            }
-            else
-            {
-                Muestra_Filas();
-            }
-        }
-
-        private void TNombreTercero_TextChanged(object sender, EventArgs e)
-        {
-            bool muestra = false;
-            string nombre = TDescr.Text.ToString().Trim().ToUpper();
-            if (!string.IsNullOrWhiteSpace(nombre))
-            {
-                fila_buscada = sender;
-                if (nombre.Length < aa_Ultima_Descr_filtro.Length)
-                {
-                    muestra = true;
-                }
-                aa_Ultima_Descr_filtro = nombre;
-                if (muestra)
-                    Muestra_Filas();
-
-                Filtra(1, nombre, false);
-
-            }
-            else
-            {
-                Muestra_Filas();
-            }
-        }
-        
-        private void BLimpiar_Click(object sender, EventArgs e)
-        {
-            TCodigo.Text = "";
-            TDescr.Text = "";
-            TAseg.Text = "";
-            TDescAseg.Text = "";
-            foreach (DataGridViewRow dr in DG_Datos.Rows)
-            {
-                dr.Visible = true;
-
-            }
-        }
-        
-
-        private void TConsultorio_TextChanged(object sender, EventArgs e)
-        {
-            string nombre = TAseg.Text.ToString().Trim().ToUpper();
-            bool muestra = false;
-            if (!string.IsNullOrWhiteSpace(nombre))
-            {
-                fila_buscada = sender;
-                if (nombre.Length < aa_Ultima_Descr_filtro.Length)
-                {
-                    muestra = true;
-                }
-                aa_Ultima_Descr_filtro = nombre;
-                if (muestra)
-                    Muestra_Filas();
-
-                Filtra(2, nombre, false);
-
-            }
-            else
-            {
-                Muestra_Filas();
-            }
-        }
-
-        private void TDescConsultorio_TextChanged(object sender, EventArgs e)
-        {
-            string nombre = TDescAseg.Text.ToString().Trim().ToUpper();
-            bool muestra = false;
-            if (!string.IsNullOrWhiteSpace(nombre))
-            {
-                fila_buscada = sender;
-                if (nombre.Length < aa_Ultima_Descr_filtro.Length)
-                {
-                    muestra = true;
-                }
-                aa_Ultima_Descr_filtro = nombre;
-                if (muestra)
-                    Muestra_Filas();
-
-                Filtra(3, nombre, false);
-
-            }
-            else
-            {
-                Muestra_Filas();
-            }
-        }
-
-        private void BCrear_Click(object sender, EventArgs e)
-        {
-            Conf_CaractTHabitacion form = new Conf_CaractTHabitacion("a", "");
-            form.ShowDialog();
-            Lee_Datos();
-
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-            Lee_Datos();
-        }
-
-        private void BConsultorio_Click(object sender, EventArgs e)
-        {
-            Mant_C_TipoHabitacion form = new Mant_C_TipoHabitacion("e");
-            if(form.ShowDialog()==DialogResult.OK)
-            {
-                string id = form.Id;
-                if(id.ToString().Trim()!=""&& id.ToString().Trim() != "0")
-                {
-                    TAseg.Text = id.ToString();
-                    TDescAseg.Text = funciones.Lee_Descr_Tipo(id.ToString(), "tipo_habitacion");
-                }
             }
         }
     }
-}
+    }

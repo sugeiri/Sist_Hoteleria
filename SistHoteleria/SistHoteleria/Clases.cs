@@ -228,5 +228,26 @@ namespace SistHoteleria
 
 
         }
+        public class EReserva_Detalle
+        {
+            public string id_reservacion_det = "";
+            public string id_thab_reserv_det = "";
+            public int cant_reserv_det = 0;
+
+
+        }
+        public class EReserva
+        {
+            public string id_reservacion = "";
+            public string id_cliente = "";
+            public string id_t_aloj_reservacion = "";
+            public string fecha_lleg_reservacion = "";
+            public string fecha_sal_reservacion = "";
+            public string Monto_apagar = "";
+            public string estado_reservacion = "";
+
+
+        }
+  
     }
 }

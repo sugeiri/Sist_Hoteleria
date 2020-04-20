@@ -16,75 +16,90 @@ namespace SistHoteleria
         string aa_modo = "a";
         string aa_id = "";
         string Error = "";
-        Clases.ETHabitacion aa_THabitacion = new Clases.ETHabitacion();
-        List<Clases.Ethab_caracteristica> aa_LECaracteristicas = new List<Clases.Ethab_caracteristica>();
+        Clases.EReserva aa_EReserva = new Clases.EReserva();
+        List<Clases.EReserva_Detalle> aa_LEReserva_Detalle = new List<Clases.EReserva_Detalle>();
         public Reserva(string ii_modo, string ii_id)
         {
             InitializeComponent();
             aa_modo = ii_modo;
             aa_id = ii_id;
         }
-
+        public Reserva(string ii_modo)
+        {
+            InitializeComponent();
+            aa_modo = ii_modo;
+        }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            //LEE Caracteristicas PARA ENCADENAR
-            tipob form = new tipob("e", "caracteristica", "Caracteristicas");
-            form.ShowDialog();
-            string id_T = form.Id.Trim();
-            if (!string.IsNullOrWhiteSpace(id_T.Trim()))
-            {
-                Agrega_Fila(id_T);
-            }
+        //    //LEE Caracteristicas PARA ENCADENAR
+        //    Mant_C_TipoHabitacion form = new Mant_C_TipoHabitacion("e");
+        //    form.ShowDialog();
+        //    string id_T = form.Id.Trim();
+        //    if (!string.IsNullOrWhiteSpace(id_T.Trim()))
+        //    {
+        //        Agrega_Fila(id_T);
+        //    }
 
         }
         void Agrega_Fila(string id)
         {
 
-            for (int i = 0; i < dg_Caracteristicas.Rows.Count - 1; i++)
+            for (int i = 0; i < dg_Reservas.Rows.Count - 1; i++)
             {
-                if (dg_Caracteristicas.Rows[i].Cells[0].Value.ToString().Trim() == id.ToString().Trim())
+                if (dg_Reservas.Rows[i].Cells[0].Value.ToString().Trim() == id.ToString().Trim())
                 {
-                    MessageBox.Show("Ya Existe Esta Caracteristicas para el Tipo de Habitacion");
+                    MessageBox.Show("Ya Existe el Tipo de Habitacion");
                     return;
                 }
             }
 
             DataGridViewRow ii_row = new DataGridViewRow();
-            ii_row.CreateCells(dg_Caracteristicas);
+            ii_row.CreateCells(dg_Reservas);
             ii_row.Cells[0].Value = id;
-            ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(id, "caracteristica");
-            dg_Caracteristicas.Rows.Add(ii_row);
+            ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(id, "tipo_habitacion");
+            ii_row.Cells[2].Value = funciones.Lee_Costo_TipoHabitacion(id);
+            dg_Reservas.Rows.Add(ii_row);
         }
 
 
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //LEE Caracteristicas PARA ENCADENAR
-            tipob form = new tipob("e", "caracteristica", "Caracteristicas");
-            form.ShowDialog();
-            string id_T = form.Id.Trim();
-            if (!string.IsNullOrWhiteSpace(id_T.Trim()))
-            {
-                Agrega_Fila(id_T);
-            }
+            ////LEE Caracteristicas PARA ENCADENAR
+            //Mant_C_TipoHabitacion form = new Mant_C_TipoHabitacion("e");
+            //form.ShowDialog();
+            //string id_T = form.Id.Trim();
+            //if (!string.IsNullOrWhiteSpace(id_T.Trim()))
+            //{
+            //    Agrega_Fila(id_T);
+            //}
 
 
         }
 
         private void Reserva_Load(object sender, EventArgs e)
         {
-            TReserva.Text = funciones.Prox_Codigo("Reservacion").ToString();
+
 
             if (aa_modo.ToUpper() == "A")
             {
-                TR.Enabled = true;
+                CB_Estado.SelectedIndex = 0;
+                TReserva.Text = funciones.Prox_Codigo("Reservacion").ToString();
+                DateTime fecha = DateTime.Today;
+                DT_Fecha_Ini.Value = fecha;
+
+                DT_Fecha_Fin.Value = fecha.AddDays(1);
+                TimeSpan dias = DT_Fecha_Fin.Value - DT_Fecha_Ini.Value;
+                LNoches.Text = dias.Days.ToString();
+                TTAlojamiento.Enabled = true;
 
             }
+            
             else
             {
-                aa_THabitacion = funciones.Lee_TipoHabitacion(aa_id.ToString());
+               
+                // aa_THabitacion = funciones.Lee_TipoHabitacion(aa_id.ToString());
                 Pasa_Datos();
 
 
@@ -96,21 +111,44 @@ namespace SistHoteleria
         bool Inserta_Datos()
         {
             Error = "";
-            List<Clases.Ethab_caracteristica> aa_LECaracteristicasTHab = new List<Clases.Ethab_caracteristica>();
-            Clases.Ethab_caracteristica aa_ECaracteristicasTHab = new Clases.Ethab_caracteristica();
-            for (int ii = 0; ii < dg_Caracteristicas.RowCount - 1; ii++)
+            aa_EReserva = new Clases.EReserva();
+            aa_EReserva.id_reservacion = TReserva.Text.ToString();
+            aa_EReserva.id_cliente = TCliente.Text.ToString();
+            aa_EReserva.id_t_aloj_reservacion = TTAlojamiento.Text.ToString();
+            aa_EReserva.fecha_lleg_reservacion = DT_Fecha_Ini.Value.ToString("yyyy-MM-dd").Trim();
+
+            aa_EReserva.fecha_sal_reservacion = DT_Fecha_Fin.Value.ToString("yyyy-MM-dd").Trim();
+            aa_EReserva.Monto_apagar = LTotalN.Text.ToString();
+            aa_EReserva.estado_reservacion = CB_Estado.SelectedItem.ToString().Trim().ToUpper().Substring(0, 1);
+
+            List<Clases.EReserva_Detalle> aa_LEReserva_Detalle = new List<Clases.EReserva_Detalle>();
+            Clases.EReserva_Detalle aa_EReserva_Detalle = new Clases.EReserva_Detalle();
+
+            for (int ii = 0; ii < dg_Reservas.RowCount - 1; ii++)
             {
-                aa_ECaracteristicasTHab = new Clases.Ethab_caracteristica();
+                aa_EReserva_Detalle = new Clases.EReserva_Detalle();
 
-                aa_ECaracteristicasTHab.id_t_hab_thcar = TR.Text;
-                aa_ECaracteristicasTHab.id_caracteristica_thcar = dg_Caracteristicas.Rows[ii].Cells[0].Value.ToString().Trim();
-
-                aa_LECaracteristicasTHab.Add(aa_ECaracteristicasTHab);
+                aa_EReserva_Detalle.id_reservacion_det = TReserva.Text;
+                aa_EReserva_Detalle.id_thab_reserv_det = dg_Reservas.Rows[ii].Cells[0].Value.ToString().Trim();
+                aa_EReserva_Detalle.cant_reserv_det = int.Parse(dg_Reservas.Rows[ii].Cells[3].Value.ToString().Trim());
+                aa_LEReserva_Detalle.Add(aa_EReserva_Detalle);
             }
 
-            if (funciones.Inserta_Caracteristicas_THabitacion(aa_LECaracteristicasTHab, ref Error))
+
+            // INSERTA ENCABEZADO
+            if (funciones.Inserta_Reserva(aa_EReserva, ref Error))
             {
-                return true;
+                if (funciones.Inserta_Detalle_Reserva(aa_LEReserva_Detalle, ref Error))
+                {
+                    return true;
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(Error.Trim()))
+                    {
+                        MessageBox.Show(Error.ToString().Trim());
+                    }
+                }
             }
             else
             {
@@ -119,6 +157,10 @@ namespace SistHoteleria
                     MessageBox.Show(Error.ToString().Trim());
                 }
             }
+
+
+            
+           
             return false;
         }
 
@@ -129,17 +171,23 @@ namespace SistHoteleria
             if (aa_modo.ToUpper() == "A")
             {
 
-                if (TR.Text.ToString().Trim() == "")
+                if (TCliente.Text.ToString().Trim() == "")
                 {
                     MessageBox.Show(Msj);
-                    errorProvider1.SetError(TR, Msj);
+                    errorProvider1.SetError(TTAlojamiento, Msj);
+                    return false;
+                }
+                if (TTAlojamiento.Text.ToString().Trim() == "")
+                {
+                    MessageBox.Show(Msj);
+                    errorProvider1.SetError(TTAlojamiento, Msj);
                     return false;
                 }
 
 
-                if (dg_Caracteristicas.RowCount <= 1)
+                if (dg_Reservas.RowCount <= 1)
                 {
-                    MessageBox.Show("Debe Indicar Al menos Una Caracteristicas");
+                    MessageBox.Show("Debe Reservar al menos 1 habitacion");
                     return false;
                 }
 
@@ -150,23 +198,23 @@ namespace SistHoteleria
         }
         void Pasa_Datos()
         {
-            TR.Text = aa_THabitacion.id_t_hab.ToString();
-            TdescTAlojamiento.Text = aa_THabitacion.descr_t_hab.ToString().ToUpper();
-            aa_LECaracteristicas = new List<Clases.Ethab_caracteristica>();
-            aa_LECaracteristicas = funciones.Lee_Caracteristicas_THabitacion(aa_THabitacion.id_t_hab);
+            TTAlojamiento.Text = aa_EReserva.id_t_aloj_reservacion.ToString();
+            TdescTAlojamiento.Text = funciones.Lee_Descr_Tipo(aa_EReserva.id_t_aloj_reservacion,"TIPO");
+            aa_LEReserva_Detalle = new List<Clases.EReserva_Detalle>();
+           // aa_LEReserva_Detalle = funciones.Lee_Caracteristicas_THabitacion(aa_THabitacion.id_t_hab);
 
-            if (aa_LECaracteristicas != null)
+            if (aa_LEReserva_Detalle != null)
             {
 
-                dg_Caracteristicas.Rows.Clear();
-                foreach (var Caracteristicas in aa_LECaracteristicas)
+                dg_Reservas.Rows.Clear();
+                foreach (var Caracteristicas in aa_LEReserva_Detalle)
                 {
 
                     DataGridViewRow ii_row = new DataGridViewRow();
-                    ii_row.CreateCells(dg_Caracteristicas);
-                    ii_row.Cells[0].Value = Caracteristicas.id_caracteristica_thcar.ToString().Trim();
-                    ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(Caracteristicas.id_caracteristica_thcar.ToString(), "caracteristica");
-                    dg_Caracteristicas.Rows.Add(ii_row);
+                    ii_row.CreateCells(dg_Reservas);
+                 //   ii_row.Cells[0].Value = Caracteristicas.id_caracteristica_thcar.ToString().Trim();
+                  //  ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(Caracteristicas.id_caracteristica_thcar.ToString(), "caracteristica");
+                    dg_Reservas.Rows.Add(ii_row);
                 }
             }
 
@@ -179,7 +227,7 @@ namespace SistHoteleria
             {
                 if (Inserta_Datos())
                 {
-                    MessageBox.Show("DATOS GUARDADOS, THabitacion -->" + aa_THabitacion.id_t_hab);
+                    MessageBox.Show("DATOS GUARDADOS, Reserva -->" + TReserva.Text.ToString());
                     if (aa_modo.ToUpper() != "A")
                     {
                         this.DialogResult = DialogResult.OK;
@@ -193,7 +241,7 @@ namespace SistHoteleria
             }
             else
             {
-                MessageBox.Show("No Pudo Grabar THabitacion-->" + Error);
+                MessageBox.Show("No Pudo Grabar reserva-->" + Error);
             }
 
 
@@ -203,7 +251,7 @@ namespace SistHoteleria
 
         void Limpia_Datos()
         {
-            aa_THabitacion = new Clases.ETHabitacion();
+          //  aa_THabitacion = new Clases.ETHabitacion();
             aa_id = "";
             aa_modo = "a";
             foreach (Control item in this.Controls)
@@ -220,8 +268,8 @@ namespace SistHoteleria
                 catch { }
             }
 
-            dg_Caracteristicas.Rows.Clear();
-            TR.Enabled = true;
+            dg_Reservas.Rows.Clear();
+            TTAlojamiento.Enabled = true;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -231,63 +279,105 @@ namespace SistHoteleria
             {
                 return;
             }
-            dg_Caracteristicas.Rows.Clear();
+            dg_Reservas.Rows.Clear();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dg_Caracteristicas.Rows.Count - 1; i++)
+            for (int i = 0; i < dg_Reservas.Rows.Count - 1; i++)
             {
-                if (dg_Caracteristicas.Rows[i].Cells[0].Selected || dg_Caracteristicas.Rows[i].Cells[1].Selected)
+                if (dg_Reservas.Rows[i].Cells[0].Selected || dg_Reservas.Rows[i].Cells[1].Selected)
                 {
-                    dg_Caracteristicas.Rows.RemoveAt(i);
+                    dg_Reservas.Rows.RemoveAt(i);
 
                 }
             }
         }
 
-        private void dg_Caracteristicas_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void dg_Reserva_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
 
-            if (e.ColumnIndex == 0 && dg_Caracteristicas.Rows[e.RowIndex].Cells[0] != null && (e.RowIndex < dg_Caracteristicas.Rows.Count - 1))
+            if (e.ColumnIndex == 0 && dg_Reservas.Rows[e.RowIndex].Cells[0] != null && (e.RowIndex < dg_Reservas.Rows.Count - 1))
             {
-                if (dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value != null)
+                if (dg_Reservas.Rows[e.RowIndex].Cells[0].Value != null)
                 {
-                    for (int i = 0; i < dg_Caracteristicas.Rows.Count - 1; i++)
+                    for (int i = 0; i < dg_Reservas.Rows.Count - 1; i++)
                     {
                         if (i != e.RowIndex)
                         {
-                            string n = dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value.ToString();
-                            if (dg_Caracteristicas.Rows[i].Cells[0].Value.ToString().Trim() == n)
+                            string n = dg_Reservas.Rows[e.RowIndex].Cells[0].Value.ToString();
+                            if (dg_Reservas.Rows[i].Cells[0].Value.ToString().Trim() == n)
                             {
                                 MessageBox.Show("Ya Existe Esta Caracteristicas para el THabitacion");
-                                dg_Caracteristicas.Rows.RemoveAt(e.RowIndex);
+                                dg_Reservas.Rows.RemoveAt(e.RowIndex);
                                 return;
 
 
                             }
                         }
 
-                        string SelectedText = dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value.ToString();
-                        string descr = funciones.Lee_Descr_Tipo(SelectedText, "caracteristica").ToString().Trim();
+                        string SelectedText = dg_Reservas.Rows[e.RowIndex].Cells[0].Value.ToString();
+                        string descr = funciones.Lee_Descr_Tipo(SelectedText, "tipo_habitacion").ToString().Trim();
+                        string cost = funciones.Lee_Costo_TipoHabitacion(SelectedText);
                         if (descr == "")
                         {
-                            MessageBox.Show("No Existe Esta Caracteristica");
+                            MessageBox.Show("No Existe Esta Tipo Habitacion");
                             return;
 
                         }
-                        dg_Caracteristicas.Rows[e.RowIndex].Cells[0].Value = int.Parse(SelectedText);
-                        dg_Caracteristicas.Rows[e.RowIndex].Cells[1].Value = descr.ToUpper();
+                        dg_Reservas.Rows[e.RowIndex].Cells[0].Value = int.Parse(SelectedText);
+                        dg_Reservas.Rows[e.RowIndex].Cells[1].Value = descr.ToUpper();
+                        dg_Reservas.Rows[e.RowIndex].Cells[2].Value = double.Parse(cost);
+                        dg_Reservas.Rows[e.RowIndex].Cells[3].Value = 1;
+                        dg_Reservas.Rows[e.RowIndex].Cells[4].Value = double.Parse(cost)*1;
+                        dg_Reservas.Rows[e.RowIndex].Cells[5].Value = double.Parse(dg_Reservas.Rows[e.RowIndex].Cells[4].Value.ToString()) * int.Parse(LNoches.Text.ToString()); ;
                     }
+
                 }
                 else
                 {
-                    dg_Caracteristicas.Rows.RemoveAt(e.RowIndex);
+                    dg_Reservas.Rows.RemoveAt(e.RowIndex);
                 }
 
+                double sumNo = 0;
+                double sumT = 0;
+                for (int i = 0; i < dg_Reservas.Rows.Count; ++i)
+                {
+                    if (dg_Reservas.Rows[i].Cells[1].Value == null)
+                    { break; }
+                    double di = double.Parse(dg_Reservas.Rows[i].Cells[4].Value.ToString());
+                    double total = double.Parse(dg_Reservas.Rows[i].Cells[5].Value.ToString());
+                    sumNo += di;
+                    sumT += total;
                 }
+                LTotalN.Text = sumNo.ToString();
+                LTotal.Text = sumT.ToString();
 
             }
+
+            if (dg_Reservas.Columns[e.ColumnIndex].Name == "Cant")
+            {
+                dg_Reservas.Rows[e.RowIndex].Cells[4].Value = double.Parse(dg_Reservas.Rows[e.RowIndex].Cells[2].Value.ToString()) * double.Parse(dg_Reservas.Rows[e.RowIndex].Cells[3].Value.ToString());
+                dg_Reservas.Rows[e.RowIndex].Cells[5].Value = double.Parse(dg_Reservas.Rows[e.RowIndex].Cells[4].Value.ToString()) * int.Parse(LNoches.Text.ToString());
+
+                double sumNo = 0;
+                double sumT= 0;
+                for (int i = 0; i < dg_Reservas.Rows.Count; ++i)
+                { if (dg_Reservas.Rows[i].Cells[1].Value==null)
+                    { break; }
+                    double di = double.Parse(dg_Reservas.Rows[i].Cells[4].Value.ToString());
+                    double total = double.Parse(dg_Reservas.Rows[i].Cells[5].Value.ToString());
+                    sumNo += di;
+                    sumT += total;
+                }
+                LTotalN.Text = sumNo.ToString();
+                LTotal.Text = sumT.ToString();
+            }
+           
+           
+
+
+        }
 
             private void BTAlojamiento_Click(object sender, EventArgs e)
             {
@@ -296,40 +386,20 @@ namespace SistHoteleria
             string id = CP.Id.ToString().Trim();
             if (id.Trim() != "0")
             {
-                TdescCliente.Text = funciones.Lee_Descr_Tercero(id, "cliente");
+                TTAlojamiento.Text = id;
+                TdescTAlojamiento.Text = funciones.Lee_Descr_TipoAlojamiento(id);
 
 
             }
+           
         }
 
             private void TTAlojamiento_Leave(object sender, EventArgs e)
             {
-                if (TR.Text.ToString().Trim() != "")
+                if (TTAlojamiento.Text.ToString().Trim() != "")
                 {
-                    string descr = funciones.Lee_Descr_Tipo(TR.Text, "Tipo_alojamiento");
-                    if (descr.Trim() != "")
-                    {
-                        List<Clases.Ethab_caracteristica> int_med_Esp = funciones.Lee_Caracteristicas_THabitacion(TR.Text);
-                        if (int_med_Esp != null)
-                        {
-                            DialogResult dialogResult = MessageBox.Show("Ya Existe Asignacion de Caracteristicas para este Tipo de Habitacion , Desea Modificar?", "Alerta", MessageBoxButtons.YesNo);
-                            if (dialogResult == DialogResult.No)
-                            {
-                                TR.Text = "";
-                                return;
-
-                            }
-                            aa_modo = "m";
-                            TR.Enabled = true;
-                            aa_THabitacion.id_t_hab = int_med_Esp[0].id_t_hab_thcar;
-                            Pasa_Datos();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Existe este Tipo de Habitacion en la Base de Datos");
-                        return;
-                    }
+                    string descr = funciones.Lee_Descr_Tipo(TTAlojamiento.Text, "Tipo_alojamiento");
+                TTAlojamiento.Text = descr;
                 }
 
             }
@@ -347,9 +417,74 @@ namespace SistHoteleria
             string id = CP.Id.ToString().Trim();
             if (id.Trim() != "0")
             {
+                TCliente.Text = id;
                 TdescCliente.Text = funciones.Lee_Descr_Tercero(id, "cliente");
                
 
+            }
+        }
+
+        private void DT_Fecha_Ini_ValueChanged(object sender, EventArgs e)
+        {
+            if (DateTime.Today > DT_Fecha_Ini.Value)
+            {
+                MessageBox.Show("La fecha salida no puede ser menor a la de hoy");
+                return;
+            }
+            TimeSpan dias = DT_Fecha_Fin.Value - DT_Fecha_Ini.Value;
+            if(dias.Days<0)
+            {
+                MessageBox.Show("La fecha salida no puede ser menor a la fecha Entrada");
+                return;
+            }
+            LNoches.Text = dias.Days.ToString();
+            
+            if (dg_Reservas.Rows[0].Cells[0].Value != null) { 
+                double sumT = 0;
+                for (int i = 0; i < dg_Reservas.Rows.Count-1; ++i)
+                {
+                    dg_Reservas.Rows[i].Cells[5].Value = double.Parse(dg_Reservas.Rows[i].Cells[4].Value.ToString()) * dias.Days;
+
+                    if (dg_Reservas.Rows[i].Cells[1].Value == null)
+                    { break; }
+                    double total = double.Parse(dg_Reservas.Rows[i].Cells[5].Value.ToString());
+                    sumT += total;
+                }
+                LTotal.Text = sumT.ToString();
+            }
+           
+        }
+
+        private void DT_Fecha_Fin_ValueChanged(object sender, EventArgs e)
+        {
+            if(DateTime.Today> DT_Fecha_Fin.Value)
+            {
+                MessageBox.Show("La fecha salida no puede ser menor a la de hoy");
+                return;
+            }
+            TimeSpan dias = DT_Fecha_Fin.Value - DT_Fecha_Ini.Value;
+            if (dias.Days < 0)
+            {
+                MessageBox.Show("La fecha salida no puede ser menor a la fecha Entrada");
+                return;
+            }
+            LNoches.Text = dias.Days.ToString();
+            if (dg_Reservas.Rows[0].Cells[0].Value != null)
+            {
+                double sumT = 0;
+                for (int i = 0; i < dg_Reservas.Rows.Count-1; ++i)
+                {
+                    int noches = dias.Days;
+                    string celdas = (dg_Reservas.Rows[i].Cells[4].Value.ToString());
+
+                    dg_Reservas.Rows[i].Cells[5].Value = double.Parse(celdas) * noches;
+
+                    if (dg_Reservas.Rows[i].Cells[1].Value == null)
+                    { break; }
+                    double total = double.Parse(dg_Reservas.Rows[i].Cells[5].Value.ToString());
+                    sumT += total;
+                }
+                LTotal.Text = sumT.ToString();
             }
         }
     }
