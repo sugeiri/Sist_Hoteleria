@@ -1429,5 +1429,87 @@ namespace SistHoteleria
             return null;
 
         }
+        public static bool Inserta_Alojamiento(Clases.EAlojamiento ii_EAlojamiento, string modo, ref string Error)
+        {
+            string sql = "";
+
+
+
+            sql = "EXEC ACTALOJAMIENTO '" + ii_EAlojamiento.id_alojamiento + "','" +
+                                ii_EAlojamiento.id_reserv_alojamiento + "','" +
+                                ii_EAlojamiento.ing_por_alojamiento + "','" +
+                                ii_EAlojamiento.fecha_i_alojamiento + "','" +
+                               ii_EAlojamiento.sal_por_alojamiento + "','" +
+                                ii_EAlojamiento.fecha_s_alojamiento + "','" +
+                                ii_EAlojamiento.estado_alojamiento + "','" +
+                                modo + "'";
+           
+            if (!Conexion.Inserta_Datos(sql, ref Error))
+            {
+                return false;
+            }
+            return true;
+        }
+        public static bool Inserta_Detalle_Alojamiento(List<Clases.EAlojamiento_Detalle> ii_LEAlojamiento_Detalle, string alojamiento,string modo, ref string Error)
+        {
+
+            string sql = "";
+            if (modo == "m") { 
+                sql = "delete from alojamiento_det where id_alojamiento_det='" + alojamiento + "'";
+                if (!Conexion.Inserta_Datos(sql, ref Error))
+                {
+                  return false;
+                }
+            }
+          
+            int ii = 0;
+            foreach (var dato in ii_LEAlojamiento_Detalle)
+            {
+                sql = "EXEC ACTALOJAMIENTO_DET '" + dato.id_alojamiento_det + "','" +
+                                    dato.id_hab_det + "','" +
+                                    dato.id_clie_det + "'";
+                if (!Conexion.Inserta_Datos(sql, ref Error))
+                {
+                   return false;
+                }
+                ii++;
+            }
+            return true;
+        }
+        public static Clases.EAlojamiento Lee_Alojamiento(string id)
+        {
+            Clases.EAlojamiento ii_EAlojamiento = new Clases.EAlojamiento();
+            Clases.EAlojamiento_Detalle ii_EDet = new Clases.EAlojamiento_Detalle();
+            DataSet DS = new DataSet();
+            string Error = "";
+            string sql = " select * from alojamiento where  id_alojamiento='" + id + "'";
+            DS = Conexion.EjecutaSQL(sql, ref Error);
+            if (DS.Tables[0].Rows.Count > 0)
+            {
+                ii_EAlojamiento.id_alojamiento = DS.Tables[0].Rows[0]["id_alojamiento"].ToString();
+                ii_EAlojamiento.id_reserv_alojamiento = DS.Tables[0].Rows[0]["id_reserv_alojamiento"].ToString();
+                ii_EAlojamiento.ing_por_alojamiento = DS.Tables[0].Rows[0]["ing_por_alojamiento"].ToString();
+                ii_EAlojamiento.fecha_i_alojamiento = DS.Tables[0].Rows[0]["fecha_i_alojamiento"].ToString();
+                ii_EAlojamiento.sal_por_alojamiento = DS.Tables[0].Rows[0]["sal_por_alojamiento"].ToString();
+                ii_EAlojamiento.fecha_s_alojamiento  = DS.Tables[0].Rows[0]["fecha_s_alojamiento"].ToString();
+                ii_EAlojamiento.estado_alojamiento = DS.Tables[0].Rows[0]["estado_alojamiento"].ToString();
+                sql = "  select * from Alojamiento_det where  id_Alojamiento_det='" + id + "'";
+                DS = new DataSet();
+                DS = Conexion.EjecutaSQL(sql, ref Error);
+                for (int i = 0; i < DS.Tables[0].Rows.Count; i++)
+                {
+                    ii_EDet = new Clases.EAlojamiento_Detalle();
+                    ii_EDet.id_alojamiento_det = DS.Tables[0].Rows[i]["id_Alojamiento_det"].ToString();
+                    ii_EDet.id_hab_det = DS.Tables[0].Rows[i]["id_hab_det"].ToString();
+                    ii_EDet.id_clie_det = DS.Tables[0].Rows[i]["id_clie_det"].ToString();
+
+                    ii_EAlojamiento.LEDetalle.Add(ii_EDet);
+                }
+                return ii_EAlojamiento;
+            }
+            return null;
+
+        }
+
     }
 }

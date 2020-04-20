@@ -32,6 +32,10 @@
             this.BLimpiar = new System.Windows.Forms.Button();
             this.BSeguir = new System.Windows.Forms.Button();
             this.dg_Alojamientos = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idClie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.LTotal = new System.Windows.Forms.Label();
@@ -53,12 +57,6 @@
             this.TFecha_ini_Reserva = new System.Windows.Forms.TextBox();
             this.TFecha_Fin_Reserva = new System.Windows.Forms.TextBox();
             this.BReserva = new System.Windows.Forms.Button();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idClie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dg_Alojamientos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -112,6 +110,34 @@
             this.dg_Alojamientos.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_Alojamiento_CellEndEdit);
             this.dg_Alojamientos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID Hab";
+            this.dataGridViewTextBoxColumn1.MaxInputLength = 12;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 80;
+            // 
+            // Descr
+            // 
+            this.Descr.HeaderText = "Descripcion";
+            this.Descr.Name = "Descr";
+            this.Descr.ReadOnly = true;
+            this.Descr.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Descr.Width = 225;
+            // 
+            // idClie
+            // 
+            this.idClie.HeaderText = "ID Cliente";
+            this.idClie.Name = "idClie";
+            this.idClie.ReadOnly = true;
+            this.idClie.Width = 80;
+            // 
+            // Cant
+            // 
+            this.Cant.HeaderText = "Nombre";
+            this.Cant.Name = "Cant";
+            this.Cant.Width = 225;
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -126,9 +152,9 @@
             this.groupBox3.Controls.Add(this.button5);
             this.groupBox3.Controls.Add(this.button6);
             this.groupBox3.Controls.Add(this.dg_Alojamientos);
-            this.groupBox3.Location = new System.Drawing.Point(-6, 76);
+            this.groupBox3.Location = new System.Drawing.Point(-6, 58);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(643, 278);
+            this.groupBox3.Size = new System.Drawing.Size(643, 296);
             this.groupBox3.TabIndex = 79;
             this.groupBox3.TabStop = false;
             // 
@@ -326,59 +352,11 @@
             this.BReserva.UseVisualStyleBackColor = true;
             this.BReserva.Click += new System.EventHandler(this.BReserva_Click);
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID Hab";
-            this.dataGridViewTextBoxColumn1.MaxInputLength = 12;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 80;
-            // 
-            // Descr
-            // 
-            this.Descr.HeaderText = "Descripcion";
-            this.Descr.Name = "Descr";
-            this.Descr.ReadOnly = true;
-            this.Descr.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Descr.Width = 225;
-            // 
-            // idClie
-            // 
-            this.idClie.HeaderText = "ID Cliente";
-            this.idClie.Name = "idClie";
-            this.idClie.ReadOnly = true;
-            this.idClie.Width = 80;
-            // 
-            // Cant
-            // 
-            this.Cant.HeaderText = "Nombre";
-            this.Cant.Name = "Cant";
-            this.Cant.Width = 225;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(14, 58);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 23);
-            this.button1.TabIndex = 99;
-            this.button1.Text = "Oferta";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Info;
-            this.textBox1.Location = new System.Drawing.Point(124, 61);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(89, 20);
-            this.textBox1.TabIndex = 98;
-            // 
             // Alojamiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(649, 415);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.BReserva);
             this.Controls.Add(this.TFecha_Fin_Reserva);
             this.Controls.Add(this.TFecha_ini_Reserva);
@@ -436,7 +414,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Descr;
         private System.Windows.Forms.DataGridViewTextBoxColumn idClie;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cant;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }

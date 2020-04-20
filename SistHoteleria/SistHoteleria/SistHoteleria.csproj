@@ -117,6 +117,12 @@
       <DependentUpon>C_Mantenimiento.cs</DependentUpon>
     </Compile>
     <Compile Include="Conexion.cs" />
+    <Compile Include="C_Alojamiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C_Alojamiento.designer.cs">
+      <DependentUpon>C_Alojamiento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Estadisticas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -431,6 +437,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="C_Mantenimiento.resx">
       <DependentUpon>C_Mantenimiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C_Alojamiento.resx">
+      <DependentUpon>C_Alojamiento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Estadisticas.resx">
       <DependentUpon>Estadisticas.cs</DependentUpon>

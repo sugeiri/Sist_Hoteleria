@@ -88,113 +88,22 @@ namespace SistHoteleria
 
         }
 
-        bool Inserta_Datos()
-        {
-            Error = "";
-            aa_EAlojamiento = new Clases.EAlojamiento();
-            aa_EAlojamiento.id_Alojamientocion = TAlojamiento.Text.ToString();
-            aa_EAlojamiento.id_cliente = TCliente.Text.ToString();
-            aa_EAlojamiento.id_t_aloj_Alojamientocion = TTAlojamiento.Text.ToString();
-            aa_EAlojamiento.fecha_lleg_Alojamientocion = DT_Fecha_Ini.Value.ToString("yyyy/MM/dd").Trim();
-
-            aa_EAlojamiento.fecha_sal_Alojamientocion = DT_Fecha_Fin.Value.ToString("yyyy/MM/dd").Trim();
-            aa_EAlojamiento.Monto_apagar = LTotalN.Text.ToString();
-            aa_EAlojamiento.estado_Alojamientocion = CB_Estado.SelectedItem.ToString().Trim().ToUpper().Substring(0, 1);
-
-            List<Clases.EAlojamiento_Detalle> aa_LEAlojamiento_Detalle = new List<Clases.EAlojamiento_Detalle>();
-            Clases.EAlojamiento_Detalle aa_EAlojamiento_Detalle = new Clases.EAlojamiento_Detalle();
-
-            for (int ii = 0; ii < dg_Alojamientos.RowCount - 1; ii++)
-            {
-                aa_EAlojamiento_Detalle = new Clases.EAlojamiento_Detalle();
-
-                aa_EAlojamiento_Detalle.id_Alojamientocion_det = TAlojamiento.Text;
-                aa_EAlojamiento_Detalle.id_thab_reserv_det = dg_Alojamientos.Rows[ii].Cells[0].Value.ToString().Trim();
-                aa_EAlojamiento_Detalle.cant_reserv_det = int.Parse(dg_Alojamientos.Rows[ii].Cells[3].Value.ToString().Trim());
-                aa_LEAlojamiento_Detalle.Add(aa_EAlojamiento_Detalle);
-            }
-
-
-            // INSERTA ENCABEZADO
-            if (funciones.Inserta_Alojamiento(aa_EAlojamiento,aa_modo, ref Error))
-            {
-                if (funciones.Inserta_Detalle_Alojamiento(aa_LEAlojamiento_Detalle, aa_EAlojamiento.id_Alojamientocion, ref Error))
-                {
-                    return true;
-                }
-                else
-                {
-                    if (!string.IsNullOrWhiteSpace(Error.Trim()))
-                    {
-                        MessageBox.Show(Error.ToString().Trim());
-                    }
-                }
-            }
-            else
-            {
-                if (!string.IsNullOrWhiteSpace(Error.Trim()))
-                {
-                    MessageBox.Show(Error.ToString().Trim());
-                }
-            }
-
-
-            
-           
-            return false;
-        }
-
-        bool Valida_Datos()
-        {
-            errorProvider1.Clear();
-            bool if_clien = true;
-            string Msj = "Este Campo No Puede Estar en Blanco";
-            if (aa_modo.ToUpper() == "A")
-            {
-
-                if (dg_Alojamientos.RowCount <= 1)
-                {
-                    MessageBox.Show("Debe Alojamientor al menos 1 habitacion");
-                    return false;
-                }
-
-
-                for (int i = 0; i < dg_Alojamientos.Rows.Count - 1; i++)
-                {
-                    if (dg_Alojamientos.Rows[i].Cells[2].Value == null)
-                    {
-                       
-                        if_clien = false;
-                        break;
-
-
-                    }
-                }
-                if (!if_clien)
-                {
-                    MessageBox.Show("Debe asignar cliente");
-                    return false;
-                }
-                   
-
-
-
-
-            }
-            return true;
-        }
+      
         void Pasa_Datos()
         {
-            TAlojamiento.Text = aa_EAlojamiento.id_Alojamientocion;
-            TCliente.Text = aa_EAlojamiento.id_cliente;
-            TdescCliente.Text = funciones.Lee_Descr_Tercero(aa_EAlojamiento.id_cliente,"CLIENTE");
-            TTAlojamiento.Text = aa_EAlojamiento.id_t_aloj_Alojamientocion.ToString();
-            TdescTAlojamiento.Text = funciones.Lee_Descr_Tipo(aa_EAlojamiento.id_t_aloj_Alojamientocion,"TIPO_alojamiento");
-            DateTime fecha = DateTime.Parse(aa_EAlojamiento.fecha_lleg_Alojamientocion);
-            DT_Fecha_Ini.Value = DateTime.Parse(fecha.ToString("dd/MM/yyyy"));
-            fecha = DateTime.Parse(aa_EAlojamiento.fecha_sal_Alojamientocion);
-            DT_Fecha_Fin.Value = DateTime.Parse(fecha.ToString("dd/MM/yyyy"));
-            if (aa_EAlojamiento.estado_Alojamientocion.ToString().Trim().ToUpper() == "A")
+            TAlojamiento.Text = aa_EAlojamiento.id_alojamiento;
+            TReserva.Text = aa_EAlojamiento.id_reserv_alojamiento;
+          
+               aa_EReserva= funciones.Lee_Reserva(TReserva.Text.ToString());
+            TFecha_ini_Reserva.Text = aa_EReserva.fecha_lleg_reservacion;
+            TFecha_Fin_Reserva.Text = aa_EReserva.fecha_sal_reservacion;
+            TimeSpan dias = DateTime.Parse(TFecha_Fin_Reserva.Text) - DateTime.Parse(TFecha_ini_Reserva.Text);
+            LNoches.Text = dias.Days.ToString();
+            LTotalN.Text = (double.Parse(aa_EReserva.Monto_apagar) / int.Parse(LNoches.Text.ToString())).ToString();
+            LTotal.Text = aa_EReserva.Monto_apagar;
+
+            
+            if (aa_EAlojamiento.estado_alojamiento.ToString().Trim().ToUpper() == "A")
             {
                 CB_Estado.SelectedIndex = 0;
             }
@@ -207,13 +116,11 @@ namespace SistHoteleria
 
                 DataGridViewRow ii_row = new DataGridViewRow();
                 ii_row.CreateCells(dg_Alojamientos);
-                ii_row.Cells[0].Value = Det.id_thab_reserv_det.ToString().Trim();
-                ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(Det.id_thab_reserv_det.ToString(), "tipo_habitacion");
-                ii_row.Cells[2].Value = funciones.Lee_Costo_TipoHabitacion(Det.id_thab_reserv_det.ToString());
-                ii_row.Cells[3].Value = Det.cant_reserv_det.ToString().Trim();
-                ii_row.Cells[4].Value = double.Parse(ii_row.Cells[2].Value.ToString()) * int.Parse(ii_row.Cells[3].Value.ToString());
-                ii_row.Cells[5].Value = double.Parse(ii_row.Cells[4].Value.ToString()) * int.Parse(LNoches.Text.ToString());
-
+                ii_row.Cells[0].Value = Det.id_hab_det.ToString().Trim();
+                ii_row.Cells[1].Value = funciones.Lee_Descr_Tipo(Det.id_hab_det.ToString(), "habitacion");
+                ii_row.Cells[2].Value = Det.id_clie_det.ToString().Trim();
+                ii_row.Cells[3].Value = funciones.Lee_Descr_Tercero(Det.id_clie_det.ToString(),"cliente");
+              
                 dg_Alojamientos.Rows.Add(ii_row);
 
 
@@ -265,6 +172,101 @@ namespace SistHoteleria
 
 
         }
+        bool Valida_Datos()
+        {
+            errorProvider1.Clear();
+            bool if_clien = true;
+            string Msj = "Este Campo No Puede Estar en Blanco";
+            if (aa_modo.ToUpper() == "A")
+            {
+
+                if (dg_Alojamientos.RowCount <= 1)
+                {
+                    MessageBox.Show("Debe Alojamientor al menos 1 habitacion");
+                    return false;
+                }
+
+
+                for (int i = 0; i < dg_Alojamientos.Rows.Count - 1; i++)
+                {
+                    if (dg_Alojamientos.Rows[i].Cells[2].Value == null)
+                    {
+
+                        if_clien = false;
+                        break;
+
+
+                    }
+                }
+                if (!if_clien)
+                {
+                    MessageBox.Show("Debe asignar cliente");
+                    return false;
+                }
+
+
+
+
+
+            }
+            return true;
+        }
+        bool Inserta_Datos()
+        {
+            Error = "";
+            aa_EAlojamiento = new Clases.EAlojamiento();
+            aa_EAlojamiento.id_alojamiento = TAlojamiento.Text.ToString();
+            aa_EAlojamiento.id_reserv_alojamiento = TReserva.Text.ToString();
+            aa_EAlojamiento.ing_por_alojamiento = Clases.Usuario;
+            aa_EAlojamiento.fecha_i_alojamiento = (DateTime.Parse(TFecha_ini_Reserva.Text)).ToString("yyyy/MM/dd").Trim();
+            aa_EAlojamiento.sal_por_alojamiento = Clases.Usuario;
+            aa_EAlojamiento.fecha_s_alojamiento = (DateTime.Parse(TFecha_Fin_Reserva.Text)).ToString("yyyy/MM/dd").Trim();
+            aa_EAlojamiento.estado_alojamiento = CB_Estado.SelectedItem.ToString().Substring(0, 1).Trim();
+
+            List<Clases.EAlojamiento_Detalle> aa_LEAlojamiento_Detalle = new List<Clases.EAlojamiento_Detalle>();
+            Clases.EAlojamiento_Detalle aa_EAlojamiento_Detalle = new Clases.EAlojamiento_Detalle();
+
+            for (int ii = 0; ii < dg_Alojamientos.RowCount - 1; ii++)
+            {
+                aa_EAlojamiento_Detalle = new Clases.EAlojamiento_Detalle();
+                aa_EAlojamiento_Detalle.id_alojamiento_det = TAlojamiento.Text;
+                aa_EAlojamiento_Detalle.id_hab_det = dg_Alojamientos.Rows[ii].Cells[0].Value.ToString().Trim();
+                aa_EAlojamiento_Detalle.id_clie_det = dg_Alojamientos.Rows[ii].Cells[2].Value.ToString().Trim();
+
+                aa_LEAlojamiento_Detalle.Add(aa_EAlojamiento_Detalle);
+
+            }
+                 
+
+            // INSERTA ENCABEZADO
+            if (funciones.Inserta_Alojamiento(aa_EAlojamiento, aa_modo, ref Error))
+            {
+                if (funciones.Inserta_Detalle_Alojamiento(aa_LEAlojamiento_Detalle, aa_EAlojamiento.id_alojamiento,"m", ref Error))
+                {
+                    return true;
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(Error.Trim()))
+                    {
+                        MessageBox.Show(Error.ToString().Trim());
+                    }
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(Error.Trim()))
+                {
+                    MessageBox.Show(Error.ToString().Trim());
+                }
+            }
+
+
+
+
+            return false;
+        }
+
 
         void Limpia_Datos()
         {
